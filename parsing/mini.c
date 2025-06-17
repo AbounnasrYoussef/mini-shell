@@ -6,11 +6,19 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/17 12:59:27 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/17 19:30:08 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void syntaxe_errors(char **args)
+{
+    int i = 0;
+    if (args[0] == '|')
+        write(2, "syntaxe error\n",15);
+}
+
 
 void ft_read()
 {
@@ -23,6 +31,7 @@ void ft_read()
             break; // if il y a un erreur 
         if (*input)
             add_history(input); // pour enregistrer tous les commande precedent
+        syntaxe_errors(&input);
         free(input); // on free car readline il alloce 
     }
 }
