@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/18 13:41:59 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/18 15:49:16 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@
 
 
 
+
+
 //tokenisation
 void tokens(char *line);
 
 // syntaxe errors
 void printf_error(int x);
 void syntaxe_errors(char *args);
-void syntaxe_errors_pipe(char *args);
-void syntaxe_errors_redi(char *args);
+void error_pipe(char *caracter , int i);
 
 
 // utils
