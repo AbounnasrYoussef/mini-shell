@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/18 10:30:18 by yabounna         ###   ########.fr       */
+/*   Created: 2025/06/18 07:55:01 by yabounna          #+#    #+#             */
+/*   Updated: 2025/06/18 08:25:27 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
+}
 
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
 
-
-
-
-// syntaxe errors
-void printf_error(int x);
-void syntaxe_errors(char *args);
-void syntaxe_errors_pipe(char *args);
-void syntaxe_errors_redi(char *args);
-
-
-// utils
-int	ft_strcmp(const char *s1, const char *s2);
-size_t	ft_strlen(const char *s);
-
-#endif
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
