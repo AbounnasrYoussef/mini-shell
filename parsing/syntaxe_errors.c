@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 08:11:03 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/18 10:53:09 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/18 10:54:53 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void syntaxe_errors_redi(char *args)
             write(2,"   syntaxe error \n",19);
             break;
         }
-        i++;    }
+        i++;
+    }
     
     
 }
