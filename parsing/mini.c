@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/18 14:58:28 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/19 10:16:47 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void ft_read()
         if (*line)
             add_history(line); // pour enregistrer tous les commande precedent
         syntaxe_errors(line);
-        // tokens(line);
         free(line); // on free car readline il alloce 
     }
 }
@@ -44,17 +43,7 @@ void printf_error(int x)
 
 int main(int ac, char **av)
 {
-    if (ac != 2)
-        printf_error(1);
-    else 
-    {
-        {
-            if (ft_strcmp(av[1], "minishell") == 0)
-                ft_read();
-            else
-                printf_error(1);
-        }
-    }
+    ft_read();
     return 0;
 }
 
