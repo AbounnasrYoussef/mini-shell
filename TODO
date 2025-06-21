@@ -1,9 +1,0 @@
-bash-3.2$ fdsf >| ls
-minishell$ <<fds
-
-minishell$ >> fds
-
-heredoc and append
-
-
-minishell$         gg  |  <
