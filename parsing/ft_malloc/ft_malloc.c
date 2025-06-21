@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 09:58:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/21 12:06:21 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:08:37 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,4 @@ void ft_free_all(garbage *garb)
         free(tmp);  // libère le conteneur du suivi.
     }
     garb = NULL; //on remet la liste à vide.
-}
-
-int main()
-{
-    garbage *head;
-
-    head = NULL;
-    char **str = ft_malloc(&head, 3 * 8);
-    str[0] = strdup("fefefe");
-    str[1] = strdup("fefef1e");
-    str[2] = NULL;
-    while (*str)
-    {
-        printf("%s\n",*str);
-        str++;
-    }
 }
