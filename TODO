@@ -1,9 +1,8 @@
-minishell$ |< fsaa
 bash-3.2$ fdsf >| ls
 minishell$ <<fds
-minishell: syntax error
+
 minishell$ >> fds
-minishell: syntax error
+
 heredoc and append
 
 

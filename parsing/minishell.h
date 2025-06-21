@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/19 09:36:57 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/20 12:58:36 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void printf_error(int x);
 void syntaxe_errors(char *args);
 int error_pipe(char *caracter , int *i);
 int error_redir(char *caracter , int *i);
-int error_quote(char *caracter);
+int error_quote(char *caracter, int *i);
 
 
 // utils
