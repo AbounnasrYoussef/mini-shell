@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   skip_space.c                                       :+:      :+:    :+:   */
+/*   ft_malloc.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 08:24:22 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/20 13:02:58 by yabounna         ###   ########.fr       */
+/*   Created: 2025/06/21 09:58:57 by yabounna          #+#    #+#             */
+/*   Updated: 2025/06/21 11:57:17 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#ifndef FT_MALLOC
+# define FT_MALLOC
 
-int skip_space(char c)
+
+#include "../minishell.h"
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct garbage
 {
-    if (c == ' ' || c == '\t' || c == '\n')
-        return 1;
-    return 0;
-}
+    void *ptr; // hada pointer generique vers n'importe quelle memoire allouee 
+    struct garbage *next;  // hada next l prochaine element dial dik la list
+}   garbage;
+
+
+void *ft_malloc(garbage **garb , size_t size);
+char *gc_strdup(garbage *garb , const char *s);
+void ft_free_all(garbage *garb);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/19 10:16:47 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/21 09:30:54 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void printf_error(int x)
 
 int main(int ac, char **av)
 {
+    (void)ac;
+    (void)av;
     ft_read();
     return 0;
 }
