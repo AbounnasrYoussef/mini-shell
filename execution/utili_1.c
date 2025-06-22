@@ -6,23 +6,28 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:37 by arahhab           #+#    #+#             */
-/*   Updated: 2025/06/19 23:42:26 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/06/22 15:49:39 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-char *ft_put_string(char *str)
+void ft_put_string(char *str)
 {
 	int i;
 	
 	i = 0;
+	if(str == NULL)
+	{
+		write(1, " ", 1);
+		return ;
+	}
 	while(str[i] != '\0')
 	{
 		write(1,&str[i], 1);
 		i++;
 	}
-	return str;
+	return ;
 }
 
 int	ft_strcmp(const char *s1, const char *s2)
