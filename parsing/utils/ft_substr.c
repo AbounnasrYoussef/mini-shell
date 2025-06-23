@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   skip_space.c                                       :+:      :+:    :+:   */
+/*   dt_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 08:24:22 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/23 13:24:29 by yabounna         ###   ########.fr       */
+/*   Created: 2025/06/23 12:33:56 by yabounna          #+#    #+#             */
+/*   Updated: 2025/06/23 12:34:10 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int skip_space(char c)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-    if (c == ' ' || c == '\t' || c == '\n')
-        return 1;
-    return 0;
-}
+	char			*sub;
+	unsigned int	i;
 
-int is_quote(char c)
-{
-    if (c=='\'' || c == '"')
-        return 1;
-    return 0;
-}
-
-int is_operator(char c)
-{
-    if (c == '|' || c == '<' || c == '>')
-        return 1;
-    return 0;
+	if (!s)
+		return (NULL);
+	if (start > (unsigned int)ft_strlen(s))
+		return (ft_strdup(""));
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	sub = (char *)malloc(len + 1);
+	if (!sub)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		sub[i] = s[start + i];
+		i++;
+	}
+	sub[i] = '\0';
+	return (sub);
 }

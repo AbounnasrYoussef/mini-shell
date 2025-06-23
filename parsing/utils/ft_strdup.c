@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   skip_space.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 08:24:22 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/23 13:24:29 by yabounna         ###   ########.fr       */
+/*   Created: 2025/06/23 12:34:51 by yabounna          #+#    #+#             */
+/*   Updated: 2025/06/23 12:35:01 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int skip_space(char c)
+char	*ft_strdup(const char *s1)
 {
-    if (c == ' ' || c == '\t' || c == '\n')
-        return 1;
-    return 0;
-}
+	size_t	i;
+	char	*d;
 
-int is_quote(char c)
-{
-    if (c=='\'' || c == '"')
-        return 1;
-    return 0;
-}
-
-int is_operator(char c)
-{
-    if (c == '|' || c == '<' || c == '>')
-        return 1;
-    return 0;
+	i = ft_strlen(s1);
+	d = (char *)malloc((i + 1) * sizeof(char));
+	if (d == NULL)
+		return (NULL);
+	ft_memcpy(d, s1, i);
+	d[i] = '\0';
+	return (d);
 }

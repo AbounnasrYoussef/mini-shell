@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/23 10:08:41 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:49:54 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ typedef enum type_token{
     RDR_IN,
     RDR_OUT,
     APPEND,
-    HEREDOC,
-    EOF_TOKEN,
+    HERE_DOC,
 }   type_token;
 
 // linked_list pour  token 
@@ -39,7 +38,7 @@ typedef enum type_token{
 typedef struct y_token{
     char *value;
     type_token type;
-    struct token *next;
+    struct y_token *next;
 }   t_token;
 
 
@@ -47,7 +46,17 @@ typedef struct y_token{
 
 
 //tokenisation
-void tokens(char *line);
+t_token *tokens(char *line);
+void handle_word(const char *line, int *i, t_token **tokens);
+void handle_single_operator(char *line, int *i, t_token **tokens);
+void handel_double_operator(char *line ,int *i , t_token **tokens);
+void handel_quote(char *line , int  *i , t_token **token);
+
+type_token get_token_type(char *str);
+t_token *new_token(char *value, type_token type);
+void add_token(t_token **list, t_token *new_tok);
+void space_skip(char *line , int *i);
+
 
 // syntaxe errors
 void printf_error(int x);
@@ -64,8 +73,9 @@ char	**ft_split(char const *s, char c);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 int skip_space(char c);
 int is_quote(char c);
-
-
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strdup(const char *s1);
+int is_operator(char c);
 
 
 #endif
