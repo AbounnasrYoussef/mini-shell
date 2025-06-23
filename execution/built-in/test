@@ -1,0 +1,75 @@
+
+/// exit 
+
+bash-3.2$ exit cfgas1342
+exit
+bash: exit: cfgas1342: numeric argument required
+➜  built-in git:(zaba_execution) ✗ $?                              
+zsh: command not found: 255
+
+bash-3.2$ exit cfgas1342 655245642
+exit
+bash: exit: cfgas1342: numeric argument required
+➜  built-in git:(zaba_execution) ✗ $?
+zsh: command not found: 255
+
+
+exit 313 1313
+
+exit fdfefwr
+
+ exit 311313
+
+$?
+
+bash-3.2$ exit 654564564654565645645645645656456456654564564564564564564566
+
+
+
+//cd 
+
+bash-3.2$ export | grep PWD
+declare -x OLDPWD
+declare -x PWD="/mnt/homes/arahhab/minishell"
+bash-3.2$ cd
+bash-3.2$ export | grep PWD
+declare -x OLDPWD="/mnt/homes/arahhab/minishell"
+declare -x PWD="/mnt/homes/arahhab"
+bash-3.2$ ls
+
+bash-3.2$ cd efwh fqhew
+bash: cd: efwh: No such file or directory
+
+
+bash-3.2$ unset HOME
+bash-3.2$ cd
+bash: cd: HOME not set
+
+
+bash-3.2$ mkdir -p 1/2/3
+bash-3.2$ cd 1/2/3/
+bash-3.2$ pwd
+/mnt/homes/arahhab/minishell/1/2/3
+bash-3.2$ cd ..
+bash: cd: ..: No such file or directory
+bash-3.2$ pwd
+/mnt/homes/arahhab/minishell/1/2/3
+bash-3.2$ cd ..
+cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+bash-3.2$ pwd
+/mnt/homes/arahhab/minishell/1/2/3/..
+bash-3.2$ cd /
+
+rm -rf 1 //in new terminal
+
+// unset
+bash-3.2$ unset 534
+bash: unset: `534': not a valid identifiert
+
+bash-3.2$ unset gh
+bash-3.2$ unset ghhggh
+bash-3.2$ unset ghhggh fghgf
+
+bash-3.2$ unset +=dfgdf
+bash: unset: `+=dfgdf': not a valid identifier
+bash-3.2$ unset fghfh654
