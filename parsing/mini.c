@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/21 09:30:54 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/23 10:07:14 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void ft_read()
         if (*line)
             add_history(line); // pour enregistrer tous les commande precedent
         syntaxe_errors(line);
+        tokens(line);
         free(line); // on free car readline il alloce 
     }
 }

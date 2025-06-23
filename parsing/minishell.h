@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/21 11:09:47 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/23 10:08:41 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,26 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+
+// enumeration pour reconnaitre chaque type
+
+typedef enum type_token{
+    WORD,
+    PIPE,
+    RDR_IN,
+    RDR_OUT,
+    APPEND,
+    HEREDOC,
+    EOF_TOKEN,
+}   type_token;
+
+// linked_list pour  token 
+// hadi bach nstokiwe kola element 
+typedef struct y_token{
+    char *value;
+    type_token type;
+    struct token *next;
+}   t_token;
 
 
 
@@ -43,6 +63,8 @@ size_t	ft_strlen(const char *s);
 char	**ft_split(char const *s, char c);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 int skip_space(char c);
+int is_quote(char c);
+
 
 
 

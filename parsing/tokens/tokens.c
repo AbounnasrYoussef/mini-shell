@@ -6,25 +6,30 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:44:25 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/18 14:32:19 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/23 10:23:55 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 
 void tokens(char *line)
 {
     char **mot;
-    char **cmd;
+    // char **cmd;
+    // t_token *tokens = NULL;
+    // t_token cmd_tokens;
     int i = 0;
     mot = ft_split(line , '|');
     
+    
+    
     while (mot[i] != (void *)0 )
     {
-        cmd = ft_split(*mot , ' ');
+        printf("%s\n", mot[i]);
         i++;
-    }
-   
-   
+    } 
+    
 }
+ 
+

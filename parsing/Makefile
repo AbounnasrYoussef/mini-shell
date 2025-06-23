@@ -3,10 +3,11 @@ NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = mini.c tokens.c \
+SRC = mini.c\
       $(wildcard utils/*.c) \
       $(wildcard syntaxe_errors/*.c) \
-	  $(wildcard ft_malloc/*.c)
+	  $(wildcard ft_malloc/*.c)\
+	  $(wildcard tokens/*.c)
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 08:24:22 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/20 13:02:58 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/23 09:42:24 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,11 @@ int skip_space(char c)
     if (c == ' ' || c == '\t' || c == '\n')
         return 1;
     return 0;
+}
+
+int is_quote(char c)
+{
+    if (c=='\'' || c == '"')
+        return 1;
+    return -1;
 }
