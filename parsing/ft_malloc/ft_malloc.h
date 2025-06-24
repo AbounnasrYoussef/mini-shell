@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 09:58:57 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/21 11:57:17 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/24 15:55:17 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct garbage
-{
-    void *ptr; // hada pointer generique vers n'importe quelle memoire allouee 
-    struct garbage *next;  // hada next l prochaine element dial dik la list
-}   garbage;
-
+typedef struct garbage garbage;
 
 void *ft_malloc(garbage **garb , size_t size);
 char *gc_strdup(garbage *garb , const char *s);
