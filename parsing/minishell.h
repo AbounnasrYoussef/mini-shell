@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 08:37:54 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:32:27 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void space_skip(char *line , int *i);
 
 
 // syntaxe errors
-void syntaxe_errors(char *args);
+int syntaxe_errors(char *args);
 int error_pipe(char *caracter , int *i);
 int error_redir(char *caracter , int *i);
 int error_quote(char *caracter, int *i);
@@ -74,8 +74,8 @@ char	**ft_split(char const *s, char c);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 int skip_space(char c);
 int is_quote(char c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strdup(const char *s1);
+char	*ft_substr(char const *s, unsigned int start, size_t len,garbage **garb);
+char	*ft_strdup(const char *s1,garbage **garb);
 int is_operator(char c);
 
 

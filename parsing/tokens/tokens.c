@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:44:25 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 08:06:53 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/25 13:07:34 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 // hade fonction hiya li k determiner lina type dial token
 type_token get_token_type(char *str) {
-    if (!strcmp(str, "|"))
+    if (!ft_strcmp(str, "|"))
         return PIPE;
-    if (!strcmp(str, "<"))
+    if (!ft_strcmp(str, "<"))
         return RDR_IN;
-    if (!strcmp(str, "<<"))
+    if (!ft_strcmp(str, "<<"))
         return HERE_DOC;
-    if (!strcmp(str, ">"))
+    if (!ft_strcmp(str, ">"))
         return RDR_OUT;
-    if (!strcmp(str, ">>"))
+    if (!ft_strcmp(str, ">>"))
         return APPEND;
     return WORD;
 }
@@ -33,7 +33,7 @@ t_token *new_token(char *value, type_token type,garbage **garb)
     t_token *tok = ft_malloc(garb,sizeof(t_token));
     if (!tok)
         return NULL;
-    tok->value = value;
+    tok->value = ft_strdup(value, garb);
     tok->type = type;
     tok->next = NULL;
     return tok;
@@ -75,14 +75,15 @@ t_token *tokens(char *line,garbage **garb)
             break;
         if (is_quote(line[i])) // ila l9ina single ou double quote
             handel_quote(line , &i , &tokens,garb);
-        else if (line[i] == '<' || line[i] == '>' || line[i + 1] == line[i])
-        //ila kane chi  double operateur 
+        else if ((line[i] == '<' || line[i] == '>') && line[i + 1] == line[i])
             handel_double_operator(line , &i , &tokens,garb);
         else if (is_operator(line[i])) // ila kane chi operateur 
             handle_single_operator(line , &i , &tokens,garb);
         else  // ila  makane ta haja 9bel donc rah world
             handle_word(line, &i ,&tokens,garb);
-    } 
+    }
+    for (t_token *cur = tokens; cur; cur = cur->next)
+        printf("%s %d\n", cur->value, cur->type);
     return tokens;
     
 }

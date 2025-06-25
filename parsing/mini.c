@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 08:38:03 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:33:19 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void ft_read()
             break; // if il y a un erreur 
         if (*line)
             add_history(line); // pour enregistrer tous les commande precedent
-        syntaxe_errors(line);
+        if (syntaxe_errors(line) == 0)
+            continue;
         tokens(line,&garb);
         free(line); // on free car readline il alloce 
     }

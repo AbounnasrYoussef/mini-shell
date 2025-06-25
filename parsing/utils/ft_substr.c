@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dt_substr.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:33:56 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/23 12:34:10 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:23:40 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len,garbage **garb)
 {
 	char			*sub;
 	unsigned int	i;
@@ -20,10 +20,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (start > (unsigned int)ft_strlen(s))
-		return (ft_strdup(""));
+		return (ft_strdup("", garb));
 	if (len > ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
-	sub = (char *)malloc(len + 1);
+	sub = (char *)ft_malloc(garb,(len + 1));
 	if (!sub)
 		return (NULL);
 	i = 0;

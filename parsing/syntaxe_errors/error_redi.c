@@ -6,27 +6,31 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 08:17:40 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/19 09:06:10 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:54:57 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int error_redir(char *caracter , int *i)
+int error_redir(char *caracter, int *i)
 {
-    (*i)++;
+    if ((caracter[*i] == '>' && caracter[*i + 1] == '>') ||
+        (caracter[*i] == '<' && caracter[*i + 1] == '<'))
+        (*i) += 2;
+    else
+        (*i)++;
+
     while (caracter[*i] && skip_space(caracter[*i]))
         (*i)++;
-    if (caracter[*i] == '|')
-    {
-        write(2, "minishell: syntax error\n", 25);
+
+    if (!caracter[*i]) {
+        write(2, "minishell:syntax error\n", 24);
         return -1;
     }
-        
-    if (!caracter[*i] || caracter[*i] == '>' || caracter[*i] == '<')
-    {
-        write(2, "minishell: syntax error\n", 25);
+    if (caracter[*i] == '|' || caracter[*i] == '>' || caracter[*i] == '<') {
+        write(2, "minishell:syntax error\n", 24);
         return -1;
     }
     return 1;
 }
+
