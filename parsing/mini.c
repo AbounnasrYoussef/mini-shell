@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/24 16:20:18 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/25 08:38:03 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void ft_read()
 {
     char *line;
     garbage *garb = NULL;
-
-
 
     while (1)
     {
@@ -32,18 +30,6 @@ void ft_read()
         free(line); // on free car readline il alloce 
     }
 }
-
-void printf_error(int x)
-{
-    if (x == 1)
-    {
-        write(2,"error input\n",13);
-        write(2,"write 'minishell' ",19);
-        exit(EXIT_FAILURE);
-    }
-    
-}
-
 
 int main(int ac, char **av)
 {

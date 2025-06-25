@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 08:27:34 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/25 08:37:54 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void space_skip(char *line , int *i);
 
 
 // syntaxe errors
-void printf_error(int x);
 void syntaxe_errors(char *args);
 int error_pipe(char *caracter , int *i);
 int error_redir(char *caracter , int *i);
