@@ -6,19 +6,24 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:44:25 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/24 15:59:24 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/25 08:06:53 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
+// hade fonction hiya li k determiner lina type dial token
 type_token get_token_type(char *str) {
-    if (!strcmp(str, "|")) return PIPE;
-    if (!strcmp(str, "<")) return RDR_IN;
-    if (!strcmp(str, "<<")) return HERE_DOC;
-    if (!strcmp(str, ">")) return RDR_OUT;
-    if (!strcmp(str, ">>")) return APPEND;
+    if (!strcmp(str, "|"))
+        return PIPE;
+    if (!strcmp(str, "<"))
+        return RDR_IN;
+    if (!strcmp(str, "<<"))
+        return HERE_DOC;
+    if (!strcmp(str, ">"))
+        return RDR_OUT;
+    if (!strcmp(str, ">>"))
+        return APPEND;
     return WORD;
 }
 

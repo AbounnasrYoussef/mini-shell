@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:30:32 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/24 14:44:45 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/25 08:24:33 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 void handle_word(const char *line, int *i, t_token **tokens , garbage **garb)
 {
-    int start = *i;                                // Début du mot
+    int start = *i;// bedia dial mot li 7na fih db
 
     while (line[*i] && !skip_space(line[*i])
         && !is_operator(line[*i]) && !is_quote(line[*i]))
-        (*i)++;                                    // Avance jusqu’à fin du mot
+        (*i)++;  // loop htal la5er dial mot
 
-    char *word = ft_substr(line, start, *i - start);   // Extrait le mot
-    add_token(tokens, new_token(word, WORD,garb));     // Ajoute comme WORD
+    char *word = ft_substr(line, start, *i - start);// Extrait le mot
+    add_token(tokens, new_token(word, WORD,garb)); // cree token de type word et ajouter a la liste
 }
+
+// hna kngeriwe sigle operator | > <
 void handle_single_operator(char *line, int *i, t_token **tokens , garbage **garb)
 {
     char op[2] = {line[*i], '\0'};   
@@ -30,12 +32,13 @@ void handle_single_operator(char *line, int *i, t_token **tokens , garbage **gar
     (*i)++;                         
 }
 
-
+// kn gerewe les operateur doublons >> << 
 void handel_double_operator(char *line ,int *i , t_token **tokens, garbage **garb)
 {
     char op[3] = {line[*i], line[*i + 1], '\0'};
     add_token(tokens, new_token(ft_strdup(op), get_token_type(op), garb));
-    *i += 2; 
+    
+    *i += 2; // bach na9zo douk es caractere doublons
 }
 
 

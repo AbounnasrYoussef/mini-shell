@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/24 15:59:36 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/25 08:27:34 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void handle_word(const char *line, int *i, t_token **tokens , garbage **garb);
 void handle_single_operator(char *line, int *i, t_token **tokens , garbage **garb);
 void handel_double_operator(char *line ,int *i , t_token **tokens, garbage **garb);
 void handel_quote(char *line , int  *i , t_token **token ,garbage **garb);
-
 type_token get_token_type(char *str);
 t_token *new_token(char *value, type_token type,garbage **garb);
 void add_token(t_token **list, t_token *new_tok);
