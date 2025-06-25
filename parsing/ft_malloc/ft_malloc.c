@@ -6,12 +6,13 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 09:58:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/21 13:08:37 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/25 08:42:09 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
+//hade fonction hiya li ktstoker lina noeud jdida fl la5er
 garbage *ft_last(garbage *head)
 {
     garbage *last;
@@ -44,7 +45,7 @@ void *ft_malloc(garbage **garb , size_t size)
     if (*garb == NULL)
         *garb = new;
     else
-        ft_last(*garb)->next = new; // knda5lo noeud fl bedia dial la list bach iweli new howa head;
+        ft_last(*garb)->next = new; // knda5lo noeud fl la5er;
     new->next = NULL;
     return ptr; // knretourniwe  dakchi li t alloca 
 }
