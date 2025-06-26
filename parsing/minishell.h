@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 11:32:27 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/26 08:55:09 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int is_quote(char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len,garbage **garb);
 char	*ft_strdup(const char *s1,garbage **garb);
 int is_operator(char c);
+char	*ft_strjoin(char const *s1, char const *s2, garbage **garb);
 
 
 #endif
