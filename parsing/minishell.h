@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/26 08:55:09 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/06/26 17:16:40 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <stdbool.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+
 
 
 // enumeration pour reconnaitre chaque type
@@ -46,6 +47,15 @@ typedef struct garbage
     void *ptr; // hada pointer generique vers n'importe quelle memoire allouee 
     struct garbage *next;  // hada next l prochaine element dial dik la list
 }   garbage;
+
+typedef struct s_list
+{
+	void	*ligne;
+	void	*variable;
+	void 	*valeur_vari;
+	struct s_list	*next;
+}	t_list;
+
 
 
 //tokenisation

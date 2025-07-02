@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 08:24:22 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/23 13:24:29 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/02 14:56:30 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,13 @@ int is_operator(char c)
 {
     if (c == '|' || c == '<' || c == '>')
         return 1;
+    return 0;
+}
+int redirection(char c)
+{
+    if (c == '>')
+        return RDR_OUT;
+    else if (c == '<')
+        return RDR_IN;
     return 0;
 }

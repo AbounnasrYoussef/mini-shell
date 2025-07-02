@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:44:25 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 13:07:34 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/02 14:57:10 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void space_skip(char *line , int *i)
 
 // hade lfonction  hiya li ktanalyser lina la line de commande
 
-t_token *tokens(char *line,garbage **garb)
+t_token *tokens(char *line, garbage **garb)
 {
     // char **cmd;
     t_token *tokens = NULL;
@@ -83,7 +83,7 @@ t_token *tokens(char *line,garbage **garb)
             handle_word(line, &i ,&tokens,garb);
     }
     for (t_token *cur = tokens; cur; cur = cur->next)
-        printf("%s %d\n", cur->value, cur->type);
+        printf("%s \n", cur->value);
     return tokens;
     
 }

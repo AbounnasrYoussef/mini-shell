@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 08:53:55 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/26 08:54:35 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/02 14:41:18 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static char	*check(char const *s1, char const *s2, garbage **garb)
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-		return (ft_strdup_gc(s2, garb));
+		return (ft_strdup(s2, garb));
 	if (!s2)
-		return (ft_strdup_gc(s1, garb));
+		return (ft_strdup(s1, garb));
 	return (NULL);
 }
 

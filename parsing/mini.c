@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 15:08:04 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/02 15:13:25 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,9 @@ int main(int ac, char **av)
     return 0;
 }
 
+//int main(int argc, char **argv, char **env)
+//{
+//	t_list *ls1 ;
+//	ls1 = ft_env(env);
+//	printf("%s", ls1->ligne);
+//}
