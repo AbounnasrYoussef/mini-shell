@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:44:25 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/02 14:57:10 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/02 15:50:39 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ t_token *tokens(char *line, garbage **garb)
     for (t_token *cur = tokens; cur; cur = cur->next)
         printf("%s \n", cur->value);
     return tokens;
-    
 }
  
 
