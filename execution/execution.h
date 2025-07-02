@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/06/22 18:07:27 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/02 15:51:32 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,12 @@ int	ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 t_list *ft_env(char **str);
+int ft_strlen_argc(char **str);
+int ft_strlen(char *str);
+void ft_cd(char **args, char *line, t_list *env);
+void ft_echo(int argc, char **str);
+void ft_exit (int len, int argc, char **str);
+t_list *ex_sort(t_list *list_env);
+char *ft_pwd(void);
+
 #endif
