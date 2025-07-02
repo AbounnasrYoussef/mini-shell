@@ -1,28 +1,28 @@
 
-/// exit 
+#/// exit 
 
-bash-3.2$ exit cfgas1342
-exit
-bash: exit: cfgas1342: numeric argument required
-➜  built-in git:(zaba_execution) ✗ $?                              
-zsh: command not found: 255
+#bash-3.2$ exit cfgas1342
+#exit
+#bash: exit: cfgas1342: numeric argument required
+#➜  built-in git:(zaba_execution) ✗ $?                              
+#zsh: command not found: 255
 
-bash-3.2$ exit cfgas1342 655245642
-exit
-bash: exit: cfgas1342: numeric argument required
-➜  built-in git:(zaba_execution) ✗ $?
-zsh: command not found: 255
+#bash-3.2$ exit cfgas1342 655245642
+#exit
+#bash: exit: cfgas1342: numeric argument required
+#➜  built-in git:(zaba_execution) ✗ $?
+#zsh: command not found: 255
 
 
-exit 313 1313
+#exit 313 1313
 
-exit fdfefwr
+#exit fdfefwr
 
- exit 311313
+# exit 311313
 
-$?
+#$?
 
-bash-3.2$ exit 654564564654565645645645645656456456654564564564564564564566
+#bash-3.2$ exit 654564564654565645645645645656456456654564564564564564564566
 
 
 
