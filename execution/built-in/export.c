@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/02 09:13:41 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/02 15:08:03 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 
-t_list *sort(t_list *list_env)
+t_list *ex_sort(t_list *list_env)
 {
 	t_list	*list1;
 	char	*tmp;;
@@ -32,11 +32,20 @@ t_list *sort(t_list *list_env)
 			//printf("aaaaaaaa %s \n\n", list1->ligne);
 			//printf("pppppppp %s \n\n", list_env->ligne);
 			//printf("cmp : %d\n\n", ft_strcmp(list1->ligne, (list_env->ligne)));
-			if (ft_strcmp(list1->ligne, (list_env->ligne)) > 0)
+			if (ft_strcmp(list1->variable, (list_env->variable)) > 0)
 			{
+				tmp = list1->variable;
+				list1->variable = list_env->variable;
+				list_env->variable = tmp;
+				
+				tmp = list1->valeur_vari;
+				list1->valeur_vari = list_env->valeur_vari;
+				list_env->valeur_vari = tmp;
+				
 				tmp = list1->ligne;
 				list1->ligne = list_env->ligne;
 				list_env->ligne = tmp;
+				
 				list1 = debut;
 			}
 			list1 = list1->next;	
@@ -47,16 +56,9 @@ t_list *sort(t_list *list_env)
 	return debut;
 }
 
-int main(int argc, char **argv, char **env)
-{
-	t_list *at;
-	t_list *srt;
-	at = ft_env(env);
-	//printf("%s\n", at->ligne);
-	srt = sort(ft_env(env));
-	while (srt != NULL)
-	{
-		printf("%s\n", srt->ligne);
-		srt = srt->next;
-	}
-}
+//void ft_export(t_list *list_env)
+//{
+//	t_list *export;
+//	export = sort(list_env);
+//}
+

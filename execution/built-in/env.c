@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:33:27 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/01 08:17:26 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/02 14:46:52 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,9 @@ t_list *ft_env(char **str)
 		ft_lstadd_back(&copy_env, ft_lstnew(splitt[0], splitt[1], str[i]));
 		if(i == 0)
 			debut_env = copy_env;
-		//ft_put_string(str[i]);
-		//ft_put_string(copy_env->variable);
-		//ft_put_string("=");
-		//ft_put_string(copy_env->valeur_vari);
-		
-		//ft_put_string("\n");
 		i++;
 	}
 	return (debut_env);
 }
 
-//int main(int argc, char **argv, char **env)
-//{
-//	t_list *ls1 ;
-//	ls1 = ft_env(env);
-//	printf("%s", ls1->next->next->ligne);
-//}
+

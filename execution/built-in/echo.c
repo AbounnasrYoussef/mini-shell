@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:17:33 by arahhab           #+#    #+#             */
-/*   Updated: 2025/06/23 17:19:58 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/02 14:40:40 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,14 @@ void ft_echo(int argc, char **str)
 	int i;
 
 	i = 0;
-	
-
-	if (argc > 2)
+	if (argc > 1)
 	{
-		//printf("{%d  %d}\n", trait_cmd1(str[1]),trait_cmd2(str[2]));
-		if (trait_cmd1(str[1]) == 0)
+		//printf("{%d  %d}\n", trait_cmd1(str[0]),trait_cmd2(str[1]));
+		if (trait_cmd1(str[0]) == 0)
 		{
-			if (trait_cmd2(str[2]) == 0)
+			if (trait_cmd2(str[1]) == 0)
 			{
-				i = 3;
+				i = 2;
 				while (str[i] != NULL && trait_cmd2(str[i]) == 0)
 				{
 					i++;
@@ -76,9 +74,9 @@ void ft_echo(int argc, char **str)
 					i++;
 				}
 			}
-			else if (trait_cmd2(str[2]) == 1)
+			else if (trait_cmd2(str[1]) == 1)
 			{
-				i = 2;
+				i = 1;
 				while(str[i] != NULL)
 				{
 					ft_put_string(str[i]);
@@ -88,26 +86,12 @@ void ft_echo(int argc, char **str)
 				}
 				ft_put_string("\n");
 			}
-		}
-				
+		}			
 	}
-	else if (argc == 2 && trait_cmd1(str[1]) == 0)
+	else if (argc == 1 && trait_cmd1(str[0]) == 0)
 	{
 		//printf("{%d}\n", trait_cmd1(str[1]));
 		write(1, "\n", 1);
 	}
 		
-}
-
-int main (int argc, char **argv)
-{
-	//while (1)
-	//{
-		//char *line = readline("minishell: ");
-		//ft_echo(line);
-		
-	//}
-
-	ft_echo(argc, argv);
-	return 0;
 }
