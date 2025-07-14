@@ -21,8 +21,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-
-
 // enumeration pour reconnaitre chaque type
 
 typedef enum type_token{
@@ -42,6 +40,8 @@ typedef struct y_token{
     struct y_token *next;
 }   t_token;
 
+
+
 typedef struct garbage
 {
     void *ptr; // hada pointer generique vers n'importe quelle memoire allouee 
@@ -56,6 +56,22 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+
+typedef struct s_list_env
+{
+	void	*ligne;
+	void	*variable;
+	void 	*valeur_vari;
+	struct s_list	*next;
+}	t_list_env;
+
+// hadi 3la 9bol expanding
+typedef struct s_expand_ctx
+{
+	int			exit_code;
+	t_list_env	*env;
+	garbage	**garb;
+}	t_expand_ctx;
 
 
 //tokenisation
@@ -88,6 +104,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len,garbage **garb);
 char	*ft_strdup(const char *s1,garbage **garb);
 int is_operator(char c);
 char	*ft_strjoin(char const *s1, char const *s2, garbage **garb);
+char	*ft_strchr(const char *s, int c);
 
 
 #endif

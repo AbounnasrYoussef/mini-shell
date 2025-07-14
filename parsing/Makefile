@@ -13,7 +13,7 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) minishell.h
 	$(CC) $(OBJ) -o $(NAME) -lreadline
 
 $(OBJ): %.o : %.c
