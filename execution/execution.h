@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/02 15:51:32 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:49:07 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ int ft_strlen(char *str);
 void ft_cd(char **args, char *line, t_list *env);
 void ft_echo(int argc, char **str);
 void ft_exit (int len, int argc, char **str);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+t_list	*ft_lstnew(void *variable, void *valeur_vari, void *ligne);
 t_list *ex_sort(t_list *list_env);
+void ft_print_env(t_list *env);
+void ft_export(t_list *list_env, char **args, int argc);
 char *ft_pwd(void);
 
 #endif

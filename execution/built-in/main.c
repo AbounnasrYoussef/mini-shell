@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/02 15:09:50 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/14 19:37:05 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void ft_print_env(t_list *env)
 {
 	while (env != NULL)
 	{
-		printf("%s=%s\n", env->variable, env->valeur_vari);
+		if (env->valeur_vari != NULL)
+			printf("declare -x %s=\"%s\"\n", env->variable, env->valeur_vari);
+		else
+			printf("declare -x %s\n", env->variable);
 		env = env->next;
 	}
 }
@@ -27,7 +30,7 @@ void ft_built_in(char *line, t_list *env)
 	int argc;
 	int len;
 	
-
+	args = NULL;
 	args = ft_split(line, ' ');
 	argc = ft_strlen_argc(args);
 	if (argc > 1)
@@ -41,7 +44,7 @@ void ft_built_in(char *line, t_list *env)
 	else if (ft_strcmp(args[0], "exit") == 0)
 		ft_exit (len, argc, args);
 	else if (ft_strcmp(args[0], "export") == 0)
-		ft_print_env(ex_sort(env));
+		ft_export(env, args, argc);
 	else if (ft_strcmp(args[0], "env") == 0)
 		ft_print_env(env);
 	//else if (ft_strcmp(args[0], "unset") == 0)
@@ -60,6 +63,9 @@ int main(int argc, char **argv, char **env)
 		while (1)
 		{
 			char *line = readline("minishell: ");
+			add_history(line);
+			if (!line || !*line)
+				continue ;
 			ft_built_in(line, envv);
 		}
 	}
