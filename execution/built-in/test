@@ -121,45 +121,51 @@ export
 
 ///////////
 
-bash-3.2$ export 677gf
-bash: export: `677gf': not a valid identifier
+#bash-3.2$ export 677gf
+#bash: export: `677gf': not a valid identifier
 
-/////
+#/////
 
-bash-3.2$ export a 6777gf b
-bash: export: `6777gf': not a valid identifier
-bash-3.2$ export
-
-//////
-
-bash-3.2$ export a=ggg 8hjhj b=hghh
-bash: export: `8hjhj': not a valid identifier
-bash-3.2$ export a=ggg h@jhj b=hghh
-bash: export: `h@jhj': not a valid identifier
-bash-3.2$ export a=ggg h_jhj b=hghh
-bash-3.2$ export a=ggg h-jhj b=hghh
-bash: export: `h-jhj': not a valid identifier
-bash-3.2$ export a=ggg h/jhj b=hghh
-bash: export: `h/jhj': not a valid identifier
-bash-3.2$ export a=ggg h?jhj b=hghh
-bash: export: `h?jhj': not a valid identifier
-bash-3.2$ export a=ggg _hjhj b=hghh
+#bash-3.2$ export a 6777gf b
+#bash: export: `6777gf': not a valid identifier
+#bash-3.2$ export
 
 //////
 
+#bash-3.2$ export a=ggg 8hjhj b=hghh
+#bash: export: `8hjhj': not a valid identifier
+#bash-3.2$ export a=ggg h@jhj b=hghh
+#bash: export: `h@jhj': not a valid identifier
+#bash-3.2$ export a=ggg h_jhj b=hghh
+#bash-3.2$ export a=ggg h-jhj b=hghh
+#bash: export: `h-jhj': not a valid identifier
+#bash-3.2$ export a=ggg h/jhj b=hghh
+#bash: export: `h/jhj': not a valid identifier
+#bash-3.2$ export a=ggg h?jhj b=hghh
+#bash: export: `h?jhj': not a valid identifier
+#bash-3.2$ export a=ggg _hjhj b=hghh
 
-declare -x z="ffg"
-bash-3.2$ export z+=ddd
-bash-3.2$ export
+//////
+
+
+#declare -x z="ffg"
+#bash-3.2$ export z+=ddd
+#bash-3.2$ export
 
 ///////
-bash-3.2$ export ghghgh677838_-
-bash: export: `ghghgh677838_-': not a valid identifier
-bash-3.2$ export ghghgh677838_
-bash-3.2$ export _ghghgh
+#bash-3.2$ export ghghgh677838_-
+#bash: export: `ghghgh677838_-': not a valid identifier
+#bash-3.2$ export ghghgh677838_
+#bash-3.2$ export _ghghgh
 
 
 //////
-export hfhf+=dhfh
+#export hfhf+=dhfh
 
 ////
+
+export a=b
+export
+export a
+export
+/////

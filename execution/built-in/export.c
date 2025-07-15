@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/14 21:17:33 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/15 10:26:39 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,35 @@ int verif_exist(t_list **list_env, char *arg)
 	return 0;
 }
 
-void repmlacer_elem(t_list **list_env, char *var, char *arg)
+char *ft_concat(char *str, char *str2)
+{
+	int l1;
+	int l2;
+	int i;
+	int j;
+	char *new_str;
+
+	l1 = ft_strlen(str);
+	l2 = ft_strlen(str2);
+	new_str = malloc((l1 + l2 + 1) * sizeof(char));
+	i = 0;
+	j = 0;
+	while (str[i] != '\0')
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	while(str2[j] != '\0')
+	{
+		new_str[i] = str2[j];
+		i++;
+		j++;
+	}
+	new_str[i] = '\0';
+	return new_str;
+}
+
+void repmlacer_elem(t_list **list_env, char *var, char *arg, int d)
 {
 	t_list *l_env;
 	
@@ -37,91 +65,119 @@ void repmlacer_elem(t_list **list_env, char *var, char *arg)
 	{
 		if (ft_strcmp((l_env)->variable, var) == 0)
 		{
-			(l_env)->valeur_vari = arg;
-		}
-			
+			if (d == 1)
+			{
+				(l_env)->valeur_vari = ft_concat((l_env)->valeur_vari , arg);
+			}
+			else
+				(l_env)->valeur_vari = arg;
+		}	
 		(l_env) = (l_env)->next;
 	}
 }
 
-void ajout_exp_elem(t_list **list_env, char **args)
+void ajout_exp_elem(t_list **list_env, char *args)
 {
 	int i;
 	int j;
 	int c;
+	int d;
+	
 	char **arg_varia;
 
-	i = 1;
+	i = 0;
 	j = 0;
+	d = 0;
 	arg_varia = malloc(2 * sizeof(char *));
-	
-	while (args[i] != NULL)
-	{
-		arg_varia[0] = malloc(200);
-		while(args[i][j] != '\0')
-		{
-			while (args[i][j] != '\0' && args[i][j] != '=')
-			{	
-				arg_varia[0][j] = args[i][j];
-				j++;
-			}
-			c = 0;
-			j++;
-
-			arg_varia[1] = NULL;
-			if (args[i][j] == '\0')
-				arg_varia[1] = NULL;
-			else
-				arg_varia[1] = malloc(200);
-			while (args[i][j] != '\0')
-			{
-				arg_varia[1][c] = args[i][j];
-				c++;
-				j++;
-			}
-			if (verif_exist(list_env, arg_varia[0]) == 0)
-			{
-				ft_lstadd_back(list_env, ft_lstnew(arg_varia[0], arg_varia[1], args[i]));
-			}
-			else
-			{
-				repmlacer_elem(list_env, arg_varia[0], arg_varia[1]);
-			}
-		}
+	arg_varia[0] = malloc(200);
+	while (args[i] != '\0' && args[i] != '=' && args[i] != '+')
+	{	
+		arg_varia[0][j] = args[i];
 		i++;
+		j++;
+	}
+	c = 0;
+	if (args[i] == '+' && args[i+1] == '=')
+	{
+		d = 1;
+		i += 2;
+	}
+	else if (args[i] == '=')
+		i++;
+	if (args[i] == '\0')
+		arg_varia[1] = NULL;
+	else
+		arg_varia[1] = malloc(200);
+	while (args[i] != '\0')
+	{
+		arg_varia[1][c] = args[i];
+		c++;
+		i++;
+	}
+	if (verif_exist(list_env, arg_varia[0]) == 0)
+	{
+		ft_lstadd_back(list_env, ft_lstnew(arg_varia[0], arg_varia[1], args));
+	}
+	else
+	{
+		repmlacer_elem(list_env, arg_varia[0], arg_varia[1], d);
 	}
 }
 
-int check_args(t_list **list_env, char **args)
+
+
+void check_args(t_list **list_env, char **args)
 {
 	int i;
 	int j;
+	int c;
+	
 
 	i = 1;
-	j = 0;
-	
+	j = 1;
+	c = 0;
 	while (args[i] != NULL)
 	{
 		if (!(args[i][0] == '_' ||
 			(args[i][0] >= 'a' && args[i][0] <= 'z')
 			|| (args[i][0] >= 'A' && args[i][0] <= 'Z')))
 		{
-			return -1;
+			c = 1;
+			printf("not a valid identifier\n");
 		}	
-		while(args[i][j] != '\0')
+		while(args[i][j] != '\0' && args[i][j] != '=' && args[i][j] != '+')
 		{
-			if (!(args[i][j] == '_' || args[i][j] == '=' 
-				|| (args[i][j] >= 'a' && args[i][j] <= 'z') 
-				|| (args[i][j] >= 'A' && args[i][j] <= 'Z') 
+			if (!(args[i][j] == '_' || args[i][j] == '='
+				|| (args[i][j] >= 'a' && args[i][j] <= 'z')
+				|| (args[i][j] >= 'A' && args[i][j] <= 'Z')
 				|| (args[i][j] >= '0' && args[i][j] <= '9')))
-				return (-1);
+				{
+					c = 1;
+					printf("not a valid identifier\n");
+				}
 			j++;
 		}
-		j = 0;
+		if (args[i][j] == '+')
+		{
+			if (args[i][j+1] != '=')
+			{
+				c = 1;
+				printf("export: %s : not a valid identifier\n", args[i]);
+			}
+			j++;
+		}
+		//printf("%c   uuuuuu\n\n\n\n\n", args[i][j]);
+		if (c == 0)
+		{
+			ajout_exp_elem(list_env, args[i]);
+		}
+		else
+		{
+			c = 0;
+		}
+		j = 1;
 		i++;
 	}
-	ajout_exp_elem(list_env, args);
-	return (0);
 }
 
 
@@ -173,11 +229,7 @@ void ft_export(t_list *list_env, char **args, int argc)
 	}
 	else
 	{
-		if (check_args(&list_env, args) == -1)
-		{
-			printf("not a valid identifier");
-			exit(-1);
-		}
+		check_args(&list_env, args);
 	}
 }
 
