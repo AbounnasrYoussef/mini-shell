@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/15 13:33:51 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/15 15:00:36 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@ void ft_print_env_ex(t_list *env)
 {
 	while (env != NULL)
 	{
-		if (env->valeur_vari != NULL)
-			printf("declare -x %s=\"%s\"\n", env->variable, env->valeur_vari);
-		else
-			printf("declare -x %s\n", env->variable);
+		if (ft_strcmp(env->variable, "_") != 0)
+		{
+			if (env->valeur_vari != NULL)
+				printf("declare -x %s=\"%s\"\n", env->variable, env->valeur_vari);
+			else
+				printf("declare -x %s\n", env->variable);
+		}
 		env = env->next;
 	}
 }
@@ -56,7 +59,12 @@ void ft_built_in(char *line, t_list *env)
 	else if (ft_strcmp(args[0], "export") == 0)
 		ft_export(env, args, argc);
 	else if (ft_strcmp(args[0], "env") == 0)
-		ft_print_env(env);
+	{
+		if (argc == 1)
+			ft_print_env(env);
+		else
+			printf("env: %s: No such file or directory\n", args[1]);
+	}
 	else if (ft_strcmp(args[0], "unset") == 0)
 		ft_unset(env, args);
 }

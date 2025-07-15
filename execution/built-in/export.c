@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/15 13:32:23 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:37:32 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,12 @@ void ajout_exp_elem(t_list **list_env, char *args)
 	}
 	if (verif_exist(list_env, arg_varia[0]) == 0)
 	{
-	
 		ft_lstadd_back(list_env, ft_lstnew(arg_varia[0], arg_varia[1], args));
 	}
 	else
 	{
-		repmlacer_elem(list_env, arg_varia[0], arg_varia[1], d);
+		if (arg_varia[1] != NULL)
+			repmlacer_elem(list_env, arg_varia[0], arg_varia[1], d);
 	}
 }
 

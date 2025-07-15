@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/14 19:49:07 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:12:28 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ t_list *ex_sort(t_list *list_env);
 void ft_print_env(t_list *env);
 void ft_export(t_list *list_env, char **args, int argc);
 char *ft_pwd(void);
+void ft_unset(t_list *list_env, char **args);
+void ft_print_env_ex(t_list *env);
 
 #endif
