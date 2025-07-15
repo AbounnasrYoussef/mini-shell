@@ -62,17 +62,13 @@ bash-3.2$ cd /
 
 rm -rf 1 //in new terminal
 
-// unset
-bash-3.2$ unset 534
-bash: unset: `534': not a valid identifiert
 
-bash-3.2$ unset gh
-bash-3.2$ unset ghhggh
-bash-3.2$ unset ghhggh fghgf
 
-bash-3.2$ unset +=dfgdf
-bash: unset: `+=dfgdf': not a valid identifier
-bash-3.2$ unset fghfh654
+bash-3.2$ unset HOME
+bash-3.2$ cd
+bash: cd: HOME not set
+
+////////////////
 
 
 =====
@@ -96,6 +92,7 @@ env
 =========
 bash-3.2$ env rw efrw
 env: rw: No such file or directory
+
 =========
 
 
@@ -110,14 +107,14 @@ bash-3.2$
 ===========
 
 ==============
-export
+#export
 
-export z
-env | grep z
-export
-export z=3
-env | grep z
-export
+#export z
+#env | grep z
+#export
+#export z=3
+#env | grep z
+#export
 
 ///////////
 
@@ -169,3 +166,22 @@ export
 export a
 export
 /////
+
+
+#minishell: pwd k
+#/mnt/homes/arahhab/Desktop/minishell/execution/built-in
+
+//////////
+
+#// unset
+#bash-3.2$ unset 534
+#bash: unset: `534': not a valid identifiert
+
+#bash-3.2$ unset gh
+#bash-3.2$ unset ghhggh
+#bash-3.2$ unset ghhggh fghgf
+
+#bash-3.2$ unset +=dfgdf
+#bash: unset: `+=dfgdf': not a valid identifier
+#bash-3.2$ unset fghfh654
+

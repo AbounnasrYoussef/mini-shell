@@ -6,13 +6,13 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/14 19:37:05 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/15 13:33:51 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-void ft_print_env(t_list *env)
+void ft_print_env_ex(t_list *env)
 {
 	while (env != NULL)
 	{
@@ -20,6 +20,16 @@ void ft_print_env(t_list *env)
 			printf("declare -x %s=\"%s\"\n", env->variable, env->valeur_vari);
 		else
 			printf("declare -x %s\n", env->variable);
+		env = env->next;
+	}
+}
+
+void ft_print_env(t_list *env)
+{
+	while (env != NULL)
+	{
+		if (env->valeur_vari != NULL)
+			printf("%s=\"%s\"\n", env->variable, env->valeur_vari);
 		env = env->next;
 	}
 }
@@ -47,8 +57,8 @@ void ft_built_in(char *line, t_list *env)
 		ft_export(env, args, argc);
 	else if (ft_strcmp(args[0], "env") == 0)
 		ft_print_env(env);
-	//else if (ft_strcmp(args[0], "unset") == 0)
-	//	ft_unset(line, env);
+	else if (ft_strcmp(args[0], "unset") == 0)
+		ft_unset(env, args);
 }
 
 int main(int argc, char **argv, char **env)
