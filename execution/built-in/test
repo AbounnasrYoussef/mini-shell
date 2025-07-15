@@ -26,42 +26,24 @@
 
 
 
-//cd 
+#//cd 
 
-bash-3.2$ export | grep PWD
-declare -x OLDPWD
-declare -x PWD="/mnt/homes/arahhab/minishell"
-bash-3.2$ cd
-bash-3.2$ export | grep PWD
-declare -x OLDPWD="/mnt/homes/arahhab/minishell"
-declare -x PWD="/mnt/homes/arahhab"
-bash-3.2$ ls
+#bash-3.2$ export | grep PWD
+#declare -x OLDPWD
+#declare -x PWD="/mnt/homes/arahhab/minishell"
+#bash-3.2$ cd
+#bash-3.2$ export | grep PWD
+#declare -x OLDPWD="/mnt/homes/arahhab/minishell"
+#declare -x PWD="/mnt/homes/arahhab"
+#bash-3.2$ ls
 
-bash-3.2$ cd efwh fqhew
-bash: cd: efwh: No such file or directory
-
-
-bash-3.2$ unset HOME
-bash-3.2$ cd
-bash: cd: HOME not set
+#bash-3.2$ cd efwh fqhew
+#bash: cd: efwh: No such file or directory
 
 
-bash-3.2$ mkdir -p 1/2/3
-bash-3.2$ cd 1/2/3/
-bash-3.2$ pwd
-/mnt/homes/arahhab/minishell/1/2/3
-bash-3.2$ cd ..
-bash: cd: ..: No such file or directory
-bash-3.2$ pwd
-/mnt/homes/arahhab/minishell/1/2/3
-bash-3.2$ cd ..
-cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
-bash-3.2$ pwd
-/mnt/homes/arahhab/minishell/1/2/3/..
-bash-3.2$ cd /
-
-rm -rf 1 //in new terminal
-
+#bash-3.2$ unset HOME
+#bash-3.2$ cd
+#bash: cd: HOME not set
 
 
 #bash-3.2$ unset HOME
@@ -83,14 +65,6 @@ rm -rf 1 //in new terminal
 #======
 
 
-
-============
-bash-3.2$ elkjerljte/
-bash: elkjerljte/: No such file or directory
-bash-3.2$ $?
-bash: 127: command not found
-
-
 #env
 #=========
 #bash-3.2$ env rw efrw
@@ -99,17 +73,6 @@ bash: 127: command not found
 #=========
 
 
-pwd====
-bash-3.2$ mkdir t
-bash-3.2$ cd t
-bash-3.2$ ls
-bash-3.2$ rm -rf ../t
-bash-3.2$ pwd
-/mnt/homes/arahhab/Desktop/minishell/execution/built-in/t
-bash-3.2$ 
-===========
-
-==============
 #export
 
 #export z
@@ -189,5 +152,47 @@ bash-3.2$
 #bash-3.2$ unset fghfh654
 
 
-declare -x a
-minishell: ./a.out 
+#export a
+#minishell: ./a.out 
+#export
+
+///////////////CD
+
+bash-3.2$ mkdir -p 1/2/3
+bash-3.2$ cd 1/2/3/
+bash-3.2$ pwd
+/mnt/homes/arahhab/minishell/1/2/3
+bash-3.2$ cd ..
+bash: cd: ..: No such file or directory
+bash-3.2$ pwd
+/mnt/homes/arahhab/minishell/1/2/3
+bash-3.2$ cd ..
+cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+bash-3.2$ pwd
+/mnt/homes/arahhab/minishell/1/2/3/..
+bash-3.2$ cd /
+
+rm -rf 1 //in new terminal
+
+
+
+
+/////////// PWD====
+
+bash-3.2$ mkdir t
+bash-3.2$ cd t
+bash-3.2$ ls
+bash-3.2$ rm -rf ../t
+bash-3.2$ pwd
+/mnt/homes/arahhab/Desktop/minishell/execution/built-in/t
+bash-3.2$ 
+===========
+
+==============
+
+/////////////
+============
+bash-3.2$ elkjerljte/
+bash: elkjerljte/: No such file or directory
+bash-3.2$ $?
+bash: 127: command not found

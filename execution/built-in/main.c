@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/15 15:00:36 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/15 18:54:54 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,29 @@ void ft_print_env(t_list *env)
 			printf("%s=\"%s\"\n", env->variable, env->valeur_vari);
 		env = env->next;
 	}
+}
+
+t_list *supp_var_nv(t_list *env)
+{
+	
+	t_list *tmp;
+	t_list *tmp2;
+	
+	tmp = env;
+	tmp2 = env;
+	
+	while (env != NULL)
+	{
+		if (env->valeur_vari == NULL && ft_strcmp(env->variable, "VSCODE_GIT_ASKPASS_EXTRA_ARGS") != 0)
+		{
+			printf("%s ------\n\n\n", env->variable);
+			tmp = ft_supp_arg(tmp, env->variable);
+		}
+		env = env->next;
+	}
+	printf("gsghsgffss\n\n");
+	
+	return tmp;
 }
 
 void ft_built_in(char *line, t_list *env)
@@ -67,6 +90,10 @@ void ft_built_in(char *line, t_list *env)
 	}
 	else if (ft_strcmp(args[0], "unset") == 0)
 		ft_unset(env, args);
+	else if (ft_strcmp(args[0], "./a.out") == 0)
+	{
+		env = supp_var_nv(env);
+	}
 }
 
 int main(int argc, char **argv, char **env)
