@@ -86,6 +86,15 @@ void add_token(t_token **list, t_token *new_tok);
 void space_skip(char *line , int *i);
 
 
+// expand
+void	expand_all_tokens(t_token *tokens, int exit_code,t_list_env *env, garbage **garb);
+char	*expand_token(char *value, int exit_code,t_list_env *env, garbage **garb);
+void	append_single_quote(const char *val, int *i, char **res,garbage **garb);
+void	append_double_quote(const char *val, int *i, char **res,t_expand_ctx ctx);
+
+
+
+
 // syntaxe errors
 int syntaxe_errors(char *args);
 int error_pipe(char *caracter , int *i);
@@ -105,6 +114,7 @@ char	*ft_strdup(const char *s1,garbage **garb);
 int is_operator(char c);
 char	*ft_strjoin(char const *s1, char const *s2, garbage **garb);
 char	*ft_strchr(const char *s, int c);
+int	ft_isalnum(int c);
 
 
 #endif

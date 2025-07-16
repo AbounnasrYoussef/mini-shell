@@ -28,10 +28,6 @@ void ft_read()
         if (syntaxe_errors(line) == 0)
             continue;
         token = tokens(line,&garb);
-        if (token->value == WORD)
-        {
-            
-        }
         free(line); // on free car readline il alloce 
     }
 }
