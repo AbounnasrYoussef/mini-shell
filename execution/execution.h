@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/16 23:04:10 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/17 05:55:49 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ char *ft_pwd(void);
 void ft_unset(t_list *list_env, char **args);
 void ft_print_env_ex(t_list *env);
 t_list* ft_supp_arg(t_list *list_env, char *arg);
+char *ft_concat(char *str, char *str2);
+char *cherche_path_cmd(char *cmd, char **env);
 char *ft_concat(char *str, char *str2);
 #endif
