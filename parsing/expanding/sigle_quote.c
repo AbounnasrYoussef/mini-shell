@@ -6,11 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:22:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/17 10:23:02 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/17 11:37:10 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../minishell.h>
+#include  "../minishell.h"
 
 // Gère le cas d'une chaîne entre apostrophes simples (quote '...')
 void	append_single_quote(const char *val, int *i, char **res,garbage **garb)

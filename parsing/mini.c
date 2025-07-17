@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/17 10:49:01 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/17 11:12:37 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,17 @@ void ft_read_loop(t_list_env *env)
         }
         token = tokens(line, &garb); // Tokenisation de la ligne
         free(line); // readline malloc => on libère après usage
-        if (!tokens)
+        if (!token)
             continue;
         // Expansion des variables d'environnement et de $? sur les tokens
         expand_all_tokens(token, last_exit_code, env, &garb);
         // Exécution des commandes et récupération du code de sortie
-        last_exit_code = execute(token, env, &garb);
+        // last_exit_code = execute(token, env, &garb);
         // Nettoyage mémoire via garbage collector
-        ft_free_all(&garb);
+        ft_free_all(garb);
     }
 }
+
 
 // Entrée du programme
 int main(int ac, char **av, char **envp)
@@ -54,7 +55,7 @@ int main(int ac, char **av, char **envp)
     (void)av;
 
     // Initialiser l'environnement en liste chaînée
-    env_list = init_env(envp);
+    env_list = ft_env(envp);
 
     // Lancer la boucle principale
     ft_read_loop(env_list);

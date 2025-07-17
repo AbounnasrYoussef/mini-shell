@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/26 17:16:40 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/17 11:30:41 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ typedef struct garbage
     struct garbage *next;  // hada next l prochaine element dial dik la list
 }   garbage;
 
-typedef struct s_list
-{
-	void	*ligne;
-	void	*variable;
-	void 	*valeur_vari;
-	struct s_list	*next;
-}	t_list;
+// typedef struct s_list
+// {
+// 	void	*ligne;
+// 	void	*variable;
+// 	void 	*valeur_vari;
+// 	struct s_list	*next;
+// }	t_list;
 
 
 typedef struct s_list_env
@@ -62,7 +62,7 @@ typedef struct s_list_env
 	void	*ligne;
 	void	*variable;
 	void 	*valeur_vari;
-	struct s_list	*next;
+	struct s_list_env	*next;
 }	t_list_env;
 
 // hadi 3la 9bol expanding
@@ -91,7 +91,7 @@ void	expand_all_tokens(t_token *tokens, int exit_code,t_list_env *env, garbage *
 char	*expand_token(char *value, int exit_code,t_list_env *env, garbage **garb);
 void	append_single_quote(const char *val, int *i, char **res,garbage **garb);
 void	append_double_quote(const char *val, int *i, char **res,t_expand_ctx ctx);
-
+char	*expand_dollar(char *value, int *i, int exit_code,t_list_env *env, garbage **garb);
 
 
 
@@ -115,6 +115,8 @@ int is_operator(char c);
 char	*ft_strjoin(char const *s1, char const *s2, garbage **garb);
 char	*ft_strchr(const char *s, int c);
 int	ft_isalnum(int c);
+char	*ft_itoa(int n, garbage **garb);
+t_list_env *ft_env(char **str);
 
 
 #endif

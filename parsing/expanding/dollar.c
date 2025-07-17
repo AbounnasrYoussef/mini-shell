@@ -6,11 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:23:13 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/17 10:23:15 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/17 11:30:14 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../minishell.h>
+#include "../minishell.h"
 
 
 char	*get_env_value(char *name, t_list_env *env, garbage **garb)

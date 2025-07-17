@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utile_expand.c                                     :+:      :+:    :+:   */
+/*   double_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 08:22:31 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/26 15:17:18 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/17 11:36:55 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ void	append_double_quote(const char *val, int *i, char **res,t_expand_ctx ctx)
 	while (val[*i] && val[*i] != '"')  // Lire jusqu'à la quote fermante
 	{
 		if (val[*i] == '$')  // Si on trouve un dollar
-			part = ft_strjoin(part,
-					expand_dollar(val, i, ctx.exit_code,
-						ctx.env, ctx.garb), ctx.garb);
+			part = ft_strjoin(part,expand_dollar((char *)val, i, ctx.exit_code, ctx.env, ctx.garb), ctx.garb);
 			// On étend la variable avec sa valeur
 		else
 		{

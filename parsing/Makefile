@@ -7,7 +7,10 @@ SRC = mini.c\
       $(wildcard utils/*.c) \
       $(wildcard syntaxe_errors/*.c) \
 	  $(wildcard ft_malloc/*.c)\
-	  $(wildcard tokens/*.c)
+	  $(wildcard tokens/*.c)\
+	  $(wildcard expanding/*.c)\
+	  $(wildcard env/*.c)
+
 
 OBJ = $(SRC:.c=.o)
 

@@ -1,4 +1,17 @@
-#include <minishell.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/17 11:13:21 by yabounna          #+#    #+#             */
+/*   Updated: 2025/07/17 11:16:15 by yabounna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "../minishell.h"
 
 static char	*ft_char(char *s, unsigned int number, long int len)
 {
@@ -33,11 +46,11 @@ char	*ft_itoa(int n, garbage **garb)
 	int					sign;
 
 	if (n == 0)
-		return (ft_strdup_gc("0", garb));
+		return (ft_strdup("0", garb));
 	sign = 1;
 	len = ft_len(n);
 	// Allocation avec garbage collector
-	s = (char *)ft_malloc(sizeof(char) * (len + 1), garb);
+	s = (char *)ft_malloc(garb ,sizeof(char) * (len + 1));
 	if (!s)
 		return (NULL);
 	s[len--] = '\0';
