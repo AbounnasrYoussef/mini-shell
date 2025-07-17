@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/17 03:40:42 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/17 04:33:13 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,6 @@ char *cherche_path_cmd(char *cmd, char **env)
 	return path_cmd;
 }
 
-//int main(int argc, char **argv, char **env)
-//{
-//	char *cmd;
-	
-//	cmd = NULL;
-//	if (argv[1] != NULL)
-//	{
-//		cmd = cherche_path_cmd(argv[1], env);
-//	}
-//	execve(cmd, &argv[1], NULL);
-//	printf("\n\n\n");
-//	execve(cmd, &argv[1], NULL);
-	
-//}
 
 //int main(int argc, char **argv, char **env)
 //{
@@ -114,78 +100,105 @@ char *cherche_path_cmd(char *cmd, char **env)
 
 
 
+
+
 //int main(int argc, char **argv, char **env)
 //{
 //	char *cmd;
+//	char *cmd2;
+//	int fd[2];
+//	int pip;
 	
+//	pip = pipe(fd);
 //	int id;
+//	int id2;
 //	cmd = NULL;
 //	if (argv[1] != NULL)
 //	{
 //		cmd = cherche_path_cmd(argv[1], env);
 //	}
+//	if (argv[2] != NULL)
+//	{
+//		cmd2 = cherche_path_cmd(argv[2], env);
+//	}
 	
 //	id = fork();
+	
 //	if (id == 0)
 //	{
-//		execve(cmd, &argv[1], NULL);
-//	}
-//	else
-//	{
+//		dup2(fd[0], STDIN_FILENO);
+//		close(fd[1]);
+//		close(fd[0]);
 //		execve(cmd, &argv[1], NULL);
 //	}
 //	if (id != 0)
 //	{
 //		wait(NULL);
 //	}
+	
+//	id2 = fork();
+//	if (id2 == 0)
+//	{
+//		dup2(fd[1], STDOUT_FILENO);
+//		close(fd[1]);
+//		close(fd[0]);
+//		execve(cmd2, &argv[2], NULL);
+//	}
+	
+//	if (id2 != 0)
+//	{
+//		wait(NULL);
+//	}
 //}
 
-int main(int argc, char **argv, char **env)
+
+
+
+void ft_pipe(int argc, char **argv, char **env)
 {
-	char *cmd;
-	char *cmd2;
+	char **cmd;
 	int fd[2];
+	int id[argc - 1];
 	int pip;
+	int i;
 	
+	i = 0;
 	pip = pipe(fd);
-	int id;
-	int id2;
-	cmd = NULL;
-	if (argv[1] != NULL)
+	cmd = malloc(200);
+	while (i < (argc - 1))
 	{
-		cmd = cherche_path_cmd(argv[1], env);
+		cmd[i] = malloc(200);
+		i++;
 	}
-	if (argv[2] != NULL)
+	i = 1;
+	while (i < (argc))
 	{
-		cmd2 = cherche_path_cmd(argv[2], env);
-	}
-	
-	id = fork();
-	
-	if (id == 0)
-	{
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[1]);
-		close(fd[0]);
-		execve(cmd, &argv[1], NULL);
-	}
-	if (id != 0)
-	{
-		wait(NULL);
+		cmd[i] = cherche_path_cmd(argv[i], env);
+		i++;
 	}
 	
-	id2 = fork();
-	if (id2 == 0)
+	i = 1;
+
+	while (i < (argc))
 	{
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-		close(fd[0]);
-		execve(cmd2, &argv[2], NULL);
-	}
+		id[i] = fork();
 	
-	if (id2 != 0)
-	{
-		wait(NULL);
+		if (id[i] == 0)
+		{
+			dup2(fd[0], STDIN_FILENO);
+			close(fd[1]);
+			close(fd[0]);
+			execve(cmd[i], &argv[1], NULL);
+		}
+		if (id[i] != 0)
+		{
+			wait(NULL);
+		}
+		i++;
 	}
 }
 
+int main(int argc, char **argv, char **env)
+{
+	ft_pipe(argc, argv, env);
+}
