@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect_output.c                                  :+:      :+:    :+:   */
+/*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 05:54:12 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/17 07:29:25 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/18 17:55:30 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,16 @@
 
 #include <fcntl.h>
 
-
-
-
 int main(int argc, char **argv, char **env)
 {
 	char *cmd;
-	int fd[2];
 	int fd2;
-	char *buffer;
+	int fd[2];
 	int c;
 	
-	fd2 = open(argv[2], O_CREAT | O_RDWR);
-	buffer = malloc(2000);
+	fd[0] = 0;
+	fd[1] = 1;
+	
 	int id;
 	cmd = NULL;
 	if (argv[1] != NULL)
@@ -34,21 +31,35 @@ int main(int argc, char **argv, char **env)
 		cmd = cherche_path_cmd(argv[1], env);
 	}
 
-	
 	id = fork();
-	
+	char *argvv[2];
+	argvv[0] = argv[1];
+	argvv[1] = NULL;
 	if (id == 0)
 	{
-		//c = read(fd[1], buffer, 2000);
-		//printf("\n\n\n\n------- %s \n\n\n\n -------\n", buffer);
-		execve(cmd, &argv[1], NULL);
+		if (ft_strcmp(argv[2], "<") == 0)
+		{
+			fd2 = open(argv[3], O_RDONLY);
+			dup2(fd2, STDIN_FILENO);
+			close(fd2);
+		}
+		else if (ft_strcmp(argv[2], ">") == 0)
+		{
+			fd2 = open(argv[3], O_CREAT | O_RDWR | O_TRUNC,0777);
+			dup2(fd2, STDOUT_FILENO);
+			close(fd2);
+		}
+		else if (ft_strcmp(argv[2], ">>") == 0)
+		{
+			fd2 = open(argv[3], O_CREAT | O_RDWR | O_APPEND, 0777);
+			dup2(fd2, STDOUT_FILENO);
+			close(fd2);
+		}
+		execve(cmd, argvv, NULL);
 		
 	}
 	if (id != 0)
 	{
-		wait(&id);
+		waitpid(id, NULL, 0);
 	}
-	//write(fd2, buffer, 10);
-	//printf("\n\n\n\n------- %s \n\n\n\n -------\n", buffer);
-	
 }

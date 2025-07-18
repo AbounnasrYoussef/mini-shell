@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/18 15:28:51 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/18 15:36:04 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void ft_pipe(int argc, char **argv, char **env)
 }
 
 
-int main(int argc, char **argv, char **env)
-{
-	ft_pipe(argc, argv, env);
-}
+//int main(int argc, char **argv, char **env)
+//{
+//	ft_pipe(argc, argv, env);
+//}
