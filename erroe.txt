@@ -1,0 +1,11 @@
+l"s" ->> ls
+ls | < file cat machi syntax error
+
+
+bash-3.2$ $HOM ls
+erroe.txt       execution       parsing
+bash-3.2$ "$HOM" ls
+bash: : command not found
+
+
+export a="ls -la" => split
