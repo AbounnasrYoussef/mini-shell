@@ -1,0 +1,198 @@
+
+#/// exit 
+
+#bash-3.2$ exit cfgas1342
+#exit
+#bash: exit: cfgas1342: numeric argument required
+#➜  built-in git:(zaba_execution) ✗ $?                              
+#zsh: command not found: 255
+
+#bash-3.2$ exit cfgas1342 655245642
+#exit
+#bash: exit: cfgas1342: numeric argument required
+#➜  built-in git:(zaba_execution) ✗ $?
+#zsh: command not found: 255
+
+
+#exit 313 1313
+
+#exit fdfefwr
+
+# exit 311313
+
+#$?
+
+#bash-3.2$ exit 654564564654565645645645645656456456654564564564564564564566
+
+
+
+#//cd 
+
+#bash-3.2$ export | grep PWD
+#declare -x OLDPWD
+#declare -x PWD="/mnt/homes/arahhab/minishell"
+#bash-3.2$ cd
+#bash-3.2$ export | grep PWD
+#declare -x OLDPWD="/mnt/homes/arahhab/minishell"
+#declare -x PWD="/mnt/homes/arahhab"
+#bash-3.2$ ls
+
+#bash-3.2$ cd efwh fqhew
+#bash: cd: efwh: No such file or directory
+
+
+#bash-3.2$ unset HOME
+#bash-3.2$ cd
+#bash: cd: HOME not set
+
+
+#bash-3.2$ unset HOME
+#bash-3.2$ cd
+#bash: cd: HOME not set
+
+////////////////
+
+
+#=====
+#minishell: exit 2442 2424
+#exit: too many arguments
+#➜  built-in git:(zaba_execution) bash
+#should not exit
+
+#bash-3.2$ exit 9223372036854775808
+#exit
+#bash: exit: 9223372036854775808: numeric argument required
+#======
+
+
+#env
+#=========
+#bash-3.2$ env rw efrw
+#env: rw: No such file or directory
+
+#=========
+
+
+#export
+
+#export z
+#env | grep z
+#export
+#export z=3
+#env | grep z
+#export
+
+///////////
+
+#bash-3.2$ export 677gf
+#bash: export: `677gf': not a valid identifier
+
+#/////
+
+#bash-3.2$ export a 6777gf b
+#bash: export: `6777gf': not a valid identifier
+#bash-3.2$ export
+
+//////
+
+#bash-3.2$ export a=ggg 8hjhj b=hghh
+#bash: export: `8hjhj': not a valid identifier
+#bash-3.2$ export a=ggg h@jhj b=hghh
+#bash: export: `h@jhj': not a valid identifier
+#bash-3.2$ export a=ggg h_jhj b=hghh
+#bash-3.2$ export a=ggg h-jhj b=hghh
+#bash: export: `h-jhj': not a valid identifier
+#bash-3.2$ export a=ggg h/jhj b=hghh
+#bash: export: `h/jhj': not a valid identifier
+#bash-3.2$ export a=ggg h?jhj b=hghh
+#bash: export: `h?jhj': not a valid identifier
+#bash-3.2$ export a=ggg _hjhj b=hghh
+
+//////
+
+
+#declare -x z="ffg"
+#bash-3.2$ export z+=ddd
+#bash-3.2$ export
+
+///////
+#bash-3.2$ export ghghgh677838_-
+#bash: export: `ghghgh677838_-': not a valid identifier
+#bash-3.2$ export ghghgh677838_
+#bash-3.2$ export _ghghgh
+
+
+//////
+#export hfhf+=dhfh
+
+////
+
+#export a=b
+#export
+#export a
+#export
+/////
+
+
+#minishell: pwd k
+#/mnt/homes/arahhab/Desktop/minishell/execution/built-in
+
+//////////
+
+#// unset
+#bash-3.2$ unset 534
+#bash: unset: `534': not a valid identifiert
+
+#bash-3.2$ unset gh
+#bash-3.2$ unset ghhggh
+#bash-3.2$ unset ghhggh fghgf
+
+#bash-3.2$ unset +=dfgdf
+#bash: unset: `+=dfgdf': not a valid identifier
+#bash-3.2$ unset fghfh654
+
+
+#export a
+#minishell: ./a.out 
+#export
+
+///////////////CD
+
+bash-3.2$ mkdir -p 1/2/3
+bash-3.2$ cd 1/2/3/
+bash-3.2$ pwd
+/mnt/homes/arahhab/minishell/1/2/3
+bash-3.2$ cd ..
+bash: cd: ..: No such file or directory
+bash-3.2$ pwd
+/mnt/homes/arahhab/minishell/1/2/3
+bash-3.2$ cd ..
+cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+bash-3.2$ pwd
+/mnt/homes/arahhab/minishell/1/2/3/..
+bash-3.2$ cd /
+
+rm -rf 1 //in new terminal
+
+
+
+
+/////////// PWD====
+
+bash-3.2$ mkdir t
+bash-3.2$ cd t
+bash-3.2$ ls
+bash-3.2$ rm -rf ../t
+bash-3.2$ pwd
+/mnt/homes/arahhab/Desktop/minishell/execution/built-in/t
+bash-3.2$ 
+===========
+
+==============
+
+/////////////
+============
+bash-3.2$ elkjerljte/
+bash: elkjerljte/: No such file or directory
+bash-3.2$ $?
+bash: 127: command not found
