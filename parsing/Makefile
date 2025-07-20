@@ -4,12 +4,13 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRC = mini.c\
-      $(wildcard utils/*.c) \
-      $(wildcard syntaxe_errors/*.c) \
-	  $(wildcard ft_malloc/*.c)\
-	  $(wildcard tokens/*.c)\
-	  $(wildcard expanding/*.c)\
-	  $(wildcard env/*.c)
+      $(wildcard utils/*.c)\
+      $(wildcard syntaxe_errors/*.c)\
+      $(wildcard ft_malloc/*.c)\
+      $(wildcard tokens/*.c)\
+      $(wildcard expanding/*.c)\
+      $(wildcard env/*.c)\
+      $(wildcard struct_atmane/*.c)
 
 
 OBJ = $(SRC:.c=.o)
@@ -30,5 +31,5 @@ fclean: clean
 
 re: fclean all
 
-print:
-	@echo $(SRC)
+#print:
+#	@echo $(SRC)

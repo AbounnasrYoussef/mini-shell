@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/17 11:30:41 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/20 10:45:00 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,19 @@ typedef struct y_token{
     struct y_token *next;
 }   t_token;
 
+typedef struct s_file
+{
+	int				type;
+	char			*file_name;
+	struct s_file	*next;
+}	t_file;
+
+typedef struct s_exec
+{
+	char			**cmd;
+	t_file			*files;
+	struct s_exec	*next;
+}	t_exec;
 
 
 typedef struct garbage
@@ -47,14 +60,6 @@ typedef struct garbage
     void *ptr; // hada pointer generique vers n'importe quelle memoire allouee 
     struct garbage *next;  // hada next l prochaine element dial dik la list
 }   garbage;
-
-// typedef struct s_list
-// {
-// 	void	*ligne;
-// 	void	*variable;
-// 	void 	*valeur_vari;
-// 	struct s_list	*next;
-// }	t_list;
 
 
 typedef struct s_list_env
@@ -118,5 +123,11 @@ int	ft_isalnum(int c);
 char	*ft_itoa(int n, garbage **garb);
 t_list_env *ft_env(char **str);
 
+
+// strcut atmane
+t_exec	*parse_tokens_to_exec_list(t_token *tokens, garbage **garb);
+char	**extract_cmd_from_tokens(t_token *tokens, garbage **garb);
+t_file	*extract_redirs_from_tokens(t_token *tokens, garbage **garb);
+void free_exec_list(t_exec *exec_list);
 
 #endif

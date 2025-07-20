@@ -59,10 +59,3 @@ t_list_env *ft_env(char **str)
 	}
 	return (debut_env);
 }
-
-
-typedef struct s_exec{
-    char **cmd;
-    t_file file;
-    struct s_exec *next
-} t_exec;
