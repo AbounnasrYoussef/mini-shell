@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 05:54:12 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/18 17:55:30 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/20 12:39:13 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,5 @@ int main(int argc, char **argv, char **env)
 		waitpid(id, NULL, 0);
 	}
 }
+
+
