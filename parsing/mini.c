@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 18:51:23 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/24 20:51:02 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ while (tmp)
     {
         for (int j = 0; tmp->cmd[j]; j++)
             printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
+        //     printf("%s", tmp->cmd[j]);
+        // printf("\n");
     }
 
     // Afficher les redirections

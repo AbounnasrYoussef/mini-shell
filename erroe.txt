@@ -14,3 +14,21 @@ dik l3ayba dial commande fstruct dial expanding ila da5el $chi haja galta
 
 
  > hamide | ls << khalide | ls < moo | < cat ls -la syntax error
+
+
+
+
+ ================
+ export var1 $var2 var3 $var $USER $HOME
+ ================
+ '''"$HOME"'$USER'"$?"'''
+ ================
+ minishell$ export var+='vvvvv'
+---- Commande 1 ----
+cmd[0] = export
+cmd[1] = var+=
+cmd[2] = 'vvvvv'
+minishell$ 
+(checki: remove (+=) && (''""))
+================
+ ls | << j ===> syntaxe error 
