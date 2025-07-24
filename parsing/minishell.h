@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 11:07:54 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/24 13:25:51 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ typedef struct y_token{
     type_token type;
     struct y_token *next;
 }   t_token;
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list;
 
 typedef struct s_file
 {
@@ -127,6 +121,7 @@ char	*ft_strjoin(char const *s1, char const *s2, garbage **garb);
 char	*ft_strchr(const char *s, int c);
 int	ft_isalnum(int c);
 char	*ft_itoa(int n, garbage **garb);
+int	ft_isalpha(int c);
 t_list_env *ft_env(char **str);
 
 
