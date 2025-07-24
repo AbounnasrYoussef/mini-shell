@@ -9,3 +9,8 @@ bash: : command not found
 
 
 export a="ls -la" => split
+
+dik l3ayba dial commande fstruct dial expanding ila da5el $chi haja galta  
+
+
+ > hamide | ls << khalide | ls < moo | < cat ls -la syntax error
