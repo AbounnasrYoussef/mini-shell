@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 11:13:34 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/24 18:51:23 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void ft_read_loop(t_list_env **env ,t_exec **data)
         if (!token)
             continue;
         // Expansion des variables d'environnement et de $? sur les tokens
-        expand_all_tokens(token, last_exit_code, *env, &garb);
+        expand_all_tokens(&token, last_exit_code, *env, &garb);
         *data = parse_tokens_to_exec_list(token , &garb);
         t_exec *tmp = *data;
 int i = 1;

@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 13:25:51 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/24 18:58:13 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef enum type_token{
 typedef struct y_token{
     char *value;
     type_token type;
+	int quoted;
     struct y_token *next;
 }   t_token;
 
@@ -89,16 +90,19 @@ type_token get_token_type(char *str);
 t_token *new_token(char *value, type_token type,garbage **garb);
 void add_token(t_token **list, t_token *new_tok);
 void space_skip(char *line , int *i);
+void	add_token_back(t_token **head, t_token *new_token);
+char	**i_split(char const *s, char c);
 
 
 // expand
-void	expand_all_tokens(t_token *tokens, int exit_code,t_list_env *env, garbage **garb);
+void	expand_all_tokens(t_token **tokens, int exit_code,t_list_env *env, garbage **garb);
 char	*expand_token(char *value, int exit_code,t_list_env *env, garbage **garb);
 void	append_single_quote(const char *val, int *i, char **res,garbage **garb);
 void	append_double_quote(const char *val, int *i, char **res,t_expand_ctx ctx);
 char	*expand_dollar(char *value, int *i, int exit_code,t_list_env *env, garbage **garb);
-
-
+void	replace_token(t_token **head, t_token *old, t_token *new_list);
+t_token	*get_last_token(t_token *tokens);
+t_token	*split_into_tokens(char *str, garbage **garb);
 
 // syntaxe errors
 int syntaxe_errors(char *args);
@@ -110,7 +114,7 @@ int error_quote(char *caracter, int *i);
 // utils
 int	ft_strcmp(const char *s1, const char *s2);
 size_t	ft_strlen(const char *s);
-char	**ft_split(char const *s, char c);
+char	**ft_split(const char *s, char c, garbage **garb);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 int skip_space(char c);
 int is_quote(char c);
@@ -126,6 +130,7 @@ t_list_env *ft_env(char **str);
 
 
 // strcut atmane
+// void	expand_all_tokens(t_token **tokens, int exit_code,t_list_env *env, garbage **garb);
 t_exec	*parse_tokens_to_exec_list(t_token *tokens, garbage **garb);
 char	**extract_cmd_from_tokens(t_token *tokens, garbage **garb);
 t_file	*extract_redirs_from_tokens(t_token *tokens, garbage **garb);

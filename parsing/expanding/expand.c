@@ -6,11 +6,29 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 13:20:27 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/24 18:56:15 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+
+void	add_token_back(t_token **head, t_token *new_token)
+{
+	t_token	*tmp;
+
+	if (!head || !new_token)
+		return ;
+	if (*head == NULL)
+	{
+		*head = new_token;
+		return ;
+	}
+	tmp = *head;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new_token;
+}
 
 // hade fonction hiya li kt7awel lina  token l texte $user =  youssef
 char	*expand_token(char *value, int exit_code,t_list_env *env, garbage **garb)
@@ -44,21 +62,50 @@ char	*expand_token(char *value, int exit_code,t_list_env *env, garbage **garb)
 	return (res);
 }
 
-
-
-void	expand_all_tokens(t_token *tokens, int exit_code,t_list_env *env, garbage **garb)
-                // code de retour du dernier commande executer
+void	expand_all_tokens(t_token **tokens, int exit_code,t_list_env *env, garbage **garb)
 {
+	t_token	*current;
 	char	*expanded;
+	t_token	*new_tokens;
+	t_token	*last;
+	t_token	*next;
 
-	while (tokens) //tous les tokens
+	current = *tokens;
+	while (current)
 	{
-		if (tokens->type == WORD && ft_strchr(tokens->value, '$')) // if ila kane token word o kayn fih dollar
+		next = current->next;
+		if (current->type == WORD && ft_strchr(current->value, '$'))
 		{
-			expanded = expand_token(tokens->value, exit_code, env, garb);
-			tokens->value = expanded;
+			expanded = expand_token(current->value, exit_code, env, garb);
+			if (!current->quoted)
+			{
+				new_tokens = split_into_tokens(expanded, garb);
+				last = get_last_token(new_tokens);
+				last->next = current->next;
+				replace_token(tokens, current, new_tokens);
+			}
+			else
+				current->value = expanded;
 		}
-		tokens = tokens->next;
+		current = next;
 	}
 }
+
+
+
+// void	expand_all_tokens(t_token *tokens, int exit_code,t_list_env *env, garbage **garb)
+//                 // code de retour du dernier commande executer
+// {
+// 	char	*expanded;
+
+// 	while (tokens) //tous les tokens
+// 	{
+// 		if (tokens->type == WORD && ft_strchr(tokens->value, '$')) // if ila kane token word o kayn fih dollar
+// 		{
+// 			expanded = expand_token(tokens->value, exit_code, env, garb);
+// 			tokens->value = expanded;
+// 		}
+// 		tokens = tokens->next;
+// 	}
+// }
 
