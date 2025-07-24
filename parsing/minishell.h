@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/20 10:45:00 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/24 11:07:54 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct y_token{
     type_token type;
     struct y_token *next;
 }   t_token;
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 
 typedef struct s_file
 {
@@ -129,5 +135,6 @@ t_exec	*parse_tokens_to_exec_list(t_token *tokens, garbage **garb);
 char	**extract_cmd_from_tokens(t_token *tokens, garbage **garb);
 t_file	*extract_redirs_from_tokens(t_token *tokens, garbage **garb);
 void free_exec_list(t_exec *exec_list);
+int	is_redirection(type_token type);
 
 #endif
