@@ -6,12 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 18:56:15 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/25 09:50:21 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 void	add_token_back(t_token **head, t_token *new_token)
 {
@@ -62,50 +61,45 @@ char	*expand_token(char *value, int exit_code,t_list_env *env, garbage **garb)
 	return (res);
 }
 
-void	expand_all_tokens(t_token **tokens, int exit_code,t_list_env *env, garbage **garb)
+
+void	expand_all_tokens(t_token **tokens, int exit_code,
+				t_list_env *env, garbage **garb)
 {
 	t_token	*current;
-	char	*expanded;
 	t_token	*new_tokens;
 	t_token	*last;
-	t_token	*next;
+	char	*expanded;
 
 	current = *tokens;
 	while (current)
 	{
-		next = current->next;
 		if (current->type == WORD && ft_strchr(current->value, '$'))
 		{
 			expanded = expand_token(current->value, exit_code, env, garb);
+
+			// Si ce n'est pas quoted, trim les espaces/tabs
 			if (!current->quoted)
+				expanded = ft_strtrim(expanded, " \t" , garb);
+
+			// Si ce n'est pas quoted, on split en plusieurs tokens
+			if (!current->quoted && ft_strchr(expanded, ' '))
 			{
 				new_tokens = split_into_tokens(expanded, garb);
 				last = get_last_token(new_tokens);
-				last->next = current->next;
 				replace_token(tokens, current, new_tokens);
+				current = last;
 			}
 			else
 				current->value = expanded;
 		}
-		current = next;
+		current = current->next;
 	}
 }
 
 
 
-// void	expand_all_tokens(t_token *tokens, int exit_code,t_list_env *env, garbage **garb)
-//                 // code de retour du dernier commande executer
-// {
-// 	char	*expanded;
 
-// 	while (tokens) //tous les tokens
-// 	{
-// 		if (tokens->type == WORD && ft_strchr(tokens->value, '$')) // if ila kane token word o kayn fih dollar
-// 		{
-// 			expanded = expand_token(tokens->value, exit_code, env, garb);
-// 			tokens->value = expanded;
-// 		}
-// 		tokens = tokens->next;
-// 	}
-// }
+
+
+
 

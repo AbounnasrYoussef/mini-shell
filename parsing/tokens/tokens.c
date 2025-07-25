@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:44:25 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/21 14:42:08 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/25 09:01:57 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,21 @@ type_token get_token_type(char *str) {
 }
 
 // kncrew wa7ed noeud
-t_token *new_token(char *value, type_token type,garbage **garb)
+t_token	*new_token(char *value, type_token type, garbage **garb)
 {
-    t_token *tok = ft_malloc(garb,sizeof(t_token));
-    if (!tok)
-        return NULL;
-    tok->value = ft_strdup(value, garb);
-    tok->type = type;
-    tok->next = NULL;
-    return tok;
+	t_token	*tok;
+
+	tok = ft_malloc(garb, sizeof(t_token));
+	if (!tok)
+		return (NULL);
+	tok->value = ft_strdup(value, garb);
+	tok->type = type;
+	tok->quoted = 0;
+	tok->in_double_quote = 0;
+	tok->next = NULL;
+	return (tok);
 }
+
 
 // hade fontion bach nzido wa7ed token l la5er dial liste chainee 
 void add_token(t_token **list, t_token *new_tok)

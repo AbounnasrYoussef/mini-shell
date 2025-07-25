@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 18:58:13 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/25 09:20:59 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct y_token{
     char *value;
     type_token type;
 	int quoted;
+	int				in_double_quote;
     struct y_token *next;
 }   t_token;
 
@@ -104,6 +105,7 @@ void	replace_token(t_token **head, t_token *old, t_token *new_list);
 t_token	*get_last_token(t_token *tokens);
 t_token	*split_into_tokens(char *str, garbage **garb);
 
+
 // syntaxe errors
 int syntaxe_errors(char *args);
 int error_pipe(char *caracter , int *i);
@@ -126,6 +128,7 @@ char	*ft_strchr(const char *s, int c);
 int	ft_isalnum(int c);
 char	*ft_itoa(int n, garbage **garb);
 int	ft_isalpha(int c);
+char	*ft_strtrim(char const *s1, char const *set, garbage **garb);
 t_list_env *ft_env(char **str);
 
 
