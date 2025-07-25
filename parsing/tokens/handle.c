@@ -6,23 +6,23 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:30:32 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 13:51:08 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/25 15:01:53 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void handle_word(const char *line, int *i, t_token **tokens , garbage **garb)
-{
-    int start = *i;// bedia dial mot li 7na fih db
+// void handle_word(const char *line, int *i, t_token **tokens , garbage **garb)
+// {
+//     int start = *i;// bedia dial mot li 7na fih db
 
-    while (line[*i] && !skip_space(line[*i])
-        && !is_operator(line[*i]) && !is_quote(line[*i]))
-        (*i)++;  // loop htal la5er dial mot
+//     while (line[*i] && !skip_space(line[*i])
+//         && !is_operator(line[*i]) && !is_quote(line[*i]))
+//         (*i)++;  // loop htal la5er dial mot
 
-    char *word = ft_substr(line, start, *i - start, garb);// Extrait le mot
-    add_token(tokens, new_token(word, WORD,garb)); // cree token de type word et ajouter a la liste
-}
+//     char *word = ft_substr(line, start, *i - start, garb);// Extrait le mot
+//     add_token(tokens, new_token(word, WORD,garb)); // cree token de type word et ajouter a la liste
+// }
 
 // hna kngeriwe sigle operator | > <
 void handle_single_operator(char *line, int *i, t_token **tokens , garbage **garb)
