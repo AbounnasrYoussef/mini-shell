@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 12:59:18 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/15 13:49:10 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 12:22:45 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_list* ft_supp_arg(t_list *list_env, char *arg)
 	
 	while ((list_env) != NULL)
 	{// free the deleted node before returning TODO
-		if (ft_strcmp((list_env)->variable, arg) == 0)
+		if (ft_strcmpp((list_env)->variable, arg) == 0)
 		{
 			if (tmp_node)
 				tmp_node->next = list_env->next;

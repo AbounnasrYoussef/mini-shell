@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 12:53:52 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 12:28:00 by arahhab          ###   ########.fr       */
+/*   Created: 2025/06/23 10:09:11 by yabounna          #+#    #+#             */
+/*   Updated: 2025/07/25 12:17:46 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../minishell.h"
 
 static size_t	count_word(char const *s, char c)
 {
@@ -78,7 +78,7 @@ static void	*free_split(char **array, int i)
 	return (NULL);
 }
 
-char	**ft_splitt(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	size_t	skip;
 	size_t	i;
@@ -99,7 +99,7 @@ char	**ft_splitt(char const *s, char c)
 		alloce_array[index] = (char *)malloc(sizeof(char) * (sizee + 1));
 		if (!alloce_array[index])
 			return (free_split(alloce_array, index));
-		ft_memcpyy(alloce_array[index], s + skip, sizee);
+		ft_memcpy(alloce_array[index], s + skip, sizee);
 		alloce_array[index][sizee] = '\0';
 		index++;
 	}

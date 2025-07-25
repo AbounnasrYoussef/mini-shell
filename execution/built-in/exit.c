@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/15 16:31:07 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 12:21:28 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@
 //{
 //	if (argc == 1)
 //	{
-//		if (ft_strcmp(str[0], "exit") == 0)
+//		if (ft_strcmpp(str[0], "exit") == 0)
 //		{
 //			printf("shhs\n");
 //			exit(0);
@@ -84,7 +84,7 @@
 //	}
 //	else if (argc > 1)
 //	{
-//		if (ft_strcmp(str[0], "exit") == 0)
+//		if (ft_strcmpp(str[0], "exit") == 0)
 //		{
 //			if (check_number(str[1]) == 0 && argc == 2 && len <= 18)
 //			{
@@ -202,7 +202,7 @@ void ft_exit (int len, int argc, char **str)
 {
 	if (argc == 1)
 	{
-		if (ft_strcmp(str[0], "exit") == 0)
+		if (ft_strcmpp(str[0], "exit") == 0)
 		{
 			printf("shhs\n");
 			exit(0);
@@ -210,7 +210,7 @@ void ft_exit (int len, int argc, char **str)
 	}
 	else if (argc > 1)
 	{
-		if (ft_strcmp(str[0], "exit") == 0)
+		if (ft_strcmpp(str[0], "exit") == 0)
 		{
 			if (check_number(str[1]) == 0 && argc == 2 && len <= 19)
 			{

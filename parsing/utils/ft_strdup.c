@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 13:41:23 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 12:16:27 by arahhab          ###   ########.fr       */
+/*   Created: 2025/06/23 12:34:51 by yabounna          #+#    #+#             */
+/*   Updated: 2025/07/25 12:19:38 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../minishell.h"
 
-void	*ft_memcpyy(void *dst, const void *src, size_t n)
+char	*ft_strdup(const char *s1,garbage **garb)
 {
-	char	*s;
-	char	*d;
 	size_t	i;
+	char	*d;
 
-	if (!dst && !src)
+	i = ft_strlen(s1);
+	d = (char *)ft_malloc(garb,((i + 1) * sizeof(char)));
+	if (d == NULL)
 		return (NULL);
-	if (src == dst)
-		return (dst);
-	s = (char *)src;
-	d = (char *)dst;
-	i = 0;
-	while (i < n)
-	{
-		d[i] = s[i];
-		i++;
-	}
+	ft_memcpy(d, s1, i);
+	d[i] = '\0';
 	return (d);
 }

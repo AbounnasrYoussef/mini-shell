@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 22:24:19 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/15 18:16:26 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 12:20:44 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void ft_update_opwd(t_list **env)
 {
 	while (*env != NULL)
 	{
-		if (ft_strcmp((*env)->variable, "OLDPWD") == 0)
+		if (ft_strcmpp((*env)->variable, "OLDPWD") == 0)
 		{
 			(*env)->valeur_vari = ft_pwd();
 		}
@@ -28,7 +28,7 @@ char *ft_cherch_home(t_list *env)
 {
 	while (env != NULL)
 	{
-		if (ft_strcmp(env->variable, "HOME") == 0)
+		if (ft_strcmpp(env->variable, "HOME") == 0)
 			return (env->valeur_vari);
 		env = env->next;
 	}
@@ -39,7 +39,7 @@ int check_home(t_list *env)
 {
 	while (env != NULL)
 	{
-		if (ft_strcmp(env->variable, "HOME") == 0)
+		if (ft_strcmpp(env->variable, "HOME") == 0)
 			return (1);
 		env = env->next;
 	}
@@ -50,11 +50,11 @@ void ft_r_pwd_oldp(t_list *env, char *new_pwd, char *old_pwd)
 {
 	while (env != NULL)
 	{
-		if (ft_strcmp(env->variable, "PWD") == 0)
+		if (ft_strcmpp(env->variable, "PWD") == 0)
 		{
 			env->valeur_vari = new_pwd;
 		}
-		else if (ft_strcmp(env->variable, "OLDPWD") == 0)
+		else if (ft_strcmpp(env->variable, "OLDPWD") == 0)
 		{
 			env->valeur_vari = old_pwd;
 		}
@@ -69,6 +69,7 @@ void ft_cd(char **args, char *line, t_list *env)
 	char *new_pwd;
 	//ft_update_opwd(&env);
 
+	(void)line;
 	old_pwd = NULL;
 	len_args = ft_strlen_argc(args);
 	if (len_args == 1)

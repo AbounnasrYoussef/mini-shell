@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 13:41:23 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 12:16:27 by arahhab          ###   ########.fr       */
+/*   Created: 2025/07/20 13:01:18 by yabounna          #+#    #+#             */
+/*   Updated: 2025/07/20 13:02:32 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../minishell.h"
 
-void	*ft_memcpyy(void *dst, const void *src, size_t n)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	char	*s;
-	char	*d;
 	size_t	i;
 
-	if (!dst && !src)
-		return (NULL);
-	if (src == dst)
-		return (dst);
-	s = (char *)src;
-	d = (char *)dst;
 	i = 0;
-	while (i < n)
+    if (s1== NULL || s2 == NULL)
+        return 0;
+	while (s1[i] || s2[i] )
 	{
-		d[i] = s[i];
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
-	return (d);
+	return (0);
 }

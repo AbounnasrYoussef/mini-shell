@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/15 14:37:32 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 12:26:26 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,11 @@ int verif_exist(t_list **list_env, char *arg)
 	l_env = *list_env;
 	while (l_env != NULL)
 	{
-		if (ft_strcmp((l_env)->variable, arg) == 0)
+		if (ft_strcmpp((l_env)->variable, arg) == 0)
 			return 1;
 		(l_env) = (l_env)->next;
 	}
 	return 0;
-}
-
-char *ft_concat(char *str, char *str2)
-{
-	int l1;
-	int l2;
-	int i;
-	int j;
-	char *new_str;
-
-	l1 = ft_strlen(str);
-	l2 = ft_strlen(str2);
-	new_str = malloc((l1 + l2 + 1) * sizeof(char));
-	i = 0;
-	j = 0;
-	while (str[i] != '\0')
-	{
-		new_str[i] = str[i];
-		i++;
-	}
-	while(str2[j] != '\0')
-	{
-		new_str[i] = str2[j];
-		i++;
-		j++;
-	}
-	new_str[i] = '\0';
-	return new_str;
 }
 
 void repmlacer_elem(t_list **list_env, char *var, char *arg, int d)
@@ -63,7 +35,7 @@ void repmlacer_elem(t_list **list_env, char *var, char *arg, int d)
 	l_env =  *list_env;
 	while (l_env != NULL)
 	{
-		if (ft_strcmp((l_env)->variable, var) == 0)
+		if (ft_strcmpp((l_env)->variable, var) == 0)
 		{
 			if (d == 1)
 			{
@@ -116,7 +88,7 @@ void ajout_exp_elem(t_list **list_env, char *args)
 	}
 	if (verif_exist(list_env, arg_varia[0]) == 0)
 	{
-		ft_lstadd_back(list_env, ft_lstnew(arg_varia[0], arg_varia[1], args));
+		ft_lstadd_backk(list_env, ft_lstneww(arg_varia[0], arg_varia[1], args));
 	}
 	else
 	{
@@ -196,7 +168,7 @@ t_list *ex_sort(t_list *list_env)
 		list1 = debut;
 		while(list1 != NULL)
 		{
-			if (ft_strcmp(list1->variable, (list_env->variable)) > 0)
+			if (ft_strcmpp(list1->variable, (list_env->variable)) > 0)
 			{
 				tmp = list1->variable;
 				list1->variable = list_env->variable;
@@ -221,7 +193,6 @@ t_list *ex_sort(t_list *list_env)
 
 void ft_export(t_list *list_env, char **args, int argc)
 {
-	t_list *new_list;
 	if (argc == 1)
 	{
 		ft_print_env_ex(ex_sort(list_env));

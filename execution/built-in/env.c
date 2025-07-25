@@ -6,13 +6,13 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:33:27 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/02 14:46:52 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 12:28:27 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-t_list	*ft_lstnew(void *variable, void *valeur_vari, void *ligne)
+t_list	*ft_lstneww(void *variable, void *valeur_vari, void *ligne)
 {
 	t_list	*list1;
 
@@ -28,7 +28,7 @@ t_list	*ft_lstnew(void *variable, void *valeur_vari, void *ligne)
 	return (list1);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_backk(t_list **lst, t_list *new)
 {
 	t_list	*temp;
 
@@ -49,11 +49,10 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	temp->next = new;
 }
 
-t_list *ft_env(char **str)
+t_list *ft_envvv(char **str)
 {
 	t_list *copy_env = NULL;
 	t_list *debut_env;
-	t_list *new;
 	char **splitt;
 	int i;
 	int j;
@@ -63,8 +62,8 @@ t_list *ft_env(char **str)
 	
 	while (str[i] != NULL )
 	{
-		splitt = ft_split(str[i], '=');
-		ft_lstadd_back(&copy_env, ft_lstnew(splitt[0], splitt[1], str[i]));
+		splitt = ft_splitt(str[i], '=');
+		ft_lstadd_backk(&copy_env, ft_lstneww(splitt[0], splitt[1], str[i]));
 		if(i == 0)
 			debut_env = copy_env;
 		i++;

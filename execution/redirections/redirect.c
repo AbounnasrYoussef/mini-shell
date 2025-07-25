@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 05:54:12 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/20 12:39:13 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 12:23:27 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ int main(int argc, char **argv, char **env)
 	argvv[1] = NULL;
 	if (id == 0)
 	{
-		if (ft_strcmp(argv[2], "<") == 0)
+		if (ft_strcmpp(argv[2], "<") == 0)
 		{
 			fd2 = open(argv[3], O_RDONLY);
 			dup2(fd2, STDIN_FILENO);
 			close(fd2);
 		}
-		else if (ft_strcmp(argv[2], ">") == 0)
+		else if (ft_strcmpp(argv[2], ">") == 0)
 		{
 			fd2 = open(argv[3], O_CREAT | O_RDWR | O_TRUNC,0777);
 			dup2(fd2, STDOUT_FILENO);
 			close(fd2);
 		}
-		else if (ft_strcmp(argv[2], ">>") == 0)
+		else if (ft_strcmpp(argv[2], ">>") == 0)
 		{
 			fd2 = open(argv[3], O_CREAT | O_RDWR | O_APPEND, 0777);
 			dup2(fd2, STDOUT_FILENO);

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:37 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/16 22:55:05 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 12:20:22 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void ft_put_string(char *str)
 	return ;
 }
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmpp(const char *s1, const char *s2)
 {
 	size_t	i;
 
@@ -44,7 +44,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (0);
 }
 
-int ft_strlen(char *str)
+int ft_strlenn(char *str)
 {
 	int i;
 

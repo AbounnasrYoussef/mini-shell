@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 13:41:23 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 12:16:27 by arahhab          ###   ########.fr       */
+/*   Created: 2025/07/20 13:03:00 by yabounna          #+#    #+#             */
+/*   Updated: 2025/07/20 13:03:03 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../minishell.h"
 
-void	*ft_memcpyy(void *dst, const void *src, size_t n)
+size_t	ft_strlen(const char *s)
 {
-	char	*s;
-	char	*d;
 	size_t	i;
 
-	if (!dst && !src)
-		return (NULL);
-	if (src == dst)
-		return (dst);
-	s = (char *)src;
-	d = (char *)dst;
 	i = 0;
-	while (i < n)
+	while (s[i] != '\0')
 	{
-		d[i] = s[i];
 		i++;
 	}
-	return (d);
+	return (i);
 }

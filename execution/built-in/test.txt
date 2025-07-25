@@ -4,7 +4,7 @@
 #bash-3.2$ exit cfgas1342
 #exit
 #bash: exit: cfgas1342: numeric argument required
-#➜  built-in git:(zaba_execution) ✗ $?                              
+#➜  built-in git:(zaba_execution) ✗ $?                          
 #zsh: command not found: 255
 
 #bash-3.2$ exit cfgas1342 655245642

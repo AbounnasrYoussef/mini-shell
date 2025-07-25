@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:17:33 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/02 14:40:40 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 12:21:04 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int trait_cmd1(char *str)
 {
 	if(str == NULL)
 		return 1;
-	if (ft_strcmp(str, "echo") == 0)
+	if (ft_strcmpp(str, "echo") == 0)
 	{
 			return 0;
 	}
@@ -28,7 +28,7 @@ int trait_cmd2(char *str)
 	int i;
 	
 	i = 0;
-	if (ft_strcmp(str, "-n") == 0)
+	if (ft_strcmpp(str, "-n") == 0)
 	{
 		return 0;
 	}

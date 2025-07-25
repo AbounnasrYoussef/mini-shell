@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 13:41:23 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 12:16:27 by arahhab          ###   ########.fr       */
+/*   Created: 2025/07/20 13:00:45 by yabounna          #+#    #+#             */
+/*   Updated: 2025/07/25 12:17:22 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../minishell.h"
 
-void	*ft_memcpyy(void *dst, const void *src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	char	*s;
 	char	*d;
