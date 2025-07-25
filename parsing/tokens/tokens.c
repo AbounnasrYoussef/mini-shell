@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:44:25 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 09:01:57 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/25 11:43:00 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_token	*new_token(char *value, type_token type, garbage **garb)
 	tok->value = ft_strdup(value, garb);
 	tok->type = type;
 	tok->quoted = 0;
-	tok->in_double_quote = 0;
+    tok->double_quote = 0;
 	tok->next = NULL;
 	return (tok);
 }

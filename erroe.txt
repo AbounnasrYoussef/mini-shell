@@ -35,25 +35,23 @@ minishell$
 
 4/ hadi machi syntaxe erreur "    ls | << j ===> syntaxe error  "
 
-5/ minishell$ ' $HOME$USER'
+✅ 5/ minishell$ ' $HOME$USER'
 ---- Commande 1 ----
 cmd[0] = '
 cmd[1] = $HOME$USER'
 
 
-6/ ila kane dollar 5asso irode dollar
+✅ 6/ ila kane dollar 5asso irode dollar
 minishell$ $
 ---- Commande 1 ----
 cmd[0] = 
 
-
-
-7/ ma5asse itla3 walo minishell$ $hfgh
+✅ 7/ ma5asse itla3 walo minishell$ $hfgh
 ---- Commande 1 ----
 cmd[0] = 
 
 
-8/ 5asse t5alli dollar o texpander dollar la5er 
+✅ 8/ 5asse t5alli dollar o texpander dollar la5er 
 minishell$ $$$$homer
 ---- Commande 1 ----
 cmd[0] = 

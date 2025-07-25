@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:23:13 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 13:26:06 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/25 11:35:43 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,37 @@ char	*get_env_value(char *name, t_list_env *env, garbage **garb)
 	return (ft_strdup("", garb));
 }
 
-char	*expand_dollar(char *value, int *i, int exit_code,t_list_env *env, garbage **garb)
+// Expansion du $ : gère $$, $?, $VAR, $ seul, $ suivi de char invali
+char	*expand_dollar(char *value, int *i, int exit_code, t_list_env *env, garbage **garb)
 {
 	char	*var_name;
+	char	*res;
 
+	if (!value[*i + 1])
+	{
+		(*i)++;
+		return (ft_strdup("$", garb)); // $ en fin de chaîne => $
+	}
+	if (value[*i + 1] == '$')
+	{
+		(*i) += 2;
+		return (ft_strdup("$$", garb)); // $$ reste $$
+	}
 	if (value[*i + 1] == '?')
 	{
 		(*i) += 2;
-		return (ft_itoa(exit_code, garb));
+		return (ft_itoa(exit_code, garb)); // $? remplacé par exit_code
 	}
 	(*i)++;
+	if (!is_valid_var_char(value[*i]))
+	{
+		// $ suivi d'un char non valide, on ne consomme pas ce char
+		return (ft_strdup("$", garb));
+	}
 	int start = *i;
-	while (value[*i] && (ft_isalnum(value[*i]) || value[*i] == '_'))
+	while (value[*i] && is_valid_var_char(value[*i]))
 		(*i)++;
 	var_name = ft_substr(value, start, *i - start, garb);
-	return (get_env_value(var_name, env, garb));
+	res = get_env_value(var_name, env, garb);
+	return (res);
 }

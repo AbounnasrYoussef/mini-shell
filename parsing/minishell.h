@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 09:20:59 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/25 11:42:42 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct y_token{
     char *value;
     type_token type;
 	int quoted;
-	int				in_double_quote;
+	int double_quote;
     struct y_token *next;
 }   t_token;
 
@@ -75,8 +75,8 @@ typedef struct s_list_env
 // hadi 3la 9bol expanding
 typedef struct s_expand_ctx
 {
-	int			exit_code;
 	t_list_env	*env;
+	int			exit_code;
 	garbage	**garb;
 }	t_expand_ctx;
 
@@ -104,6 +104,9 @@ char	*expand_dollar(char *value, int *i, int exit_code,t_list_env *env, garbage 
 void	replace_token(t_token **head, t_token *old, t_token *new_list);
 t_token	*get_last_token(t_token *tokens);
 t_token	*split_into_tokens(char *str, garbage **garb);
+char *ft_strtrim_custom(char *str, garbage **garb, int quoted);
+int	is_valid_var_char(char c);
+char	*ft_strtrim_custom(char *str, garbage **garb, int quoted);
 
 
 // syntaxe errors
