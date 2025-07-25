@@ -6,16 +6,16 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 12:59:18 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/25 12:22:45 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 14:09:52 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-t_list* ft_supp_arg(t_list *list_env, char *arg)
+t_list_env* ft_supp_arg(t_list_env *list_env, char *arg)
 {
-	t_list *tmp_node;
-	t_list *tmp_list;
+	t_list_env *tmp_node;
+	t_list_env *tmp_list;
 	
 	tmp_node = NULL;
 	tmp_list = list_env;
@@ -38,7 +38,7 @@ t_list* ft_supp_arg(t_list *list_env, char *arg)
 	return (tmp_list);
 }
 
-void ft_unset(t_list *list_env, char **args)
+void ft_unset(t_list_env *list_env, char **args)
 {
 	int i;
 	int j;

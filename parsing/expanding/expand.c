@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/26 15:19:08 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/25 14:17:18 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ char	*expand_token(char *value, int exit_code,t_list_env *env, garbage **garb)
 	}
 	return (res);
 }
-
-
 
 void	expand_all_tokens(t_token *tokens, int exit_code,t_list_env *env, garbage **garb)
                 // code de retour du dernier commande executer

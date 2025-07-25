@@ -6,17 +6,17 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:33:27 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/25 12:28:27 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 14:09:52 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-t_list	*ft_lstneww(void *variable, void *valeur_vari, void *ligne)
+t_list_env	*ft_lstneww(void *variable, void *valeur_vari, void *ligne)
 {
-	t_list	*list1;
+	t_list_env	*list1;
 
-	list1 = malloc(sizeof(t_list));
+	list1 = malloc(sizeof(t_list_env));
 	if (list1 == NULL)
 	{
 		return (NULL);
@@ -28,9 +28,9 @@ t_list	*ft_lstneww(void *variable, void *valeur_vari, void *ligne)
 	return (list1);
 }
 
-void	ft_lstadd_backk(t_list **lst, t_list *new)
+void	ft_lstadd_backk(t_list_env **lst, t_list_env *new)
 {
-	t_list	*temp;
+	t_list_env	*temp;
 
 	if (new == NULL || lst == NULL)
 	{
@@ -49,10 +49,10 @@ void	ft_lstadd_backk(t_list **lst, t_list *new)
 	temp->next = new;
 }
 
-t_list *ft_envvv(char **str)
+t_list_env *ft_envvv(char **str)
 {
-	t_list *copy_env = NULL;
-	t_list *debut_env;
+	t_list_env *copy_env = NULL;
+	t_list_env *debut_env;
 	char **splitt;
 	int i;
 	int j;

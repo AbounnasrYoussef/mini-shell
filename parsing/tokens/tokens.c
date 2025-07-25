@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:44:25 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/20 10:33:35 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/25 14:19:44 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ t_token *tokens(char *line, garbage **garb)
         else  // ila  makane ta haja 9bel donc rah world
             handle_word(line, &i ,&tokens,garb);
     }
-    for (t_token *cur = tokens; cur; cur = cur->next)
-        printf("%s \n", cur->value);
+    //for (t_token *cur = tokens; cur; cur = cur->next)
+    //    printf("%s \n", cur->value);
     return tokens;
 }
  

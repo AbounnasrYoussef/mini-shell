@@ -6,13 +6,13 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 22:24:19 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/25 12:20:44 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 19:41:58 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-void ft_update_opwd(t_list **env)
+void ft_update_opwd(t_list_env **env)
 {
 	while (*env != NULL)
 	{
@@ -24,7 +24,7 @@ void ft_update_opwd(t_list **env)
 	}
 }
 
-char *ft_cherch_home(t_list *env)
+char *ft_cherch_home(t_list_env *env)
 {
 	while (env != NULL)
 	{
@@ -35,7 +35,7 @@ char *ft_cherch_home(t_list *env)
 	return NULL;
 }
 
-int check_home(t_list *env)
+int check_home(t_list_env *env)
 {
 	while (env != NULL)
 	{
@@ -46,7 +46,7 @@ int check_home(t_list *env)
 	return 0;
 }
 
-void ft_r_pwd_oldp(t_list *env, char *new_pwd, char *old_pwd)
+void ft_r_pwd_oldp(t_list_env *env, char *new_pwd, char *old_pwd)
 {
 	while (env != NULL)
 	{
@@ -61,7 +61,7 @@ void ft_r_pwd_oldp(t_list *env, char *new_pwd, char *old_pwd)
 		env = env->next;
 	}
 }
-void ft_cd(char **args, char *line, t_list *env)
+void ft_cd(char **args, t_list_env *env)
 {
 	int	a;
 	int len_args;
@@ -69,7 +69,6 @@ void ft_cd(char **args, char *line, t_list *env)
 	char *new_pwd;
 	//ft_update_opwd(&env);
 
-	(void)line;
 	old_pwd = NULL;
 	len_args = ft_strlen_argc(args);
 	if (len_args == 1)
@@ -78,10 +77,16 @@ void ft_cd(char **args, char *line, t_list *env)
 			printf ("cd: HOME not set\n");
 		else
 		{
-			old_pwd = getcwd(NULL, 0);
-			a = chdir(ft_cherch_home(env));
-			new_pwd = getcwd(NULL, 0);;
-			ft_r_pwd_oldp(env, new_pwd, old_pwd);
+			if (access(ft_cherch_home(env), F_OK) == 0)
+			{
+				old_pwd = getcwd(NULL, 0);
+				a = chdir(ft_cherch_home(env));
+				new_pwd = getcwd(NULL, 0);
+				ft_r_pwd_oldp(env, new_pwd, old_pwd);
+			}
+			else
+				printf("cd: %s: No such file or directory\n", ft_cherch_home(env));
+
 		}
 	}
 	else if (access( args[1], F_OK) == 0)

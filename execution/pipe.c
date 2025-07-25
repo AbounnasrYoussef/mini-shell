@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/25 12:28:18 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 19:50:57 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ char *ft_concat(char *str, char *str2)
 	return new_str;
 }
 
-char *cherche_path_cmd(char *cmd, char **env)
+char *cherche_path_cmd(char *cmd, t_list_env *env)
 {
-	t_list *envv;
 	char *path;
 	char **paths;
 	char *path_cmd;
@@ -50,18 +49,17 @@ char *cherche_path_cmd(char *cmd, char **env)
 	char **cmd_n_op;
 	
 	cmd_n_op = ft_splitt(cmd, ' '); 
-	envv = ft_envvv(env);
 	path = NULL;
 	i = 0;
 	path_cmd = NULL;
-	while (envv != NULL)
+	while (env != NULL)
 	{
-		if (ft_strcmpp(envv->variable, "PATH") == 0)
+		if (ft_strcmpp(env->variable, "PATH") == 0)
 		{
-			path = envv->valeur_vari;
+			path = env->valeur_vari;
 		}
 		
-		envv = envv->next;
+		env = env->next;
 	}
 	paths = ft_splitt(path, ':');
 	while (paths && paths[i] && (paths[i] != NULL))
@@ -77,14 +75,14 @@ char *cherche_path_cmd(char *cmd, char **env)
 	if (path_cmd == NULL)
 	{
 		printf("%s: command not found\n", cmd);
-		exit(1);
+		//exit(1);
 	}
 	return path_cmd;
 }
 
-void ft_pipe(int argc, char **argv, char **env)
+void ft_pipe(int argc, t_exec *data, t_list_env *env)
 {
-	char **cmd;
+	char **cmdd;
 	int id[argc - 1];
 	int i;
 	int fd[2];
@@ -93,22 +91,25 @@ void ft_pipe(int argc, char **argv, char **env)
 	
 	c = 0;
 	i = 0;
-	cmd = malloc(argc * sizeof(char *));
+	cmdd = malloc(argc * sizeof(char *));
 	fd[0] = 0;
 	fd[1] = 1;
 	tmp[0] = 0;
 	tmp[1] = 1;
-	while (i < argc) {
-		if (i < argc - 1)
-		{
-			cmd[i] = cherche_path_cmd(argv[i + 1], env);
-			//printf("%s \n\n", argv[i + 1]);
-		}
+	while (i < argc) 
+	{
+		if (ft_strcmpp(data->cmd[0], "./minishell") == 0)
+	    {
+			env = supp_var_nv(env);
+			return ;
+	    }
+		
 		pipe(fd);
 		id[i] = fork();
-		if (id[i] == 0) {
+		if (id[i] == 0)
+		{
 			dup2(tmp[0], STDIN_FILENO);
-			if (i < argc -1) {
+			if (i < argc - 1) {
 				dup2(fd[1], STDOUT_FILENO);
 			}
 			close(fd[0]);
@@ -116,24 +117,31 @@ void ft_pipe(int argc, char **argv, char **env)
 			if (tmp[0] != 0)
 				close(tmp[0]);
 			char **cmdv;
-			cmdv = ft_splitt(argv[i], ' '); 
-			execve(cmd[i - 1], cmdv, NULL);
+			cmdv = data->cmd;
+			if (ft_built_in(data, env) == -1)
+			{
+				cmdd[i] = cherche_path_cmd((data->cmd[0]), env);
+				execve(cmdd[i], cmdv, NULL);
+			}
+				
 		}
 		else
 		{
 			close(fd[1]);
-			if (tmp[0] != 0) {
+			if (tmp[0] != 0) 
+			{
 				close(tmp[0]);
 			}
 			tmp[0] = fd[0];	
 		}
+		data = data->next;
 		i++;
 	}
 	if (tmp[0] != 0)
 	{
 		close(tmp[0]);
 	}
-	while (c < argc - 1)
+	while (c < argc)
 	{
 		waitpid(id[c], NULL, 0);
 		c++;

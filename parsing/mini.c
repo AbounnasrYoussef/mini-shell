@@ -6,11 +6,12 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 12:04:29 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 17:43:54 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "../execution/execution.h"
 
 // void ft_read()
 // {
@@ -30,7 +31,21 @@
 //         free(line); // on free car readline il alloce 
 //     }
 // }
-void ft_read_loop(t_list_env **env ,t_exec **data)
+
+int ft_count_cmd(t_exec *data)
+{
+	int i;
+
+	i = 0;
+	while (data != NULL)
+	{
+		data = data->next;
+		i++;
+	}
+	return i;
+}
+
+void ft_read_loop(t_list_env *env ,t_exec **data)
 {
     char        *line;
     garbage   *garb;
@@ -54,9 +69,11 @@ void ft_read_loop(t_list_env **env ,t_exec **data)
         if (!token)
             continue;
         // Expansion des variables d'environnement et de $? sur les tokens
-        expand_all_tokens(token, last_exit_code, *env, &garb);
+        expand_all_tokens(token, last_exit_code, env, &garb);
         *data = parse_tokens_to_exec_list(token , &garb);
-        //t_exec *tmp = *data;
+        t_exec *tmp = *data;
+
+		ft_pipe(ft_count_cmd(tmp), tmp, env);
 		
 	//int i = 1;
 
@@ -87,44 +104,44 @@ void ft_read_loop(t_list_env **env ,t_exec **data)
     }
 }
 
-//int main(int ac, char **av, char **envp)
-//{
-//	t_list_env	*env_list;
-//	t_exec		*data;
+int main(int ac, char **av, char **envp)
+{
+	t_list_env	*env_list;
+	t_exec		*data;
 
-//	(void)ac;
-//	(void)av;
+	(void)ac;
+	(void)av;
 
-//	data = NULL;
+	data = NULL;
 
-//	env_list = ft_envv(envp);
+	env_list = ft_env(envp);
 
-//	ft_read_loop(&env_list ,&data);
+	ft_read_loop(env_list ,&data);
     
 
-//	return (0);
-//}
-
-#include "../execution/execution.h"
-
-int main(int argc, char **argv, char **env)
-{
-	t_list *envv;
-
-	(void)argv;
-	envv = ft_envvv(env);
-	if (argc > 1)
-		printf("aucun arg recommender");
-	else
-	{
-		while (1)
-		{
-			char *line = readline("minishell: ");
-			add_history(line);
-			if (!line || !*line)
-				continue ;
-			ft_built_in(line, envv);
-		}
-	}
-	return 0;
+	return (0);
 }
+
+
+
+//int main(int argc, char **argv, char **env)
+//{
+//	t_list_env *envv;
+
+//	(void)argv;
+//	envv = ft_envvv(env);
+//	if (argc > 1)
+//		printf("aucun arg recommender");
+//	else
+//	{
+//		while (1)
+//		{
+//			char *line = readline("minishell: ");
+//			add_history(line);
+//			if (!line || !*line)
+//				continue ;
+//			ft_built_in(line, envv);
+//		}
+//	}
+//	return 0;
+//}

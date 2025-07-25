@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/25 12:26:26 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/25 14:09:52 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 #include <stdio.h>
 
-int verif_exist(t_list **list_env, char *arg)
+int verif_exist(t_list_env **list_env, char *arg)
 {
-	t_list *l_env;
+	t_list_env *l_env;
 
 	l_env = *list_env;
 	while (l_env != NULL)
@@ -28,9 +28,9 @@ int verif_exist(t_list **list_env, char *arg)
 	return 0;
 }
 
-void repmlacer_elem(t_list **list_env, char *var, char *arg, int d)
+void repmlacer_elem(t_list_env **list_env, char *var, char *arg, int d)
 {
-	t_list *l_env;
+	t_list_env *l_env;
 	
 	l_env =  *list_env;
 	while (l_env != NULL)
@@ -48,7 +48,7 @@ void repmlacer_elem(t_list **list_env, char *var, char *arg, int d)
 	}
 }
 
-void ajout_exp_elem(t_list **list_env, char *args)
+void ajout_exp_elem(t_list_env **list_env, char *args)
 {
 	int i;
 	int j;
@@ -99,7 +99,7 @@ void ajout_exp_elem(t_list **list_env, char *args)
 
 
 
-void check_args(t_list **list_env, char **args)
+void check_args(t_list_env **list_env, char **args)
 {
 	int i;
 	int j;
@@ -155,11 +155,11 @@ void check_args(t_list **list_env, char **args)
 
 
 
-t_list *ex_sort(t_list *list_env)
+t_list_env *ex_sort(t_list_env *list_env)
 {
-	t_list	*list1;
+	t_list_env	*list1;
 	char	*tmp;;
-	t_list	*debut;
+	t_list_env	*debut;
 	
 	list1 = list_env;
 	debut = list1;
@@ -191,7 +191,7 @@ t_list *ex_sort(t_list *list_env)
 	return debut;
 }
 
-void ft_export(t_list *list_env, char **args, int argc)
+void ft_export(t_list_env *list_env, char **args, int argc)
 {
 	if (argc == 1)
 	{
