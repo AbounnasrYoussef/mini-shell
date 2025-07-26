@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/26 18:11:47 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/26 22:23:50 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void check_args(t_list_env **list_env, char **args)
 			|| (args[i][0] >= 'A' && args[i][0] <= 'Z')))
 		{
 			c = 1;
-			printf("not a valid identifier\n");
+			printf("export: `%s' not a valid identifier\n", args[i]);
 		}	
 		while(args[i][j] != '\0' && args[i][j] != '=' && args[i][j] != '+')
 		{
@@ -126,7 +126,8 @@ void check_args(t_list_env **list_env, char **args)
 				|| (args[i][j] >= '0' && args[i][j] <= '9')))
 				{
 					c = 1;
-					printf("not a valid identifier\n");
+				
+					printf("export: `%s' not a valid identifier\n", args[i]);
 				}
 			j++;
 		}

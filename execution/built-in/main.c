@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/26 18:03:09 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/26 20:21:59 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,8 @@ t_list_env *supp_var_nv(t_list_env *env)
 int ft_built_in(int argc, t_exec *data, t_list_env *env)
 {
 	int len;
-	
 	if (argc > 1)
-		len = ft_strlenn(data->cmd[1]) - 1;
+		len = ft_strlenn(data->cmd[0]) - 1;
 	if (ft_strcmpp(data->cmd[0], "cd") == 0)
 	{
 		return (ft_cd(data->cmd, env), 0);
@@ -124,8 +123,7 @@ int ft_built_in(int argc, t_exec *data, t_list_env *env)
 	}
 	else if (ft_strcmpp(data->cmd[0], "unset") == 0)
 		return (ft_unset(env, data->cmd), 0);
-	else
-		return -1;
+	return -1;
 }
 
 
