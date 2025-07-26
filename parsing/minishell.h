@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 13:14:04 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/26 11:27:43 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void add_token(t_token **list, t_token *new_tok);
 void space_skip(char *line , int *i);
 void	add_token_back(t_token **head, t_token *new_token);
 char	**i_split(char const *s, char c);
+int printf_error();
 
 
 // expand
