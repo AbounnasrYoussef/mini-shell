@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:33:27 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/25 14:09:52 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/26 13:42:22 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ t_list_env *ft_envvv(char **str)
 		splitt = ft_splitt(str[i], '=');
 		ft_lstadd_backk(&copy_env, ft_lstneww(splitt[0], splitt[1], str[i]));
 		if(i == 0)
+		{
 			debut_env = copy_env;
+		}
 		i++;
 	}
 	return (debut_env);

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/25 14:09:52 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/26 18:11:47 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void check_args(t_list_env **list_env, char **args)
 		//printf("%c   uuuuuu\n\n\n\n\n", args[i][j]);
 		if (c == 0)
 		{
+			//printf("\n\n\n %s -------sgsggsgsgh\n\n\n", args[i]);
 			ajout_exp_elem(list_env, args[i]);
 		}
 		else
@@ -191,9 +192,11 @@ t_list_env *ex_sort(t_list_env *list_env)
 	return debut;
 }
 
-void ft_export(t_list_env *list_env, char **args, int argc)
+void ft_export(t_list_env *list_env, char **args)
 {
-	if (argc == 1)
+	int c;
+	c = ft_strlen_argc(args);
+	if (c == 1)
 	{
 		ft_print_env_ex(ex_sort(list_env));
 	}

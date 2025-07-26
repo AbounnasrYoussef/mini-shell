@@ -6,11 +6,12 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/25 19:50:57 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/26 18:30:45 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+#include <sys/stat.h>
 
 char *ft_concat(char *str, char *str2)
 {
@@ -52,14 +53,21 @@ char *cherche_path_cmd(char *cmd, t_list_env *env)
 	path = NULL;
 	i = 0;
 	path_cmd = NULL;
+
 	while (env != NULL)
 	{
 		if (ft_strcmpp(env->variable, "PATH") == 0)
 		{
 			path = env->valeur_vari;
 		}
-		
 		env = env->next;
+	}
+	if (path == NULL)
+	{
+		if (access(cmd, X_OK) == 0)
+		{
+			return cmd;
+		}
 	}
 	paths = ft_splitt(path, ':');
 	while (paths && paths[i] && (paths[i] != NULL))
@@ -74,8 +82,17 @@ char *cherche_path_cmd(char *cmd, t_list_env *env)
 	}
 	if (path_cmd == NULL)
 	{
-		printf("%s: command not found\n", cmd);
-		//exit(1);
+		
+		if (access(cmd, X_OK) == 0)
+		{
+			return cmd;
+		}
+		if (path == NULL)
+		{
+			printf("%s: No such file or directory\n", cmd);
+		}
+		else
+			printf("%s: command not found\n", cmd);
 	}
 	return path_cmd;
 }
@@ -88,6 +105,14 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 	int fd[2];
 	int tmp[2];
 	int c;
+	struct stat info;
+	t_list_env *debut_env;
+	int d;
+	int len;
+				
+	
+	
+	
 	
 	c = 0;
 	i = 0;
@@ -96,13 +121,44 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 	fd[1] = 1;
 	tmp[0] = 0;
 	tmp[1] = 1;
+	debut_env = env;
+	d = 0;
+	len = 0;
 	while (i < argc) 
 	{
+		
 		if (ft_strcmpp(data->cmd[0], "./minishell") == 0)
 	    {
-			env = supp_var_nv(env);
-			return ;
+			
+			while(debut_env != NULL)
+			{
+				
+				if(ft_strcmpp(debut_env->variable, "PATH") == 0)
+				{
+					d = 1;
+					env = supp_var_nv(env);
+					if (data->next == NULL)
+						return ;
+				}
+				debut_env = debut_env->next;
+			}
+			if (d == 1)
+			{
+				env = supp_var_nv(env);
+				if (data->next == NULL)
+					return ;
+			}
+			else
+			{
+				printf("./minishell: No such file or directory\n");
+				return ;
+			}
+				
 	    }
+		else if (ft_strcmpp(data->cmd[0], "exit") == 0 && argc == 1)
+		{
+			ft_exit (0, argc, data->cmd);
+		}
 		
 		pipe(fd);
 		id[i] = fork();
@@ -118,10 +174,22 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 				close(tmp[0]);
 			char **cmdv;
 			cmdv = data->cmd;
-			if (ft_built_in(data, env) == -1)
+			if (ft_built_in(argc, data, env) == -1)
 			{
+				if (data->cmd[0][0] == '.' && data->cmd[0][1] == '/')
+				{
+					stat(data->cmd[0], &info);
+					if (S_ISDIR(info.st_mode))
+					{
+						printf("%s: is a directory \n", data->cmd[0]);
+						return ;
+					}
+				}
+		
 				cmdd[i] = cherche_path_cmd((data->cmd[0]), env);
 				execve(cmdd[i], cmdv, NULL);
+	
+
 			}
 				
 		}

@@ -156,61 +156,27 @@
 #minishell: ./a.out 
 #export
 
-///////////////CD
 
-bash-3.2$ mkdir -p 1/2/3
-bash-3.2$ cd 1/2/3/
-bash-3.2$ pwd
-/mnt/homes/arahhab/minishell/1/2/3
-bash-3.2$ cd ..
-bash: cd: ..: No such file or directory
-bash-3.2$ pwd
-/mnt/homes/arahhab/minishell/1/2/3
-bash-3.2$ cd ..
-cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
-bash-3.2$ pwd
-/mnt/homes/arahhab/minishell/1/2/3/..
-bash-3.2$ cd /
+#/////////// PWD====
 
-rm -rf 1 //in new terminal
+#bash-3.2$ mkdir t
+#bash-3.2$ cd t
+#bash-3.2$ ls
+#bash-3.2$ rm -rf ../t
+#bash-3.2$ pwd
+#/mnt/homes/arahhab/Desktop/minishell/execution/built-in/t
+#bash-3.2$ 
+
+#////////////////
 
 
 
-
-/////////// PWD====
-
-bash-3.2$ mkdir t
-bash-3.2$ cd t
-bash-3.2$ ls
-bash-3.2$ rm -rf ../t
-bash-3.2$ pwd
-/mnt/homes/arahhab/Desktop/minishell/execution/built-in/t
-bash-3.2$ 
-===========
-
-==============
-
-/////////////
-============
-bash-3.2$ elkjerljte/
-bash: elkjerljte/: No such file or directory
-bash-3.2$ $?
-bash: 127: command not found
-
-
-
-NNNNNNNNN
-
-////////////////
-
-
-
-minishell$ unset PATH
-minishell$ ls
-ls: command not found
-minishell$ cd /bin
-minishell$ ls
-ls: command not found
+#minishell$ unset PATH
+#minishell$ ls
+#ls: command not found
+#minishell$ cd /bin
+#minishell$ ls
+#ls: command not found
 
 
 ///////
@@ -231,10 +197,6 @@ ls: command not found
 
 #/////
 
-bash-3.2$ mkdir ls
-bash-3.2$ ./ls
-bash: ./ls: is a directory
-
 #//////
 #minishell$ echo | ls
 
@@ -250,5 +212,176 @@ bash: ./ls: is a directory
 #Makefile        env             expanding 
 
 /////
-bash-3.2$ bash | pwd
-/mnt/homes/arahhab/Desktop/minishell/parsing
+#bash-3.2$ bash | pwd
+#/mnt/homes/arahhab/Desktop/minishell/parsing
+
+/////
+#bash-3.2$ bash | pwd | ls
+
+#The default interactive shell is now zsh.
+
+
+#minishell$ mkdir 1/2/3
+#mkdir: 1/2: No such file or directory
+
+
+#bash-3.2$ elkjerljte/
+#bash: elkjerljte/: No such file or directory
+
+#bash-3.2$ mkdir ls
+#bash-3.2$ ./ls
+#bash: ./ls: is a directory
+
+
+
+/////
+
+#minishell$ exit | exit
+
+
+
+//////
+
+#minishell$ /bin/ls
+#/bin/ls: command not found
+
+//////
+#export b 
+#export b
+
+//////
+
+#bash-3.2$ exit dfva 45  45
+#exit
+#bash: exit: dfva: numeric argument required
+
+
+
+#minishell$ unset PATH
+#minishell$ ls
+#ls: command not found
+#minishell$ ./mini
+#./mini.c      ./mini.o      ./minishell   ./minishell.h
+#minishell$ ./minishell
+#minishell$ ls
+#ls: command not foundj
+
+
+///////
+
+#bash-3.2$ unset PATH
+#bash-3.2$ bash
+#bash: bash: No such file or directory
+
+
+/////
+
+#minishell$ exit |exit
+#[1]    83322 segmentation fault  ./minishell
+
+
+/////// parsing
+
+minishell$ export c="hshs"
+not a valid identifier
+not a valid identifier
+
+///// parsing
+
+minishell$ export c="ls -l"
+not a valid identifier
+not a valid identifier
+not a valid identifier
+not a valid identifier
+
+////
+
+
+
+bash-3.2$ exit dfs | exi
+bash: exi: command not found
+bash: exit: dfs: numeric argument required
+
+/////////
+./minishell | pwd | ls
+
+//////
+touch ls
+
+bash-3.2$ unset PATH
+bash-3.2$ ls
+bash: ls: Permission denied
+bash-3.2$ ls
+bash: ls: No such file or directory
+bash-3.2$ 
+
+minishell$ exit dfs | exit
+
+///////////////CD
+
+bash-3.2$ mkdir -p 1/2/3
+bash-3.2$ cd 1/2/3/
+bash-3.2$ pwd
+/mnt/homes/arahhab/minishell/1/2/3
+bash-3.2$ cd ..
+bash: cd: ..: No such file or directory
+bash-3.2$ pwd
+/mnt/homes/arahhab/minishell/1/2/3
+bash-3.2$ cd ..
+cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+bash-3.2$ pwd
+/mnt/homes/arahhab/minishell/1/2/3/..
+bash-3.2$ cd /
+
+rm -rf 1 //in new terminal
+
+////////
+
+minishell$ mkdir 1/2/3
+mkdir: 1/2: No such file or directory
+minishell$ mkdir -p 1/2/3
+minishell$ cd 1/2/3/
+minishell$ pwd
+/mnt/homes/arahhab/Desktop/minishell/parsing/1/2/3
+minishell$ cd ..
+cd: ..: No such file or directory
+minishell$ pwd
+/mnt/homes/arahhab/Desktop/minishell/parsing/1/2/3
+minishell$ cd ..
+minishell$ pwd
+(null)
+
+
+/////////////
+============
+
+bash-3.2$ $?
+bash: 127: command not found
+
+
+
+bash-3.2$ /////
+bash: /////: is a directory
+
+/
+bash: /: is a directory
+
+bash-3.2$ touch ls /in new term
+ 
+minishell$ ./ls
+Makefile        expanding       ls              minishell       syntaxe_errors
+a.out           ft_malloc       mini.c          minishell.h     tokens
+env             hh              mini.o          struct_atmane   utils
+minishell$ 
+
+////////
+minishell$ export 45 | ls
+Makefile        expanding       ls              minishell       syntaxe_errors
+a.out           ft_malloc       mini.c          minishell.h     tokens
+env             hh              mini.o          struct_atmane   utils
+
+//////
+minishell$ export | grep PWD
+declare -x PWD="/mnt/homes/arahhab/Desktop/minishell/parsing"
+declare -x OLDPWD="/mnt/homes/arahhab/Desktop/minishell"
+^C

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 14:15:00 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/26 13:21:24 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_list_env
 	void	*ligne;
 	void	*variable;
 	void 	*valeur_vari;
+	void	*path;
 	struct s_list_env	*next;
 }	t_list_env;
 

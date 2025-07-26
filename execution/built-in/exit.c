@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/25 12:21:28 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/26 17:47:10 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,9 @@ unsigned long long ft_atoi(int len, char *nbr)
 			{
 				if (nbr[19] > '8')
 				{
+					printf("exit\n");
 					printf("%s : numeric argument required\n", nbr);
-					return 1;
+					exit(255);
 				}
 			}
 		}
@@ -145,8 +146,10 @@ unsigned long long ft_atoi(int len, char *nbr)
 		{
 			if (nombre > (9223372036854775807))
 			{
+				printf("exit\n");
 				printf("%s : numeric argument required\n", nbr);
-				return 1;
+				
+				exit(255);
 			}
 		}
 		if (len > i)
@@ -200,20 +203,19 @@ int ft_modulo_number(unsigned long long number)
 
 void ft_exit (int len, int argc, char **str)
 {
-	if (argc == 1)
+	if (argc >= 1)
 	{
 		if (ft_strcmpp(str[0], "exit") == 0)
 		{
-			printf("shhs\n");
-			exit(0);
-		}		
-	}
-	else if (argc > 1)
-	{
-		if (ft_strcmpp(str[0], "exit") == 0)
-		{
-			if (check_number(str[1]) == 0 && argc == 2 && len <= 19)
+			
+			if (str[1] == NULL)
 			{
+				printf("exit\n");
+				exit(0);
+			}
+			else if (check_number(str[1]) == 0 && argc == 2 && len <= 19)
+			{
+				printf("exit\n");
 				exit(ft_modulo_number(ft_atoi((len), str[1])));
 			}
 			else if (check_number(str[1]) == 0 && argc > 2 && len <= 19)
@@ -222,12 +224,13 @@ void ft_exit (int len, int argc, char **str)
 			}
 			else
 			{
+				printf("exit\n");
 				ft_put_string("exit: ");
 				ft_put_string(str[1]);
 				ft_put_string(": numeric argument required\n");
 				exit(255);
 			}
-		}	
+		}
 	}
 
 }

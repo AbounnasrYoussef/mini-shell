@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/25 18:02:54 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/26 18:03:09 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,10 @@ t_list_env *supp_var_nv(t_list_env *env)
 
 //}
 
-int ft_built_in(t_exec *data, t_list_env *env)
+int ft_built_in(int argc, t_exec *data, t_list_env *env)
 {
-	int argc;
 	int len;
 	
-	argc = ft_strlen_argc(data->cmd);
 	if (argc > 1)
 		len = ft_strlenn(data->cmd[1]) - 1;
 	if (ft_strcmpp(data->cmd[0], "cd") == 0)
@@ -110,13 +108,13 @@ int ft_built_in(t_exec *data, t_list_env *env)
 		return (ft_cd(data->cmd, env), 0);
 	}
 	else if (ft_strcmpp(data->cmd[0], "pwd") == 0)
-		return (printf("%s\n", ft_pwd()), 0);
+		return (printf("%s\n", ft_pwd(env)), 0);
 	else if (ft_strcmpp(data->cmd[0], "echo") == 0)
 		return (ft_echo(argc, data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "exit") == 0)
 		return (ft_exit (len, argc, data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "export") == 0)
-		return (ft_export(env, data->cmd, argc), 0);
+		return (ft_export(env, data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "env") == 0)
 	{
 		if (argc == 1)
@@ -126,22 +124,8 @@ int ft_built_in(t_exec *data, t_list_env *env)
 	}
 	else if (ft_strcmpp(data->cmd[0], "unset") == 0)
 		return (ft_unset(env, data->cmd), 0);
-	//else if (ft_strcmpp(data->cmd[0], "./minishell") == 0)
-	//{
-	//	return (env = supp_var_nv(env), 0);
-	//}
-	
-	return -1;
-	//else
-	//{
-	//	//printf("%d   dhjdshdjkds\n\n", ft_count_cmd(data));
-	//	ft_pipe(ft_count_cmd(data), data, env);
-	//}
-	//else if (data->cmd[0][0] == '.')
-	//{
-	//	printf("%s: No such file or directory\n", data->cmd[0]);
-
-	//}
+	else
+		return -1;
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/25 17:46:20 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/26 18:02:58 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ void	ft_lstadd_backk(t_list_env **lst, t_list_env *new);
 t_list_env	*ft_lstneww(void *variable, void *valeur_vari, void *ligne);
 t_list_env *ex_sort(t_list_env *list_env);
 void ft_print_env(t_list_env *env);
-void ft_export(t_list_env *list_env, char **args, int argc);
-char *ft_pwd(void);
+void ft_export(t_list_env *list_env, char **args);
+char *ft_pwd(t_list_env *env);
 void ft_unset(t_list_env *list_env, char **args);
 void ft_print_env_ex(t_list_env *env);
 t_list_env* ft_supp_arg(t_list_env *list_env, char *arg);
 char *ft_concat(char *str, char *str2);
 char *cherche_path_cmd(char *cmd, t_list_env *env);
-int ft_built_in(t_exec *data, t_list_env *env);
+int ft_built_in(int argc, t_exec *data, t_list_env *env);
 t_list_env *supp_var_nv(t_list_env *env);
 void ft_print_env(t_list_env *env);
 void ft_print_env_ex(t_list_env *env);

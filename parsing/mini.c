@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 17:43:54 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/26 17:36:37 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void ft_read_loop(t_list_env *env ,t_exec **data)
 int main(int ac, char **av, char **envp)
 {
 	t_list_env	*env_list;
+	//t_list_env	*debut;
 	t_exec		*data;
 
 	(void)ac;
@@ -115,6 +116,15 @@ int main(int ac, char **av, char **envp)
 	data = NULL;
 
 	env_list = ft_env(envp);
+	//debut = env_list;
+	//while (debut != NULL)
+	//{
+	//	if (ft_strcmp(debut->variable, "PATH") == 0)	
+	//	{	
+	//		debut->path = debut->valeur_vari;
+	//	}
+	//	debut = debut->next;
+	//}
 
 	ft_read_loop(env_list ,&data);
     
