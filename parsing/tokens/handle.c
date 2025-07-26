@@ -6,23 +6,59 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:30:32 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 13:51:08 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/26 10:52:14 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void handle_word(const char *line, int *i, t_token **tokens , garbage **garb)
+void	handle_word(const char *line, int *i, t_token **tokens, garbage **garb)
 {
-    int start = *i;// bedia dial mot li 7na fih db
+	int		start;
+	char	*tmp;
+	char	*res;
+	char	quote;
 
-    while (line[*i] && !skip_space(line[*i])
-        && !is_operator(line[*i]) && !is_quote(line[*i]))
-        (*i)++;  // loop htal la5er dial mot
-
-    char *word = ft_substr(line, start, *i - start, garb);// Extrait le mot
-    add_token(tokens, new_token(word, WORD,garb)); // cree token de type word et ajouter a la liste
+	res = NULL;
+	while (line[*i] && !skip_space(line[*i]) && !is_operator(line[*i]))
+	{
+		if (is_quote(line[*i]))
+		{
+			quote = line[(*i)++];
+			start = *i;
+			while (line[*i] && line[*i] != quote)
+				(*i)++;
+			tmp = ft_substr(line, start, *i - start, garb);
+			res = res ? ft_strjoin(res, tmp, garb) : tmp;
+			if (line[*i] == quote)
+				(*i)++;
+		}
+		else
+		{
+			start = *i;
+			while (line[*i] && !skip_space(line[*i]) && !is_operator(line[*i]) && !is_quote(line[*i]))
+				(*i)++;
+			tmp = ft_substr(line, start, *i - start, garb);
+			res = res ? ft_strjoin(res, tmp, garb) : tmp;
+		}
+	}
+	add_token(tokens, new_token(res, WORD, garb));
 }
+
+
+
+
+// void handle_word(const char *line, int *i, t_token **tokens , garbage **garb)
+// {
+//     int start = *i;// bedia dial mot li 7na fih db
+
+//     while (line[*i] && !skip_space(line[*i])
+//         && !is_operator(line[*i]) && !is_quote(line[*i]))
+//         (*i)++;  // loop htal la5er dial mot
+
+//     char *word = ft_substr(line, start, *i - start, garb);// Extrait le mot
+//     add_token(tokens, new_token(word, WORD,garb)); // cree token de type word et ajouter a la liste
+// }
 
 // hna kngeriwe sigle operator | > <
 void handle_single_operator(char *line, int *i, t_token **tokens , garbage **garb)
@@ -62,3 +98,4 @@ void handel_quote(char *line , int  *i , t_token **token ,garbage **garb)
     //kncrewe tokens jdida bdakchi li jbedna  b substr o type 
     
 }
+

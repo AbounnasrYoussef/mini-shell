@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:44:25 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 11:43:00 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/26 10:49:24 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,30 +64,28 @@ void space_skip(char *line , int *i)
 }
 
 
+
 // hade lfonction  hiya li ktanalyser lina la line de commande
 
 t_token *tokens(char *line, garbage **garb)
 {
-    // char **cmd;
-    t_token *tokens = NULL;
-    // t_token cmd_tokens;
-    int i = 0;
-    
-    while (line[i] != '\0') // knloopiwe 3la  chaque 
-    {
-        space_skip(line , &i); //ignorer les espaces 
-        if (!line[i]) // ki checker wach ba9a chi haja tanalysa
-            break;
-        if (is_quote(line[i])) // ila l9ina single ou double quote
-            handel_quote(line , &i , &tokens,garb);
-        else if ((line[i] == '<' || line[i] == '>') && line[i + 1] == line[i])
-            handel_double_operator(line , &i , &tokens,garb);
-        else if (is_operator(line[i])) // ila kane chi operateur 
-            handle_single_operator(line , &i , &tokens,garb);
-        else  // ila  makane ta haja 9bel donc rah world
-            handle_word(line, &i ,&tokens,garb);
-    }
-    return tokens;
+	t_token *tokens = NULL;
+	int i = 0;
+
+	while (line[i])
+	{
+		space_skip(line, &i);
+		if (!line[i])
+			break;
+		if ((line[i] == '<' || line[i] == '>') && line[i + 1] == line[i])
+			handel_double_operator(line, &i, &tokens, garb);
+		else if (is_operator(line[i]))
+			handle_single_operator(line, &i, &tokens, garb);
+		else
+			handle_word(line, &i, &tokens, garb);
+	}
+	return tokens;
 }
+
  
 
