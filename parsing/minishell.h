@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/27 10:54:35 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/27 12:50:24 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ t_token	*split_into_tokens(char *str, garbage **garb);
 char *ft_strtrim_custom(char *str, garbage **garb, int quoted);
 int	is_valid_var_char(char c);
 char	*ft_strtrim_custom(char *str, garbage **garb, int quoted);
+char	*get_env_value(char *name, t_list_env *env, garbage **garb);
+int ft_exit_status(int status, int flag);
 
 
 // syntaxe errors

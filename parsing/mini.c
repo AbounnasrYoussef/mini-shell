@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 20:51:02 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/27 12:52:42 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void ft_read_loop(t_list_env **env ,t_exec **data)
             add_history(line); // Sauvegarde dans l'historique
         if (!syntaxe_errors(line))
         {
+            ft_exit_status(258 , 1);
             free(line);
             continue;
         }

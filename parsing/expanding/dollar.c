@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:23:13 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 12:49:21 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/27 12:50:48 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*expand_dollar(char *value, int *i, int exit_code, t_list_env *env, garbage
 	char	*var_name;
 	char	*res;
 
+	(void)exit_code;
+
 	if (!value[*i + 1])
 	{
 		(*i)++;
@@ -43,7 +45,7 @@ char	*expand_dollar(char *value, int *i, int exit_code, t_list_env *env, garbage
 	if (value[*i + 1] == '?')
 	{
 		(*i) += 2;
-		return (ft_itoa(exit_code, garb)); // $? remplacé par exit_code
+		return (ft_itoa(ft_exit_status(0 , 0), garb)); // $? remplacé par exit_code
 	}
 	(*i)++;
 	if (!is_valid_var_char(value[*i]))

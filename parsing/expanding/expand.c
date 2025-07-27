@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 13:13:42 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/27 12:40:01 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ void	add_token_back(t_token **head, t_token *new_token)
 	tmp->next = new_token;
 }
 
+int ft_exit_status(int status, int flag)
+{
+	static int exit_status = 0;
+
+	if (flag)
+		exit_status = status;
+	return (exit_status);
+}
 // hade fonction hiya li kt7awel lina  token l texte $user =  youssef
 char	*expand_token(char *value, int exit_code, t_list_env *env, garbage **garb)
 {
