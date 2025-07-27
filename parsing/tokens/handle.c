@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:30:32 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/27 09:07:53 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/27 09:16:39 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void handle_single_operator(const char *line, int *i, t_token **tokens , garbage
     add_token(tokens, new_token(ft_strdup(op, garb), get_token_type(op), garb));
     (*i)++;                         
 }
+
+
 
 // kn gerewe les operateur doublons >> << 
 void handel_double_operator(const char *line ,int *i , t_token **tokens, garbage **garb)
