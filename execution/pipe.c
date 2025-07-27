@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/26 22:22:35 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/27 13:04:39 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,13 @@ char *cherche_path_cmd(char *cmd, t_list_env *env)
 	return path_cmd;
 }
 
+int ft_exit_status(int status, int flags)
+{
+	static int exit_status;
+	if (status)
+		exit_status = status;
+	return exit_status;
+}
 void ft_pipe(int argc, t_exec *data, t_list_env *env)
 {
 	char **cmdd;
@@ -111,9 +118,7 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 	t_list_env *debut_env;
 	int d;
 	int len;
-				
-	
-	
+	int status;
 	
 	c = 0;
 	i = 0;
@@ -125,10 +130,10 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 	debut_env = env;
 	d = 0;
 	len = 0;
+	status = 0;
 	while (i < argc) 
 	{
-		
-		
+	
 		if (ft_strcmpp(data->cmd[0], "./minishell") == 0)
 	    {
 			
@@ -155,7 +160,6 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 				printf("./minishell: No such file or directory\n");
 				return ;
 			}
-				
 	    }
 		else if (ft_strcmpp(data->cmd[0], "exit") == 0 && argc == 1)
 		{
@@ -237,7 +241,11 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 	}
 	while (c < argc)
 	{
-		waitpid(id[c], NULL, 0);
+		waitpid(id[c], &status, 0);
+		if (WIFEXITED(status) == 0)
+		{
+			return (ft_exit_status(status, 1));
+		}
 		c++;
 	}
 }
