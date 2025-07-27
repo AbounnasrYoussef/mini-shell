@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 22:24:19 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/26 15:06:42 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/27 10:52:10 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void ft_cd(char **args, t_list_env *env)
 	int len_args;
 	char *old_pwd;
 	char *new_pwd;
-	//ft_update_opwd(&env);
-
+	
 	old_pwd = NULL;
+	new_pwd = NULL;
 	len_args = ft_strlen_argc(args);
 	if (len_args == 1)
 	{
@@ -82,6 +82,8 @@ void ft_cd(char **args, t_list_env *env)
 				old_pwd = getcwd(NULL, 0);
 				a = chdir(ft_cherch_home(env));
 				new_pwd = getcwd(NULL, 0);
+				if (new_pwd == NULL)
+					printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
 				ft_r_pwd_oldp(env, new_pwd, old_pwd);
 			}
 			else
@@ -91,9 +93,12 @@ void ft_cd(char **args, t_list_env *env)
 	}
 	else if (access( args[1], F_OK) == 0)
 	{
+		
 		old_pwd = getcwd(NULL, 0);
 		a = chdir(args[1]);
 		new_pwd = getcwd(NULL, 0);
+		if (new_pwd == NULL)
+			printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
 		ft_r_pwd_oldp(env, new_pwd, old_pwd);
 	}
 	else

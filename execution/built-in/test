@@ -381,3 +381,16 @@ env             hh              mini.o          struct_atmane   utils
 bash-3.2$ exit dfs | exi
 bash: exi: command not found
 bash: exit: dfs: numeric argument required
+
+////
+bash-3.2$ $fff $HOME
+bash: /mnt/homes/arahhab: is a directory
+
+////
+bash | bash
+
+/////
+minishell$ cat | ls | cat | dwdwdw
+
+/////
+minishell$ export | grep 1
