@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:44:25 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/26 10:49:24 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/27 09:06:57 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,26 @@ void add_token(t_token **list, t_token *new_tok)
         tmp->next = new_tok;// une fois kiwssal la5er ki zide new_token 
     }
 }
+void handle_redirection(const char *line, int *i, t_token **tokens, garbage **garb)
+{
+	int type = 0;
+	if (line[*i] == '<')
+		type = (line[*i + 1] == '<') ? (*i += 2, HERE_DOC) : (*i += 1, RDR_IN);
+	else
+		type = (line[*i + 1] == '>') ? (*i += 2, APPEND) : (*i += 1, RDR_OUT);
 
-void space_skip(char *line , int *i)
+	// int start = *i;
+	while (line[*i] && skip_space(line[*i]))
+		(*i)++;
+	int name_start = *i;
+	while (line[*i] && !skip_space(line[*i]) && !is_operator(line[*i]))
+		(*i)++;
+
+	char *filename = ft_substr(line, name_start, *i - name_start, garb);
+	add_token(tokens, new_token(filename, type, garb));
+}
+
+void space_skip(const char *line , int *i)
 {
     while (line[*i] != '\0' && skip_space(line[*i]))
         (*i)++;
@@ -67,25 +85,34 @@ void space_skip(char *line , int *i)
 
 // hade lfonction  hiya li ktanalyser lina la line de commande
 
-t_token *tokens(char *line, garbage **garb)
+void handle_pipe(int *i, t_token **tokens, garbage **garb)
 {
-	t_token *tokens = NULL;
-	int i = 0;
-
-	while (line[i])
-	{
-		space_skip(line, &i);
-		if (!line[i])
-			break;
-		if ((line[i] == '<' || line[i] == '>') && line[i + 1] == line[i])
-			handel_double_operator(line, &i, &tokens, garb);
-		else if (is_operator(line[i]))
-			handle_single_operator(line, &i, &tokens, garb);
-		else
-			handle_word(line, &i, &tokens, garb);
-	}
-	return tokens;
+	(*i)++;
+	add_token(tokens, new_token(ft_strdup("|", garb), PIPE, garb));
 }
 
+t_token *tokens(const char *line, garbage **garb)
+{
+    // char **cmd;
+    t_token *tokens = NULL;
+    // t_token cmd_tokens;
+    int i = 0;
+    
+    while (line[i] != '\0') // knloopiwe 3la  chaque 
+    {
+        space_skip(line , &i); //ignorer les espaces 
+        if (!line[i]) // ki checker wach ba9a chi haja tanalysa
+            break;
+        if (is_quote(line[i])) // ila l9ina single ou double quote
+            handel_quote(line , &i , &tokens,garb);
+        else if ((line[i] == '<' || line[i] == '>') && line[i + 1] == line[i])
+            handel_double_operator(line , &i , &tokens,garb);
+        else if (is_operator(line[i])) // ila kane chi operateur 
+            handle_single_operator(line , &i , &tokens,garb);
+        else  // ila  makane ta haja 9bel donc rah world
+            handle_word(line, &i ,&tokens,garb);
+    }
+    return tokens;
+}
  
 

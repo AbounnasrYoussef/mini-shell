@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/26 10:46:12 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/27 09:07:48 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,19 @@ typedef struct s_expand_ctx
 
 
 //tokenisation
-t_token *tokens(char *line,garbage **garb);
+// t_token *tokens(char *line,garbage **garb);
+t_token *tokens(const char *line, garbage **garb);
 void handle_word(const char *line, int *i, t_token **tokens , garbage **garb);
-void handle_single_operator(char *line, int *i, t_token **tokens , garbage **garb);
-void handel_double_operator(char *line ,int *i , t_token **tokens, garbage **garb);
-void handel_quote(char *line , int  *i , t_token **token ,garbage **garb);
+void handle_single_operator(const char *line, int *i, t_token **tokens , garbage **garb);
+void handel_double_operator(const char *line ,int *i , t_token **tokens, garbage **garb);
+void handel_quote(const char *line , int  *i , t_token **token ,garbage **garb);
 type_token get_token_type(char *str);
 t_token *new_token(char *value, type_token type,garbage **garb);
 void add_token(t_token **list, t_token *new_tok);
-void space_skip(char *line , int *i);
+void space_skip(const char *line , int *i);
 void	add_token_back(t_token **head, t_token *new_token);
 char	**i_split(char const *s, char c);
+void handle_word(const char *line, int *i, t_token **tokens, garbage **garb);
 
 
 // expand
