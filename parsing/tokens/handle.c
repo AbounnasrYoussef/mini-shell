@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:30:32 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 13:51:08 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/27 09:12:57 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void handel_double_operator(char *line ,int *i , t_token **tokens, garbage **gar
     
     *i += 2; // bach na9zo douk es caractere doublons
 }
-
-
 // hade fonction kt analyser un mot entre quotes
 void handel_quote(char *line , int  *i , t_token **token ,garbage **garb)
 {
