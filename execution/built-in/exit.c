@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/26 20:24:16 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/27 13:30:38 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,8 +201,11 @@ int ft_modulo_number(unsigned long long number)
 	return (number - g);
 }
 
-void ft_exit (int len, int argc, char **str)
+void ft_exit (int len, char **str)
 {
+	int argc;
+	
+	argc = ft_strlen_argc(str);
 	if (argc >= 1)
 	{
 		if (ft_strcmpp(str[0], "exit") == 0)

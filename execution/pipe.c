@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/27 13:04:39 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/27 13:32:50 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char *cherche_path_cmd(char *cmd, t_list_env *env)
 int ft_exit_status(int status, int flags)
 {
 	static int exit_status;
-	if (status)
+	if (flags)
 		exit_status = status;
 	return exit_status;
 }
@@ -163,7 +163,7 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 	    }
 		else if (ft_strcmpp(data->cmd[0], "exit") == 0 && argc == 1)
 		{
-			ft_exit (0, argc, data->cmd);
+			ft_exit (0, data->cmd);
 		}
 		
 		pipe(fd);
@@ -241,11 +241,12 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 	}
 	while (c < argc)
 	{
+		waitpid(id[c], NULL, 0);
 		waitpid(id[c], &status, 0);
-		if (WIFEXITED(status) == 0)
-		{
-			return (ft_exit_status(status, 1));
-		}
+		//if (WIFEXITED(status) == 0)
+		//{
+		//	ft_exit_status(status, 1);
+		//}
 		c++;
 	}
 }

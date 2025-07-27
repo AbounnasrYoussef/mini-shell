@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/27 13:05:00 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/27 13:28:01 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int ft_built_in(int argc, t_exec *data, t_list_env *env)
 {
 	int len;
 	if (argc > 1)
-		len = ft_strlenn(data->cmd[0]) - 1;
+		len = ft_strlenn(data->cmd[1]) - 1;
 	if (ft_strcmpp(data->cmd[0], "cd") == 0)
 	{
 		return (ft_cd(data->cmd, env), 0);
@@ -111,7 +111,7 @@ int ft_built_in(int argc, t_exec *data, t_list_env *env)
 	else if (ft_strcmpp(data->cmd[0], "echo") == 0)
 		return (ft_echo(argc, data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "exit") == 0)
-		return (ft_exit (len, argc, data->cmd), 0);
+		return (ft_exit (len, data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "export") == 0)
 		return (ft_export(env, data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "env") == 0)
