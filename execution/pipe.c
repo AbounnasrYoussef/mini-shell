@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/29 16:05:48 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 21:41:10 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char *cherche_path_cmd(char *cmd, t_list_env *env)
 	}
 	if (path_cmd == NULL)
 	{
+		//printf("dndndn\n\n\n");
 		if (path == NULL)
 		{
 			write(2, cmd, ft_strlenn(cmd));
@@ -90,8 +91,12 @@ char *cherche_path_cmd(char *cmd, t_list_env *env)
 		}
 		else
 		{
-			write(2, cmd, ft_strlenn(cmd));
-			write(2, ": command not found\n", 20);
+			//printf("%d   %s %s\n", ft_strcmpp(ft_cherch_home(env), cmd),ft_cherch_home(env), cmd);
+			if (ft_strcmpp(ft_cherch_home(env), cmd) != 0 )
+			{
+				write(2, cmd, ft_strlenn(cmd));
+				write(2, ": command not found\n", 20);
+			}
 		}
 	
 		//else if ((info.st_mode & S_IXUSR) == 0)
@@ -167,15 +172,17 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 				return ;
 			}
 	    }
-		else if (ft_strcmpp(data->cmd[0], "exit") == 0 && argc == 1)
-		{
-			ft_exit (0, data->cmd);
-		}
-		pipe(fd);
+		//else
+		// if (ft_strcmpp(data->cmd[0], "exit") == 0 && argc == 1)
+		//{
+		//	ft_exit (0, data->cmd);
+		//}
+		
+		//if (i != argc - 1 && i != 0)
+			pipe(fd);
 		id[i] = fork();
 		if (id[i] == 0)
 		{
-			
 			dup2(tmp[0], STDIN_FILENO);
 			if (i < argc - 1) {
 				dup2(fd[1], STDOUT_FILENO);
@@ -187,23 +194,27 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 			
 			char **cmdv;
 			cmdv = data->cmd;
+			
 			if (ft_built_in(argc, data, env) == -1)
 			{
 				stat(data->cmd[0], &info);
 				if (S_ISDIR(info.st_mode))
 				{
+					//printf("Hello\n");
 					if (data->cmd[0][0] == '.' && data->cmd[0][1] == '/')
 					{
 						write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
 						write(2, ": is a directory \n", 18);
-						if (argc == 1)
-							return ;
+						exit(1);
+						//if (argc == 1)
+						//	return ;
 					}
 						
 					else if (cherche_path_cmd((data->cmd[0]), env) == NULL)
 					{
 						write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
 						write(2, ": is a directory \n", 18);
+						exit(1);
 					}
 				}
 				if ((argc == 1) && (data->cmd[1] == NULL) && (cherche_path_cmd((data->cmd[0]), env) == NULL))

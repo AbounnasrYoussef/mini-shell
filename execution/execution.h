@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/29 14:16:14 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 21:40:01 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ t_list_env *supp_var_nv(t_list_env *env);
 void ft_print_env(t_list_env *env);
 void ft_print_env_ex(t_list_env *env);
 void ft_pipe(int argc, t_exec *data, t_list_env *env);
+char *ft_cherch_home(t_list_env *env);
 #endif

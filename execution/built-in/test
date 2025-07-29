@@ -280,19 +280,19 @@
 #[1]    83322 segmentation fault  ./minishell
 
 
-/////// parsing
+#/////// parsing
 
-minishell$ export c="hshs"
-not a valid identifier
-not a valid identifier
+#minishell$ export c="hshs"
+#not a valid identifier
+#not a valid identifier
 
-///// parsing
+#///// parsing
 
-minishell$ export c="ls -l"
-not a valid identifier
-not a valid identifier
-not a valid identifier
-not a valid identifier
+#minishell$ export c="ls -l"
+#not a valid identifier
+#not a valid identifier
+#not a valid identifier
+#not a valid identifier
 
 
 #/////////
@@ -334,53 +334,45 @@ not a valid identifier
 #minishell$ touch ls
 #minishell$ ./ls
 
-
-
-///////////////CD
-
-bash-3.2$ mkdir -p 1/2/3
-bash-3.2$ cd 1/2/3/
-bash-3.2$ pwd
-/mnt/homes/arahhab/minishell/1/2/3
-bash-3.2$ cd ..
-bash: cd: ..: No such file or directory
-bash-3.2$ pwd
-/mnt/homes/arahhab/minishell/1/2/3
-bash-3.2$ cd ..
-cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
-bash-3.2$ pwd
-/mnt/homes/arahhab/minishell/1/2/3/..
-bash-3.2$ cd /
-
-rm -rf 1 //in new terminal
-
-////////
-
-/////////////
-============
-
-bash-3.2$ $?
-bash: 127: command not found
-
-
-
-//////
-minishell$ export | grep PWD
-declare -x PWD="/mnt/homes/arahhab/Desktop/minishell/parsing"
-declare -x OLDPWD="/mnt/homes/arahhab/Desktop/minishell"
-^C
-
-
-////////
-minishell$ export 45 | ls
-Makefile        expanding       ls              minishell       syntaxe_errors
-a.out           ft_malloc       mini.c          minishell.h     tokens
-env             hh              mini.o          struct_atmane   utils
+#////////
+#minishell$ export 45 | ls
+#Makefile        expanding       ls              minishell       syntaxe_errors
+#a.out           ft_malloc       mini.c          minishell.h     tokens
+#env             hh              mini.o          struct_atmane   utils
 
 ////
-bash-3.2$ exit dfs | exi
-bash: exi: command not found
-bash: exit: dfs: numeric argument required
+#bash-3.2$ exit dfs | exi
+#bash: exi: command not found
+#bash: exit: dfs: numeric argument required
+
+#///////
+#minishell$ mkdir l
+
+#rm -rf 1 //in new terminal
+
+#minishell$ cd l
+#minishell$ unset PWD
+#minishell$ unset PATH
+#minishell$ pwd
+#(null)
+
+#///////////////CD
+
+#bash-3.2$ mkdir -p 1/2/3
+#bash-3.2$ cd 1/2/3/
+#bash-3.2$ pwd
+#/mnt/homes/arahhab/minishell/1/2/3
+#bash-3.2$ cd ..
+#bash: cd: ..: No such file or directory
+#bash-3.2$ pwd
+#/mnt/homes/arahhab/minishell/1/2/3
+#bash-3.2$ cd ..
+#cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+#bash-3.2$ pwd
+#/mnt/homes/arahhab/minishell/1/2/3/..
+#bash-3.2$ cd /
+
+#rm -rf 1 //in new terminal
 
 ////
 bash-3.2$ $fff $HOME
@@ -393,4 +385,16 @@ bash | bash
 minishell$ cat | ls | cat | dwdwdw
 
 /////
-minishell$ export | grep 1
+minishell$ export | grep PWD
+declare -x PWD="/mnt/homes/arahhab/Desktop/minishell/parsing"
+declare -x OLDPWD="/mnt/homes/arahhab/Desktop/minishell"
+^C
+
+/////////////
+============
+
+bash-3.2$ $?
+bash: 127: command not found
+
+minishell$ ./fffffds
+minishell$ ./fffffdsksjdfksfjksjf

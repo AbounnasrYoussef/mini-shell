@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 12:59:18 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/29 13:55:25 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 21:39:28 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void ft_unset(t_list_env *list_env, char **args)
 	int i;
 	int j;
 	
-
 	i = 1;
 	j = 0;
 	while (args[i] != NULL)

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 16:05:14 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 17:26:44 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,15 @@ void ft_read_loop(t_list_env **env ,t_exec **data)
 //    tmp = tmp->next;
 //    i++;
 //}
-//        // if (*data != NULL)
-//        // {
-//        //     free_exec_list(*data); // Fonction à écrire pour libérer la liste t_exec
-//        //     *data = NULL;
-//        // }
-//        // Exécution des commandes et récupération du code de sortie
+        // if (*data != NULL)
+        // {
+        //     free_exec_list(*data); // Fonction à écrire pour libérer la liste t_exec
+        //     *data = NULL;
+        // }
+        // Exécution des commandes et récupération du code de sortie
         
-//        // Nettoyage mémoire via garbage collector
-//        ft_free_all(garb);
+        // Nettoyage mémoire via garbage collector
+        //ft_free_all(garb);
     }
 }
 
