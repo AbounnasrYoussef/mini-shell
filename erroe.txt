@@ -1,0 +1,58 @@
+
+
+dik l3ayba dial commande fstruct dial expanding ila da5el $chi haja galta  
+
+ ================
+ export var1 $var2 var3 $var $USER $HOME
+ ================
+ '''"$HOME"'$USER'"$?"'''
+ ================
+ minishell$ export var+='vvvvv'
+---- Commande 1 ----
+cmd[0] = export
+cmd[1] = var+=
+cmd[2] = 'vvvvv'
+minishell$ 
+(checki: remove (+=) && (''""))
+================
+
+
+
+
+
+
+
+
+
+
+---------------------------------
+
+✅ 1/ les espaces et les tabs dans export  "   export a="      ls" spaces and tabs   ".
+
+2/ "$a" makhshach tsplita
+
+3/ l"s" hadi 5assha t5dem o tweli ls o hta hadi l's'
+
+4/ hadi machi syntaxe erreur "    ls | << j ===> syntaxe error  "
+
+✅ 5/ minishell$ ' $HOME$USER'
+---- Commande 1 ----
+cmd[0] = '
+cmd[1] = $HOME$USER'
+
+
+✅ 6/ ila kane dollar 5asso irode dollar
+minishell$ $
+---- Commande 1 ----
+cmd[0] = 
+
+✅ 7/ ma5asse itla3 walo minishell$ $hfgh
+---- Commande 1 ----
+cmd[0] = 
+
+
+✅ 8/ 5asse t5alli dollar o texpander dollar la5er 
+minishell$ $$$$homer
+---- Commande 1 ----
+cmd[0] = 
+minishell$ $$HOME

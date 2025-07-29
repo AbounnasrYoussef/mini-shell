@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 10:09:11 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 12:17:46 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/24 18:44:07 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static size_t	count_word(char const *s, char c)
+static size_t	count_word(const char *s, char c)
 {
 	size_t	len;
 	size_t	count;
@@ -23,51 +23,28 @@ static size_t	count_word(char const *s, char c)
 	{
 		while (s[len] == c)
 			len++;
-		while (s[len])
-		{
-			if (s[len] == c || s[len + 1] == '\0')
-			{
-				count++;
-				break ;
-			}
+		if (s[len])
+			count++;
+		while (s[len] && s[len] != c)
 			len++;
-		}
-		if (s[len] == '\0')
-			break ;
-		len++;
 	}
 	return (count);
 }
 
-static int	count_len_word(char const *s, char c, size_t *j, size_t *skip)
+static int	count_len_word(const char *s, char c, size_t *j, size_t *skip)
 {
-	size_t	longueur;
+	size_t	length;
 
-	longueur = 0;
+	length = 0;
 	while (s[*j] == c)
 		(*j)++;
 	*skip = *j;
-	while (s[*j])
+	while (s[*j] && s[*j] != c)
 	{
-		if (s[*j] != c)
-			longueur++;
-		else
-			break ;
+		length++;
 		(*j)++;
 	}
-	return (longueur);
-}
-
-static char	**alloc(char const *s, char c)
-{
-	char	**sp;
-
-	if (!s)
-		return (NULL);
-	sp = malloc(sizeof(char *) * (count_word(s, c) + 1));
-	if (!sp)
-		return (NULL);
-	return (sp);
+	return (length);
 }
 
 static void	*free_split(char **array, int i)
@@ -78,30 +55,32 @@ static void	*free_split(char **array, int i)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(const char *s, char c, garbage **garb)
 {
 	size_t	skip;
 	size_t	i;
 	size_t	index;
-	size_t	sizee;
-	char	**alloce_array;
+	size_t	word_len;
+	char	**result;
 
-	skip = 0;
+	if (!s)
+		return (NULL);
+	result = ft_malloc( garb , sizeof(char *) * (count_word(s, c) + 1));
+	if (!result)
+		return (NULL);
 	i = 0;
 	index = 0;
-	sizee = 0;
-	alloce_array = alloc(s, c);
-	if (!alloce_array)
-		return (NULL);
 	while (index < count_word(s, c))
 	{
-		sizee = count_len_word(s, c, &i, &skip);
-		alloce_array[index] = (char *)malloc(sizeof(char) * (sizee + 1));
-		if (!alloce_array[index])
-			return (free_split(alloce_array, index));
-		ft_memcpy(alloce_array[index], s + skip, sizee);
-		alloce_array[index][sizee] = '\0';
+		word_len = count_len_word(s, c, &i, &skip);
+		result[index] = ft_malloc(garb ,sizeof(char) * (word_len + 1));
+		if (!result[index])
+			return (free_split(result, index));
+		ft_memcpy(result[index], s + skip, word_len);
+		result[index][word_len] = '\0';
 		index++;
 	}
-	return (alloce_array[index] = NULL, alloce_array);
+	result[index] = NULL;
+	return (result);
 }
+

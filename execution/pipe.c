@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/29 15:27:10 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 16:05:48 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,13 @@ char *cherche_path_cmd(char *cmd, t_list_env *env)
 	return path_cmd;
 }
 
-int ft_exit_status(int status, int flags)
-{
-	static int exit_status;
-	if (flags)
-		exit_status = status;
-	return exit_status;
-}
+//int ft_exit_status(int status, int flags)
+//{
+//	static int exit_status;
+//	if (flags)
+//		exit_status = status;
+//	return exit_status;
+//}
 void ft_pipe(int argc, t_exec *data, t_list_env *env)
 {
 	char **cmdd;

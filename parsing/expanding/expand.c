@@ -3,37 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 14:17:18 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 12:32:17 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// hade fonction hiya li kt7awel lina  token l texte $user =  youssef
-char	*expand_token(char *value, int exit_code,t_list_env *env, garbage **garb)
+
+
+void	add_token_back(t_token **head, t_token *new_token)
 {
-    // value  hiya chaine original a anakyser
+	t_token	*tmp;
+
+	if (!head || !new_token)
+		return ;
+	if (*head == NULL)
+	{
+		*head = new_token;
+		return ;
+	}
+	tmp = *head;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new_token;
+}
+
+int ft_exit_status(int status, int flag)
+{
+	static int exit_status = 0;
+
+	if (flag)
+		exit_status = status;
+	return (exit_status);
+}
+// hade fonction hiya li kt7awel lina  token l texte $user =  youssef
+char	*expand_token(char *value, int exit_code, t_list_env *env, garbage **garb)
+{
 	int			i;
-	char		*res; //hna fine gadi ndiro resultas final
-	char		*tmp; // chaine teporaire bach nbniwe res
+	char		*res;
+	char		*tmp;
 	t_expand_ctx	ctx;
 
 	i = 0;
-	res = ft_strdup("", garb);// hna bach ncommenciwe fwa7ed chaine valide han la chine 5awya 3ade gadi n3amroha bach maykoune ta segfault
 	ctx.env = env;
 	ctx.exit_code = exit_code;
 	ctx.garb = garb;
-	while (value[i]) // mn hade mawssalnach lla5er dial la chaine
+	res = ft_strdup("", garb);
+	while (value[i])
 	{
-		if (value[i] == '\'') // ila kane simple quote 
-			append_single_quote(value, &i, &res, garb); // gadi ncopiwe dakchili wassthom bl 7arf Entrée : 'Salut $USER' → Résultat : Salut $USER
-		else if (value[i] == '"') // ilakano double quote
-			append_double_quote(value, &i, &res, ctx);// hna 3awdo dollah bl value dialo Si USER=amine et entrée = "Salut $USER" → Résultat : Salut amine
+		if (value[i] == '\'')
+			append_single_quote(value, &i, &res, garb);
+		else if (value[i] == '"')
+			append_double_quote(value, &i, &res, ctx);
 		else if (value[i] == '$')
-			res = ft_strjoin(res,expand_dollar(value, &i, exit_code, env, garb),garb);
+			res = ft_strjoin(res,
+					expand_dollar(value, &i, exit_code, env, garb),
+					garb);
 		else
 		{
 			tmp = ft_substr(value, i, 1, garb);
@@ -44,19 +72,92 @@ char	*expand_token(char *value, int exit_code,t_list_env *env, garbage **garb)
 	return (res);
 }
 
-void	expand_all_tokens(t_token *tokens, int exit_code,t_list_env *env, garbage **garb)
-                // code de retour du dernier commande executer
+t_token	*new_token_0(char *value, type_token type, garbage **garb)
 {
-	char	*expanded;
+	t_token	*tok;
 
-	while (tokens) //tous les tokens
+	tok = ft_malloc(garb, sizeof(t_token));
+	if (!tok)
+		return (NULL);
+	tok->value = ft_strdup(value, garb);
+	tok->type = type;
+	tok->join = 0;
+	tok->quoted = 0;
+    tok->double_quote = 0;
+	tok->next = NULL;
+	return (tok);
+}
+
+// void	expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, garbage **garb)
+// {
+// 	t_token	*curr;
+// 	t_token	*new_tokens;
+// 	t_token	*last;
+// 	char	*expanded;
+
+// 	if (!tokens || !*tokens)
+// 		return ;
+// 	curr = *tokens;
+// 	while (curr)
+// 	{
+// 		if (curr->type == WORD && ft_strchr(curr->value, '$') && (curr->quoted == 0))
+// 		{
+// 			expanded = expand_token(curr->value, exit_code, env, garb);
+// 			expanded = ft_strtrim_custom(expanded, garb, curr->quoted);
+// 			if (!curr->quoted && ft_strchr(expanded, ' '))
+// 			{
+// 				new_tokens = split_into_tokens(expanded, garb);
+// 				if (new_tokens)
+// 				{
+// 					replace_token(tokens, curr, new_tokens);
+// 					last = new_tokens;
+// 					while (last->next)
+// 						last = last->next;
+// 					curr = last;
+// 				}
+// 				else
+// 					curr->value = expanded;
+// 			}
+// 			else
+// 				curr->value = expanded;
+// 		}
+// 		curr = curr->next;
+// 	}
+// }
+
+void expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, garbage **garb)
+{
+	t_token *curr = *tokens;
+	t_token *prev = NULL;
+
+	while (curr)
 	{
-		if (tokens->type == WORD && ft_strchr(tokens->value, '$')) // if ila kane token word o kayn fih dollar
+		// Appliquer l'expansion de la variable
+		char *expanded = expand_token(curr->value, exit_code, env, garb);
+
+		// Supprimer les quotes si applicable
+		char *cleaned = ft_strtrim_custom(expanded, garb, curr->quoted);
+
+		// Si le token devient vide après expansion, on le supprime de la liste
+		if (!cleaned || cleaned[0] == '\0')
 		{
-			expanded = expand_token(tokens->value, exit_code, env, garb);
-			tokens->value = expanded;
+			t_token *to_delete = curr;
+			curr = curr->next;
+
+			if (!prev) // début de liste
+				*tokens = to_delete->next;
+			else
+				prev->next = to_delete->next;
+
+			// Pas besoin de free car gestion via garbage
+			continue;
 		}
-		tokens = tokens->next;
+
+		// Mettre à jour la valeur du token
+		curr->value = cleaned;
+
+		prev = curr;
+		curr = curr->next;
 	}
 }
 

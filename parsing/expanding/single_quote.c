@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   single_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/23 12:34:51 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 11:21:02 by yabounna         ###   ########.fr       */
+/*   Created: 2025/07/25 10:57:55 by yabounna          #+#    #+#             */
+/*   Updated: 2025/07/27 11:46:28 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
 
-char	*ft_strdup(const char *s1,garbage **garb)
+
+#include  "../minishell.h"
+
+// Gère le cas d'une chaîne entre apostrophes simples (quote '...')
+void	append_single_quote(const char *val, int *i, char **res, garbage **garb)
 {
-	size_t	i;
-	char	*d;
+	int	start = ++(*i);
+	char	*tmp;
 
-	i = ft_strlen(s1);
-	d = (char *)ft_malloc(garb,((i + 1) * sizeof(char)));
-	if (d == NULL)
-		return (NULL);
-	ft_memcpy(d, s1, i);
-	d[i] = '\0';
-	return (d);
+	while (val[*i] && val[*i] != '\'')
+		(*i)++;
+	tmp = ft_substr(val, start, *i - start, garb);
+	*res = ft_strjoin(*res, tmp, garb);
+	if (val[*i] == '\'')
+		(*i)++;
 }

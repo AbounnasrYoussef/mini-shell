@@ -12,7 +12,7 @@ SRC = mini.c\
       $(wildcard env/*.c)\
       $(wildcard struct_atmane/*.c)\
 	  $(wildcard ../execution/built-in/*.c)\
-	   $(wildcard ../execution/*.c)
+	  $(wildcard ../execution/*.c)
 
 
 OBJ = $(SRC:.c=.o)
@@ -32,6 +32,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-#print:
-#	@echo $(SRC)

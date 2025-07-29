@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/27 10:49:01 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 16:05:14 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 //         free(line); // on free car readline il alloce 
 //     }
 // }
-
 int ft_count_cmd(t_exec *data)
 {
 	int i;
@@ -45,7 +44,7 @@ int ft_count_cmd(t_exec *data)
 	return i;
 }
 
-void ft_read_loop(t_list_env *env ,t_exec **data)
+void ft_read_loop(t_list_env **env ,t_exec **data)
 {
     char        *line;
     garbage   *garb;
@@ -61,6 +60,7 @@ void ft_read_loop(t_list_env *env ,t_exec **data)
             add_history(line); // Sauvegarde dans l'historique
         if (!syntaxe_errors(line))
         {
+            ft_exit_status(258 , 1);
             free(line);
             continue;
         }
@@ -69,38 +69,46 @@ void ft_read_loop(t_list_env *env ,t_exec **data)
         if (!token)
             continue;
         // Expansion des variables d'environnement et de $? sur les tokens
-        expand_all_tokens(token, last_exit_code, env, &garb);
+        expand_all_tokens(&token, last_exit_code, *env, &garb);
         *data = parse_tokens_to_exec_list(token , &garb);
         t_exec *tmp = *data;
-
-		ft_pipe(ft_count_cmd(tmp), tmp, env);
+		ft_pipe(ft_count_cmd(tmp), tmp, *env);
 		
-	//int i = 1;
+//int i = 1;
 
-	//while (tmp)
-	//{
-	//	printf("---- Commande %d ----\n", i);
+//while (tmp)
+//{
+//    printf("---- Commande %d ----\n", i);
 
-	//	// Afficher les mots de la commande
-	//	if (tmp->cmd)
-	//	{
-	//		for (int j = 0; tmp->cmd[j]; j++)
-	//			printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
-	//	}
+//    // Afficher les mots de la commande
+//    if (tmp->cmd)
+//    {
+//        for (int j = 0; tmp->cmd[j]; j++)
+//            printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
+//        //     printf("%s", tmp->cmd[j]);
+//        // printf("\n");
+//    }
 
-	//	// Afficher les redirections
-	//	t_file *file = tmp->files;
-	//	while (file)
-	//	{
-	//		printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
-	//		file = file->next;
-	//	}
+//    // Afficher les redirections
+//    t_file *file = tmp->files;
+//    while (file)
+//    {
+//        printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
+//        file = file->next;
+//    }
 
-	//	tmp = tmp->next;
-	//	i++;
-	//}
-
-        ft_free_all(garb);
+//    tmp = tmp->next;
+//    i++;
+//}
+//        // if (*data != NULL)
+//        // {
+//        //     free_exec_list(*data); // Fonction à écrire pour libérer la liste t_exec
+//        //     *data = NULL;
+//        // }
+//        // Exécution des commandes et récupération du code de sortie
+        
+//        // Nettoyage mémoire via garbage collector
+//        ft_free_all(garb);
     }
 }
 
@@ -116,42 +124,56 @@ int main(int ac, char **av, char **envp)
 	data = NULL;
 
 	env_list = ft_env(envp);
-	//debut = env_list;
-	//while (debut != NULL)
-	//{
-	//	if (ft_strcmp(debut->variable, "PATH") == 0)	
-	//	{	
-	//		debut->path = debut->valeur_vari;
-	//	}
-	//	debut = debut->next;
-	//}
 
-	ft_read_loop(env_list ,&data);
+	ft_read_loop(&env_list ,&data);
     
 
 	return (0);
 }
 
-
-
-//int main(int argc, char **argv, char **env)
+//int main(int ac, char **av, char **envp)
 //{
-//	t_list_env *envv;
+//	t_list_env	*env_list;
+//	t_exec		*data;
 
-//	(void)argv;
-//	envv = ft_envvv(env);
-//	if (argc > 1)
-//		printf("aucun arg recommender");
-//	else
-//	{
-//		while (1)
-//		{
-//			char *line = readline("minishell: ");
-//			add_history(line);
-//			if (!line || !*line)
-//				continue ;
-//			ft_built_in(line, envv);
-//		}
-//	}
-//	return 0;
+//	(void)ac;
+//	(void)av;
+
+//	data = NULL;
+
+//	env_list = ft_env(envp);
+
+//	ft_read_loop(&env_list ,&data);
+    
+
+//	return (0);
 //}
+
+
+
+// void ft_read()
+// {
+//     char *line;
+//     garbage *garb = NULL;
+//     t_token *token;
+//     while (1)
+//     {
+//         line = readline("minishell$ ");
+//         if (!line)
+//             break; // if il y a un erreur 
+//         if (*line)
+//             add_history(line); // pour enregistrer tous les commande precedent
+//         if (syntaxe_errors(line) == 0)
+//             continue;
+//         token = tokens(line,&garb);
+//         free(line); // on free car readline il alloce 
+//     }
+// }
+
+// int main(int ac, char **av)
+// {
+//     (void)ac;
+//     (void)av;
+//     ft_read();
+//     return 0;
+// }

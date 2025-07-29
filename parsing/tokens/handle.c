@@ -6,29 +6,29 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:30:32 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 13:51:08 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 11:39:33 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void handle_word(const char *line, int *i, t_token **tokens , garbage **garb)
-{
-    int start = *i;// bedia dial mot li 7na fih db
+// void handle_word(const char *line, int *i, t_token **tokens , garbage **garb)
+// {
+//     int start = *i;// bedia dial mot li 7na fih db
 
-    while (line[*i] && !skip_space(line[*i])
-        && !is_operator(line[*i]) && !is_quote(line[*i]))
-        (*i)++;  // loop htal la5er dial mot
+//     while (line[*i] && !skip_space(line[*i])
+//         && !is_operator(line[*i]) && !is_quote(line[*i]))
+//         (*i)++;  // loop htal la5er dial mot
 
-    char *word = ft_substr(line, start, *i - start, garb);// Extrait le mot
-    add_token(tokens, new_token(word, WORD,garb)); // cree token de type word et ajouter a la liste
-}
+//     char *word = ft_substr(line, start, *i - start, garb);// Extrait le mot
+//     add_token(tokens, new_token(word, WORD,garb)); // cree token de type word et ajouter a la liste
+// }
 
 // hna kngeriwe sigle operator | > <
 void handle_single_operator(char *line, int *i, t_token **tokens , garbage **garb)
 {
     char op[2] = {line[*i], '\0'};   
-    add_token(tokens, new_token(ft_strdup(op, garb), get_token_type(op), garb));
+    add_token(tokens, new_token_0(ft_strdup(op, garb), get_token_type(op), garb));
     (*i)++;                         
 }
 
@@ -36,12 +36,10 @@ void handle_single_operator(char *line, int *i, t_token **tokens , garbage **gar
 void handel_double_operator(char *line ,int *i , t_token **tokens, garbage **garb)
 {
     char op[3] = {line[*i], line[*i + 1], '\0'};
-    add_token(tokens, new_token(ft_strdup(op ,  garb), get_token_type(op), garb));
+    add_token(tokens, new_token_0(ft_strdup(op ,  garb), get_token_type(op), garb));
     
     *i += 2; // bach na9zo douk es caractere doublons
 }
-
-
 // hade fonction kt analyser un mot entre quotes
 void handel_quote(char *line , int  *i , t_token **token ,garbage **garb)
 {
@@ -58,7 +56,7 @@ void handel_quote(char *line , int  *i , t_token **token ,garbage **garb)
     // hna kn5edmo f substr bach njebdo dakchi li waste lquotes
     (*i)++;
     char *quoted = ft_substr(line , start , *i - start , garb);
-    add_token(token , new_token(quoted , WORD,garb));
+    add_token(token , new_token_0(quoted , WORD,garb));
     //kncrewe tokens jdida bdakchi li jbedna  b substr o type 
     
 }

@@ -51,7 +51,7 @@ t_list_env *ft_env(char **str)
 	
 	while (str[i] != NULL )
 	{
-		splitt = ft_split(str[i], '=');
+		splitt = i_split(str[i], '=');
 		ft_lstadd_back(&copy_env, ft_lstnew(splitt[0], splitt[1], str[i]));
 		if(i == 0)
 			debut_env = copy_env;
