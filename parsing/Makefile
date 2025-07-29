@@ -10,7 +10,9 @@ SRC = mini.c\
       $(wildcard tokens/*.c)\
       $(wildcard expanding/*.c)\
       $(wildcard env/*.c)\
-      $(wildcard struct_atmane/*.c)
+      $(wildcard struct_atmane/*.c)\
+	  $(wildcard ../execution/built-in/*.c)\
+	  $(wildcard ../execution/*.c)
 
 
 OBJ = $(SRC:.c=.o)

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 11:19:58 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:05:14 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "../execution/execution.h"
 
 // void ft_read()
 // {
@@ -30,6 +31,19 @@
 //         free(line); // on free car readline il alloce 
 //     }
 // }
+int ft_count_cmd(t_exec *data)
+{
+	int i;
+
+	i = 0;
+	while (data != NULL)
+	{
+		data = data->next;
+		i++;
+	}
+	return i;
+}
+
 void ft_read_loop(t_list_env **env ,t_exec **data)
 {
     char        *line;
@@ -58,47 +72,50 @@ void ft_read_loop(t_list_env **env ,t_exec **data)
         expand_all_tokens(&token, last_exit_code, *env, &garb);
         *data = parse_tokens_to_exec_list(token , &garb);
         t_exec *tmp = *data;
-int i = 1;
+		ft_pipe(ft_count_cmd(tmp), tmp, *env);
+		
+//int i = 1;
 
-while (tmp)
-{
-    printf("---- Commande %d ----\n", i);
+//while (tmp)
+//{
+//    printf("---- Commande %d ----\n", i);
 
-    // Afficher les mots de la commande
-    if (tmp->cmd)
-    {
-        for (int j = 0; tmp->cmd[j]; j++)
-            printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
-        //     printf("%s", tmp->cmd[j]);
-        // printf("\n");
-    }
+//    // Afficher les mots de la commande
+//    if (tmp->cmd)
+//    {
+//        for (int j = 0; tmp->cmd[j]; j++)
+//            printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
+//        //     printf("%s", tmp->cmd[j]);
+//        // printf("\n");
+//    }
 
-    // Afficher les redirections
-    t_file *file = tmp->files;
-    while (file)
-    {
-        printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
-        file = file->next;
-    }
+//    // Afficher les redirections
+//    t_file *file = tmp->files;
+//    while (file)
+//    {
+//        printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
+//        file = file->next;
+//    }
 
-    tmp = tmp->next;
-    i++;
-}
-        // if (*data != NULL)
-        // {
-        //     free_exec_list(*data); // Fonction à écrire pour libérer la liste t_exec
-        //     *data = NULL;
-        // }
-        // Exécution des commandes et récupération du code de sortie
+//    tmp = tmp->next;
+//    i++;
+//}
+//        // if (*data != NULL)
+//        // {
+//        //     free_exec_list(*data); // Fonction à écrire pour libérer la liste t_exec
+//        //     *data = NULL;
+//        // }
+//        // Exécution des commandes et récupération du code de sortie
         
-        // Nettoyage mémoire via garbage collector
-        ft_free_all(garb);
+//        // Nettoyage mémoire via garbage collector
+//        ft_free_all(garb);
     }
 }
 
 int main(int ac, char **av, char **envp)
 {
 	t_list_env	*env_list;
+	//t_list_env	*debut;
 	t_exec		*data;
 
 	(void)ac;
@@ -113,6 +130,24 @@ int main(int ac, char **av, char **envp)
 
 	return (0);
 }
+
+//int main(int ac, char **av, char **envp)
+//{
+//	t_list_env	*env_list;
+//	t_exec		*data;
+
+//	(void)ac;
+//	(void)av;
+
+//	data = NULL;
+
+//	env_list = ft_env(envp);
+
+//	ft_read_loop(&env_list ,&data);
+    
+
+//	return (0);
+//}
 
 
 
