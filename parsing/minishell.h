@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:35:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/27 12:50:24 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 11:49:39 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct y_token{
     type_token type;
 	int quoted;
 	int double_quote;
+	int join;
     struct y_token *next;
 }   t_token;
 
@@ -89,12 +90,13 @@ void handle_single_operator(char *line, int *i, t_token **tokens , garbage **gar
 void handel_double_operator(char *line ,int *i , t_token **tokens, garbage **garb);
 void handel_quote(char *line , int  *i , t_token **token ,garbage **garb);
 type_token get_token_type(char *str);
-t_token *new_token(char *value, type_token type,garbage **garb);
+t_token	*new_token(char *value, type_token type,int i, garbage **garb);
 void add_token(t_token **list, t_token *new_tok);
 void space_skip(char *line , int *i);
 void	add_token_back(t_token **head, t_token *new_token);
 char	**i_split(char const *s, char c);
 int printf_error();
+t_token	*new_token_0(char *value, type_token type, garbage **garb);
 
 
 // expand

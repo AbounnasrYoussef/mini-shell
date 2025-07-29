@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:37:21 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/27 11:46:32 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 11:40:07 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_token	*split_into_tokens(char *str, garbage **garb)
 		char *trimmed = ft_substr(str, 1, len - 2, garb);
 		if (!trimmed)
 			return (NULL);
-		new = new_token(trimmed, WORD, garb);
+		new = new_token_0(trimmed, WORD, garb);
 		new->quoted = 1;
 		add_token_back(&head, new);
 		return (head);
@@ -70,7 +70,7 @@ t_token	*split_into_tokens(char *str, garbage **garb)
 	i = 0;
 	while (words && words[i])
 	{
-		new = new_token(words[i], WORD, garb);
+		new = new_token_0(words[i], WORD, garb);
 		new->quoted = 0;
 		add_token_back(&head, new);
 		i++;

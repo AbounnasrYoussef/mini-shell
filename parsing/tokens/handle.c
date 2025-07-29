@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:30:32 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/27 09:14:46 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 11:39:33 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 void handle_single_operator(char *line, int *i, t_token **tokens , garbage **garb)
 {
     char op[2] = {line[*i], '\0'};   
-    add_token(tokens, new_token(ft_strdup(op, garb), get_token_type(op), garb));
+    add_token(tokens, new_token_0(ft_strdup(op, garb), get_token_type(op), garb));
     (*i)++;                         
 }
 
@@ -36,7 +36,7 @@ void handle_single_operator(char *line, int *i, t_token **tokens , garbage **gar
 void handel_double_operator(char *line ,int *i , t_token **tokens, garbage **garb)
 {
     char op[3] = {line[*i], line[*i + 1], '\0'};
-    add_token(tokens, new_token(ft_strdup(op ,  garb), get_token_type(op), garb));
+    add_token(tokens, new_token_0(ft_strdup(op ,  garb), get_token_type(op), garb));
     
     *i += 2; // bach na9zo douk es caractere doublons
 }
@@ -56,7 +56,7 @@ void handel_quote(char *line , int  *i , t_token **token ,garbage **garb)
     // hna kn5edmo f substr bach njebdo dakchi li waste lquotes
     (*i)++;
     char *quoted = ft_substr(line , start , *i - start , garb);
-    add_token(token , new_token(quoted , WORD,garb));
+    add_token(token , new_token_0(quoted , WORD,garb));
     //kncrewe tokens jdida bdakchi li jbedna  b substr o type 
     
 }

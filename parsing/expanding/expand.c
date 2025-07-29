@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/27 12:40:01 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 12:32:17 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,48 +72,92 @@ char	*expand_token(char *value, int exit_code, t_list_env *env, garbage **garb)
 	return (res);
 }
 
-
-void	expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, garbage **garb)
+t_token	*new_token_0(char *value, type_token type, garbage **garb)
 {
-	t_token	*curr;
-	t_token	*new_tokens;
-	t_token	*last;
-	char	*expanded;
+	t_token	*tok;
 
-	if (!tokens || !*tokens)
-		return ;
-	curr = *tokens;
+	tok = ft_malloc(garb, sizeof(t_token));
+	if (!tok)
+		return (NULL);
+	tok->value = ft_strdup(value, garb);
+	tok->type = type;
+	tok->join = 0;
+	tok->quoted = 0;
+    tok->double_quote = 0;
+	tok->next = NULL;
+	return (tok);
+}
+
+// void	expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, garbage **garb)
+// {
+// 	t_token	*curr;
+// 	t_token	*new_tokens;
+// 	t_token	*last;
+// 	char	*expanded;
+
+// 	if (!tokens || !*tokens)
+// 		return ;
+// 	curr = *tokens;
+// 	while (curr)
+// 	{
+// 		if (curr->type == WORD && ft_strchr(curr->value, '$') && (curr->quoted == 0))
+// 		{
+// 			expanded = expand_token(curr->value, exit_code, env, garb);
+// 			expanded = ft_strtrim_custom(expanded, garb, curr->quoted);
+// 			if (!curr->quoted && ft_strchr(expanded, ' '))
+// 			{
+// 				new_tokens = split_into_tokens(expanded, garb);
+// 				if (new_tokens)
+// 				{
+// 					replace_token(tokens, curr, new_tokens);
+// 					last = new_tokens;
+// 					while (last->next)
+// 						last = last->next;
+// 					curr = last;
+// 				}
+// 				else
+// 					curr->value = expanded;
+// 			}
+// 			else
+// 				curr->value = expanded;
+// 		}
+// 		curr = curr->next;
+// 	}
+// }
+
+void expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, garbage **garb)
+{
+	t_token *curr = *tokens;
+	t_token *prev = NULL;
+
 	while (curr)
 	{
-		if (curr->type == WORD && ft_strchr(curr->value, '$'))
+		// Appliquer l'expansion de la variable
+		char *expanded = expand_token(curr->value, exit_code, env, garb);
+
+		// Supprimer les quotes si applicable
+		char *cleaned = ft_strtrim_custom(expanded, garb, curr->quoted);
+
+		// Si le token devient vide après expansion, on le supprime de la liste
+		if (!cleaned || cleaned[0] == '\0')
 		{
-			expanded = expand_token(curr->value, exit_code, env, garb);
-			expanded = ft_strtrim_custom(expanded, garb, curr->quoted);
-			if (!curr->quoted && ft_strchr(expanded, ' '))
-			{
-				new_tokens = split_into_tokens(expanded, garb);
-				if (new_tokens)
-				{
-					replace_token(tokens, curr, new_tokens);
-					last = new_tokens;
-					while (last->next)
-						last = last->next;
-					curr = last;
-				}
-				else
-					curr->value = expanded;
-			}
+			t_token *to_delete = curr;
+			curr = curr->next;
+
+			if (!prev) // début de liste
+				*tokens = to_delete->next;
 			else
-				curr->value = expanded;
+				prev->next = to_delete->next;
+
+			// Pas besoin de free car gestion via garbage
+			continue;
 		}
+
+		// Mettre à jour la valeur du token
+		curr->value = cleaned;
+
+		prev = curr;
 		curr = curr->next;
 	}
 }
-
-
-
-
-
-
-
 
