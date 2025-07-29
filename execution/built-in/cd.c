@@ -6,23 +6,11 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 22:24:19 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/27 10:52:10 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 14:36:07 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
-
-//void ft_update_opwd(t_list_env **env)
-//{
-//	while (*env != NULL)
-//	{
-//		if (ft_strcmpp((*env)->variable, "OLDPWD") == 0)
-//		{
-//			(*env)->valeur_vari = ft_pwd();
-//		}
-//		*env = (*env)->next;
-//	}
-//}
 
 char *ft_cherch_home(t_list_env *env)
 {
@@ -74,7 +62,7 @@ void ft_cd(char **args, t_list_env *env)
 	if (len_args == 1)
 	{
 		if (check_home(env) == 0)
-			printf ("cd: HOME not set\n");
+			write(2, "cd: HOME not set\n", 17);
 		else
 		{
 			if (access(ft_cherch_home(env), F_OK) == 0)
@@ -83,12 +71,15 @@ void ft_cd(char **args, t_list_env *env)
 				a = chdir(ft_cherch_home(env));
 				new_pwd = getcwd(NULL, 0);
 				if (new_pwd == NULL)
-					printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+					write(2, "cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", 108);
 				ft_r_pwd_oldp(env, new_pwd, old_pwd);
 			}
 			else
-				printf("cd: %s: No such file or directory\n", ft_cherch_home(env));
-
+			{
+				write(2, "cd: ", 4);
+				write(2, ft_cherch_home(env), ft_strlenn(ft_cherch_home(env)));
+				write(2, ": No such file or directory\n", 28);
+			}
 		}
 	}
 	else if (access( args[1], F_OK) == 0)
@@ -98,10 +89,14 @@ void ft_cd(char **args, t_list_env *env)
 		a = chdir(args[1]);
 		new_pwd = getcwd(NULL, 0);
 		if (new_pwd == NULL)
-			printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+			write(2, "cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", 108);
 		ft_r_pwd_oldp(env, new_pwd, old_pwd);
 	}
 	else
-		printf("cd: %s: No such file or directory\n", args[1]);
+	{
+		write(2, "cd: ", 4);
+		write(2, args[1], ft_strlenn(args[1]));
+		write(2, ": No such file or directory\n", 28);
+	}
 	return ;
 }

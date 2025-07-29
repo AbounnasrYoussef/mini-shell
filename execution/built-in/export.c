@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/26 22:23:50 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 13:48:57 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,9 @@ void check_args(t_list_env **list_env, char **args)
 			|| (args[i][0] >= 'A' && args[i][0] <= 'Z')))
 		{
 			c = 1;
-			printf("export: `%s' not a valid identifier\n", args[i]);
+			write(2, "export: `", 9);
+			write(2, args[i], ft_strlenn(args[i]));
+			write(2, "' not a valid identifier\n", 25);
 		}	
 		while(args[i][j] != '\0' && args[i][j] != '=' && args[i][j] != '+')
 		{
@@ -126,8 +128,9 @@ void check_args(t_list_env **list_env, char **args)
 				|| (args[i][j] >= '0' && args[i][j] <= '9')))
 				{
 					c = 1;
-				
-					printf("export: `%s' not a valid identifier\n", args[i]);
+					write(2, "export: `", 9);
+					write(2, args[i], ft_strlenn(args[i]));
+					write(2, "' not a valid identifier\n", 25);
 				}
 			j++;
 		}
@@ -136,14 +139,14 @@ void check_args(t_list_env **list_env, char **args)
 			if (args[i][j+1] != '=')
 			{
 				c = 1;
-				printf("export: %s : not a valid identifier\n", args[i]);
+				write(2, "export: `", 9);
+				write(2, args[i], ft_strlenn(args[i]));
+				write(2, "' not a valid identifier\n", 25);
 			}
 			j++;
 		}
-		//printf("%c   uuuuuu\n\n\n\n\n", args[i][j]);
 		if (c == 0)
 		{
-			//printf("\n\n\n %s -------sgsggsgsgh\n\n\n", args[i]);
 			ajout_exp_elem(list_env, args[i]);
 		}
 		else

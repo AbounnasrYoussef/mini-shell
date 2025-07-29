@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/27 13:29:51 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 14:16:14 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_list_env *ft_envvv(char **str);
 int ft_strlen_argc(char **str);
 int ft_strlenn(char *str);
 void ft_cd(char **args, t_list_env *env);
-void ft_echo(int argc, char **str);
+void ft_echo(char **str);
 void ft_exit (int len, char **str);
 void	ft_lstadd_backk(t_list_env **lst, t_list_env *new);
 t_list_env	*ft_lstneww(void *variable, void *valeur_vari, void *ligne);

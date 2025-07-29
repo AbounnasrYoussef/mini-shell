@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:17:33 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/25 17:40:48 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 14:17:42 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ int trait_cmd2(char *str)
 	return 1;
 }
 
-void ft_echo(int argc, char **str)
+void ft_echo(char **str)
 {		
 	int i;
 
 	i = 0;
+	int argc = ft_strlen_argc(str);
 	if (argc > 1)
 	{
-		//printf("{%d  %d}\n", trait_cmd1(str[0]),trait_cmd2(str[1]));
 		if (trait_cmd1(str[0]) == 0)
 		{
 			if (trait_cmd2(str[1]) == 0)
@@ -90,7 +90,6 @@ void ft_echo(int argc, char **str)
 	}
 	else if (argc == 1 && trait_cmd1(str[0]) == 0)
 	{
-		//printf("{%d}\n", trait_cmd1(str[1]));
 		write(1, "\n", 1);
 	}
 		

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/27 13:28:01 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 15:25:23 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,58 +50,20 @@ t_list_env *supp_var_nv(t_list_env *env)
 	{
 		if (env->valeur_vari == NULL && ft_strcmpp(env->variable, "VSCODE_GIT_ASKPASS_EXTRA_ARGS") != 0)
 		{
-			//printf("%s ------\n\n\n", env->variable);
 			tmp = ft_supp_arg(tmp, env->variable);
 		}
 		env = env->next;
 	}
-	//printf("gsghsgffss\n\n");
-	
 	return tmp;
 }
 
-//void ft_built_in(char *line, t_list_env *env)
-//{
-//	char **args;
-//	int argc;
-//	int len;
-	
-//	args = NULL;
-//	args = ft_splitt(line, ' ');
-//	argc = ft_strlen_argc(args);
-//	if (argc > 1)
-//		len = ft_strlenn(args[1]) - 1;
-//	if (ft_strcmpp(args[0], "cd") == 0)
-//		ft_cd(args, line, env);
-//	else if (ft_strcmpp(args[0], "pwd") == 0)
-//		printf("%s\n", ft_pwd());
-//	else if (ft_strcmpp(args[0], "echo") == 0)
-//		ft_echo(argc, args);
-//	else if (ft_strcmpp(args[0], "exit") == 0)
-//		ft_exit (len, argc, args);
-//	else if (ft_strcmpp(args[0], "export") == 0)
-//		ft_export(env, args, argc);
-//	else if (ft_strcmpp(args[0], "env") == 0)
-//	{
-//		if (argc == 1)
-//			ft_print_env(env);
-//		else
-//			printf("env: %s: No such file or directory\n", args[1]);
-//	}
-//	else if (ft_strcmpp(args[0], "unset") == 0)
-//		ft_unset(env, args);
-//	else if (ft_strcmpp(args[0], "./a.out") == 0)
-//	{
-//		env = supp_var_nv(env);
-//	}
-
-//}
-
 int ft_built_in(int argc, t_exec *data, t_list_env *env)
 {
+	
+	
 	int len;
 	if (argc > 1)
-		len = ft_strlenn(data->cmd[1]) - 1;
+		len = ft_strlenn(data->cmd[0]) - 1;
 	if (ft_strcmpp(data->cmd[0], "cd") == 0)
 	{
 		return (ft_cd(data->cmd, env), 0);
@@ -109,7 +71,7 @@ int ft_built_in(int argc, t_exec *data, t_list_env *env)
 	else if (ft_strcmpp(data->cmd[0], "pwd") == 0)
 		return (printf("%s\n", ft_pwd(env)), 0);
 	else if (ft_strcmpp(data->cmd[0], "echo") == 0)
-		return (ft_echo(argc, data->cmd), 0);
+		return (ft_echo(data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "exit") == 0)
 		return (ft_exit (len, data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "export") == 0)
@@ -119,10 +81,16 @@ int ft_built_in(int argc, t_exec *data, t_list_env *env)
 		if (argc == 1)
 			return (ft_print_env(env), 0);
 		else
-			return (printf("env: %s: No such file or directory\n", data->cmd[1]), 0);
+		{
+			write(2, "env: ", 5);
+			write(2, data->cmd[1], ft_strlenn(data->cmd[1]));
+			write(2, ": No such file or directory\n", 28);
+			return 0;
+		}
 	}
 	else if (ft_strcmpp(data->cmd[0], "unset") == 0)
-		return (ft_unset(env, data->cmd), 0);
+		return (printf("djdjjd\n\n"), ft_unset(env, data->cmd), 0);
+	
 	return -1;
 }
 

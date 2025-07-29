@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/27 13:30:38 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 14:21:07 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,24 +213,24 @@ void ft_exit (int len, char **str)
 			
 			if (str[1] == NULL)
 			{
-				printf("exit\n");
+				write(2, "exit\n", 5);
 				exit(0);
 			}
 			else if (check_number(str[1]) == 0 && argc == 2 && len <= 19)
 			{
-				printf("exit\n");
+				write(2, "exit\n", 5);
 				exit(ft_modulo_number(ft_atoi((len), str[1])));
 			}
 			else if (check_number(str[1]) == 0 && argc > 2 && len <= 19)
 			{
-				ft_put_string("exit: too many arguments\n");
+				write(2, "exit: too many arguments\n", 25);
 			}
 			else
 			{
-				printf("exit\n");
-				ft_put_string("exit: ");
-				ft_put_string(str[1]);
-				ft_put_string(": numeric argument required\n");
+				write(2, "exit\n", 5);
+				write(2, "exit", 4);
+				write(2, str[1], ft_strlenn(str[1]));
+				write(2, ": numeric argument required\n", 28);
 				exit(255);
 			}
 		}

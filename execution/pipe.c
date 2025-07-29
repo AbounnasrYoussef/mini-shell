@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/27 13:32:50 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/29 15:27:10 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char *ft_concat(char *str, char *str2)
 
 char *cherche_path_cmd(char *cmd, t_list_env *env)
 {
+	
 	char *path;
 	char **paths;
 	char *path_cmd;
@@ -84,10 +85,15 @@ char *cherche_path_cmd(char *cmd, t_list_env *env)
 	{
 		if (path == NULL)
 		{
-			printf("%s: No such file or directory\n", cmd);
+			write(2, cmd, ft_strlenn(cmd));
+			write(2, ": No such file or directory\n", 28);
 		}
 		else
-			printf("%s: command not found\n", cmd);
+		{
+			write(2, cmd, ft_strlenn(cmd));
+			write(2, ": command not found\n", 20);
+		}
+	
 		//else if ((info.st_mode & S_IXUSR) == 0)
 		//	printf("%s: Permission denied\n", cmd);
 	}
@@ -157,7 +163,7 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 			}
 			else
 			{
-				printf("./minishell: No such file or directory\n");
+				write(2, "./minishell: No such file or directory\n", 39);
 				return ;
 			}
 	    }
@@ -165,7 +171,6 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 		{
 			ft_exit (0, data->cmd);
 		}
-		
 		pipe(fd);
 		id[i] = fork();
 		if (id[i] == 0)
@@ -182,23 +187,24 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 			
 			char **cmdv;
 			cmdv = data->cmd;
-			
-			
 			if (ft_built_in(argc, data, env) == -1)
 			{
-				
 				stat(data->cmd[0], &info);
 				if (S_ISDIR(info.st_mode))
 				{
 					if (data->cmd[0][0] == '.' && data->cmd[0][1] == '/')
 					{
-						printf("%s: is a directory \n", data->cmd[0]);
+						write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
+						write(2, ": is a directory \n", 18);
 						if (argc == 1)
 							return ;
 					}
 						
 					else if (cherche_path_cmd((data->cmd[0]), env) == NULL)
-						printf("%s: is a directory \n", data->cmd[0]);
+					{
+						write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
+						write(2, ": is a directory \n", 18);
+					}
 				}
 				if ((argc == 1) && (data->cmd[1] == NULL) && (cherche_path_cmd((data->cmd[0]), env) == NULL))
 				{
@@ -211,10 +217,14 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 				else if ((argc == 1) && !(S_ISDIR(info.st_mode)) && data->cmd[0][0] == '.' && data->cmd[0][1] == '/')
 				{
 					if (!S_ISREG(info.st_mode))
-						printf("%s: No such file or directory\n", data->cmd[0]);
+					{
+						write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
+						write(2, ": No such file or directory\n", 28);
+					}
 				}
 				else
 				{
+					
 					cmdd[i] = cherche_path_cmd((data->cmd[0]), env);
 					execve(cmdd[i], cmdv, NULL);
 
@@ -241,8 +251,9 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 	}
 	while (c < argc)
 	{
+		//wait(NULL);
 		waitpid(id[c], NULL, 0);
-		waitpid(id[c], &status, 0);
+		//waitpid(id[c], &status, 0);
 		//if (WIFEXITED(status) == 0)
 		//{
 		//	ft_exit_status(status, 1);
@@ -251,8 +262,3 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 	}
 }
 
-
-//int main(int argc, char **argv, char **env)
-//{
-//	ft_pipe(argc, argv, env);
-//}
