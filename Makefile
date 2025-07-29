@@ -1,7 +1,6 @@
 NAME = minishell
-
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS =  -Wall -Wextra -Werror
 PARS = parsing
 SRC = minishell.c\
 		$(PARS)/syntaxe_errors/syntaxe_errors.c\
@@ -28,6 +27,17 @@ SRC = minishell.c\
 		$(PARS)/ft_malloc/ft_malloc.c\
 		$(PARS)/env/env.c\
 		$(PARS)/env/split.c\
+		$(PARS)/expanding/dollar.c\
+		$(PARS)/expanding/double_quote.c\
+		$(PARS)/expanding/expand_token.c\
+		$(PARS)/expanding/expand.c\
+		$(PARS)/expanding/single_quote.c\
+		$(PARS)/expanding/split_tokens.c\
+		$(PARS)/expanding/utils.c\
+		$(PARS)/struct_atmane/cmd_token.c\
+		$(PARS)/struct_atmane/free_list.c\
+		$(PARS)/struct_atmane/redir_token.c\
+		$(PARS)/struct_atmane/struct_at.c\
 
 
 

@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 15:47:08 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 18:01:12 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,29 @@ t_token	*new_token(char *value, type_token type,int i, garbage **garb);
 
 
 
+//expanding
+void expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, garbage **garb);
+char	*expand_token(char *value, int exit_code, t_list_env *env, garbage **garb);
+char	*expand_dollar(char *value, int *i, int exit_code, t_list_env *env, garbage **garb);
+void	append_double_quote(const char *val, int *i, char **res, t_expand_ctx ctx);
+void	append_single_quote(const char *val, int *i, char **res, garbage **garb);
+char	*get_env_value(char *name, t_list_env *env, garbage **garb);
+void	replace_token(t_token **head, t_token *old, t_token *new_list);
+t_token	*get_last_token(t_token *tokens);
+t_token	*split_into_tokens(char *str, garbage **garb);
+void	add_token_back(t_token **head, t_token *new_token);
+t_token	*new_token_0(char *value, type_token type, garbage **garb);
+int ft_exit_status(int status, int flag);
+int	is_valid_var_char(char c);
+char	*ft_strtrim_custom(char *str, garbage **garb, int quoted);
+
+
+//struct_atmane
+char **extract_cmd_from_tokens(t_token *tokens, garbage **garb);
+void free_exec_list(t_exec *exec_list);
+int	is_redirection(type_token type);
+t_file	*extract_redirs_from_tokens(t_token *tokens, garbage **garb);
+t_exec	*parse_tokens_to_exec_list(t_token *tokens, garbage **garb);
 
 //utils
 int     ft_isalnum(int c);

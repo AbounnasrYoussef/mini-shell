@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 16:28:03 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 18:14:02 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,46 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 		free(line);
 		if (!token)
 			continue ;
-		t_token *tmp = token;
-		while (tmp)
-		{
-    		printf("%s\n", tmp->value);
-    		tmp = tmp->next;
-		}
 
-		// expand_all_tokens(&token, last_exit_code, *env, &garb);
-		// *data = parse_tokens_to_exec_list(token, &garb);
+		expand_all_tokens(&token, last_exit_code, *env, &garb);
+		*data = parse_tokens_to_exec_list(token, &garb);
+		 t_exec *tmp = *data;
+		// ft_pipe(ft_count_cmd(tmp), tmp, *env);
+		
+int i = 1;
+
+while (tmp)
+{
+   printf("---- Commande %d ----\n", i);
+
+   // Afficher les mots de la commande
+   if (tmp->cmd)
+   {
+       for (int j = 0; tmp->cmd[j]; j++)
+           printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
+       //     printf("%s", tmp->cmd[j]);
+       // printf("\n");
+   }
+
+   // Afficher les redirections
+   t_file *file = tmp->files;
+   while (file)
+   {
+       printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
+       file = file->next;
+   }
+
+   tmp = tmp->next;
+   i++;
+}
+       // if (*data != NULL)
+       // {
+       //     free_exec_list(*data); // Fonction à écrire pour libérer la liste t_exec
+       //     *data = NULL;
+       // }
+       // Exécution des commandes et récupération du code de sortie
+        
+       // Nettoyage mémoire via garbage collector
 		ft_free_all(garb);
 	}
 }
