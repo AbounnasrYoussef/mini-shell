@@ -6,13 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 11:13:29 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/17 11:13:30 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:52:55 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../minishell.h"
-
+#include "../../minishell.h"
 
 int	ft_isalnum(int c)
 {

@@ -6,11 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:03:00 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/20 13:03:03 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:53:35 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 size_t	ft_strlen(const char *s)
 {

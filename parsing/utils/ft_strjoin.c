@@ -6,11 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 08:53:55 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/02 14:41:18 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:53:32 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 static char	*check(char const *s1, char const *s2, garbage **garb)
 {

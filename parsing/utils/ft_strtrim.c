@@ -6,11 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 08:41:47 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 08:46:34 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:53:37 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 static short	find_world(char c, char const *set)
 {

@@ -6,11 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:01:18 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/20 13:02:32 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:53:21 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

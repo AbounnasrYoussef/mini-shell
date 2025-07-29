@@ -6,11 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 10:09:11 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 18:44:07 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:53:10 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 static size_t	count_word(const char *s, char c)
 {

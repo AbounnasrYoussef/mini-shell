@@ -1,0 +1,139 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
+/*   Updated: 2025/07/29 15:47:08 by yabounna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+#include "parsing/ft_malloc/ft_malloc.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
+
+// enumeration pour reconnaitre chaque type
+
+typedef enum type_token{
+    WORD,
+    PIPE,
+    RDR_IN,
+    RDR_OUT,
+    APPEND,
+    HERE_DOC,
+}   type_token;
+
+// linked_list pour  token 
+// hadi bach nstokiwe kola element 
+typedef struct y_token{
+    char *value;
+    type_token type;
+	int quoted;
+	int double_quote;
+	int join;
+    struct y_token *next;
+}   t_token;
+
+typedef struct s_file
+{
+	int				type;
+	char			*file_name;
+	struct s_file	*next;
+}	t_file;
+
+typedef struct s_exec
+{
+	char			**cmd;
+	t_file			*files;
+	struct s_exec	*next;
+}	t_exec;
+
+
+typedef struct garbage
+{
+    void *ptr; // hada pointer generique vers n'importe quelle memoire allouee 
+    struct garbage *next;  // hada next l prochaine element dial dik la list
+}   garbage;
+
+
+typedef struct s_list_env
+{
+	void	*ligne;
+	void	*variable;
+	void 	*valeur_vari;
+	struct s_list_env	*next;
+}	t_list_env;
+
+// hadi 3la 9bol expanding
+typedef struct s_expand_ctx
+{
+	t_list_env	*env;
+	int			exit_code;
+	garbage	**garb;
+}	t_expand_ctx;
+
+
+
+
+// syntaxe_error
+int syntaxe_errors(char *args);
+int	error_quote(char *caracter, int *i);
+int	error_pipe(char *caracter, int *i);
+int	error_redir(char *str, int *i);
+
+
+
+
+
+//tokens
+t_token *tokens(const char *line, garbage **garb);
+void handel_quote(const char *line , int  *i , t_token **token ,garbage **garb);
+void handel_double_operator(const char *line ,int *i , t_token **tokens, garbage **garb);
+void handle_single_operator(const char *line, int *i, t_token **tokens , garbage **garb);
+void handle_word(const char *line, int *i, t_token **tokens, garbage **garb);
+//tokens//utils
+void add_token(t_token **list, t_token *new_tok);
+t_token	*new_token_0(char *value, type_token type, garbage **garb);
+type_token get_token_type(char *str);
+t_token	*new_token(char *value, type_token type,int i, garbage **garb);
+
+
+
+
+//utils
+int     ft_isalnum(int c);
+int     ft_isalpha(int c);
+char    *ft_itoa(int n, garbage **garb);
+void    *ft_memcpy(void *dst, const void *src, size_t n);
+char    **ft_split(const char *s, char c, garbage **garb);
+char    *ft_strchr(const char *s, int c);
+int     ft_strcmp(const char *s1, const char *s2);
+char    *ft_strdup(const char *s1,garbage **garb);
+char    *ft_strjoin(char const *s1, char const *s2, garbage **garb);
+char    *ft_strtrim(char const *s1, char const *set, garbage **garb);
+char    *ft_substr(char const *s, unsigned int start, size_t len, garbage **garb);
+int     skip_space(char c);
+int     is_quote(char c);
+int     is_operator(char c);
+int     redirection(char c);
+void    space_skip(const char *line , int *i);
+size_t  ft_strlen(const char *s);
+
+
+
+//env
+t_list_env *ft_env(char **str);
+void	ft_lstadd_back(t_list_env **lst, t_list_env *new);
+t_list_env	*ft_lstnew(void *variable, void *valeur_vari, void *ligne);
+char	**i_split(char const *s, char c);
+
+#endif

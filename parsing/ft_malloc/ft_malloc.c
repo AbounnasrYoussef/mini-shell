@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 09:58:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 18:11:49 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:32:16 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,6 @@ void *ft_malloc(garbage **garb , size_t size)
     new->next = NULL;
     return ptr; // knretourniwe  dakchi li t alloca 
 }
-
-char *gc_strdup(garbage *garb , const char *s)
-{
-    if (!s) // la chaine n'est pas null
-        return NULL;
-    
-    size_t len = ft_strlen(s) + 1; // kn7essbo la taille
-    char *dup = ft_malloc(&garb , len); // allouer l amemoire avec garbage collector
-    ft_memcpy(dup , s , len);
-    return dup; // retourn la chaine dupliquer
-}
-
 
 // hna kn free toute la memoire allouer via le garbage collector
 void ft_free_all(garbage *garb)

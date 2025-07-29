@@ -6,12 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 11:13:37 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/17 11:13:38 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:53:13 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../minishell.h"
+#include "../../minishell.h"
 
 char	*ft_strchr(const char *s, int c)
 {

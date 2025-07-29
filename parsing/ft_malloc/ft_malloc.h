@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 09:58:57 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/24 15:55:17 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:38:26 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 # define FT_MALLOC
 
 
-#include "../minishell.h"
+#include "../../minishell.h"
 #include <stdlib.h>
 #include <string.h>
 
 typedef struct garbage garbage;
 
+garbage *ft_last(garbage *head);
 void *ft_malloc(garbage **garb , size_t size);
-char *gc_strdup(garbage *garb , const char *s);
 void ft_free_all(garbage *garb);
 
 #endif

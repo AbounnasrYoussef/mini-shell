@@ -6,34 +6,35 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 08:11:03 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 11:32:15 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:39:50 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-int syntaxe_errors(char *args)
+int	syntaxe_errors(char *args)
 {
-    int i = 0;
-    while(args[i] != '\0')
-    {
-        if (args[i] == '\'' || args[i] == '\"')
-        {
-            if (error_quote(args , &i) == -1)
-                return 0;
-        }
-        else if (args[i] == '|')
-        {
-            if (error_pipe(args , &i) == -1 )
-                return 0;
-        } 
-        else if (args[i] == '>' || args[i] == '<')
-        {
-            if (error_redir(args , &i)== -1 )
-                return 0;
-        }
-        i++; 
-    }
-    return 1;
-}
+	int	i;
 
+	i = 0;
+	while (args[i] != '\0')
+	{
+		if (args[i] == '\'' || args[i] == '\"')
+		{
+			if (error_quote(args, &i) == -1)
+				return (0);
+		}
+		else if (args[i] == '|')
+		{
+			if (error_pipe(args, &i) == -1)
+				return (0);
+		}
+		else if (args[i] == '>' || args[i] == '<')
+		{
+			if (error_redir(args, &i) == -1)
+				return (0);
+		}
+		i++;
+	}
+	return (1);
+}

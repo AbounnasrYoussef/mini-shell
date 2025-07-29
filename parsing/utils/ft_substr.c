@@ -6,13 +6,13 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:33:56 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 11:23:40 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:53:41 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len,garbage **garb)
+char	*ft_substr(char const *s, unsigned int start, size_t len, garbage **garb)
 {
 	char			*sub;
 	unsigned int	i;
