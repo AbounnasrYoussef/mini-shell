@@ -2,7 +2,7 @@ NAME = minishell
 CC = cc
 CFLAGS =  -Wall -Wextra -Werror
 PARS = parsing
-SRC = minishell.c\
+SRC = minishell.c  signals.c\
 		$(PARS)/syntaxe_errors/syntaxe_errors.c\
 		$(PARS)/syntaxe_errors/error_pipe.c\
 		$(PARS)/syntaxe_errors/error_quote.c\
@@ -38,7 +38,6 @@ SRC = minishell.c\
 		$(PARS)/struct_atmane/free_list.c\
 		$(PARS)/struct_atmane/redir_token.c\
 		$(PARS)/struct_atmane/struct_at.c\
-
 
 
 

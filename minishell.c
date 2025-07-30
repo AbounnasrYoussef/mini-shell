@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/30 16:00:03 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/30 16:55:00 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 	last_exit_code = 0;
 	while (1)
 	{
+		setup_signals();
 		garb = NULL;
 		line = readline("minishell$ ");
 		if (!line)

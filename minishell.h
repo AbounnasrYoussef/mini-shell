@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 18:01:12 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/30 17:10:10 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 #include <stdbool.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <stdio.h>
+
+
+
 
 
 // enumeration pour reconnaitre chaque type
@@ -158,5 +162,10 @@ t_list_env *ft_env(char **str);
 void	ft_lstadd_back(t_list_env **lst, t_list_env *new);
 t_list_env	*ft_lstnew(void *variable, void *valeur_vari, void *ligne);
 char	**i_split(char const *s, char c);
+
+//signals 
+void	setup_signals(void);
+void	handle_sigquit(int sig);
+void	handle_sigint(int sig);
 
 #endif
