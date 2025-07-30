@@ -149,4 +149,7 @@ t_file	*extract_redirs_from_tokens(t_token *tokens, garbage **garb);
 void free_exec_list(t_exec *exec_list);
 int	is_redirection(type_token type);
 
+///////
+char    *get_next_line(int fd);
+
 #endif

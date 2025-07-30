@@ -48,7 +48,7 @@ void ft_unset(t_list_env *list_env, char **args);
 void ft_print_env_ex(t_list_env *env);
 t_list_env* ft_supp_arg(t_list_env *list_env, char *arg);
 char *ft_concat(char *str, char *str2);
-char *cherche_path_cmd(char *cmd, t_list_env *env);
+char *cherche_path_cmd(char *cmd, t_list_env *env, int argc, t_exec *data);
 int ft_built_in(int argc, t_exec *data, t_list_env *env);
 t_list_env *supp_var_nv(t_list_env *env);
 void ft_print_env(t_list_env *env);

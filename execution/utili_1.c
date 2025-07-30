@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:37 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/29 21:40:35 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/30 17:06:47 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ int	ft_strcmpp(const char *s1, const char *s2)
 	size_t	i;
 
 	i = 0;
-	while (s1 && s2 && (s1[i] || s2[i]))
+    if (s1 == NULL || s2 == NULL)
+        return 0;
+	while (s1[i] || s2[i] )
 	{
 		if ((unsigned char)s1[i] != (unsigned char)s2[i])
 			return ((unsigned char)s1[i] - (unsigned char)s2[i]);

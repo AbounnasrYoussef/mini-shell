@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/29 21:03:10 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/30 16:19:47 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void ft_exit (int len, char **str)
 		if (ft_strcmpp(str[0], "exit") == 0)
 		{
 			if (str[1] == NULL)
-				(write(2, "exit\n", 5), exit(0));
+				(printf("exit\n"), exit(0));
 			else if (check_number(str[1]) == 0 && argc == 2 && len <= 19)
 			{
 				write(2, "exit\n", 5);

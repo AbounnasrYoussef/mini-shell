@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/29 21:33:20 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/30 17:22:44 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ int verif_exist(t_list_env **list_env, char *arg)
 	l_env = *list_env;
 	while (l_env != NULL)
 	{
+		
 		if (ft_strcmpp((l_env)->variable, arg) == 0)
+		{
 			return 1;
+			break;
+		}	
 		(l_env) = (l_env)->next;
 	}
 	return 0;
@@ -62,8 +66,12 @@ void ajout_exp_elem_help(t_list_env **list_env, char *args, int i, int c, int d,
 	}
 	else
 	{
+		
 		if (arg_varia[1] != NULL)
+		{
 			repmlacer_elem(list_env, arg_varia[0], arg_varia[1], d);
+		}
+			
 	}
 }
 
@@ -116,6 +124,7 @@ int	ft_isalnumm(int c)
 		return (0);
 	}
 }
+
 int	ft_isalphaa(int c)
 {
 	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
@@ -143,7 +152,9 @@ void check_args(t_list_env **list_env, char **args, int i, int j, int c)
 			j++;
 		}
 		if (c == 0)
+		{
 			ajout_exp_elem(list_env, args[i], 0, 0);
+		}
 		else
 			c = 0;
 		j = 1;

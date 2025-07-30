@@ -374,21 +374,34 @@
 
 #rm -rf 1 //in new terminal
 
-////
-bash-3.2$ $fff $HOME
-bash: /mnt/homes/arahhab: is a directory
+# ////
+# bash-3.2$ $fff $HOME
+# bash: /mnt/homes/arahhab: is a directory
 
-////
-bash | bash
+#////
+#bash | bash
 
-/////
-minishell$ cat | ls | cat | dwdwdw
+#/////
+#minishell$ cat | ls | cat | dwdwdw
 
-/////
-minishell$ export | grep PWD
-declare -x PWD="/mnt/homes/arahhab/Desktop/minishell/parsing"
-declare -x OLDPWD="/mnt/homes/arahhab/Desktop/minishell"
-^C
+#/////
+#minishell$ export | grep PWD
+#declare -x PWD="/mnt/homes/arahhab/Desktop/minishell/parsing"
+#declare -x OLDPWD="/mnt/homes/arahhab/Desktop/minishell"
+#^C
+
+#minishell$ ./fffffds
+#minishell$ ./fffffdsksjdfksfjksjf
+
+#bash-3.2$ cd dwfw fwfw
+#bash: cd: dwfw: No such file or directory
+
+
+#unset PATH
+#minishell$ ls
+#ls: No such file or directory
+#ls: command not found
+
 
 /////////////
 ============
@@ -396,5 +409,39 @@ declare -x OLDPWD="/mnt/homes/arahhab/Desktop/minishell"
 bash-3.2$ $?
 bash: 127: command not found
 
-minishell$ ./fffffds
-minishell$ ./fffffdsksjdfksfjksjf
+minishell$ cd /bin 
+minishell$ ls
+ls: No such file or directory
+
+bash-3.2$ Makefile/..
+bash: Makefile/..: Not a directory
+bash-3.2$ $?
+bash: 126: command not found
+
+bash-3.2$ Makefile
+bash: Makefile: Permission denied
+bash-3.2$ $?
+bash: 126: No such file or directory
+
+touch ls
+chmod +x ls
+minishell$ unset PATH
+minishell$ ls
+ls: No such file or directory
+minishell$ 
+
+minishell$ ./minishell
+minishell$ ls
+ls: No such file or directory
+
+➜  parsing ./minishell /// execve // char **env
+minishell$ top
+Error opening terminal: unknown.
+
+unset USER 
+export | grep USER
+
+bash-3.2$ unset PATH
+bash-3.2$ bash
+bash: bash: No such file or directory
+

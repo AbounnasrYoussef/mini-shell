@@ -1,7 +1,7 @@
 NAME = minishell
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror
 
 SRC = mini.c\
       $(wildcard utils/*.c)\
@@ -12,7 +12,8 @@ SRC = mini.c\
       $(wildcard env/*.c)\
       $(wildcard struct_atmane/*.c)\
 	  $(wildcard ../execution/built-in/*.c)\
-	  $(wildcard ../execution/*.c)
+	  $(wildcard ../execution/*.c)\
+        $(wildcard get_next_line.c)
 
 
 OBJ = $(SRC:.c=.o)

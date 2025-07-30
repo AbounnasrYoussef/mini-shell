@@ -6,12 +6,13 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/29 21:41:10 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/30 19:34:47 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include <sys/stat.h>
+#include <sys/wait.h>
 
 char *ft_concat(char *str, char *str2)
 {
@@ -21,6 +22,10 @@ char *ft_concat(char *str, char *str2)
 	int j;
 	char *new_str;
 
+	if(str == NULL)
+		return str2;
+	if(str2 == NULL)
+		return str;
 	l1 = ft_strlenn(str);
 	l2 = ft_strlenn(str2);
 	new_str = malloc((l1 + l2 + 1) * sizeof(char));
@@ -41,235 +46,206 @@ char *ft_concat(char *str, char *str2)
 	return new_str;
 }
 
-char *cherche_path_cmd(char *cmd, t_list_env *env)
+char *cherche_path_cmd(char *cmd, t_list_env *env, int argc, t_exec *data)
 {
 	
 	char *path;
 	char **paths;
 	char *path_cmd;
 	int i;
-	char **cmd_n_op;
-	struct stat info;
+	char *cmd_n_op;
 	
-	cmd_n_op = ft_splitt(cmd, ' '); 
 	path = NULL;
-	i = 0;
 	path_cmd = NULL;
+	i = 0;
+	if (!cmd || !cmd[0])
+        return NULL;
+	if (cmd[0] == '/' || cmd[0] == '.') {
+        if (access(cmd, X_OK) == 0)
+            return cmd;
+        return NULL;
+    }
 	while (env != NULL)
 	{
 		if (ft_strcmpp(env->variable, "PATH") == 0)
 		{
 			path = env->valeur_vari;
+			break;
 		}
 		env = env->next;
 	}
 	if (path == NULL)
 	{
-		if (access(cmd, X_OK) == 0)
-		{
-			return cmd;
-		}
+		write(2, cmd, ft_strlenn(cmd));
+		write(2, ": No such file or directory\n", 28);
+		exit(1);
 	}
+	cmd_n_op = ft_splitt(cmd, ' ')[0]; 
 	paths = ft_splitt(path, ':');
 	while (paths && paths[i] && (paths[i] != NULL))
 	{
 		paths[i] =  ft_concat(paths[i], "/");
-		paths[i] =  ft_concat(paths[i], cmd_n_op[0]);
+		paths[i] =  ft_concat(paths[i], cmd_n_op);
 		if (access(paths[i], X_OK) == 0)
 		{
 			path_cmd = paths[i];
+			break;
 		}
 		i++;
 	}
-	if (path_cmd == NULL)
+	if (path_cmd == NULL && ft_built_in(argc, data, env) == -1)
 	{
-		//printf("dndndn\n\n\n");
-		if (path == NULL)
-		{
-			write(2, cmd, ft_strlenn(cmd));
-			write(2, ": No such file or directory\n", 28);
-		}
-		else
-		{
-			//printf("%d   %s %s\n", ft_strcmpp(ft_cherch_home(env), cmd),ft_cherch_home(env), cmd);
-			if (ft_strcmpp(ft_cherch_home(env), cmd) != 0 )
-			{
-				write(2, cmd, ft_strlenn(cmd));
-				write(2, ": command not found\n", 20);
-			}
-		}
-	
-		//else if ((info.st_mode & S_IXUSR) == 0)
-		//	printf("%s: Permission denied\n", cmd);
-	}
-	stat(path_cmd, &info);
-	if (S_ISDIR(info.st_mode))
-	{
-		return NULL;
+		write(2, cmd, ft_strlenn(cmd));
+		write(2, ": command not found\n", 20);
+		exit(1);
 	}
 	return path_cmd;
 }
 
-//int ft_exit_status(int status, int flags)
-//{
-//	static int exit_status;
-//	if (flags)
-//		exit_status = status;
-//	return exit_status;
-//}
+int is_slash(char *str)
+{
+	int i;
+	i = 0;
+	while(str[i] != '\0')
+	{
+		if (str[i] == '/')
+		{
+			return 0;
+		}
+		i++;
+	}
+	return 1;
+}
+
+int count_cmd(t_exec *data)
+{
+	int i;
+	i = 0;
+
+	while(data != NULL)
+	{
+		data = data->next;
+		i++;
+	}
+	return i; 
+}
+
 void ft_pipe(int argc, t_exec *data, t_list_env *env)
 {
-	char **cmdd;
-	int id[argc - 1];
-	int i;
-	int fd[2];
-	int tmp[2];
-	int c;
+    int i;
+    int pid;
+    int fd[2];
+    int in_fd; 
+	char *path_cmd;
+	int in_bultin;
 	struct stat info;
-	t_list_env *debut_env;
-	int d;
-	int len;
-	int status;
+	int j;
 	
-	c = 0;
+	j = 0;
+	in_fd = STDIN_FILENO;
 	i = 0;
-	cmdd = malloc(argc * sizeof(char *));
-	fd[0] = 0;
-	fd[1] = 1;
-	tmp[0] = 0;
-	tmp[1] = 1;
-	debut_env = env;
-	d = 0;
-	len = 0;
-	status = 0;
-	while (i < argc) 
+	in_bultin = 0;
+	//if ((count_cmd(data) == 1 &&  ft_built_in(argc, data, env) == 0))
+	//{
+	//	if((ft_strlen_argc(data->cmd) == 1 && ft_strcmpp(data->cmd[0], "export") != 0))
+	//	{
+	//		printf("djjjkds\n");
+	//	}
+	//	else if ((ft_strlen_argc(data->cmd) != 1))
+	//	{
+	//		printf("mmmmm\n");
+	//	}	
+	//}
+	if(count_cmd(data) == 1 && ft_strlen_argc(data->cmd) == 1 && ft_strcmpp(data->cmd[0], "export") != 0 && ft_built_in(argc, data, env) == 0)
+	;
+	else if (count_cmd(data) == 1 && ft_strlen_argc(data->cmd) != 1 && ft_built_in(argc, data, env) == 0)
+	;
+	else
 	{
-	
-		if (ft_strcmpp(data->cmd[0], "./minishell") == 0)
-	    {
-			
-			while(debut_env != NULL)
-			{
-				
-				if(ft_strcmpp(debut_env->variable, "PATH") == 0)
-				{
-					d = 1;
-					env = supp_var_nv(env);
-					if (data->next == NULL)
-						return ;
-				}
-				debut_env = debut_env->next;
-			}
-			if (d == 1)
-			{
-				env = supp_var_nv(env);
-				if (data->next == NULL)
-					return ;
-			}
-			else
-			{
-				write(2, "./minishell: No such file or directory\n", 39);
-				return ;
-			}
-	    }
-		//else
-		// if (ft_strcmpp(data->cmd[0], "exit") == 0 && argc == 1)
-		//{
-		//	ft_exit (0, data->cmd);
-		//}
-		
-		//if (i != argc - 1 && i != 0)
-			pipe(fd);
-		id[i] = fork();
-		if (id[i] == 0)
+		while (data != NULL)
 		{
-			dup2(tmp[0], STDIN_FILENO);
-			if (i < argc - 1) {
-				dup2(fd[1], STDOUT_FILENO);
-			}
-			close(fd[0]);
-			close(fd[1]);
-			if (tmp[0] != 0)
-				close(tmp[0]);
-			
-			char **cmdv;
-			cmdv = data->cmd;
-			
-			if (ft_built_in(argc, data, env) == -1)
+			if (data->next != NULL)
 			{
+				if (pipe(fd) == -1)
+				{
+					perror("pipe");
+					exit(1);
+				}
+			}
+			pid = fork();
+			if (pid == -1)
+			{
+				perror("fork");
+				exit(1);
+			}
+			else if (pid == 0)
+			{
+				if (in_fd != STDIN_FILENO)
+				{
+					dup2(in_fd, STDIN_FILENO);
+					close(in_fd);
+				}
+				if (data->next != NULL)
+				{
+					dup2(fd[1], STDOUT_FILENO);
+					close(fd[0]);
+					close(fd[1]);
+				}
 				stat(data->cmd[0], &info);
 				if (S_ISDIR(info.st_mode))
 				{
-					//printf("Hello\n");
-					if (data->cmd[0][0] == '.' && data->cmd[0][1] == '/')
+					if ((data->cmd[0][0] == '.' && data->cmd[0][1] == '/') || data->cmd[0][0] == '/')
 					{
 						write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
 						write(2, ": is a directory \n", 18);
 						exit(1);
-						//if (argc == 1)
-						//	return ;
-					}
-						
-					else if (cherche_path_cmd((data->cmd[0]), env) == NULL)
+					}	
+				}
+				else if (!S_ISREG(info.st_mode) && is_slash(data->cmd[0]) == 0)
+				{
+					write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
+					write(2, ": No such file or directory\n", 28);
+					exit(1);
+				}
+				in_bultin = ft_built_in(argc, data, env);
+				if (in_bultin == -1)
+				{
+					path_cmd = cherche_path_cmd(data->cmd[0], env, argc, data);
+					if (path_cmd)
 					{
-						write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
-						write(2, ": is a directory \n", 18);
+						execve(path_cmd, data->cmd, NULL); 
 						exit(1);
-					}
-				}
-				if ((argc == 1) && (data->cmd[1] == NULL) && (cherche_path_cmd((data->cmd[0]), env) == NULL))
-				{
-					if (access(data->cmd[0], X_OK) == 0)
-					{
-						execve(data->cmd[0], cmdv, NULL);
-					}
-					return ;
-				}
-				else if ((argc == 1) && !(S_ISDIR(info.st_mode)) && data->cmd[0][0] == '.' && data->cmd[0][1] == '/')
-				{
-					if (!S_ISREG(info.st_mode))
-					{
-						write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
-						write(2, ": No such file or directory\n", 28);
 					}
 				}
 				else
 				{
-					
-					cmdd[i] = cherche_path_cmd((data->cmd[0]), env);
-					execve(cmdd[i], cmdv, NULL);
-
+					exit(1);
 				}
 			}
-				
-		}
-		else
-		{
-			close(fd[1]);
-			if (tmp[0] != 0) 
+			else
 			{
-				close(tmp[0]);
+				if (data->next != NULL)
+				{
+					close(fd[1]);
+				}
+				if (in_fd != STDIN_FILENO)
+				{
+					close(in_fd);
+				}
+				if (data->next != NULL)
+				{
+					in_fd = fd[0];
+				}
 			}
-			tmp[0] = fd[0];	
-		}
-		
-		data = data->next;
-		i++;
+			data = data->next;
+			i++;
+		}		
 	}
-	if (tmp[0] != 0)
-	{
-		close(tmp[0]);
-	}
-	while (c < argc)
-	{
-		//wait(NULL);
-		waitpid(id[c], NULL, 0);
-		//waitpid(id[c], &status, 0);
-		//if (WIFEXITED(status) == 0)
-		//{
-		//	ft_exit_status(status, 1);
-		//}
-		c++;
-	}
+    int status;
+    while(j < i)
+    {
+        wait(&status);
+		j++;
+    }
 }
 

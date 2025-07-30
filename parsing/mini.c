@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 17:26:44 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/30 16:47:57 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,73 +44,52 @@ int ft_count_cmd(t_exec *data)
 	return i;
 }
 
-void ft_read_loop(t_list_env **env ,t_exec **data)
+void ft_read_loop(t_list_env **env, t_exec **data)
 {
     char        *line;
-    garbage   *garb;
+    garbage     *garb;
     t_token     *token;
     int         last_exit_code = 0;
+
     while (1)
     {
         garb = NULL;
-        line = readline("minishell$ ");
+        
+        if (isatty(STDIN_FILENO))
+            line = readline("minishell$ ");
+        else
+            line = get_next_line(STDIN_FILENO);
         if (!line)
-            break; // Fin de l'entrée (Ctrl+D)
+        {
+            if (isatty(STDIN_FILENO))
+                write(1, "exit\n", 5);
+            break;
+        }
         if (*line)
-            add_history(line); // Sauvegarde dans l'historique
+            add_history(line);
         if (!syntaxe_errors(line))
         {
-            ft_exit_status(258 , 1);
+            ft_exit_status(258, 1);
             free(line);
             continue;
         }
-        token = tokens(line, &garb); // Tokenisation de la ligne
-        free(line); // readline malloc => on libère après usage
+        token = tokens(line, &garb);
+        free(line);
         if (!token)
             continue;
-        // Expansion des variables d'environnement et de $? sur les tokens
+
         expand_all_tokens(&token, last_exit_code, *env, &garb);
-        *data = parse_tokens_to_exec_list(token , &garb);
-        t_exec *tmp = *data;
-		ft_pipe(ft_count_cmd(tmp), tmp, *env);
-		
-//int i = 1;
-
-//while (tmp)
-//{
-//    printf("---- Commande %d ----\n", i);
-
-//    // Afficher les mots de la commande
-//    if (tmp->cmd)
-//    {
-//        for (int j = 0; tmp->cmd[j]; j++)
-//            printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
-//        //     printf("%s", tmp->cmd[j]);
-//        // printf("\n");
-//    }
-
-//    // Afficher les redirections
-//    t_file *file = tmp->files;
-//    while (file)
-//    {
-//        printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
-//        file = file->next;
-//    }
-
-//    tmp = tmp->next;
-//    i++;
-//}
-        // if (*data != NULL)
-        // {
-        //     free_exec_list(*data); // Fonction à écrire pour libérer la liste t_exec
-        //     *data = NULL;
-        // }
-        // Exécution des commandes et récupération du code de sortie
+        *data = parse_tokens_to_exec_list(token, &garb);
         
-        // Nettoyage mémoire via garbage collector
-        //ft_free_all(garb);
+        if (*data != NULL)
+        {
+            ft_pipe(ft_count_cmd(*data), *data, *env);
+            ft_free_all(garb);
+            *data = NULL;
+        }
     }
 }
+
 
 int main(int ac, char **av, char **envp)
 {
