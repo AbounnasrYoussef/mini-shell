@@ -25,3 +25,23 @@ usage: grep [-abcDEFGHhIiJLlmnOoqRSsUVvwxZ] [-A num] [-B num] [-C[num]]
 <cd.c < echo.c < env.c cat >x >y >z < pwd.c
 
 //
+
+bash-3.2$ < a > 1 > 2 | < 1 > 1 >2
+bash: a: No such file or directory
+bash: 1: No such file or directory
+
+///
+bash-3.2$ > parsing/ 
+bash: parsing/: Is a directory
+bash-3.2$ $?
+bash: 1: command not found
+
+////
+bash-3.2$ echo > 1
+bash: 1: Permission denied
+bash-3.2$ $?
+bash: 1: command not found
+///
+
+bash-3.2$ > 1
+bash: 1: Permission denied
