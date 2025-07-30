@@ -12,7 +12,8 @@
 
 #include "../../minishell.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len, garbage **garb)
+char	*ft_substr(char const *s, unsigned int start,
+		size_t len, garbage **garb)
 {
 	char			*sub;
 	unsigned int	i;
@@ -23,7 +24,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len, garbage **garb)
 		return (ft_strdup("", garb));
 	if (len > ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
-	sub = (char *)ft_malloc(garb,(len + 1));
+	sub = (char *)ft_malloc(garb, (len + 1));
 	if (!sub)
 		return (NULL);
 	i = 0;

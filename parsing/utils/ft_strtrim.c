@@ -32,17 +32,13 @@ char	*ft_strtrim(char const *s1, char const *set, garbage **garb)
 	if (!s1 || !set)
 		return (NULL);
 	if (s1[0] == '\0')
-		return (ft_strdup("", garb));  // ✅ Déjà gérée avec garbage
-
+		return (ft_strdup("", garb));
 	debut = 0;
 	fin = ft_strlen(s1) - 1;
-
 	while (s1[debut] && find_world(s1[debut], set))
 		debut++;
 	while (fin > debut && find_world(s1[fin], set))
 		fin--;
-
 	len = fin - debut + 1;
-	return (ft_substr(s1, debut, len, garb));  // ✅ Appel direct
+	return (ft_substr(s1, debut, len, garb));
 }
-

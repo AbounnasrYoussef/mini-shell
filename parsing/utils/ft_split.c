@@ -65,7 +65,7 @@ char	**ft_split(const char *s, char c, garbage **garb)
 
 	if (!s)
 		return (NULL);
-	result = ft_malloc( garb , sizeof(char *) * (count_word(s, c) + 1));
+	result = ft_malloc(garb, sizeof(char *) * (count_word(s, c) + 1));
 	if (!result)
 		return (NULL);
 	i = 0;
@@ -73,7 +73,7 @@ char	**ft_split(const char *s, char c, garbage **garb)
 	while (index < count_word(s, c))
 	{
 		word_len = count_len_word(s, c, &i, &skip);
-		result[index] = ft_malloc(garb ,sizeof(char) * (word_len + 1));
+		result[index] = ft_malloc(garb, sizeof(char) * (word_len + 1));
 		if (!result[index])
 			return (free_split(result, index));
 		ft_memcpy(result[index], s + skip, word_len);
@@ -83,4 +83,3 @@ char	**ft_split(const char *s, char c, garbage **garb)
 	result[index] = NULL;
 	return (result);
 }
-

@@ -12,13 +12,13 @@
 
 #include "../../minishell.h"
 
-char	*ft_strdup(const char *s1,garbage **garb)
+char	*ft_strdup(const char *s1, garbage **garb)
 {
 	size_t	i;
 	char	*d;
 
 	i = ft_strlen(s1);
-	d = (char *)ft_malloc(garb,((i + 1) * sizeof(char)));
+	d = (char *)ft_malloc(garb, ((i + 1) * sizeof(char)));
 	if (d == NULL)
 		return (NULL);
 	ft_memcpy(d, s1, i);

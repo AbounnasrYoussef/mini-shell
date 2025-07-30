@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../minishell.h"
 
 static char	*ft_char(char *s, unsigned int number, long int len)
@@ -49,8 +48,7 @@ char	*ft_itoa(int n, garbage **garb)
 		return (ft_strdup("0", garb));
 	sign = 1;
 	len = ft_len(n);
-	// Allocation avec garbage collector
-	s = (char *)ft_malloc(garb ,sizeof(char) * (len + 1));
+	s = (char *)ft_malloc(garb, sizeof(char) * (len + 1));
 	if (!s)
 		return (NULL);
 	s[len--] = '\0';
