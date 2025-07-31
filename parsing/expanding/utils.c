@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:41:33 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 17:57:15 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:22:21 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	is_valid_var_char(char c)
 			(c >= '0' && c <= '9') || (c == '_'));
 }
 
-char	*ft_strtrim_custom(char *str, garbage **garb, int quoted)
+char	*ft_strtrim_custom(char *str, t_garbage **garb, int quoted)
 {
 	if (quoted)
 		return (str);

@@ -6,13 +6,13 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/30 17:46:10 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:22:02 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, garbage **garb)
+void	expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, t_garbage **garb)
 {
 	t_token	*curr = *tokens;
 	t_token	*prev = NULL;

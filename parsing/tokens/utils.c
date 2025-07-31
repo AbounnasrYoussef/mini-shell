@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:29:03 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 15:52:44 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:21:01 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void add_token(t_token **list, t_token *new_tok)
         tmp->next = new_tok;
     }
 }
-t_token	*new_token_0(char *value, type_token type, garbage **garb)
+t_token	*new_token_0(char *value, type_token type, t_garbage **garb)
 {
 	t_token	*tok;
 

@@ -6,13 +6,13 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:34:51 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 15:53:27 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:24:12 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*ft_strdup(const char *s1, garbage **garb)
+char	*ft_strdup(const char *s1, t_garbage **garb)
 {
 	size_t	i;
 	char	*d;

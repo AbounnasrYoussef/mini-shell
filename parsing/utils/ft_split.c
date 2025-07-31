@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 10:09:11 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 15:53:10 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:24:04 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	*free_split(char **array, int i)
 	return (NULL);
 }
 
-char	**ft_split(const char *s, char c, garbage **garb)
+char	**ft_split(const char *s, char c, t_garbage **garb)
 {
 	size_t	skip;
 	size_t	i;

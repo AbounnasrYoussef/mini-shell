@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 12:30:33 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:20:24 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	g_exit_status = 0;
 void	ft_read_loop(t_list_env **env, t_exec **data)
 {
 	char		*line;
-	garbage		*garb;
+	t_garbage		*garb;
 	t_token		*token;
 	int			last_exit_code = 0;
 

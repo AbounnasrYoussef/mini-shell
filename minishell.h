@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 11:37:23 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 15:13:15 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ typedef struct s_exec
 }	t_exec;
 
 
-typedef struct garbage
+typedef struct s_garbage
 {
     void *ptr; // hada pointer generique vers n'importe quelle memoire allouee 
-    struct garbage *next;  // hada next l prochaine element dial dik la list
-}   garbage;
+    struct s_garbage *next;  // hada next l prochaine element dial dik la list
+}   t_garbage;
 
 
 typedef struct s_list_env
@@ -79,9 +79,15 @@ typedef struct s_expand_ctx
 {
 	t_list_env	*env;
 	int			exit_code;
-	garbage	**garb;
+	t_garbage	**garb;
 }	t_expand_ctx;
 
+typedef struct s_quote_ctx
+{
+	char		**res;
+	int			*quoted_flag;
+	t_garbage	**garb;
+}	t_quote_ctx;
 
 
 
@@ -96,55 +102,55 @@ int	error_redir(char *str, int *i);
 
 
 //tokens
-t_token *tokens(const char *line, garbage **garb);
-void handel_quote(const char *line , int  *i , t_token **token ,garbage **garb);
-void handel_double_operator(const char *line ,int *i , t_token **tokens, garbage **garb);
-void handle_single_operator(const char *line, int *i, t_token **tokens , garbage **garb);
-void handle_word(const char *line, int *i, t_token **tokens, garbage **garb);
+t_token *tokens(const char *line, t_garbage **garb);
+void handel_quote(const char *line , int  *i , t_token **token ,t_garbage **garb);
+void handel_double_operator(const char *line ,int *i , t_token **tokens, t_garbage **garb);
+void handle_single_operator(const char *line, int *i, t_token **tokens , t_garbage **garb);
+void handle_word(const char *line, int *i, t_token **tokens, t_garbage **garb);
 //tokens//utils
 void add_token(t_token **list, t_token *new_tok);
-t_token	*new_token_0(char *value, type_token type, garbage **garb);
+t_token	*new_token_0(char *value, type_token type, t_garbage **garb);
 type_token get_token_type(char *str);
-t_token	*new_token(char *value, type_token type,int i, garbage **garb);
+t_token	*new_token(char *value, type_token type,int i, t_garbage **garb);
 
 
 
 //expanding
-void expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, garbage **garb);
-char	*expand_token(char *value, int exit_code, t_list_env *env, garbage **garb);
-char	*expand_dollar(char *value, int *i, int exit_code, t_list_env *env, garbage **garb);
+void expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, t_garbage **garb);
+char	*expand_token(char *value, int exit_code, t_list_env *env, t_garbage **garb);
+char	*expand_dollar(char *value, int *i, int exit_code, t_list_env *env, t_garbage **garb);
 void	append_double_quote(const char *val, int *i, char **res, t_expand_ctx ctx);
-void	append_single_quote(const char *val, int *i, char **res, garbage **garb);
-char	*get_env_value(char *name, t_list_env *env, garbage **garb);
+void	append_single_quote(const char *val, int *i, char **res, t_garbage **garb);
+char	*get_env_value(char *name, t_list_env *env, t_garbage **garb);
 void	replace_token(t_token **head, t_token *old, t_token *new_list);
 t_token	*get_last_token(t_token *tokens);
-t_token	*split_into_tokens(char *str, garbage **garb);
+t_token	*split_into_tokens(char *str, t_garbage **garb);
 void	add_token_back(t_token **head, t_token *new_token);
-t_token	*new_token_0(char *value, type_token type, garbage **garb);
+t_token	*new_token_0(char *value, type_token type, t_garbage **garb);
 int ft_exit_status(int status, int flag);
 int	is_valid_var_char(char c);
-char	*ft_strtrim_custom(char *str, garbage **garb, int quoted);
+char	*ft_strtrim_custom(char *str, t_garbage **garb, int quoted);
 
 
 //struct_atmane
-char **extract_cmd_from_tokens(t_token *tokens, garbage **garb);
+char **extract_cmd_from_tokens(t_token *tokens, t_garbage **garb);
 void free_exec_list(t_exec *exec_list);
 int	is_redirection(type_token type);
-t_file	*extract_redirs_from_tokens(t_token *tokens, garbage **garb);
-t_exec	*parse_tokens_to_exec_list(t_token *tokens, garbage **garb);
+t_file	*extract_redirs_from_tokens(t_token *tokens, t_garbage **garb);
+t_exec	*parse_tokens_to_exec_list(t_token *tokens, t_garbage **garb);
 
 //utils
 int     ft_isalnum(int c);
 int     ft_isalpha(int c);
-char    *ft_itoa(int n, garbage **garb);
+char    *ft_itoa(int n, t_garbage **garb);
 void    *ft_memcpy(void *dst, const void *src, size_t n);
-char    **ft_split(const char *s, char c, garbage **garb);
+char    **ft_split(const char *s, char c, t_garbage **garb);
 char    *ft_strchr(const char *s, int c);
 int     ft_strcmp(const char *s1, const char *s2);
-char    *ft_strdup(const char *s1,garbage **garb);
-char    *ft_strjoin(char const *s1, char const *s2, garbage **garb);
-char    *ft_strtrim(char const *s1, char const *set, garbage **garb);
-char    *ft_substr(char const *s, unsigned int start, size_t len, garbage **garb);
+char    *ft_strdup(const char *s1, t_garbage **garb);
+char    *ft_strjoin(char const *s1, char const *s2, t_garbage **garb);
+char    *ft_strtrim(char const *s1, char const *set, t_garbage **garb);
+char    *ft_substr(char const *s, unsigned int start, size_t len, t_garbage **garb);
 int     skip_space(char c);
 int     is_quote(char c);
 int     is_operator(char c);
@@ -167,7 +173,7 @@ void	handle_sigint(int sig);
 
 
 //heredoc
-void process_heredocs(t_exec *exec, t_list_env *env, garbage **garb);
+void process_heredocs(t_exec *exec, t_list_env *env, t_garbage **garb);
 
 
 #endif

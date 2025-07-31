@@ -6,13 +6,13 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:26:22 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 17:59:27 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:21:09 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char **extract_cmd_from_tokens(t_token *tokens, garbage **garb)
+char **extract_cmd_from_tokens(t_token *tokens, t_garbage **garb)
 {
     int count = 0;
     t_token *tmp = tokens;

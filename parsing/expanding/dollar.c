@@ -6,14 +6,14 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:23:13 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 17:55:47 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:21:49 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 
-char	*get_env_value(char *name, t_list_env *env, garbage **garb)
+char	*get_env_value(char *name, t_list_env *env, t_garbage **garb)
 {
 	while (env)
 	{
@@ -25,7 +25,7 @@ char	*get_env_value(char *name, t_list_env *env, garbage **garb)
 }
 
 // Expansion du $ : gère $$, $?, $VAR, $ seul, $ suivi de char invali
-char	*expand_dollar(char *value, int *i, int exit_code, t_list_env *env, garbage **garb)
+char	*expand_dollar(char *value, int *i, int exit_code, t_list_env *env, t_garbage **garb)
 {
 	char	*var_name;
 	char	*res;

@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 11:13:21 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 15:53:04 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:23:57 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static long int	ft_len(int n)
 	return (len);
 }
 
-char	*ft_itoa(int n, garbage **garb)
+char	*ft_itoa(int n, t_garbage **garb)
 {
 	char				*s;
 	long int			len;

@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 08:41:47 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 15:53:37 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:22:51 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static short	find_world(char c, char const *set)
 	return (0);
 }
 
-char	*ft_strtrim(char const *s1, char const *set, garbage **garb)
+char	*ft_strtrim(char const *s1, char const *set, t_garbage **garb)
 {
 	size_t	debut;
 	size_t	fin;

@@ -6,13 +6,13 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:21:08 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 10:58:02 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 15:35:47 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static int heredoc_expand(char *line, t_list_env *env, garbage **garb, char **res)
+static int heredoc_expand(char *line, t_list_env *env, t_garbage **garb, char **res)
 {
 	int i = 0;
 	char *tmp = ft_strdup("", garb);
@@ -53,7 +53,7 @@ static int heredoc_expand(char *line, t_list_env *env, garbage **garb, char **re
 	return (0);
 }
 
-static int create_heredoc(char *delimiter, int expand, t_list_env *env, garbage **garb)
+static int create_heredoc(char *delimiter, int expand, t_list_env *env, t_garbage **garb)
 {
 	char	*line;
 	char	*final;
@@ -75,7 +75,7 @@ static int create_heredoc(char *delimiter, int expand, t_list_env *env, garbage 
 	return (fd[0]);
 }
 
-void	process_heredocs(t_exec *exec, t_list_env *env, garbage **garb)
+void	process_heredocs(t_exec *exec, t_list_env *env, t_garbage **garb)
 {
 	while (exec)
 	{
@@ -91,7 +91,7 @@ void	process_heredocs(t_exec *exec, t_list_env *env, garbage **garb)
 				int		fd = create_heredoc(file->file_name, expand, env, garb);
 
 				char	*fd_str = ft_itoa(fd, garb); // convertit le fd en chaîne
-				char	*fd_path = ft_strjoin("/dev/fd/", fd_str, garb); // crée le chemin final
+				char	*fd_path = ft_strjoin("", fd_str, garb); // crée le chemin final
 				file->file_name = fd_path;
 			}
 			file = file->next;

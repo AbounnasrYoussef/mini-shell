@@ -6,62 +6,59 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 09:58:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 18:12:10 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:18:22 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-//hade fonction hiya li ktstoker lina noeud jdida fl la5er
-garbage *ft_last(garbage *head)
+t_garbage	*ft_last(t_garbage *head)
 {
-    garbage *last;
+	t_garbage	*last;
 
-    last = head;
-    while (last->next)
-        last = last->next;
-    return (last);
+	last = head;
+	while (last->next)
+		last = last->next;
+	return (last);
 }
 
-// hade fonction kat allocer lina  w ktenregistrer dakchi li talloca f garbage collector
-void *ft_malloc(garbage **garb , size_t size)
+void	*ft_malloc(t_garbage **garb, size_t size)
 {
-    void *ptr;
+	void		*ptr;
+	t_garbage	*new;
 
-    ptr = malloc(size); // alloue la memoire demandee
-    if (!ptr)
-        return (ft_free_all(*garb), exit(EXIT_FAILURE), NULL);
-    garbage *new = malloc(sizeof(garbage));
-    // hna creena wa7ed noeud f dik la liste bach nenregistriwe  l'allocation
-    if (!new) // hna ila dik allocation echouee 
-    {
-        ft_free_all(*garb);
-        free(ptr);
-        // perror
-        exit(EXIT_FAILURE);
-        return (NULL);
-    }
-    new->ptr = ptr ; // kn enregistriwe l'adresse dial allocation f ptr;
-    if (*garb == NULL)
-        *garb = new;
-    else
-        ft_last(*garb)->next = new; // knda5lo noeud fl la5er;
-    new->next = NULL;
-    return ptr; // knretourniwe  dakchi li t alloca 
+	ptr = malloc(size);
+	if (!ptr)
+		return (ft_free_all(*garb), exit(EXIT_FAILURE), NULL);
+	new = malloc(sizeof(t_garbage));
+	if (!new)
+	{
+		ft_free_all(*garb);
+		free(ptr);
+		exit(EXIT_FAILURE);
+		return (NULL);
+	}
+	new->ptr = ptr ;
+	if (*garb == NULL)
+		*garb = new;
+	else
+		ft_last(*garb)->next = new;
+	new->next = NULL;
+	return (ptr);
 }
 
-// hna kn free toute la memoire allouer via le garbage collector
-void ft_free_all(garbage *garb)
+void	ft_free_all(t_garbage *garb)
 {
-    garbage *current = garb;
-    garbage *tmp; // bach nstokiwe le noeud liberer 
+	t_garbage	*current;
+	t_garbage	*tmp;
 
-    while (current)
-    {
-        free(current->ptr); // libère la mémoire allouée.
-        tmp = current;
-        current = current->next;
-        free(tmp);  // libère le conteneur du suivi.
-    }
-    garb = NULL; //on remet la liste à vide.
+	current = garb;
+	while (current)
+	{
+		free(current->ptr);
+		tmp = current;
+		current = current->next;
+		free(tmp);
+	}
+	garb = NULL;
 }

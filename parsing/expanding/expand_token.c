@@ -6,14 +6,14 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:38:12 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 17:56:12 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:21:58 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 
-char	*expand_token(char *value, int exit_code, t_list_env *env, garbage **garb)
+char	*expand_token(char *value, int exit_code, t_list_env *env, t_garbage **garb)
 {
 	int			i;
 	char		*res;

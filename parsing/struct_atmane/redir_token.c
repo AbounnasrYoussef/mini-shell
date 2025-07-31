@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:27:22 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 18:02:44 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:21:19 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_redirection(type_token type)
 	return (type == RDR_IN || type == RDR_OUT || type == APPEND || type == HERE_DOC);
 }
 
-t_file	*extract_redirs_from_tokens(t_token *tokens, garbage **garb)
+t_file	*extract_redirs_from_tokens(t_token *tokens, t_garbage **garb)
 {
 	t_file *head = NULL;
 	t_file **current = &head;

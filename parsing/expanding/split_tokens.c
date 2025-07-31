@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:37:21 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 17:54:35 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:22:13 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_token	*get_last_token(t_token *tokens)
 }
 
 // Split une string expandée en tokens (type WORD)
-t_token	*split_into_tokens(char *str, garbage **garb)
+t_token	*split_into_tokens(char *str, t_garbage **garb)
 {
 	t_token	*head;
 	t_token	*new;
