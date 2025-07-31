@@ -39,6 +39,7 @@ SRC = minishell.c  signals.c\
 		$(PARS)/struct_atmane/redir_token.c\
 		$(PARS)/struct_atmane/struct_at.c\
 		$(PARS)/here_doc/here.c\
+		$(PARS)/here_doc/utils_here.c\
 		execution/built-in/cd.c\
 		execution/built-in/echo.c\
 		execution/built-in/env.c\

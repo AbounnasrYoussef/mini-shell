@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 22:00:34 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/31 22:30:48 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,13 @@ typedef struct s_quote_ctx
 	t_garbage	**garb;
 }	t_quote_ctx;
 
+ typedef struct s_ctx
+{
+	t_list_env	*env;
+	t_garbage	**garb;
+	char		**tmp;
+}	t_ctx;
+
 
 
 // syntaxe_error
@@ -120,7 +127,7 @@ t_token	*new_token(char *value, type_token type,int i, t_garbage **garb);
 //expanding
 void expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, t_garbage **garb);
 char	*expand_token(char *value, int exit_code, t_list_env *env, t_garbage **garb);
-char	*expand_dollar(char *value, int *i, int exit_code, t_list_env *env, t_garbage **garb);
+char	*expand_dollar(char *value, int *i, t_expand_ctx *ctx);
 void	append_double_quote(const char *val, int *i, char **res, t_expand_ctx ctx);
 void	append_single_quote(const char *val, int *i, char **res, t_garbage **garb);
 char	*get_env_value(char *name, t_list_env *env, t_garbage **garb);
@@ -176,6 +183,15 @@ void	handle_sigint(int sig);
 
 //heredoc
 void process_heredocs(t_exec *exec, t_list_env *env, t_garbage **garb);
+int	heredoc_expand(char *line, t_list_env *env, t_garbage **garb, char **res);
+int create_heredoc(char *delimiter, int expand, t_list_env *env, t_garbage **garb);
+
+//utils_heredoc
+int	append_normal_char(char **tmp, char c, t_garbage **garb);
+int	append_raw_dollar(char **tmp, char c, t_garbage **garb);
+int	append_variable(char *line, t_list_env *env,t_garbage **garb, char **tmp);
+int	append_exit_status(char **tmp, t_garbage **garb);
+int	is_valid_var_char(char c);
 
 char    *get_next_line(int fd);
 
