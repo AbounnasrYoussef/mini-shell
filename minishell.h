@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 17:54:15 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/31 22:00:34 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,5 +177,6 @@ void	handle_sigint(int sig);
 //heredoc
 void process_heredocs(t_exec *exec, t_list_env *env, t_garbage **garb);
 
+char    *get_next_line(int fd);
 
 #endif

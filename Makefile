@@ -47,12 +47,15 @@ SRC = minishell.c  signals.c\
 		execution/built-in/pwd.c\
 		execution/built-in/unset.c\
 		execution/utils/ft_memcpy.c\
+		execution/built-in/export_suit.c\
 		execution/built-in/export.c\
 		execution/utils/ft_split.c\
 		execution/utils/utili_1.c\
 		execution/pipe/pipe.c\
-
-
+		execution/pipe/cherche_path.c\
+		execution/pipe/ft_redirections.c\
+		execution/pipe/utils_pipe.c\
+		get_next_line.c\
 
 
 OBJ = $(SRC:.c=.o)

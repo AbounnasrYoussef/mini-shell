@@ -6,16 +6,16 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/31 16:55:48 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/31 21:30:11 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-void msg_err_atoi(char *nbr)
+void error_exit(char *str)
 {
 	printf("exit\n");
-	write(2, nbr, ft_strlenn(nbr));
+	write(2, str, ft_strlenn(str));
 	write(2, ": numeric argument required\n", 28);
 	exit(255);
 }
@@ -37,10 +37,10 @@ unsigned long long ft_atoi(int len, char *nbr)
 		if ((sign == -1) && (nombre > (9223372036854775807)))
 		{
 			if (nbr[19] > '8')
-				msg_err_atoi(nbr);
+				error_exit(nbr);
 		}
 		else if (nombre > (9223372036854775807))
-			msg_err_atoi(nbr);	
+			error_exit(nbr);	
 		if (len > i)
 			nombre *= 10;
 		i++;
@@ -87,14 +87,6 @@ int ft_modulo_number(unsigned long long number)
 	return (number - g);
 }
 
-void error_exit(char **str)
-{
-	printf("exit\n");
-	write(2, str[1], ft_strlenn(str[1]));
-	write(2, ": numeric argument required\n", 28);
-	exit(255);
-}
-
 void ft_exit (int len, char **str)
 {
 	int argc;
@@ -114,7 +106,7 @@ void ft_exit (int len, char **str)
 			else if (check_number(str[1]) == 0 && argc > 2 && len <= 19)
 				write(2, "exit: too many arguments\n", 25);
 			else
-				error_exit(str);
+				error_exit(str[1]);
 		}
 	}
 }

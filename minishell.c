@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 16:43:25 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/31 22:21:16 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,9 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 // 		ft_free_all(garb);
 // 	}
 // }
+
+
+
 
 int	main(int ac, char **av, char **envp)
 {

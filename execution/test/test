@@ -402,16 +402,28 @@
 #ls: No such file or directory
 #ls: command not found
 
+#minishell$ cd /bin 
+#minishell$ ls
+#ls: No such file or directory
 
-/////////////
-============
+#touch ls
+#chmod +x ls
+#minishell$ unset PATH
+#minishell$ ls
+#ls: No such file or directory
+#minishell$ 
 
-bash-3.2$ $?
-bash: 127: command not found
+#minishell$ ./minishell
+#minishell$ ls
+#ls: No such file or directory
 
-minishell$ cd /bin 
-minishell$ ls
-ls: No such file or directory
+#➜  parsing ./minishell /// execve // char **env
+#minishell$ top
+#Error opening terminal: unknown.
+
+#bash-3.2$ unset PATH
+#bash-3.2$ bash
+#bash: bash: No such file or directory
 
 bash-3.2$ Makefile/..
 bash: Makefile/..: Not a directory
@@ -423,25 +435,10 @@ bash: Makefile: Permission denied
 bash-3.2$ $?
 bash: 126: No such file or directory
 
-touch ls
-chmod +x ls
-minishell$ unset PATH
-minishell$ ls
-ls: No such file or directory
-minishell$ 
-
-minishell$ ./minishell
-minishell$ ls
-ls: No such file or directory
-
-➜  parsing ./minishell /// execve // char **env
-minishell$ top
-Error opening terminal: unknown.
-
 unset USER 
 export | grep USER
 
-bash-3.2$ unset PATH
-bash-3.2$ bash
-bash: bash: No such file or directory
+bash-3.2$ $?
+bash: 127: command not found
 
+bash | bash
