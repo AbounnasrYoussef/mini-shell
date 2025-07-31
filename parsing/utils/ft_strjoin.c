@@ -6,13 +6,13 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 08:53:55 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/02 14:41:18 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:22:46 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-static char	*check(char const *s1, char const *s2, garbage **garb)
+static char	*check(char const *s1, char const *s2, t_garbage **garb)
 {
 	if (!s1 && !s2)
 		return (NULL);
@@ -23,7 +23,7 @@ static char	*check(char const *s1, char const *s2, garbage **garb)
 	return (NULL);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2, garbage **garb)
+char	*ft_strjoin(char const *s1, char const *s2, t_garbage **garb)
 {
 	char	*dup;
 	size_t	i;
@@ -31,11 +31,10 @@ char	*ft_strjoin(char const *s1, char const *s2, garbage **garb)
 
 	if (!s1 || !s2)
 		return (check(s1, s2, garb));
-
-	dup = (char *)ft_malloc(garb, sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	dup = (char *)ft_malloc(garb, sizeof(char) * (ft_strlen(s1)
+				+ ft_strlen(s2) + 1));
 	if (!dup)
 		return (NULL);
-
 	i = 0;
 	j = 0;
 	while (s1[i])
@@ -44,6 +43,5 @@ char	*ft_strjoin(char const *s1, char const *s2, garbage **garb)
 	while (s2[i])
 		dup[j++] = s2[i++];
 	dup[j] = '\0';
-
 	return (dup);
 }

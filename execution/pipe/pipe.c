@@ -6,13 +6,14 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/30 19:34:47 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/31 17:55:27 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../execution.h"
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include "../../minishell.h"
 
 char *ft_concat(char *str, char *str2)
 {
@@ -130,6 +131,63 @@ int count_cmd(t_exec *data)
 	return i; 
 }
 
+int is_built_in(char *str)
+{
+	if(ft_strcmpp(str, "export") == 0)
+		return 0;
+	else if(ft_strcmpp(str, "cd") == 0)
+		return 0;
+	else if(ft_strcmpp(str, "echo") == 0)
+		return 0;
+	else if(ft_strcmpp(str, "env") == 0)
+		return 0;
+	else if(ft_strcmpp(str, "exit") == 0)
+		return 0;
+	else if(ft_strcmpp(str, "pwd") == 0)
+		return 0;
+	else if(ft_strcmpp(str, "unset") == 0)
+		return 0;
+	return -1;
+}
+
+void ft_redirection(t_exec *data)
+{
+	t_file *file;
+	int fd;
+	int fd_herdoc;
+	
+	fd_herdoc = -1;
+	file = data->files;
+	while(file != NULL)
+	{
+		if (file->type == 2)
+		{
+			fd = open(file->file_name, O_RDONLY);
+			dup2(fd, STDIN_FILENO);
+			close(fd);
+		}
+		else if (file->type == 3)
+		{
+			fd = open(file->file_name, O_CREAT | O_RDWR | O_TRUNC,0777);
+			dup2(fd, STDOUT_FILENO);
+			close(fd);
+		}
+		else if (file->type == 4)
+		{
+			fd = open(file->file_name, O_CREAT | O_RDWR | O_APPEND, 0777);
+			dup2(fd, STDOUT_FILENO);
+			close(fd);
+		}
+		else if (file->type == 5)
+		{
+			dup2(file->fd, STDIN_FILENO);
+			close(file->fd);
+		}
+		file = file->next;
+	}
+	
+}
+
 void ft_pipe(int argc, t_exec *data, t_list_env *env)
 {
     int i;
@@ -140,26 +198,46 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 	int in_bultin;
 	struct stat info;
 	int j;
+	int original_fd_in;
+	int original_fd_out;
 	
 	j = 0;
 	in_fd = STDIN_FILENO;
 	i = 0;
 	in_bultin = 0;
-	//if ((count_cmd(data) == 1 &&  ft_built_in(argc, data, env) == 0))
-	//{
-	//	if((ft_strlen_argc(data->cmd) == 1 && ft_strcmpp(data->cmd[0], "export") != 0))
-	//	{
-	//		printf("djjjkds\n");
-	//	}
-	//	else if ((ft_strlen_argc(data->cmd) != 1))
-	//	{
-	//		printf("mmmmm\n");
-	//	}	
-	//}
-	if(count_cmd(data) == 1 && ft_strlen_argc(data->cmd) == 1 && ft_strcmpp(data->cmd[0], "export") != 0 && ft_built_in(argc, data, env) == 0)
-	;
-	else if (count_cmd(data) == 1 && ft_strlen_argc(data->cmd) != 1 && ft_built_in(argc, data, env) == 0)
-	;
+	if(count_cmd(data) == 1 && ft_strlen_argc(data->cmd) == 1 
+		&& ft_strcmpp(data->cmd[0], "export") != 0 && is_built_in(data->cmd[0]) == 0)
+	{
+		if (data->files == NULL)
+			ft_built_in(argc, data, env);
+		else
+		{
+			original_fd_in = dup(STDIN_FILENO);
+			original_fd_out = dup(STDOUT_FILENO);
+			ft_redirection(data);
+			ft_built_in(argc, data, env);
+			dup2(original_fd_in, STDIN_FILENO);
+			dup2(original_fd_out, STDOUT_FILENO);
+			close(original_fd_in);
+			close(original_fd_out);
+		}
+	}
+	else if (count_cmd(data) == 1 && ft_strlen_argc(data->cmd) != 1 && is_built_in(data->cmd[0]) == 0)
+	{
+		if (data->files == NULL)
+			ft_built_in(argc, data, env);
+		else
+		{
+			original_fd_in = dup(STDIN_FILENO);
+			original_fd_out = dup(STDOUT_FILENO);
+			ft_redirection(data);
+			ft_built_in(argc, data, env);
+			dup2(original_fd_in, STDIN_FILENO);
+			dup2(original_fd_out, STDOUT_FILENO);
+			close(original_fd_in);
+			close(original_fd_out);
+		}
+	}
 	else
 	{
 		while (data != NULL)
@@ -191,6 +269,8 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 					close(fd[0]);
 					close(fd[1]);
 				}
+				if (data->files != NULL)
+					ft_redirection(data);
 				stat(data->cmd[0], &info);
 				if (S_ISDIR(info.st_mode))
 				{
@@ -248,4 +328,3 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 		j++;
     }
 }
-

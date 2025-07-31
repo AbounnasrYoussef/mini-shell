@@ -6,27 +6,13 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:26:22 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 11:18:59 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:21:09 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-
-// static int	count_words(t_token *tokens)
-// {
-// 	int count = 0;
-
-// 	while (tokens)
-// 	{
-// 		if (tokens->type == WORD)
-// 			count++;
-// 		tokens = tokens->next;
-// 	}
-// 	return count;
-// }
-
-char **extract_cmd_from_tokens(t_token *tokens, garbage **garb)
+char **extract_cmd_from_tokens(t_token *tokens, t_garbage **garb)
 {
     int count = 0;
     t_token *tmp = tokens;

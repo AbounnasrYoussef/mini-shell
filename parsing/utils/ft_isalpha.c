@@ -6,11 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 13:11:35 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 13:11:56 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:53:01 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int	ft_isalpha(int c)
 {

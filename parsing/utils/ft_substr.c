@@ -6,13 +6,14 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:33:56 by yabounna          #+#    #+#             */
-/*   Updated: 2025/06/25 11:23:40 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:22:55 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len,garbage **garb)
+char	*ft_substr(char const *s, unsigned int start,
+		size_t len, t_garbage **garb)
 {
 	char			*sub;
 	unsigned int	i;
@@ -23,7 +24,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len,garbage **garb)
 		return (ft_strdup("", garb));
 	if (len > ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
-	sub = (char *)ft_malloc(garb,(len + 1));
+	sub = (char *)ft_malloc(garb, (len + 1));
 	if (!sub)
 		return (NULL);
 	i = 0;

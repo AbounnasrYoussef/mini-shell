@@ -6,13 +6,13 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:19:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 11:08:20 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:21:41 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-static t_token *copy_until_pipe(t_token *start, t_token **next_start, garbage **garb)
+static t_token *copy_until_pipe(t_token *start, t_token **next_start, t_garbage **garb)
 {
 	t_token *curr = start;
 	t_token *copy = NULL;
@@ -34,7 +34,7 @@ static t_token *copy_until_pipe(t_token *start, t_token **next_start, garbage **
 	return copy;
 }
 
-t_exec	*parse_tokens_to_exec_list(t_token *tokens, garbage **garb)
+t_exec	*parse_tokens_to_exec_list(t_token *tokens, t_garbage **garb)
 {
 	t_exec *head = NULL;
 	t_exec **current = &head;

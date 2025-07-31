@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 13:41:23 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 21:40:08 by arahhab          ###   ########.fr       */
+/*   Created: 2025/07/30 16:53:44 by yabounna          #+#    #+#             */
+/*   Updated: 2025/07/31 15:50:53 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "minishell.h"
 
-void	*ft_memcpyy(void *dst, const void *src, size_t n)
+void	handle_sigquit(int sig)
 {
-	char	*s;
-	char	*d;
-	size_t	i;
+	(void)sig;
+}
 
-	if (!dst && !src)
-		return (NULL);
-	if (src == dst)
-		return (dst);
-	s = (char *)src;
-	d = (char *)dst;
-	i = 0;
-	while (i < n)
-	{
-		d[i] = s[i];
-		i++;
-	}
-	return (d);
+void	handle_sigint(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+	//rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+	g_exit_status = 130;
+}
+
+void	setup_signals(void)
+{
+	signal(SIGINT, handle_sigint);
+	signal(SIGQUIT, SIG_IGN);
 }

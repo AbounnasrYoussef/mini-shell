@@ -1,4 +1,17 @@
-#include "../minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/29 15:54:21 by yabounna          #+#    #+#             */
+/*   Updated: 2025/07/29 15:54:22 by yabounna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "../../minishell.h"
 
 t_list_env	*ft_lstnew(void *variable, void *valeur_vari, void *ligne)
 {
@@ -48,18 +61,14 @@ t_list_env *ft_env(char **str)
 	
 	i = 0;
 	j = 0;
-	char *ppwd;
+	
 	while (str[i] != NULL )
 	{
 		splitt = i_split(str[i], '=');
-		if (ft_strcmp(splitt[0], "PWD"))
-			ppwd = splitt[1];
 		ft_lstadd_back(&copy_env, ft_lstnew(splitt[0], splitt[1], str[i]));
 		if(i == 0)
 			debut_env = copy_env;
 		i++;
 	}
-	ft_lstadd_back(&copy_env, ft_lstnew("PWDO", ppwd, "rie"));
-	
 	return (debut_env);
 }

@@ -6,11 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 10:44:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/20 10:44:24 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 18:02:48 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void free_exec_list(t_exec *exec_list)
 {

@@ -6,11 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 10:09:11 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/24 18:44:07 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 14:24:04 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 static size_t	count_word(const char *s, char c)
 {
@@ -55,7 +55,7 @@ static void	*free_split(char **array, int i)
 	return (NULL);
 }
 
-char	**ft_split(const char *s, char c, garbage **garb)
+char	**ft_split(const char *s, char c, t_garbage **garb)
 {
 	size_t	skip;
 	size_t	i;
@@ -65,7 +65,7 @@ char	**ft_split(const char *s, char c, garbage **garb)
 
 	if (!s)
 		return (NULL);
-	result = ft_malloc( garb , sizeof(char *) * (count_word(s, c) + 1));
+	result = ft_malloc(garb, sizeof(char *) * (count_word(s, c) + 1));
 	if (!result)
 		return (NULL);
 	i = 0;
@@ -73,7 +73,7 @@ char	**ft_split(const char *s, char c, garbage **garb)
 	while (index < count_word(s, c))
 	{
 		word_len = count_len_word(s, c, &i, &skip);
-		result[index] = ft_malloc(garb ,sizeof(char) * (word_len + 1));
+		result[index] = ft_malloc(garb, sizeof(char) * (word_len + 1));
 		if (!result[index])
 			return (free_split(result, index));
 		ft_memcpy(result[index], s + skip, word_len);
@@ -83,4 +83,3 @@ char	**ft_split(const char *s, char c, garbage **garb)
 	result[index] = NULL;
 	return (result);
 }
-

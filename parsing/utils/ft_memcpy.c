@@ -6,11 +6,11 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:00:45 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/20 13:01:02 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:53:07 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
