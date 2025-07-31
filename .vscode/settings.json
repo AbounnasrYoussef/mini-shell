@@ -1,11 +1,15 @@
 {
     "files.associations": {
-        "array": "c",
-        "iterator": "c",
-        "string": "c",
-        "string_view": "c",
-        "vector": "c",
-        "ft_malloc.h": "c",
-        "minishell.h": "c"
-    }
+		"array": "c",
+		"iterator": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c",
+		"ft_malloc.h": "c",
+		"minishell.h": "c",
+		"readline.h": "c",
+		"stat.h": "c",
+		"execution.h": "c",
+		"fcntl.h": "c"
+	}
 }

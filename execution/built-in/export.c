@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/29 13:48:57 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/30 17:22:44 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ int verif_exist(t_list_env **list_env, char *arg)
 	l_env = *list_env;
 	while (l_env != NULL)
 	{
+		
 		if (ft_strcmpp((l_env)->variable, arg) == 0)
+		{
 			return 1;
+			break;
+		}	
 		(l_env) = (l_env)->next;
 	}
 	return 0;
@@ -48,38 +52,8 @@ void repmlacer_elem(t_list_env **list_env, char *var, char *arg, int d)
 	}
 }
 
-void ajout_exp_elem(t_list_env **list_env, char *args)
+void ajout_exp_elem_help(t_list_env **list_env, char *args, int i, int c, int d, char **arg_varia)
 {
-	int i;
-	int j;
-	int c;
-	int d;
-	
-	char **arg_varia;
-
-	i = 0;
-	j = 0;
-	d = 0;
-	arg_varia = malloc(2 * sizeof(char *));
-	arg_varia[0] = malloc(200);
-	while (args[i] != '\0' && args[i] != '=' && args[i] != '+')
-	{	
-		arg_varia[0][j] = args[i];
-		i++;
-		j++;
-	}
-	c = 0;
-	if (args[i] == '+' && args[i+1] == '=')
-	{
-		d = 1;
-		i += 2;
-	}
-	else if (args[i] == '=')
-		i++;
-	if (args[i] == '\0')
-		arg_varia[1] = NULL;
-	else
-		arg_varia[1] = malloc(200);
 	while (args[i] != '\0')
 	{
 		arg_varia[1][c] = args[i];
@@ -92,73 +66,101 @@ void ajout_exp_elem(t_list_env **list_env, char *args)
 	}
 	else
 	{
+		
 		if (arg_varia[1] != NULL)
+		{
 			repmlacer_elem(list_env, arg_varia[0], arg_varia[1], d);
+		}
+			
 	}
 }
 
-
-
-void check_args(t_list_env **list_env, char **args)
+void ajout_exp_elem(t_list_env **list_env, char *args, int i, int j)
 {
-	int i;
-	int j;
-	int c;
-	
+	int d;
+	char **arg_varia;
 
-	i = 1;
-	j = 1;
-	c = 0;
+	d = 0;
+	arg_varia = malloc(2 * sizeof(char *));
+	arg_varia[0] = malloc(200);
+	while (args[i] != '\0' && args[i] != '=' && args[i] != '+')
+	{	
+		arg_varia[0][j] = args[i];
+		i++;
+		j++;
+	}
+	if (args[i] == '+' && args[i+1] == '=')
+	{
+		d = 1;
+		i += 2;
+	}
+	else if (args[i] == '=')
+		i++;
+	if (args[i] == '\0')
+		arg_varia[1] = NULL;
+	else
+		arg_varia[1] = malloc(200);
+	ajout_exp_elem_help(list_env,  args, i, 0, d, arg_varia);
+}
+void error_export(char **args, int i)
+{
+	write(2, "export: `", 9);
+	write(2, args[i], ft_strlenn(args[i]));
+	write(2, "' not a valid identifier\n", 25);
+}
+
+int	ft_isalnumm(int c)
+{
+	unsigned char	s;
+
+	s = (unsigned char)c;
+	if ((s >= '0' && s <= '9') || (s >= 'a' && s <= 'z')
+		|| (s >= 'A' && s <= 'Z'))
+	{
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
+}
+
+int	ft_isalphaa(int c)
+{
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	else
+		return (0);
+}
+
+void check_args(t_list_env **list_env, char **args, int i, int j, int c)
+{
 	while (args[i] != NULL)
 	{
-		if (!(args[i][0] == '_' ||
-			(args[i][0] >= 'a' && args[i][0] <= 'z')
-			|| (args[i][0] >= 'A' && args[i][0] <= 'Z')))
-		{
-			c = 1;
-			write(2, "export: `", 9);
-			write(2, args[i], ft_strlenn(args[i]));
-			write(2, "' not a valid identifier\n", 25);
-		}	
+		if (!(args[i][0] == '_' || ft_isalphaa(args[i][0])))
+			(c = 1, error_export(args, i));
 		while(args[i][j] != '\0' && args[i][j] != '=' && args[i][j] != '+')
 		{
-			if (!(args[i][j] == '_' || args[i][j] == '='
-				|| (args[i][j] >= 'a' && args[i][j] <= 'z')
-				|| (args[i][j] >= 'A' && args[i][j] <= 'Z')
-				|| (args[i][j] >= '0' && args[i][j] <= '9')))
-				{
-					c = 1;
-					write(2, "export: `", 9);
-					write(2, args[i], ft_strlenn(args[i]));
-					write(2, "' not a valid identifier\n", 25);
-				}
+			if (!(args[i][j] == '_' || args[i][j] == '=' || ft_isalnumm(args[i][j])))
+					(c = 1, error_export(args, i));
 			j++;
 		}
 		if (args[i][j] == '+')
 		{
 			if (args[i][j+1] != '=')
-			{
-				c = 1;
-				write(2, "export: `", 9);
-				write(2, args[i], ft_strlenn(args[i]));
-				write(2, "' not a valid identifier\n", 25);
-			}
+				(c = 1, error_export(args, i));
 			j++;
 		}
 		if (c == 0)
 		{
-			ajout_exp_elem(list_env, args[i]);
+			ajout_exp_elem(list_env, args[i], 0, 0);
 		}
 		else
-		{
 			c = 0;
-		}
 		j = 1;
 		i++;
 	}
 }
-
-
 
 t_list_env *ex_sort(t_list_env *list_env)
 {
@@ -183,10 +185,6 @@ t_list_env *ex_sort(t_list_env *list_env)
 				list1->valeur_vari = list_env->valeur_vari;
 				list_env->valeur_vari = tmp;
 				
-				tmp = list1->ligne;
-				list1->ligne = list_env->ligne;
-				list_env->ligne = tmp;
-				
 				list1 = debut;
 			}
 			list1 = list1->next;	
@@ -206,7 +204,6 @@ void ft_export(t_list_env *list_env, char **args)
 	}
 	else
 	{
-		check_args(&list_env, args);
+		check_args(&list_env, args, 1, 1, 0);
 	}
 }
-

@@ -6,11 +6,11 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:53:52 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/25 12:28:00 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/31 16:10:12 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../execution.h"
 
 static size_t	count_word(char const *s, char c)
 {

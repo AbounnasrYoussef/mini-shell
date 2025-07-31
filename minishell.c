@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 14:20:24 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 16:43:25 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_exit_status = 0;
+
+int ft_count_cmd(t_exec *data)
+{
+	int i;
+
+	i = 0;
+	while (data != NULL)
+	{
+		data = data->next;
+		i++;
+	}
+	return i;
+}
 
 void	ft_read_loop(t_list_env **env, t_exec **data)
 {
@@ -52,32 +65,36 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 		process_heredocs(*data, *env, &garb);
 
 		// 🔍 Debug - Afficher les commandes et redirections
-		t_exec *tmp = *data;
-		int i = 1;
-		while (tmp)
-		{
-			printf("---- Commande %d ----\n", i);
-			if (tmp->cmd)
-			{
-				for (int j = 0; tmp->cmd[j]; j++)
-					printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
-			}
 
-			t_file *file = tmp->files;
-			while (file)
-			{
-				printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
-				file = file->next;
-			}
-			tmp = tmp->next;
-			i++;
-		}
+		if (*data != NULL)
+        {
+            ft_pipe(ft_count_cmd(*data), *data, *env);
+            ft_free_all(garb);
+            *data = NULL;
+        }
+		//int i = 1;
+		//while (tmp)
+		//{
+		//	printf("---- Commande %d ----\n", i);
+		//	if (tmp->cmd)
+		//	{
+		//		for (int j = 0; tmp->cmd[j]; j++)
+		//			printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
+		//	}
 
-		// 🧨 TODO: Appeler ici l'exécution (ton binôme)
-		// ft_pipe(ft_count_cmd(*data), *data, *env);
+		//	t_file *file = tmp->files;
+		//	while (file)
+		//	{
+		//		printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
+		//		file = file->next;
+		//	}
+		//	tmp = tmp->next;
+		//	i++;
+		//}
+
 
 		// 🧹 Nettoyage mémoire
-		ft_free_all(garb);
+		//ft_free_all(garb);
 		// Optionnel : free_exec_list(*data); *data = NULL;
 	}
 }

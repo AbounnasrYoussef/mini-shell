@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/29 14:16:14 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/31 17:03:55 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,16 @@
 //	struct s_list_env	*next;
 //}	t_list_env;
 
-#include "../parsing/minishell.h"
+#include "../minishell.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <stdlib.h>
+#include <fcntl.h>
+
+typedef struct s_list_env  t_list_env;
+typedef struct s_exec  t_exec;
 
 void ft_put_string(char *str);
 int	ft_strcmpp(const char *s1, const char *s2);
@@ -48,10 +52,12 @@ void ft_unset(t_list_env *list_env, char **args);
 void ft_print_env_ex(t_list_env *env);
 t_list_env* ft_supp_arg(t_list_env *list_env, char *arg);
 char *ft_concat(char *str, char *str2);
-char *cherche_path_cmd(char *cmd, t_list_env *env);
+char *cherche_path_cmd(char *cmd, t_list_env *env, int argc, t_exec *data);
 int ft_built_in(int argc, t_exec *data, t_list_env *env);
 t_list_env *supp_var_nv(t_list_env *env);
 void ft_print_env(t_list_env *env);
 void ft_print_env_ex(t_list_env *env);
 void ft_pipe(int argc, t_exec *data, t_list_env *env);
+char *ft_cherch_home(t_list_env *env);
+unsigned long long ft_atoi(int len, char *nbr);
 #endif
