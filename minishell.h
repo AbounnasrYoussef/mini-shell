@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/30 17:50:14 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 10:18:06 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <readline/history.h>
 #include <stdio.h>
 
-
+extern int g_exit_status;
 // enumeration pour reconnaitre chaque type
 
 typedef enum type_token{
@@ -164,5 +164,10 @@ char	**i_split(char const *s, char c);
 void	setup_signals(void);
 void	handle_sigquit(int sig);
 void	handle_sigint(int sig);
+
+
+//heredoc
+void process_heredocs(t_exec *exec, t_list_env *env, garbage **garb);
+
 
 #endif

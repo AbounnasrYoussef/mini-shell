@@ -6,27 +6,23 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/30 16:55:00 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 10:22:51 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
+int	g_exit_status = 0;
 
 void	ft_read_loop(t_list_env **env, t_exec **data)
 {
-	char	*line;
-	garbage	*garb;
-	t_token	*token;
-	int		last_exit_code;
+	char		*line;
+	garbage		*garb;
+	t_token		*token;
+	int			last_exit_code = 0;
 
-	(void)env;
-	(void)data;
-	last_exit_code = 0;
 	while (1)
 	{
-		setup_signals();
 		garb = NULL;
 		line = readline("minishell$ ");
 		if (!line)
@@ -45,46 +41,119 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 
 		expand_all_tokens(&token, last_exit_code, *env, &garb);
 		*data = parse_tokens_to_exec_list(token, &garb);
-		 t_exec *tmp = *data;
-		// ft_pipe(ft_count_cmd(tmp), tmp, *env);
-		
-int i = 1;
+		if (!*data)
+		{
+			ft_free_all(garb);
+			continue;
+		}
 
-while (tmp)
-{
-   printf("---- Commande %d ----\n", i);
+		// 👇 heredoc traité ici AVANT exécution
+		process_heredocs(*data, *env, &garb);
 
-   // Afficher les mots de la commande
-   if (tmp->cmd)
-   {
-       for (int j = 0; tmp->cmd[j]; j++)
-           printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
-       //     printf("%s", tmp->cmd[j]);
-       // printf("\n");
-   }
+		// 🔍 Debug - Afficher les commandes et redirections
+		t_exec *tmp = *data;
+		int i = 1;
+		while (tmp)
+		{
+			printf("---- Commande %d ----\n", i);
+			if (tmp->cmd)
+			{
+				for (int j = 0; tmp->cmd[j]; j++)
+					printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
+			}
 
-   // Afficher les redirections
-   t_file *file = tmp->files;
-   while (file)
-   {
-       printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
-       file = file->next;
-   }
+			t_file *file = tmp->files;
+			while (file)
+			{
+				printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
+				file = file->next;
+			}
+			tmp = tmp->next;
+			i++;
+		}
 
-   tmp = tmp->next;
-   i++;
-}
-       // if (*data != NULL)
-       // {
-       //     free_exec_list(*data); // Fonction à écrire pour libérer la liste t_exec
-       //     *data = NULL;
-       // }
-       // Exécution des commandes et récupération du code de sortie
-        
-       // Nettoyage mémoire via garbage collector
+		// 🧨 TODO: Appeler ici l'exécution (ton binôme)
+		// ft_pipe(ft_count_cmd(*data), *data, *env);
+
+		// 🧹 Nettoyage mémoire
 		ft_free_all(garb);
+		// Optionnel : free_exec_list(*data); *data = NULL;
 	}
 }
+
+
+// void	ft_read_loop(t_list_env **env, t_exec **data)
+// {
+// 	char	*line;
+// 	garbage	*garb;
+// 	t_token	*token;
+// 	int		last_exit_code;
+
+// 	(void)env;
+// 	(void)data;
+// 	last_exit_code = 0;
+// 	while (1)
+// 	{
+// 		// setup_signals();
+// 		garb = NULL;
+// 		line = readline("minishell$ ");
+// 		if (!line)
+// 			break ;
+// 		if (*line)
+// 			add_history(line);
+// 		if (!syntaxe_errors(line))
+// 		{
+// 			free(line);
+// 			continue ;
+// 		}
+// 		token = tokens(line, &garb);
+// 		free(line);
+// 		if (!token)
+// 			continue ;
+
+// 		expand_all_tokens(&token, last_exit_code, *env, &garb);
+// 		*data = parse_tokens_to_exec_list(token, &garb);
+// 		process_heredocs(*data, *env, &garb);
+// 		t_exec *tmp = *data;
+// 		// ft_pipe(ft_count_cmd(tmp), tmp, *env);
+		
+// int i = 1;
+
+// while (tmp)
+// {
+//    printf("---- Commande %d ----\n", i);
+
+//    // Afficher les mots de la commande
+//    if (tmp->cmd)
+//    {
+//        for (int j = 0; tmp->cmd[j]; j++)
+//            printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
+//        //     printf("%s", tmp->cmd[j]);
+//        // printf("\n");
+//    }
+
+//    // Afficher les redirections
+//    t_file *file = tmp->files;
+//    while (file)
+//    {
+//        printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
+//        file = file->next;
+//    }
+
+//    tmp = tmp->next;
+//    i++;
+// }
+//        // if (*data != NULL)
+//        // {
+//        //     free_exec_list(*data); // Fonction à écrire pour libérer la liste t_exec
+//        //     *data = NULL;
+//        // }
+//        // Exécution des commandes et récupération du code de sortie
+        
+//        // Nettoyage mémoire via garbage collector
+// 		ft_free_all(garb);
+// 	}
+// }
 
 int	main(int ac, char **av, char **envp)
 {
