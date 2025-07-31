@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:44:25 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 15:28:53 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 18:09:27 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ t_token	*tokens(const char *line, t_garbage **garb)
 		if (!line[i])
 			break ;
 		if ((line[i] == '<' || line[i] == '>') && line[i + 1] == line[i])
-		handel_double_operator(line, &i, &tokens,garb);
+			handel_double_operator(line, &i, &tokens, garb);
 		else if (is_operator(line[i]))
-			handle_single_operator(line, &i, &tokens,garb);
+			handle_single_operator(line, &i, &tokens, garb);
 		else
-			handle_word(line, &i, &tokens,garb);
+			handle_word(line, &i, &tokens, garb);
 	}
 	return (tokens);
 }

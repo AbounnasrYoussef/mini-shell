@@ -6,35 +6,28 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:38:12 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 14:21:58 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 18:12:42 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-
-char	*expand_token(char *value, int exit_code, t_list_env *env, t_garbage **garb)
+static char	*expand_loop(char *value, t_expand_ctx *ctx, t_garbage **garb)
 {
-	int			i;
-	char		*res;
-	char		*tmp;
-	t_expand_ctx	ctx;
+	int		i;
+	char	*res;
+	char	*tmp;
 
 	i = 0;
-	ctx.env = env;
-	ctx.exit_code = exit_code;
-	ctx.garb = garb;
 	res = ft_strdup("", garb);
 	while (value[i])
 	{
 		if (value[i] == '\'')
 			append_single_quote(value, &i, &res, garb);
 		else if (value[i] == '"')
-			append_double_quote(value, &i, &res, ctx);
+			append_double_quote(value, &i, &res, *ctx);
 		else if (value[i] == '$')
-			res = ft_strjoin(res,
-					expand_dollar(value, &i, exit_code, env, garb),
-					garb);
+			res = ft_strjoin(res, expand_dollar(value, &i, ctx), garb);
 		else
 		{
 			tmp = ft_substr(value, i, 1, garb);
@@ -43,4 +36,15 @@ char	*expand_token(char *value, int exit_code, t_list_env *env, t_garbage **garb
 		}
 	}
 	return (res);
+}
+
+char	*expand_token(char *value, int exit_code
+		, t_list_env *env, t_garbage **garb)
+{
+	t_expand_ctx	ctx;
+
+	ctx.exit_code = exit_code;
+	ctx.env = env;
+	ctx.garb = garb;
+	return (expand_loop(value, &ctx, garb));
 }

@@ -6,13 +6,12 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:37:21 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 14:22:13 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 18:11:28 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// Remplace un token par une liste
 void	replace_token(t_token **head, t_token *old, t_token *new_list)
 {
 	t_token	*prev;
@@ -37,7 +36,6 @@ void	replace_token(t_token **head, t_token *old, t_token *new_list)
 		last->next = old->next;
 }
 
-// Renvoie le dernier token d'une liste
 t_token	*get_last_token(t_token *tokens)
 {
 	while (tokens && tokens->next)
@@ -45,27 +43,14 @@ t_token	*get_last_token(t_token *tokens)
 	return (tokens);
 }
 
-// Split une string expandée en tokens (type WORD)
-t_token	*split_into_tokens(char *str, t_garbage **garb)
+t_token	*split_by_space(char *str, t_garbage **garb)
 {
 	t_token	*head;
 	t_token	*new;
 	char	**words;
 	int		i;
-	size_t	len;
 
 	head = NULL;
-	len = ft_strlen(str);
-	if (len >= 2 && str[0] == '"' && str[len - 1] == '"')
-	{
-		char *trimmed = ft_substr(str, 1, len - 2, garb);
-		if (!trimmed)
-			return (NULL);
-		new = new_token_0(trimmed, WORD, garb);
-		new->quoted = 1;
-		add_token_back(&head, new);
-		return (head);
-	}
 	words = ft_split(str, ' ', garb);
 	i = 0;
 	while (words && words[i])
@@ -78,5 +63,31 @@ t_token	*split_into_tokens(char *str, t_garbage **garb)
 	return (head);
 }
 
+t_token	*handle_quoted_string(char *str, t_garbage **garb)
+{
+	t_token	*head;
+	t_token	*new;
+	char	*trimmed;
 
+	head = NULL;
+	trimmed = ft_substr(str, 1, ft_strlen(str) - 2, garb);
+	if (!trimmed)
+		return (NULL);
+	new = new_token_0(trimmed, WORD, garb);
+	new->quoted = 1;
+	add_token_back(&head, new);
+	return (head);
+}
 
+t_token	*split_into_tokens(char *str, t_garbage **garb)
+{
+	size_t	len;
+
+	if (!str)
+		return (NULL);
+	len = ft_strlen(str);
+	if (len >= 2 && str[0] == '"' && str[len - 1] == '"')
+		return (handle_quoted_string(str, garb));
+	else
+		return (split_by_space(str, garb));
+}
