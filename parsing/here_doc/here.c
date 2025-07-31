@@ -3,67 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   here.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:21:08 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 17:54:51 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/31 18:58:36 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static int heredoc_expand(char *line, t_list_env *env, t_garbage **garb, char **res)
+int	heredoc_expand(char *line, t_list_env *env, t_garbage **garb, char **res)
 {
-	int i = 0;
-	char *tmp = ft_strdup("", garb);
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	tmp = ft_strdup("", garb);
 	while (line[i])
 	{
 		if (line[i] == '$')
 		{
 			i++;
 			if (line[i] == '?')
-			{
-				char *status = ft_itoa(g_exit_status, garb);
-				tmp = ft_strjoin(tmp, status, garb);
-				i++;
-			}
+				i += append_exit_status(&tmp, garb);
 			else if (ft_isalpha(line[i]) || line[i] == '_')
-			{
-				int start = i;
-				while (ft_isalnum(line[i]) || line[i] == '_')
-					i++;
-				char *name = ft_substr(line, start, i - start, garb);
-				char *val = get_env_value(name, env, garb);
-				tmp = ft_strjoin(tmp, val, garb);
-			}
+				i = append_variable(line + i, env, garb, &tmp);
 			else
-			{
-				char raw[3] = {'$', line[i], 0};
-				tmp = ft_strjoin(tmp, raw, garb);
-				i++;
-			}
+				append_raw_dollar(&tmp, line[i++], garb);
 		}
 		else
-		{
-			char c[2] = {line[i++], 0};
-			tmp = ft_strjoin(tmp, c, garb);
-		}
+			append_normal_char(&tmp, line[i++], garb);
 	}
 	*res = tmp;
 	return (0);
 }
 
-static int create_heredoc(char *delimiter, int expand, t_list_env *env, t_garbage **garb)
+int	create_heredoc(char *delimiter, int expand,
+		t_list_env *env, t_garbage **garb)
 {
 	char	*line;
 	char	*final;
 	int		fd[2];
+
 	pipe(fd);
 	while (1)
 	{
 		line = readline("> ");
 		if (!line || ft_strcmp(line, delimiter) == 0)
-			break;
+			break ;
 		if (expand)
 			heredoc_expand(line, env, garb, &final);
 		else
@@ -77,22 +64,20 @@ static int create_heredoc(char *delimiter, int expand, t_list_env *env, t_garbag
 
 void	process_heredocs(t_exec *exec, t_list_env *env, t_garbage **garb)
 {
+	t_file	*file;
+	int		expand;
+
 	while (exec)
 	{
-		t_file *file = exec->files;
+		file = exec->files;
 		while (file)
 		{
 			if (file->type == HERE_DOC)
 			{
-				int	expand = 1;
+				expand = 1;
 				if (file->file_name[0] == '\'' || file->file_name[0] == '"')
 					expand = 0;
-
 				file->fd = create_heredoc(file->file_name, expand, env, garb);
-
-				//char	*fd_str = ft_itoa(fd, garb); // convertit le fd en chaîne
-				//char	*fd_path = ft_strjoin("", fd_str, garb); // crée le chemin final
-				//file->file_name = fd_path;
 			}
 			file = file->next;
 		}
