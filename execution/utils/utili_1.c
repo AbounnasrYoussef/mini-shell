@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:37 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/31 16:10:30 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/31 17:58:25 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_strcmpp(const char *s1, const char *s2)
 
 	i = 0;
     if (s1 == NULL || s2 == NULL)
-        return 0;
+        return 22425363;
 	while (s1[i] || s2[i] )
 	{
 		if ((unsigned char)s1[i] != (unsigned char)s2[i])
@@ -51,6 +51,10 @@ int ft_strlenn(char *str)
 	int i;
 
 	i = 0;
+	if (str == NULL)
+	{
+		return 0;
+	}
 	while (str[i] != '\0')
 	{
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:21:08 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 15:35:47 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 17:54:51 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void	process_heredocs(t_exec *exec, t_list_env *env, t_garbage **garb)
 				if (file->file_name[0] == '\'' || file->file_name[0] == '"')
 					expand = 0;
 
-				int		fd = create_heredoc(file->file_name, expand, env, garb);
+				file->fd = create_heredoc(file->file_name, expand, env, garb);
 
-				char	*fd_str = ft_itoa(fd, garb); // convertit le fd en chaîne
-				char	*fd_path = ft_strjoin("", fd_str, garb); // crée le chemin final
-				file->file_name = fd_path;
+				//char	*fd_str = ft_itoa(fd, garb); // convertit le fd en chaîne
+				//char	*fd_path = ft_strjoin("", fd_str, garb); // crée le chemin final
+				//file->file_name = fd_path;
 			}
 			file = file->next;
 		}

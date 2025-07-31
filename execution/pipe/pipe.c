@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/31 17:27:08 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/31 17:55:27 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,10 +180,8 @@ void ft_redirection(t_exec *data)
 		}
 		else if (file->type == 5)
 		{
-			fd_herdoc = (int)ft_atoi(ft_strlenn(file->file_name), file->file_name);
-			printf("%d\n\n", fd_herdoc);
-			dup2(fd_herdoc, STDIN_FILENO);
-			close(fd_herdoc);
+			dup2(file->fd, STDIN_FILENO);
+			close(file->fd);
 		}
 		file = file->next;
 	}

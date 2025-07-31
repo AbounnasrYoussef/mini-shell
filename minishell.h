@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 17:26:21 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/07/31 17:54:15 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_file
 {
 	int				type;
 	char			*file_name;
+	int				fd;
 	struct s_file	*next;
 }	t_file;
 
