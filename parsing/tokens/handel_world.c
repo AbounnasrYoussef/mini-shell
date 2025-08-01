@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:38:19 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 18:09:50 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/01 11:02:12 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ t_token	*new_token(char *value, type_token type, int i, t_garbage **garb)
 	return (tok);
 }
 
-static void	handle_quoted_part(const char *line, int *i, t_quote_ctx *ctx)
+void	handle_quoted_part(const char *line, int *i,
+			char **res, int *quoted_flag, t_garbage **garb)
 {
 	char	quote;
 	int		start;
@@ -41,52 +42,45 @@ static void	handle_quoted_part(const char *line, int *i, t_quote_ctx *ctx)
 		(*i)++;
 	if (line[*i] == quote)
 	{
-		substr = ft_substr(line, start, *i - start, ctx->garb);
-		*(ctx->res) = ft_strjoin(*(ctx->res), substr, ctx->garb);
+		substr = ft_substr(line, start, *i - start, garb);
+		*res = ft_strjoin(*res, substr, garb);
 		if (quote == '\'')
-			*(ctx->quoted_flag) = 1;
-		else if (quote == '"')
-			*(ctx->quoted_flag) = 2;
+			*quoted_flag = 1;
+		else if (quote == '\"')
+			*quoted_flag = 2;
 		(*i)++;
 	}
 }
 
-static char	*read_word_loop(const char *line, int *i, t_quote_ctx *ctx)
+
+void	handle_word(const char *line, int *i,
+			t_token **tokens, t_garbage **garb)
 {
 	char	*res;
 	char	*word;
 	int		start;
+	int		quoted_flag;
 
-	res = ft_strdup("", ctx->garb);
+	quoted_flag = 0;
+	res = ft_strdup("", garb);
 	while (line[*i] && !skip_space(line[*i]) && !is_operator(line[*i]))
 	{
-		if (line[*i] == '\'' || line[*i] == '"')
-			handle_quoted_part(line, i, ctx);
+		if (line[*i] == '\'' || line[*i] == '\"')
+		{
+			handle_quoted_part(line, i, &res, &quoted_flag, garb);
+		}
 		else
 		{
 			start = *i;
-			while (line[*i] && !skip_space(line[*i]) && !is_operator(line[*i])
-				&& line[*i] != '\'' && line[*i] != '"')
+			while (line[*i] && !skip_space(line[*i])
+				&& !is_operator(line[*i])
+				&& line[*i] != '\'' && line[*i] != '\"')
 				(*i)++;
-			word = ft_substr(line, start, *i - start, ctx->garb);
-			res = ft_strjoin(res, word, ctx->garb);
+			word = ft_substr(line, start, *i - start, garb);
+			res = ft_strjoin(res, word, garb);
 		}
 	}
-	return (res);
-}
-
-void	handle_word(const char *line, int *i
-		, t_token **tokens, t_garbage **garb)
-{
-	char		*res;
-	int			quoted_flag;
-	t_quote_ctx	ctx;
-
-	quoted_flag = 0;
-	ctx.res = &res;
-	ctx.quoted_flag = &quoted_flag;
-	ctx.garb = garb;
-	res = read_word_loop(line, i, &ctx);
 	if (res && res[0] != '\0')
 		add_token(tokens, new_token(res, WORD, quoted_flag, garb));
 }
+
