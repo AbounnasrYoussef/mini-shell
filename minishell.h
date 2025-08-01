@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 22:30:48 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/01 11:28:18 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,6 @@ typedef struct s_expand_ctx
 	t_garbage	**garb;
 }	t_expand_ctx;
 
-typedef struct s_quote_ctx
-{
-	char		**res;
-	int			*quoted_flag;
-	t_garbage	**garb;
-}	t_quote_ctx;
 
  typedef struct s_ctx
 {
