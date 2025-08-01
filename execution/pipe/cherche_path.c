@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/31 22:08:56 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/01 13:05:11 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char *cherche_path_cmd(char *cmd, t_list_env *env, int argc, t_exec *data)
 	path_cmd = NULL;
 	i = 0;
 	if (!cmd || !cmd[0])
-        return NULL;
+      return NULL;  
 	if (access(cmd, X_OK) == 0)
         return cmd;
 	if (cmd[0] == '/' || cmd[0] == '.') {

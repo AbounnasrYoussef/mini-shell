@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/01 10:47:49 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/01 13:04:06 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 		//	if (tmp->cmd)
 		//	{
 		//		for (int j = 0; tmp->cmd[j]; j++)
-		//			printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
+		//			printf("cmd[%d] = '%s'\n", j, tmp->cmd[j]);
 		//	}
 
 		//	t_file *file = tmp->files;
