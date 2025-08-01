@@ -430,10 +430,10 @@
 #bash-3.2$ $?
 #bash: 126: command not found
 
-bash-3.2$ Makefile
-bash: Makefile: Permission denied
-bash-3.2$ $?
-bash: 126: No such file or directory
+#bash-3.2$ Makefile
+#bash: Makefile: Permission denied
+#bash-3.2$ $?
+#bash: 126: No such file or directory
 
 unset USER 
 export | grep USER
@@ -442,3 +442,87 @@ bash-3.2$ $?
 bash: 127: command not found
 
 bash | bash
+
+minishell$ exit | exit
+exit
+minishell$ 
+
+bash: .: filename argument required
+.: usage: . filename [arguments]
+bash-3.2$ ..
+bash: ..: command not found
+
+minishell$ cd ..
+cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+minishell$ pwd
+(null)
+minishell$ cd .. 
+cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+minishell$ pwd
+(null)
+minishell$ 
+
+touch ls
+chmod +x
+minishell$ unset PATH
+minishell$ cd /bin
+minishell$ ls
+minishell$ z
+
+
+bash-3.2$ ls < ss > d
+bash: ss: No such file or directory
+
+➜  minishell2 git:(master) ✗ ./minishell 
+minishell$ ./minishell | ls
+Makefile        execution       minishell       minishell.o     signals.c
+a               get_next_line.c minishell.c     parsing         signals.o
+d               get_next_line.o minishell.h     s
+
+
+
+
+
+^C
+minishell$ 
+
+bash-3.2$ < $hijk
+bash: $hijk: ambiguous redirect
+
+
+/// Parsing
+
+bash-3.2$ << s cat
+> $PATH
+> s
+/mnt/homes/arahhab/Library/Python/3.8/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/mnt/homes/arahhab/Library/Python/3.8/bin/
+bash-3.2$ << s'' cat 
+> $PATH
+> s
+$PATH
+bash-3.2$ 
+
+bash-3.2$ export PATH=/bin
+bash-3.2$ ls
+$               d               minishell       parsing         signals.o
+;               execution       minishell.c     s
+Makefile        get_next_line.c minishell.h     saaa
+a               get_next_line.o minishell.o     signals.c
+
+
+/usr/bin/grep
+minishell$ export PATH=dsfd
+minishell$ ls
+ls: command not found
+minishell$ export PATH=/bin
+minishell$ ls
+
+minishell$ export PATH=dfsd
+minishell$ export PATH=/bin
+minishell$ ls
+minishell$ ls
+minishell$ ls
+$               d               minishell       parsing         signals.o
+;               execution       minishell.c     s
+Makefile        get_next_line.c minishell.h     saaa
+a               get_next_line.o minishell.o     signals.c

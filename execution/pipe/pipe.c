@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/01 15:27:18 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/01 20:52:47 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ void ft_one_cmd(t_exec *data, int argc, t_list_env *env)
 	int original_fd_in;
 	int original_fd_out;
 	
-	if (access(data->cmd[0], X_OK) == 0)
-        ;
-	else
-		perror("access");
 	if (is_espace_tabulion(data->cmd[0]) == 0)
 	{
 		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
@@ -85,11 +81,11 @@ void ft_exec_child(t_exec *data, int argc, t_list_env *env, t_info_pipe inf_pip)
 		inf_pip.path_cmd = cherche_path_cmd(data->cmd[0], env, argc, data);
 		if (inf_pip.path_cmd)
 			(execve(inf_pip.path_cmd, data->cmd, inf_pip.tab_envv), exit(1));
-		if (access(data->cmd[0], X_OK | F_OK) == -1 )
+		if (access(data->cmd[0], X_OK ) == -1 )
 		{
 
 			perror("access");
-			exit(1);
+			exit(126);
 		}
 	}
 	else
