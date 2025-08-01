@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/01 13:08:55 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/01 13:21:16 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void ft_one_cmd(t_exec *data, int argc, t_list_env *env)
 	int original_fd_in;
 	int original_fd_out;
 	
+	if (is_espace_tabulion(data->cmd[0]) == 0)
+	{
+		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
+		write(2, ": command not found\n", 20);
+	}
 	if (data->files == NULL)
 		ft_built_in(argc, data, env);
 	else
@@ -130,11 +135,6 @@ void ft_pipe(int argc, t_exec *data, t_list_env *env)
 	inf_pip.in_fd = STDIN_FILENO;
 	inf_pip.in_bultin = 0;
 	inf_pip.tab_envv = tab_env(env);
-	//if (data->cmd[0][0] == ' ')
-	//{
-	//	write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
-	//	write(2, ": command not found\n", 20);
-	//}
 	if(count_cmd(data) == 1 && ft_strlen_argc(data->cmd) == 1 
 		&& ft_strcmpp(data->cmd[0], "export") != 0 && is_built_in(data->cmd[0]) == 0)
 		ft_one_cmd(data, argc, env);

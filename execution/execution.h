@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/31 22:15:25 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/01 13:23:44 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ char		**tab_env(t_list_env *env);
 int			is_slash(char *str);
 int			count_cmd(t_exec *data);
 int			is_built_in(char *str);
+int			is_espace_tabulion(char *cmd);
 unsigned long long	ft_atoi(int len, char *nbr);
 #endif

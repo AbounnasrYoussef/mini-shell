@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/01 13:05:11 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/01 13:19:16 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ char *ft_concat(char *str, char *str2)
 	return new_str;
 }
 
+int is_espace_tabulion(char *cmd)
+{
+	int i;
+
+	i = 0;
+	while(cmd[i] != '\0')
+	{
+		if (cmd[i] != ' ' && cmd[i] != '\t')
+			return 1;
+		i++;
+	}
+	return 0;	
+}
+
 char *cherche_path_cmd(char *cmd, t_list_env *env, int argc, t_exec *data)
 {
 	
@@ -56,6 +70,12 @@ char *cherche_path_cmd(char *cmd, t_list_env *env, int argc, t_exec *data)
 	path = NULL;
 	path_cmd = NULL;
 	i = 0;
+	if (is_espace_tabulion(cmd) == 0)
+	{
+		write(2, cmd, ft_strlenn(cmd));
+		write(2, ": command not found\n", 20);
+		exit(1);
+	}
 	if (!cmd || !cmd[0])
       return NULL;  
 	if (access(cmd, X_OK) == 0)
