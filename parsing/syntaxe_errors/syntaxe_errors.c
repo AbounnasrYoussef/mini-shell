@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntaxe_errors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 08:11:03 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 15:39:50 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/01 10:09:16 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int	syntaxe_errors(char *args)
 		else if (args[i] == '>' || args[i] == '<')
 		{
 			if (error_redir(args, &i) == -1)
+			{
 				return (0);
+			}
+
 		}
 		i++;
 	}

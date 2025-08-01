@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/01 08:50:29 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/01 10:14:28 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,18 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 			break ;
 		if (*line)
 			add_history(line);
-		if (!syntaxe_errors(line))
+		if (syntaxe_errors(line) == 0)
 		{
 			free(line);
+			free_exec_list(*data);
 			continue ;
 		}
 		token = tokens(line, &garb);
 		free(line);
 		if (!token)
+		{
 			continue ;
+		}
 
 		expand_all_tokens(&token, last_exit_code, *env, &garb);
 		*data = parse_tokens_to_exec_list(token, &garb);
@@ -64,6 +67,7 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 		// 👇 heredoc traité ici AVANT exécution
 		process_heredocs(*data, *env, &garb);
 
+
 		// 🔍 Debug - Afficher les commandes et redirections
 
 		if (*data != NULL)
@@ -72,6 +76,7 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
             ft_free_all(garb);
             *data = NULL;
         }
+		//t_exec *tmp = *data;
 		//int i = 1;
 		//while (tmp)
 		//{
@@ -95,7 +100,7 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 
 		// 🧹 Nettoyage mémoire
 		//ft_free_all(garb);
-		// Optionnel : free_exec_list(*data); *data = NULL;
+		//free_exec_list(*data); *data = NULL;
 	}
 }
 

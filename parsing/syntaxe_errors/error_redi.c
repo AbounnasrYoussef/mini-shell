@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_redi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 08:17:40 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 15:40:16 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/01 10:13:46 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static int	check_redir_target(char *str, int *i)
 		while (str[*i] && str[*i] != quote)
 			(*i)++;
 		if (str[*i] != quote)
-			printf_error();
+			return (printf_error());
 		(*i)++;
 		return (1);
 	}
 	if (!str[*i])
-		printf_error();
+		return (printf_error());
 	if (str[*i] == '|' || str[*i] == '>' || str[*i] == '<')
-		printf_error();
+		return (printf_error());
 	return (1);
 }
 
