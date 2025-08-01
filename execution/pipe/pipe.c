@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/01 13:21:16 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/01 15:27:18 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void ft_one_cmd(t_exec *data, int argc, t_list_env *env)
 	int original_fd_in;
 	int original_fd_out;
 	
+	if (access(data->cmd[0], X_OK) == 0)
+        ;
+	else
+		perror("access");
 	if (is_espace_tabulion(data->cmd[0]) == 0)
 	{
 		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
@@ -65,6 +69,11 @@ void ft_exec_child(t_exec *data, int argc, t_list_env *env, t_info_pipe inf_pip)
 			(write(2, ": is a directory \n", 18), exit(1));
 		}	
 	}
+	else if(!S_ISREG((inf_pip.info).st_mode) && data->cmd[0][ft_strlenn(data->cmd[0]) - 1] == '/')
+	{
+		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
+		(write(2, ": Not a directory\n", 18), exit(1));
+	}
 	else if (!S_ISREG((inf_pip.info).st_mode) && is_slash(data->cmd[0]) == 0)
 	{
 		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
@@ -76,6 +85,12 @@ void ft_exec_child(t_exec *data, int argc, t_list_env *env, t_info_pipe inf_pip)
 		inf_pip.path_cmd = cherche_path_cmd(data->cmd[0], env, argc, data);
 		if (inf_pip.path_cmd)
 			(execve(inf_pip.path_cmd, data->cmd, inf_pip.tab_envv), exit(1));
+		if (access(data->cmd[0], X_OK | F_OK) == -1 )
+		{
+
+			perror("access");
+			exit(1);
+		}
 	}
 	else
 		exit(1);
@@ -112,6 +127,7 @@ void ft_child(t_exec *data, int argc, t_list_env *env, t_info_pipe *inf_pip)
 
 void ft_plusieur_cmd(t_exec *data, int argc, t_list_env *env, t_info_pipe *inf_pip)
 {
+
 	while (data != NULL)
 	{
 		if (data->next != NULL)
