@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/01 08:31:06 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/01 08:50:29 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 
 
 		// 🧹 Nettoyage mémoire
-		ft_free_all(garb);
-		free_exec_list(*data); *data = NULL;
+		//ft_free_all(garb);
+		// Optionnel : free_exec_list(*data); *data = NULL;
 	}
 }
 
