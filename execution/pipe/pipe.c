@@ -6,13 +6,11 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/02 17:04:42 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/02 18:07:25 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
-#include <sys/stat.h>
-#include <sys/wait.h>
 #include "../../minishell.h"
 
 typedef struct s_info_pipe
@@ -86,7 +84,7 @@ void ft_exec_child(t_exec *data, t_list_env *env, t_info_pipe inf_pip, int count
 	inf_pip.in_bultin = ft_built_in(data, env, count_cmd);
 	if (inf_pip.in_bultin == -1)
 	{
-		inf_pip.path_cmd = cherche_path_cmd(data->cmd[0], env, data);
+		inf_pip.path_cmd = cherche_path_cmd(data->cmd[0], env, data, count_cmd);
 		if (inf_pip.path_cmd)
 		{
 			//printf("%s\n",inf_pip.path_cmd);

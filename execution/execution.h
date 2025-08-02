@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/02 15:46:01 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/02 17:41:27 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include <readline/history.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
 
 typedef struct s_list_env  t_list_env;
 typedef struct s_exec  t_exec;
@@ -44,7 +46,7 @@ void		ft_unset(t_list_env *list_env, char **args);
 void		ft_print_env_ex(t_list_env *env);
 t_list_env*	ft_supp_arg(t_list_env *list_env, char *arg);
 char		*ft_concat(char *str, char *str2);
-char		*cherche_path_cmd(char *cmd, t_list_env *env, t_exec *data);
+char		*cherche_path_cmd(char *cmd, t_list_env *env, t_exec *data, int count_cmd);
 int			ft_built_in(t_exec *data, t_list_env *env, int count_cmd);
 t_list_env	*supp_var_nv(t_list_env *env);
 void		ft_print_env(t_list_env *env);
