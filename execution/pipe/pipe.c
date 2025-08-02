@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/02 18:07:25 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/02 19:19:29 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,8 @@ void ft_exec_child(t_exec *data, t_list_env *env, t_info_pipe inf_pip, int count
 		inf_pip.path_cmd = cherche_path_cmd(data->cmd[0], env, data, count_cmd);
 		if (inf_pip.path_cmd)
 		{
-			//printf("%s\n",inf_pip.path_cmd);
 			data->cmd[0] = inf_pip.path_cmd;
 			execve(inf_pip.path_cmd, data->cmd, inf_pip.tab_envv);
-			perror("execve");
 			exit(1);
 		}
 		if (access(data->cmd[0], X_OK ) == -1 )

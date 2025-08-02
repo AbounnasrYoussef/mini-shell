@@ -554,3 +554,77 @@ bash-3.2$ << s'' cat
 > s
 $PATH
 bash-3.2$ 
+
+inishell$ < $y ls
+---- Commande 1 ----
+Redirection type: 2, file: ls
+
+minishell$ export a="ls -la"
+minishell$ $a
+
+
+minishell$ $"HOME"
+---- Commande 1 ----
+cmd[0] = '/mnt/homes/arahhab'
+
+minishell$ $""
+---- Commande 1 ----
+cmd[0] = '$'
+
+minishell$ $H"OME"
+---- Commande 1 ----
+cmd[0] = '/mnt/homes/arahhab'
+
+"	"
+
+
+//////////////////////
+
+
+minishell$ unset PATH
+minishell$ ./minishell
+minishell$ ls
+
+touch ls
+minishell$ "" | << s | << so | ls
+> s
+> so
+: command not found
+
+touch ls
+minishell$  << s  ls
+> s
+
+minishell$ exit ""
+exit
+bash-3.2$ 
+
+
+minishell$ unset PWD
+minishell$ pwd
+/mnt/homes/arahhab/Desktop/minishell2
+minishell$ echo $PWD
+minishell$ cd ..
+minishell$ echo $PWD
+
+minishell$ unset PWD
+bash-3.2$ export | grep PWD
+declare -x OLDPWD=""
+
+env -i
+
+bash-3.2$ mkdir -p 1/1/1/1/1/1/1/1/1/1/1/
+bash-3.2$ cd 1/1/1/1/1/1/1/1/1/1/1/
+bash-3.2$ rm -rf 1
+bash-3.2$ cd ..
+bash: cd: ..: No such file or directory
+bash-3.2$ pwd
+/mnt/homes/arahhab/Desktop/minishell2/1/1/1/1/1/1/1/1/1/1/1
+bash-3.2$ cd ..
+cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+bash-3.2$ pwd
+/mnt/homes/arahhab/Desktop/minishell2/1/1/1/1/1/1/1/1/1/1/1/..
+bash-3.2$ cd ..
+cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+bash-3.2$ pwdcd
+-> /
