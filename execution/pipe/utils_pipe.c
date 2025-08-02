@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:12:25 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/01 12:45:14 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/02 17:04:36 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char **tab_env(t_list_env *env)
 		}
 		copy_env = copy_env->next;
 	}
+	tab_env[i] = NULL;
 	return tab_env;
 }
 

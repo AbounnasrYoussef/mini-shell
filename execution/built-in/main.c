@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/31 21:52:30 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/02 15:48:13 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void error_env(char *str)
 	write(2, ": No such file or directory\n", 28);
 }
 
-int ft_built_in(int argc, t_exec *data, t_list_env *env)
+int ft_built_in(t_exec *data, t_list_env *env, int count_cmd)
 {
 	int len = 0;
 	if (data->cmd[1] != NULL)
@@ -77,12 +77,12 @@ int ft_built_in(int argc, t_exec *data, t_list_env *env)
 	else if (ft_strcmpp(data->cmd[0], "echo") == 0)
 		return (ft_echo(data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "exit") == 0)
-		return (ft_exit (len, data->cmd), 0);
+		return (ft_exit (count_cmd, len, data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "export") == 0)
 		return (ft_export(env, data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "env") == 0)
 	{
-		if (argc == 1)
+		if (data->cmd[1] == NULL)
 			return (ft_print_env(env), 0);
 		else
 			return(error_env(data->cmd[1]), 0);

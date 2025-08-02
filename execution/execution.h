@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/01 13:26:12 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/02 15:46:01 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			ft_strlen_argc(char **str);
 int			ft_strlenn(char *str);
 void		ft_cd(char **args, t_list_env *env);
 void		ft_echo(char **str);
-void		ft_exit (int len, char **str);
+void		ft_exit (int argc, int len, char **str);
 void		ft_lstadd_backk(t_list_env **lst, t_list_env *new);
 t_list_env	*ft_lstneww(void *variable, void *valeur_vari, void *ligne);
 t_list_env	*ex_sort(t_list_env *list_env);
@@ -44,12 +44,12 @@ void		ft_unset(t_list_env *list_env, char **args);
 void		ft_print_env_ex(t_list_env *env);
 t_list_env*	ft_supp_arg(t_list_env *list_env, char *arg);
 char		*ft_concat(char *str, char *str2);
-char		*cherche_path_cmd(char *cmd, t_list_env *env, int argc, t_exec *data);
-int			ft_built_in(int argc, t_exec *data, t_list_env *env);
+char		*cherche_path_cmd(char *cmd, t_list_env *env, t_exec *data);
+int			ft_built_in(t_exec *data, t_list_env *env, int count_cmd);
 t_list_env	*supp_var_nv(t_list_env *env);
 void		ft_print_env(t_list_env *env);
 void		ft_print_env_ex(t_list_env *env);
-void		ft_pipe(int argc, t_exec *data, t_list_env *env);
+void		ft_pipe(t_exec *data, t_list_env *env);
 char		*ft_cherch_home(t_list_env *env);
 int			verif_exist(t_list_env **list_env, char *arg);
 void		repmlacer_elem(t_list_env **list_env, char *var, char *arg, int d);
@@ -63,5 +63,6 @@ int			is_slash(char *str);
 int			count_cmd(t_exec *data);
 int			is_built_in(char *str);
 int			is_espace_tabulion(char *cmd);
-unsigned long long	ft_atoi(int len, char *nbr);
+int			ft_count_cmd(t_exec *data);
+unsigned long long	ft_atoi(int len, char *nbr, int count_cmd);
 #endif

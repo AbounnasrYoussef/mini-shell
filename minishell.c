@@ -3,29 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/02 10:45:39 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/02 17:22:47 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "execution/execution.h"
 
 int	g_exit_status = 0;
-
-int ft_count_cmd(t_exec *data)
-{
-	int i;
-
-	i = 0;
-	while (data != NULL)
-	{
-		data = data->next;
-		i++;
-	}
-	return i;
-}
 
 void	ft_read_loop(t_list_env **env, t_exec **data)
 {
@@ -72,7 +60,8 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 		// printf("%d\n",ft_count_cmd(*data));
 		if (*data != NULL)
         {
-            ft_pipe(ft_count_cmd(*data), *data, *env);
+            //printf("%d\n\n", ft_count_cmd(*data));
+			ft_pipe(*data, *env);
             ft_free_all(garb);
             *data = NULL;
         }
@@ -189,7 +178,9 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	data = NULL;
-	env_list = ft_env(envp);
+	if (!isatty(0) || !isatty(1))
+		return 1;
+	env_list = ft_envvv(envp);
 	ft_read_loop(&env_list, &data);
 	return (0);
 }
