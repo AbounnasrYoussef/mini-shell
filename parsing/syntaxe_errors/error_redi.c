@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_redi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 08:17:40 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/01 10:13:46 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/02 11:31:44 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	printf_error(void)
 {
 	write(2, "minishell: syntax error\n", 25);
+	ft_exit_status(258, 1);
 	return (-1);
 }
 

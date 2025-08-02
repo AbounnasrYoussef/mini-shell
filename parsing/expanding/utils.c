@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:41:33 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 18:10:29 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/02 11:30:17 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	ft_exit_status(int status, int flag)
 {
 	static int	exit_status;
 
-	exit_status = 0;
 	if (flag)
 		exit_status = status;
 	return (exit_status);

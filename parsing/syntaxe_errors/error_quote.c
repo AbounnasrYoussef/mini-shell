@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:00:14 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/01 10:53:47 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/02 11:32:05 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	error_quote(char *caracter, int *i)
 			if (!caracter[*i])
 			{
 				write(2, "minishell: syntax error\n", 25);
+				ft_exit_status(258, 1);
 				return (-1);
 			}
 		}
