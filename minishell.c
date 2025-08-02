@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/01 20:17:02 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/02 10:45:39 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,33 +69,33 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 
 
 		// 🔍 Debug - Afficher les commandes et redirections
-
+		// printf("%d\n",ft_count_cmd(*data));
 		if (*data != NULL)
         {
             ft_pipe(ft_count_cmd(*data), *data, *env);
             ft_free_all(garb);
             *data = NULL;
         }
-		//t_exec *tmp = *data;
-		//int i = 1;
-		//while (tmp)
-		//{
-		//	printf("---- Commande %d ----\n", i);
-		//	if (tmp->cmd)
-		//	{
-		//		for (int j = 0; tmp->cmd[j]; j++)
-		//			printf("cmd[%d] = '%s'\n", j, tmp->cmd[j]);
-		//	}
+		// t_exec *tmp = *data;
+		// int i = 1;
+		// while (tmp)
+		// {
+		// 	printf("---- Commande %d ----\n", i);
+		// 	if (tmp->cmd)
+		// 	{
+		// 		for (int j = 0; tmp->cmd[j]; j++)
+		// 			printf("cmd[%d] = '%s'\n", j, tmp->cmd[j]);
+		// 	}
 
-		//	t_file *file = tmp->files;
-		//	while (file)
-		//	{
-		//		printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
-		//		file = file->next;
-		//	}
-		//	tmp = tmp->next;
-		//	i++;
-		//}
+		// 	t_file *file = tmp->files;
+		// 	while (file)
+		// 	{
+		// 		printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
+		// 		file = file->next;
+		// 	}
+		// 	tmp = tmp->next;
+		// 	i++;
+		// }
 
 
 		// 🧹 Nettoyage mémoire

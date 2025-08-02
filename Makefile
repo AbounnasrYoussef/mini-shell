@@ -63,14 +63,15 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) minishell.h
+$(NAME): $(OBJ) 
 	$(CC) $(OBJ) -o $(NAME) -lreadline -L/mnt/homes/yabounna/.brew/opt/readline/lib
 
-$(OBJ): %.o : %.c 
+$(OBJ): %.o : %.c minishell.h
 	$(CC) $(CFLAGS) -c -I/mnt/homes/yabounna/.brew/opt/readline/include $< -o $@
 
 clean: 
 	rm -f $(OBJ)
+
 
 fclean: clean
 	rm -f $(NAME)

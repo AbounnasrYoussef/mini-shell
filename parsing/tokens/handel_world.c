@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:38:19 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/01 11:02:12 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/02 10:38:03 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ void	handle_quoted_part(const char *line, int *i,
 	(*i)++;
 	start = *i;
 	while (line[*i] && line[*i] != quote)
+	{
 		(*i)++;
+	}
 	if (line[*i] == quote)
 	{
 		substr = ft_substr(line, start, *i - start, garb);
@@ -80,7 +82,9 @@ void	handle_word(const char *line, int *i,
 			res = ft_strjoin(res, word, garb);
 		}
 	}
-	if (res && res[0] != '\0')
+	if (res)
+	{
 		add_token(tokens, new_token(res, WORD, quoted_flag, garb));
+	}
 }
 

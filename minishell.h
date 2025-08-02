@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/01 11:28:18 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/02 09:35:24 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 extern int g_exit_status;
 // enumeration pour reconnaitre chaque type
+
 
 typedef enum type_token{
     WORD,
