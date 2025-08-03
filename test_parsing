@@ -1,0 +1,32 @@
+/////////Parsing
+
+bash-3.2$ < $hijk
+bash: $hijk: ambiguous redirect
+
+/// Parsing
+
+bash-3.2$ << s'' cat 
+> $PATH
+> s
+$PATH
+bash-3.2$ 
+
+inishell$ < $y ls
+---- Commande 1 ----
+Redirection type: 2, file: ls
+
+minishell$ export a="ls -la"
+minishell$ $a
+
+
+minishell$ $"HOME"
+---- Commande 1 ----
+cmd[0] = '/mnt/homes/arahhab'
+
+minishell$ $""
+---- Commande 1 ----
+cmd[0] = '$'
+
+minishell$ $H"OME"
+---- Commande 1 ----
+cmd[0] = '/mnt/homes/arahhab'

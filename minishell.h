@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/02 14:28:29 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 12:29:56 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,5 @@ int	append_raw_dollar(char **tmp, char c, t_garbage **garb);
 int	append_variable(char *line, t_list_env *env,t_garbage **garb, char **tmp);
 int	append_exit_status(char **tmp, t_garbage **garb);
 int	is_valid_var_char(char c);
-
-char    *get_next_line(int fd);
 
 #endif
