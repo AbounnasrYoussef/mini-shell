@@ -25,8 +25,6 @@ SRC = minishell.c  signals.c\
 		$(PARS)/utils/ft_substr.c\
 		$(PARS)/utils/skip_space.c\
 		$(PARS)/ft_malloc/ft_malloc.c\
-		$(PARS)/env/env.c\
-		$(PARS)/env/split.c\
 		$(PARS)/expanding/dollar.c\
 		$(PARS)/expanding/double_quote.c\
 		$(PARS)/expanding/expand_token.c\

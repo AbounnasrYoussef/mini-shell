@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 21:42:24 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/31 21:45:45 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 18:43:39 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_isalphaa(int c)
 		return (0);
 }
 
-void check_args(t_list_env **list_env, char **args, int i, int j, int c)
+void check_args(t_list_env **list_env, char **args, int i, int j, int c, t_garbage **garb)
 {
 	while (args[i] != NULL)
 	{
@@ -56,7 +56,7 @@ void check_args(t_list_env **list_env, char **args, int i, int j, int c)
 		}
 		if (c == 0)
 		{
-			ajout_exp_elem(list_env, args[i], 0, 0);
+			ajout_exp_elem(list_env, args[i], 0, 0, garb);
 		}
 		else
 			c = 0;
@@ -97,7 +97,7 @@ t_list_env *ex_sort(t_list_env *list_env)
 	return debut;
 }
 
-void ft_export(t_list_env *list_env, char **args)
+void ft_export(t_list_env *list_env, char **args, t_garbage **garb)
 {
 	int c;
 	c = ft_strlen_argc(args);
@@ -107,6 +107,6 @@ void ft_export(t_list_env *list_env, char **args)
 	}
 	else
 	{
-		check_args(&list_env, args, 1, 1, 0);
+		check_args(&list_env, args, 1, 1, 0, garb);
 	}
 }

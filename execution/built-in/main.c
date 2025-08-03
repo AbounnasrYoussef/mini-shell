@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 16:23:30 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 18:49:59 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void ft_change_OLDPWD(t_list_env **env)
 	}
 }
 
-int ft_built_in(t_exec *data, t_list_env **env, int count_cmd)
+int ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
 {
 	int len = 0;
 	if (data->cmd[1] != NULL)
@@ -89,7 +89,7 @@ int ft_built_in(t_exec *data, t_list_env **env, int count_cmd)
 	else if (ft_strcmpp(data->cmd[0], "exit") == 0)
 		return (ft_exit (count_cmd, len, data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "export") == 0)
-		return (ft_export(*env, data->cmd), 0);
+		return (ft_export(*env, data->cmd, garb), 0);
 	else if (ft_strcmpp(data->cmd[0], "env") == 0)
 	{
 		if (data->cmd[1] == NULL)

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:12:25 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/02 17:04:36 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 18:37:59 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int ft_count_env(t_list_env *env)
 	return c;
 }
 
-char **tab_env(t_list_env *env)
+char **tab_env(t_list_env *env, t_garbage **garb)
 {
 	t_list_env *copy_env;
 	char **tab_env;
@@ -45,8 +45,8 @@ char **tab_env(t_list_env *env)
 	{
 		if (copy_env->valeur_vari != NULL)
 		{
-			tab_env[i] = ft_concat(copy_env->variable, "=");
-			tab_env[i] = ft_concat(tab_env[i], copy_env->valeur_vari);
+			tab_env[i] = ft_concat(copy_env->variable, "=", garb);
+			tab_env[i] = ft_concat(tab_env[i], copy_env->valeur_vari, garb);
 			i++;
 		}
 		copy_env = copy_env->next;

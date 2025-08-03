@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:53:52 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 16:10:12 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 18:39:07 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ static int	count_len_word(char const *s, char c, size_t *j, size_t *skip)
 	return (longueur);
 }
 
-static char	**alloc(char const *s, char c)
+static char	**alloc(char const *s, char c, t_garbage **garb)
 {
 	char	**sp;
 
+	(void)garb;
 	if (!s)
 		return (NULL);
 	sp = malloc(sizeof(char *) * (count_word(s, c) + 1));
@@ -78,7 +79,7 @@ static void	*free_split(char **array, int i)
 	return (NULL);
 }
 
-char	**ft_splitt(char const *s, char c)
+char	**ft_splitt(char const *s, char c, t_garbage **garb)
 {
 	size_t	skip;
 	size_t	i;
@@ -86,11 +87,12 @@ char	**ft_splitt(char const *s, char c)
 	size_t	sizee;
 	char	**alloce_array;
 
+	(void)garb;
 	skip = 0;
 	i = 0;
 	index = 0;
 	sizee = 0;
-	alloce_array = alloc(s, c);
+	alloce_array = alloc(s, c, garb);
 	if (!alloce_array)
 		return (NULL);
 	while (index < count_word(s, c))

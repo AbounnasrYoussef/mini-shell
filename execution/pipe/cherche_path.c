@@ -6,20 +6,20 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 16:50:45 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 18:51:59 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-char *ft_concat(char *str, char *str2)
+char *ft_concat(char *str, char *str2, t_garbage **garb)
 {
 	int l1;
 	int l2;
 	int i;
 	int j;
 	char *new_str;
-
+	(void)garb;
 	if(str == NULL)
 		return str2;
 	if(str2 == NULL)
@@ -58,7 +58,7 @@ int is_espace_tabulion(char *cmd)
 	return 0;	
 }
 
-char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd)
+char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd, t_garbage **garb)
 {
 	
 	char *path;
@@ -101,11 +101,11 @@ char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd)
 			exit(1);
 		}
 	}
-	paths = ft_splitt(path, ':');
+	paths = ft_splitt(path, ':', garb);
 	while (paths && paths[i] && (paths[i] != NULL))
 	{
-		paths[i] =  ft_concat(paths[i], "/");
-		paths[i] =  ft_concat(paths[i], cmd);
+		paths[i] =  ft_concat(paths[i], "/", garb);
+		paths[i] =  ft_concat(paths[i], cmd, garb);
 		if (access(paths[i], X_OK) == 0)
 		{
 			path_cmd = paths[i];
@@ -113,7 +113,7 @@ char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd)
 		}
 		i++;
 	}
-	if (path_cmd == NULL && ft_built_in(data, env, count_cmd) == -1)
+	if (path_cmd == NULL && ft_built_in(data, env, count_cmd, garb) == -1)
 	{
 		write(2, cmd, ft_strlenn(cmd));
 		write(2, ": command not found\n", 20);

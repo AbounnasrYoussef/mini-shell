@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 17:45:55 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 18:45:26 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int verif_exist(t_list_env **list_env, char *arg)
 	return 0;
 }
 
-void repmlacer_elem(t_list_env **list_env, char *var, char *arg, int d)
+void repmlacer_elem(t_list_env **list_env, char *var, char *arg, int d, t_garbage **garb)
 {
 	t_list_env *l_env;
 	
@@ -40,7 +40,7 @@ void repmlacer_elem(t_list_env **list_env, char *var, char *arg, int d)
 		{
 			if (d == 1)
 			{
-				(l_env)->valeur_vari = ft_concat((l_env)->valeur_vari , arg);
+				(l_env)->valeur_vari = ft_concat((l_env)->valeur_vari , arg, garb);
 			}
 			else
 				(l_env)->valeur_vari = arg;
@@ -49,7 +49,7 @@ void repmlacer_elem(t_list_env **list_env, char *var, char *arg, int d)
 	}
 }
 
-void ajout_exp_elem_help(t_list_env **list_env, char *args, int i, int c, int d, char **arg_varia)
+void ajout_exp_elem_help(t_list_env **list_env, char *args, int i, int c, int d, char **arg_varia, t_garbage **garb)
 {
 	while (args[i] != '\0')
 	{
@@ -59,19 +59,19 @@ void ajout_exp_elem_help(t_list_env **list_env, char *args, int i, int c, int d,
 	}
 	if (verif_exist(list_env, arg_varia[0]) == 0)
 	{
-		ft_lstadd_backk(list_env, ft_lstneww(arg_varia[0], arg_varia[1]));
+		ft_lstadd_backk(list_env, ft_lstneww(arg_varia[0], arg_varia[1], garb));
 	}
 	else
 	{
 		
 		if (arg_varia[1] != NULL)
 		{
-			repmlacer_elem(list_env, arg_varia[0], arg_varia[1], d);
+			repmlacer_elem(list_env, arg_varia[0], arg_varia[1], d, garb);
 		}
 	}
 }
 
-void ajout_exp_elem(t_list_env **list_env, char *args, int i, int j)
+void ajout_exp_elem(t_list_env **list_env, char *args, int i, int j, t_garbage **garb)
 {
 	int d;
 	char **arg_varia;
@@ -96,7 +96,7 @@ void ajout_exp_elem(t_list_env **list_env, char *args, int i, int j)
 		arg_varia[1] = NULL;
 	else
 		arg_varia[1] = malloc(200);
-	ajout_exp_elem_help(list_env,  args, i, 0, d, arg_varia);
+	ajout_exp_elem_help(list_env,  args, i, 0, d, arg_varia, garb);
 }
 
 void error_export(char **args, int i)
