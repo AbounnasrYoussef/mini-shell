@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 22:24:19 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 14:40:05 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 16:41:11 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void check_exec_fil(t_list_env *env, char *arg_cd, char *old_pwd, char *new_pwd)
 
 	a = 0;
 	
-	if (access(ft_cherch_home(env), F_OK) == 0)
+	if (access(arg_cd, F_OK) == 0)
 	{
 		old_pwd = getcwd(NULL, 0);
 		a = chdir(arg_cd);
@@ -68,13 +68,16 @@ void check_exec_fil(t_list_env *env, char *arg_cd, char *old_pwd, char *new_pwd)
 		}
 		new_pwd = getcwd(NULL, 0);
 		if (new_pwd == NULL)
+		{
 			write(2, "cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", 108);
+			a = chdir("/");
+		}
 		ft_r_pwd_oldp(env, new_pwd, old_pwd);
 	}
 	else
 	{
 		write(2, "cd: ", 4);
-		write(2, ft_cherch_home(env), ft_strlenn(ft_cherch_home(env)));
+		write(2, arg_cd, ft_strlenn(arg_cd));
 		write(2, ": No such file or directory\n", 28);
 	}
 }

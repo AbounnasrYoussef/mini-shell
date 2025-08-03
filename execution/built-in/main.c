@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 13:48:50 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 16:23:30 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void ft_print_env(t_list_env *env)
 {
 	while (env != NULL)
 	{
-		if (env->valeur_vari != NULL)
+		if (env->valeur_vari != NULL && ft_strcmpp(env->valeur_vari, "") != 0)
 			printf("%s=\"%s\"\n", env->variable, env->valeur_vari);
 		env = env->next;
 	}
@@ -42,6 +42,35 @@ void error_env(char *str)
 	write(2, "env: ", 5);
 	write(2, str, ft_strlenn(str));
 	write(2, ": No such file or directory\n", 28);
+}
+
+int check_exist_PWD(t_list_env *env)
+{
+	t_list_env *copy_env;
+	copy_env = env;
+	while(copy_env)
+	{
+		if (ft_strcmpp(copy_env->variable, "PWD") == 0)
+		{
+			return 0;
+		}
+		copy_env = copy_env->next; 
+	}
+	return 1;
+}
+
+void ft_change_OLDPWD(t_list_env **env)
+{
+	t_list_env *copy_env;
+	copy_env = *env;
+	while(copy_env)
+	{
+		if(ft_strcmpp(copy_env->variable, "OLDPWD") == 0)
+		{
+			copy_env->valeur_vari = "";
+		}
+		copy_env = copy_env->next;
+	}
 }
 
 int ft_built_in(t_exec *data, t_list_env **env, int count_cmd)
@@ -71,7 +100,10 @@ int ft_built_in(t_exec *data, t_list_env **env, int count_cmd)
 	else if (ft_strcmpp(data->cmd[0], "unset") == 0)
 	{
 		ft_unset(env, data->cmd);
-		//printf("%s\n\n", (*env)->variable);
+		if (check_exist_PWD(*env) == 1)
+		{
+			ft_change_OLDPWD(env);
+		}
 		return (0);
 	}
 		

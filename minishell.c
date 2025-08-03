@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/03 14:11:36 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 16:35:33 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,12 @@ int	main(int ac, char **av, char **envp)
 	if (!isatty(0) || !isatty(1))
 		return 1;
 	env_list = ft_envvv(envp);
+	if (env_list == NULL)
+	{
+		ft_lstadd_backk(&env_list, ft_lstneww("PATH", "/mnt/homes/arahhab/Library/Python/3.8/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", ""));
+		ft_lstadd_backk(&env_list, ft_lstneww("PWD", getcwd(NULL, 0), ""));
+		ft_lstadd_backk(&env_list, ft_lstneww("_", "/usr/bin/env", ""));
+	}
 	ft_read_loop(&env_list, &data);
 	return (0);
 }

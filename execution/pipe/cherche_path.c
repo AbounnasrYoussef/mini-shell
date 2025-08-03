@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 13:38:20 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 16:50:45 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,11 @@ char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd)
 	}
 	if (path == NULL)
 	{
-		write(2, cmd, ft_strlenn(cmd));
-		write(2, ": No such file or directory\n", 28);
-		exit(1);
+		if (access(cmd, X_OK) != 0)
+		{
+			perror("access");
+			exit(1);
+		}
 	}
 	paths = ft_splitt(path, ':');
 	while (paths && paths[i] && (paths[i] != NULL))
