@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/31 21:40:09 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 17:45:55 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void ajout_exp_elem_help(t_list_env **list_env, char *args, int i, int c, int d,
 	}
 	if (verif_exist(list_env, arg_varia[0]) == 0)
 	{
-		ft_lstadd_backk(list_env, ft_lstneww(arg_varia[0], arg_varia[1], args));
+		ft_lstadd_backk(list_env, ft_lstneww(arg_varia[0], arg_varia[1]));
 	}
 	else
 	{

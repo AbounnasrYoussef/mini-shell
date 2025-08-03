@@ -6,13 +6,13 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:33:27 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/02 15:06:50 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 17:46:09 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-t_list_env	*ft_lstneww(void *variable, void *valeur_vari, void *ligne)
+t_list_env	*ft_lstneww(void *variable, void *valeur_vari)
 {
 	t_list_env	*list1;
 
@@ -23,7 +23,6 @@ t_list_env	*ft_lstneww(void *variable, void *valeur_vari, void *ligne)
 	}
 	list1->variable = variable;
 	list1->valeur_vari = valeur_vari;
-	list1->ligne = ligne;
 	list1->next = NULL;
 	return (list1);
 }
@@ -63,10 +62,10 @@ t_list_env *ft_envvv(char **str)
 	while (str[i] != NULL )
 	{
 		splitt = ft_splitt(str[i], '=');
-		ft_lstadd_backk(&copy_env, ft_lstneww(splitt[0], splitt[1], str[i]));
+		ft_lstadd_backk(&copy_env, ft_lstneww(splitt[0], splitt[1]));
 		if(ft_strcmpp(splitt[0], "PWD") == 0)
 		{
-			ft_lstadd_backk(&copy_env, ft_lstneww("PO", splitt[1], str[i]));
+			ft_lstadd_backk(&copy_env, ft_lstneww("PO", splitt[1]));
 		}
 		if(i == 0)
 		{

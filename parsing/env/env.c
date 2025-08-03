@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 15:54:21 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 18:25:00 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/03 17:45:30 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_list_env	*ft_lstnew(void *variable, void *valeur_vari, void *ligne)
+t_list_env	*ft_lstnew(void *variable, void *valeur_vari)
 {
 	t_list_env	*list1;
 
@@ -23,7 +23,6 @@ t_list_env	*ft_lstnew(void *variable, void *valeur_vari, void *ligne)
 	}
 	list1->variable = variable;
 	list1->valeur_vari = valeur_vari;
-	list1->ligne = ligne;
 	list1->next = NULL;
 	return (list1);
 }
@@ -63,7 +62,7 @@ t_list_env	*ft_env(char **str)
 	while (str[i] != NULL )
 	{
 		splitt = i_split(str[i], '=');
-		ft_lstadd_back(&copy_env, ft_lstnew(splitt[0], splitt[1], str[i]));
+		ft_lstadd_back(&copy_env, ft_lstnew(splitt[0], splitt[1]));
 		if (i == 0)
 			debut_env = copy_env;
 		i++;
