@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/02 17:41:27 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 13:47:18 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,15 @@ t_list_env	*ex_sort(t_list_env *list_env);
 void		ft_print_env(t_list_env *env);
 void		ft_export(t_list_env *list_env, char **args);
 char		*ft_pwd(t_list_env *env);
-void		ft_unset(t_list_env *list_env, char **args);
+void		ft_unset(t_list_env **list_env, char **args);
 void		ft_print_env_ex(t_list_env *env);
-t_list_env*	ft_supp_arg(t_list_env *list_env, char *arg);
+void		ft_supp_arg(t_list_env **list_env, char *arg);
 char		*ft_concat(char *str, char *str2);
-char		*cherche_path_cmd(char *cmd, t_list_env *env, t_exec *data, int count_cmd);
-int			ft_built_in(t_exec *data, t_list_env *env, int count_cmd);
-t_list_env	*supp_var_nv(t_list_env *env);
+char		*cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd);
+int			ft_built_in(t_exec *data, t_list_env **env, int count_cmd);
 void		ft_print_env(t_list_env *env);
 void		ft_print_env_ex(t_list_env *env);
-void		ft_pipe(t_exec *data, t_list_env *env);
+void		ft_pipe(t_exec *data, t_list_env **env);
 char		*ft_cherch_home(t_list_env *env);
 int			verif_exist(t_list_env **list_env, char *arg);
 void		repmlacer_elem(t_list_env **list_env, char *var, char *arg, int d);

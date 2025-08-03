@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/02 19:19:29 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 13:47:50 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_info_pipe
 	struct stat info;
 }t_info_pipe;
 
-void ft_one_cmd(t_exec *data, t_list_env *env, int count_cmd)
+void ft_one_cmd(t_exec *data, t_list_env **env, int count_cmd)
 {
 	int original_fd_in;
 	int original_fd_out;
@@ -52,7 +52,7 @@ void ft_one_cmd(t_exec *data, t_list_env *env, int count_cmd)
 }
 
 
-void ft_exec_child(t_exec *data, t_list_env *env, t_info_pipe inf_pip, int count_cmd)
+void ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip, int count_cmd)
 {
 	if (data->files != NULL)
 		ft_redirection(data);
@@ -101,7 +101,7 @@ void ft_exec_child(t_exec *data, t_list_env *env, t_info_pipe inf_pip, int count
 		exit(1);
 }
 
-void ft_child(t_exec *data, t_list_env *env, t_info_pipe *inf_pip, int count_cmd)
+void ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip, int count_cmd)
 {
 	if (inf_pip->pid == -1)
 		(perror("fork"), exit(1));
@@ -130,7 +130,7 @@ void ft_child(t_exec *data, t_list_env *env, t_info_pipe *inf_pip, int count_cmd
 	}
 }
 
-void ft_plusieur_cmd(t_exec *data, t_list_env *env, t_info_pipe *inf_pip, int count_cmd)
+void ft_plusieur_cmd(t_exec *data, t_list_env **env, t_info_pipe *inf_pip, int count_cmd)
 {
 	while (data != NULL)
 	{
@@ -159,14 +159,14 @@ int ft_count_cmd(t_exec *data)
 	return i;
 }
 
-void ft_pipe(t_exec *data, t_list_env *env)
+void ft_pipe(t_exec *data, t_list_env **env)
 {	
 	t_info_pipe inf_pip;
 	inf_pip.i = 0;
 	inf_pip.j = 0;
 	inf_pip.in_fd = STDIN_FILENO;
 	inf_pip.in_bultin = 0;
-	inf_pip.tab_envv = tab_env(env);
+	inf_pip.tab_envv = tab_env(*env);
 	if(count_cmd(data) == 1 && ft_strlen_argc(data->cmd) == 1 
 		&& ft_strcmpp(data->cmd[0], "export") != 0 && is_built_in(data->cmd[0]) == 0)
 		ft_one_cmd(data, env, count_cmd(data));

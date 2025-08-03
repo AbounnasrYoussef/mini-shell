@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/02 17:30:03 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 13:38:20 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int is_espace_tabulion(char *cmd)
 	return 0;	
 }
 
-char *cherche_path_cmd(char *cmd, t_list_env *env, t_exec *data, int count_cmd)
+char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd)
 {
 	
 	char *path;
@@ -84,14 +84,14 @@ char *cherche_path_cmd(char *cmd, t_list_env *env, t_exec *data, int count_cmd)
             return cmd;
         return NULL;
     }
-	while (env != NULL)
+	while (*env != NULL)
 	{
-		if (ft_strcmpp(env->variable, "PATH") == 0)
+		if (ft_strcmpp((*env)->variable, "PATH") == 0)
 		{
-			path = env->valeur_vari;
+			path = (*env)->valeur_vari;
 			break;
 		}
-		env = env->next;
+		(*env) = (*env)->next;
 	}
 	if (path == NULL)
 	{

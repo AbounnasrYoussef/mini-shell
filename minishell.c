@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/02 19:15:30 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 13:47:08 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 		if (*data != NULL)
         {
             //printf("%d\n\n", ft_count_cmd(*data));
-			ft_pipe(*data, *env);
+			ft_pipe(*data, env);
             ft_free_all(garb);
             *data = NULL;
         }
