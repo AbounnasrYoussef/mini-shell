@@ -590,4 +590,108 @@ bash-3.2$ $?
 bash: 127: command not found
 
 //////////////////////
+export var=""
+env | grep var
 
+minishell$ cat << "m"
+> ^C
+^C
+^C
+^C
+^C
+^C
+^C
+
+echo """$HOLA""" | cat -e
+
+minishell$ ls > /dev/stdout | ls > /dev/stdout
+/dev/stdout: No such file or directory
+Makefile        minishell       minishell.h     parsing         signals.o
+execution       minishell.c     minishell.o     signals.c       test_parsing
+
+minishell$ export var="hllo"
+minishell$ unset var
+minishell(78616,0x1177d7dc0) malloc: *** error for object 0x7fbefa605930: pointer being freed was not allocated
+minishell(78616,0x1177d7dc0) malloc: *** set a breakpoint in malloc_error_break to debug
+[1]    78616 abort      ./minishell
+
+env -i ./minishell
+export jshsdh
+declare -x Pn���="�E�"
+leaks[78785]: [fatal] unable to read input graph: The data couldn’t be read because it isn’t in the correct format.
+minishell$
+
+minishell$ ls > /dev/stdout | ls > /dev/stdout                                             
+/dev/stdout: No such file or directory
+Makefile        minishell.c     parsing         t
+execution       minishell.h     signals.c       test_parsing
+minishell       minishell.o     signals.o
+leaks[81114]: [fatal] unable to read input graph: The data couldn’t be read because it isn’t in the correct format.
+
+
+////////parsing :
+
+minishell$ echo $"$HOME"
+$$HOME
+
+minishell$ echo $HO'ME'
+$HOME
+
+minishell$ echo "$"$HOME
+$$HOME
+
+minishell$ echo "'$HOME'"
+$HOME
+
+minishell$ echo '"'$HOME'"'
+"$HOME"
+export var="hello             world"
+var="hello             world"
+minishell$ echo $var
+[1]    67493 segmentation fault  ./minishell
+
+bash-3.2$ export var="hello      world"
+bash-3.2$ echo $var
+hello world
+bash-3.2$ echo "$var"
+hello      world
+bash-3.2$ 
+
+
+minishell$ cat << m
+> $HOME
+> "$HOME"
+> '$HOME'
+> m
+/mnt/homes/arahhabE
+"/mnt/homes/arahhabME"
+'/mnt/homes/arahhabME'
+minishell$ cat << m"
+
+minishell$ cat << "m"
+> $HOME
+> "$HOME"
+> '$HOME'
+> m
+/mnt/homes/arahhabE
+"/mnt/homes/arahhabME"
+'/mnt/homes/arahhabME'
+
+minishell$ cat <$ggdfgdfgdfg | <"$SDfdsfdsf"
+$ggdfgdfgdfg: ambiguous redirect
+$SDfdsfdsf: ambiguous redirect
+
+minishell$ cat <$ggdfgdfgdfg | <"$SDfdsfdsf" | ><<<<>>><><<>
+minishell: syntax error
+minishell: syntax error
+
+minishell$ echo "'$HO'M'E'"
+$HOME
+
+minishell$ "'l's"
+Makefile        minishell       minishell.h     parsing         signals.o
+execution       minishell.c     minishell.o     signals.c       test_parsing
+
+
+
+while true; do leaks minishell ;done

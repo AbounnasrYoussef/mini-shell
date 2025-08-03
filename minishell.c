@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/03 19:37:02 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 21:20:03 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	ft_read_loop(char **envp, t_exec **data)
 		//ft_free_all(garb);
 		//free_exec_list(*data); *data = NULL;
 	}
+	ft_free_all(garb);
 }
 
 
@@ -170,10 +171,14 @@ void	ft_read_loop(char **envp, t_exec **data)
 // }
 
 
-
+void ff()
+{
+	system("leaks -q ./minishell");
+}
 
 int	main(int ac, char **av, char **envp)
 {
+	//atexit(ff);
 	t_exec		*data;
 
 	(void)ac;
