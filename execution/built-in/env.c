@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:33:27 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 18:38:23 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 19:39:20 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_list_env	*ft_lstneww(void *variable, void *valeur_vari, t_garbage **garb)
 	t_list_env	*list1;
 
 	(void)garb;
-	list1 = malloc(sizeof(t_list_env));
+	list1 = ft_malloc(garb, sizeof(t_list_env));
 	if (list1 == NULL)
 	{
 		return (NULL);

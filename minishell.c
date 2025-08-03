@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/03 18:49:31 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 19:37:02 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 
 int	g_exit_status = 0;
 
-void	ft_read_loop(t_list_env **env, t_exec **data)
+void	ft_read_loop(char **envp, t_exec **data)
 {
 	char		*line;
 	t_garbage		*garb;
 	t_token		*token;
 	int			last_exit_code = 0;
-
+	t_list_env *env;
+	
+	env = ft_envvv(envp, &garb);
 	setup_signals();
 	while (1)
 	{
@@ -44,7 +46,7 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 			continue ;
 		}
 
-		expand_all_tokens(&token, last_exit_code, *env, &garb);
+		expand_all_tokens(&token, last_exit_code, env, &garb);
 		*data = parse_tokens_to_exec_list(token, &garb);
 		if (!*data)
 		{
@@ -53,7 +55,7 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 		}
 
 		// 👇 heredoc traité ici AVANT exécution
-		process_heredocs(*data, *env, &garb);
+		process_heredocs(*data, env, &garb);
 
 
 		// 🔍 Debug - Afficher les commandes et redirections
@@ -61,7 +63,7 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 		if (*data != NULL)
         {
             //printf("%d\n\n", ft_count_cmd(*data));
-			ft_pipe(*data, env, &garb);
+			ft_pipe(*data, &env, &garb);
             ft_free_all(garb);
             *data = NULL;
         }
@@ -172,23 +174,19 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_list_env	*env_list;
 	t_exec		*data;
-	t_garbage **garb;
 
 	(void)ac;
 	(void)av;
 	data = NULL;
-	garb = NULL;
 	if (!isatty(0) || !isatty(1))
 		return 1;
-	env_list = ft_envvv(envp, garb);
-	if (env_list == NULL)
-	{
-		ft_lstadd_backk(&env_list, ft_lstneww("PATH", "/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", garb));
-		ft_lstadd_backk(&env_list, ft_lstneww("PWD", getcwd(NULL, 0),garb));
-		ft_lstadd_backk(&env_list, ft_lstneww("_", "/usr/bin/env", garb));
-	}
-	ft_read_loop(&env_list, &data);
+	//if (env_list == NULL)
+	//{
+	//	ft_lstadd_backk(&env_list, ft_lstneww("PATH", "/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", garb));
+	//	ft_lstadd_backk(&env_list, ft_lstneww("PWD", getcwd(NULL, 0),garb));
+	//	ft_lstadd_backk(&env_list, ft_lstneww("_", "/usr/bin/env", garb));
+	//}
+	ft_read_loop(envp, &data);
 	return (0);
 }

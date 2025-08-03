@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 18:51:59 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 19:40:08 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char *ft_concat(char *str, char *str2, t_garbage **garb)
 		return str;
 	l1 = ft_strlenn(str);
 	l2 = ft_strlenn(str2);
-	new_str = malloc((l1 + l2 + 1) * sizeof(char));
+	new_str = ft_malloc(garb, (l1 + l2 + 1) * sizeof(char));
 	i = 0;
 	j = 0;
 	while (str[i] != '\0')

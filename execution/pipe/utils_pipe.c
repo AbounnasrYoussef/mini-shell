@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:12:25 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 18:37:59 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 19:40:15 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char **tab_env(t_list_env *env, t_garbage **garb)
 	int i;
 	
 	tab_env = NULL;
-	tab_env = malloc(sizeof(char *) * (ft_count_env(env) + 1));
+	tab_env = ft_malloc(garb, sizeof(char *) * (ft_count_env(env) + 1));
 	copy_env = env;
 	i = 0;
 	while(copy_env != NULL)

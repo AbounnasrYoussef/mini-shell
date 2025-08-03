@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 18:45:26 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 19:40:01 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void ajout_exp_elem(t_list_env **list_env, char *args, int i, int j, t_garbage *
 	char **arg_varia;
 
 	d = 0;
-	arg_varia = malloc(2 * sizeof(char *));
-	arg_varia[0] = malloc(200);
+	arg_varia = ft_malloc(garb, 2 * sizeof(char *));
+	arg_varia[0] = ft_malloc(garb, 200);
 	while (args[i] != '\0' && args[i] != '=' && args[i] != '+')
 	{	
 		arg_varia[0][j] = args[i];
@@ -95,7 +95,7 @@ void ajout_exp_elem(t_list_env **list_env, char *args, int i, int j, t_garbage *
 	if (args[i] == '\0')
 		arg_varia[1] = NULL;
 	else
-		arg_varia[1] = malloc(200);
+		arg_varia[1] = ft_malloc(garb, 200);
 	ajout_exp_elem_help(list_env,  args, i, 0, d, arg_varia, garb);
 }
 
