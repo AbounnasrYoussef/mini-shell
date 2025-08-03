@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/03 21:20:03 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 22:11:06 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ void	ft_read_loop(char **envp, t_exec **data)
 	t_list_env *env;
 	
 	env = ft_envvv(envp, &garb);
+	if (envp[0] == NULL)
+	{
+		env = NULL;
+		ft_lstadd_backk(&env, ft_lstneww("PATH", "/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", &garb));
+		ft_lstadd_backk(&env, ft_lstneww("PWD", getcwd(NULL, 0),&garb));
+		ft_lstadd_backk(&env, ft_lstneww("_", "/usr/bin/env", &garb));
+	}
 	setup_signals();
 	while (1)
 	{
@@ -64,7 +71,6 @@ void	ft_read_loop(char **envp, t_exec **data)
         {
             //printf("%d\n\n", ft_count_cmd(*data));
 			ft_pipe(*data, &env, &garb);
-            ft_free_all(garb);
             *data = NULL;
         }
 		// t_exec *tmp = *data;
@@ -186,12 +192,6 @@ int	main(int ac, char **av, char **envp)
 	data = NULL;
 	if (!isatty(0) || !isatty(1))
 		return 1;
-	//if (env_list == NULL)
-	//{
-	//	ft_lstadd_backk(&env_list, ft_lstneww("PATH", "/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", garb));
-	//	ft_lstadd_backk(&env_list, ft_lstneww("PWD", getcwd(NULL, 0),garb));
-	//	ft_lstadd_backk(&env_list, ft_lstneww("_", "/usr/bin/env", garb));
-	//}
 	ft_read_loop(envp, &data);
 	return (0);
 }

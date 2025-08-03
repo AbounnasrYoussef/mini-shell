@@ -1,3 +1,85 @@
+////////parsing :
+
+minishell$ echo $"$HOME"
+$$HOME
+
+minishell$ echo $HO'ME'
+$HOME
+
+minishell$ echo "$"$HOME
+$$HOME
+
+minishell$ echo "'$HOME'"
+$HOME
+
+minishell$ echo '"'$HOME'"'
+"$HOME"
+export var="hello             world"
+var="hello             world"
+minishell$ echo $var
+bash-3.2$ export var="hello      world"
+bash-3.2$ echo $var
+hello world
+
+
+bash-3.2$ export var="hello      world"
+bash-3.2$ echo $var
+hello world
+bash-3.2$ echo "$var"
+hello      world
+bash-3.2$ 
+
+
+minishell$ cat << m
+> $HOME
+> "$HOME"
+> '$HOME'
+> m
+/mnt/homes/arahhabE
+"/mnt/homes/arahhabME"
+'/mnt/homes/arahhabME'
+minishell$ cat << m"
+
+minishell$ cat << "m"
+> $HOME
+> "$HOME"
+> '$HOME'
+> m
+/mnt/homes/arahhabE
+"/mnt/homes/arahhabME"
+'/mnt/homes/arahhabME'
+
+minishell$ cat <$ggdfgdfgdfg | <"$SDfdsfdsf"
+$ggdfgdfgdfg: ambiguous redirect
+$SDfdsfdsf: ambiguous redirect
+
+minishell$ cat <$ggdfgdfgdfg | <"$SDfdsfdsf" | ><<<<>>><><<>
+minishell: syntax error
+minishell: syntax error
+
+minishell$ echo "'$HO'M'E'"
+$HOME
+
+minishell$ "'l's"
+Makefile        minishell       minishell.h     parsing         signals.o
+execution       minishell.c     minishell.o     signals.c       test_parsing
+
+minishell$ cat << m
+> $USER
+> m
+arahhabR
+
+minishell$ cat << "m"
+> ^C
+^C
+^C
+^C
+^C
+^C
+^C
+
+
+
 #/////////Parsing
 
 #bash-3.2$ < $hijk

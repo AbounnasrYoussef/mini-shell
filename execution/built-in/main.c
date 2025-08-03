@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 18:49:59 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 22:40:06 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,17 @@ void ft_print_env(t_list_env *env)
 {
 	while (env != NULL)
 	{
-		if (env->valeur_vari != NULL && ft_strcmpp(env->valeur_vari, "") != 0)
-			printf("%s=\"%s\"\n", env->variable, env->valeur_vari);
+		if (ft_strcmpp(env->variable, "OLDPWD") == 0 &&  ft_strcmpp(env->valeur_vari, "") == 0)
+		{
+			
+		}
+		if (env->valeur_vari != NULL)
+		{
+			if (ft_strcmpp(env->variable, "OLDPWD") == 0 &&  ft_strcmpp(env->valeur_vari, "") == 0)
+			;
+			else
+				printf("%s=\"%s\"\n", env->variable, env->valeur_vari);
+		}
 		env = env->next;
 	}
 }

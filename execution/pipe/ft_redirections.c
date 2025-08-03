@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:10:23 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 14:19:41 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 22:29:49 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void ft_redirection(t_exec *data)
 		}
 		else if (file->type == 3)
 		{
-			fd = open(file->file_name, O_CREAT | O_RDWR | O_TRUNC,0777);
+			fd = open(file->file_name, O_CREAT | O_WRONLY | O_TRUNC,0644);
 			if(fd == -1 && S_ISDIR(info.st_mode))
 			{
 				write(2, file->file_name, ft_strlenn(file->file_name));
@@ -49,7 +49,7 @@ void ft_redirection(t_exec *data)
 		}
 		else if (file->type == 4)
 		{
-			fd = open(file->file_name, O_CREAT | O_RDWR | O_APPEND, 0777);
+			fd = open(file->file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 			dup2(fd, STDOUT_FILENO);
 			close(fd);
 		}
@@ -67,10 +67,12 @@ void ft_redirection(t_exec *data)
 		else if(fd == -1 && access(file->file_name, X_OK) == -1)
 		{
 			perror("access");
+			//exit(1);
 		}
 		if (file->fd == -1)
 		{
 			perror("dup2");
+			exit(1);
 		}
 		file = file->next;
 	}

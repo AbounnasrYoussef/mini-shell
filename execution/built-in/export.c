@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 19:40:01 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 22:03:55 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,23 @@ void repmlacer_elem(t_list_env **list_env, char *var, char *arg, int d, t_garbag
 
 void ajout_exp_elem_help(t_list_env **list_env, char *args, int i, int c, int d, char **arg_varia, t_garbage **garb)
 {
+	int k;
+
+	k = 0;
 	while (args[i] != '\0')
 	{
-		arg_varia[1][c] = args[i];
+		i++;
 		c++;
+	}
+	i = i - c;
+	arg_varia[1] = ft_malloc(garb, (c + 1));
+	while (args[i] != '\0')
+	{
+		arg_varia[1][k] = args[i];
+		k++;
 		i++;
 	}
+	arg_varia[1][k] = '\0';
 	if (verif_exist(list_env, arg_varia[0]) == 0)
 	{
 		ft_lstadd_backk(list_env, ft_lstneww(arg_varia[0], arg_varia[1], garb));
@@ -78,13 +89,16 @@ void ajout_exp_elem(t_list_env **list_env, char *args, int i, int j, t_garbage *
 
 	d = 0;
 	arg_varia = ft_malloc(garb, 2 * sizeof(char *));
-	arg_varia[0] = ft_malloc(garb, 200);
-	while (args[i] != '\0' && args[i] != '=' && args[i] != '+')
-	{	
-		arg_varia[0][j] = args[i];
-		i++;
+	
+	while (args[j] != '\0' && args[j] != '=' && args[j] != '+')	
 		j++;
+	arg_varia[0] = ft_malloc(garb, j + 1);
+	while (i < j)
+	{	
+		arg_varia[0][i] = args[i];
+		i++;
 	}
+	arg_varia[0][i] = '\0';
 	if (args[i] == '+' && args[i+1] == '=')
 	{
 		d = 1;
@@ -94,8 +108,6 @@ void ajout_exp_elem(t_list_env **list_env, char *args, int i, int j, t_garbage *
 		i++;
 	if (args[i] == '\0')
 		arg_varia[1] = NULL;
-	else
-		arg_varia[1] = ft_malloc(garb, 200);
 	ajout_exp_elem_help(list_env,  args, i, 0, d, arg_varia, garb);
 }
 
