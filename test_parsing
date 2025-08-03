@@ -1,7 +1,7 @@
-/////////Parsing
+#/////////Parsing
 
-bash-3.2$ < $hijk
-bash: $hijk: ambiguous redirect
+#bash-3.2$ < $hijk
+#bash: $hijk: ambiguous redirect
 
 /// Parsing
 

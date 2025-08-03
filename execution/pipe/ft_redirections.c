@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:10:23 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/02 18:03:38 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 14:19:41 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void ft_redirection(t_exec *data)
 	while(file != NULL)
 	{
 		stat(file->file_name, &info);
+		if(file->file_name[0] == '$')
+		{
+			write(2, file->file_name, ft_strlenn(file->file_name));
+			write(2, ": ambiguous redirect\n", 21);
+			exit(1);
+		}
 		if (file->type == 2)
 		{
 			fd = open(file->file_name, O_RDONLY);

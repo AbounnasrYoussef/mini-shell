@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 12:59:18 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 13:58:36 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 14:20:53 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void ft_unset(t_list_env **list_env, char **args)
 			j++;
 		}
 		ft_supp_arg(list_env, args[i]);
-		printf("%s\n\n", (*list_env)->variable);
 		j = 0;
 		i++;
 	}

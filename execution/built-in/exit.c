@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/02 16:05:37 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 14:32:24 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,10 @@ void ft_exit (int count_cmd, int len, char **str)
 					printf("exit\n");
 				exit(0);
 			}
-				
+			else if (ft_strcmpp(str[1], "") == 0)
+			{
+				error_exit(str[1], count_cmd);
+			}
 			else if (check_number(str[1]) == 0 && argc == 2 && len <= 19)
 			{
 				if (count_cmd == 1)

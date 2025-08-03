@@ -545,23 +545,23 @@ bash: 127: command not found
 //////////////////////
 
 
+minishell$ touch ls
 minishell$ unset PATH
-minishell$ ./minishell
 minishell$ ls
 
-touch ls
-minishell$ "" | << s | << so | ls
-> s
-> so
-: command not found
+#touch ls
+#minishell$ "" | << s | << so | ls
+#> s
+#> so
+#: command not found
 
-touch ls
-minishell$  << s  ls
-> s
+#touch ls
+#minishell$  << s  ls
+#> s
 
-minishell$ exit ""
-exit
-bash-3.2$ 
+#minishell$ exit ""
+#exit
+#bash-3.2$ 
 
 
 minishell$ unset PWD
