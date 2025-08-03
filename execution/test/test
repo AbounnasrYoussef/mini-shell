@@ -574,19 +574,20 @@
 #bash-3.2$ pwdcd
 #-> /
 
+#minishell$ touch ls
+#minishell$ unset PATH
+#minishell$ ls
+
+#minishell$ unset PWD
+#minishell$ pwd
+#/mnt/homes/arahhab/Desktop/minishell2
+#minishell$ echo $PWD
+#minishell$ cd ..
+#minishell$ env | grep PWD
+#minishell$ echo $PWD
+
 bash-3.2$ $?
 bash: 127: command not found
 
 //////////////////////
 
-
-minishell$ touch ls
-minishell$ unset PATH
-minishell$ ls
-
-minishell$ unset PWD
-minishell$ pwd
-/mnt/homes/arahhab/Desktop/minishell2
-minishell$ echo $PWD
-minishell$ cd ..
-minishell$ echo $PWD
