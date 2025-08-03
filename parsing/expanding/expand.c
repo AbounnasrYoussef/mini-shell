@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/02 19:03:14 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 13:42:22 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ static t_token	*process_token(t_token *curr, t_token **tokens,
 	char		*cleaned;
 	t_token		*to_delete;
 
+	if (*prev && ((*prev)->type == RDR_IN || (*prev)->type == RDR_OUT || (*prev)->type == APPEND || (*prev)->type == HERE_DOC))
+
+	{
+		*prev = curr;
+		return (curr->next);
+		
+	}
 	if (curr->quoted == 1)
 		expanded = ft_strdup(curr->value, ctx->garb);
 	else
