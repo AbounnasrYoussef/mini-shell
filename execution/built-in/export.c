@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 22:03:55 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/04 22:58:41 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ void ajout_exp_elem_help(t_list_env **list_env, char *args, int i, int c, int d,
 	}
 	else
 	{
-		
-		if (arg_varia[1] != NULL)
+		if (arg_varia[1] != NULL && arg_varia[1][0] != '\0')
 		{
 			repmlacer_elem(list_env, arg_varia[0], arg_varia[1], d, garb);
 		}

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/03 22:11:06 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/04 23:08:32 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	ft_read_loop(char **envp, t_exec **data)
 
 		// 🔍 Debug - Afficher les commandes et redirections
 		// printf("%d\n",ft_count_cmd(*data));
+		
 		if (*data != NULL)
         {
             //printf("%d\n\n", ft_count_cmd(*data));

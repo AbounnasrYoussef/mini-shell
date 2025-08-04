@@ -607,3 +607,18 @@
 
 #echo """$HOLA""" | cat -e
 
+
+#bash-3.2$ export a=a
+#bash-3.2$ export a
+#bash-3.2$ export
+#declare -x OLDPWD
+#declare -x PATH="/mnt/homes/arahhab/Library/Python/3.8/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
+#declare -x PWD="/mnt/homes/arahhab/Desktop/minishell2"
+#declare -x SHLVL="1"
+#declare -x a="a"
+
+#minishell$ export a=a | $variable_makaynch //export a=a
+#minishell$ export
+#declare -x COLORTERM="truecolor"
+#....
+#declare -x a="a"

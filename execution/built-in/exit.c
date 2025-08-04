@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 14:32:24 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/04 22:52:13 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ void error_exit(char *str, int count_cmd)
 {
 	if (count_cmd == 1)
 	{
-		printf("exit\n");
+		write(2, "exit: ", 6);
 	}
-	write(2, "exit: ", 6);
 	write(2, str, ft_strlenn(str));
 	write(2, ": numeric argument required\n", 28);
 	exit(255);

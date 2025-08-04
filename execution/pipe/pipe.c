@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 18:51:20 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/03 22:59:29 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,9 +177,18 @@ void ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 		ft_plusieur_cmd(data, env, &inf_pip, count_cmd(data), garb);
 	}
     int status;
+	waitpid(inf_pip.pid, &status, 0);
+	if (WIFEXITED(status))
+	{
+		ft_exit_status(WEXITSTATUS(status) , 1);
+	}
+	else if (WIFSIGNALED(status))
+	{
+		ft_exit_status(WEXITSTATUS(status) + 130 , 1);
+	}
     while(inf_pip.j < inf_pip.i)
     {
-        wait(&status);
+		wait(NULL);
 		(inf_pip.j)++;
     }
 }
