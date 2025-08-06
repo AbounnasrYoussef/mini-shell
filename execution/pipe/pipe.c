@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 17:14:37 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 19:07:31 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void ft_one_cmd(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
 	{
 		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
 		write(2, ": command not found\n", 20);
+		exit(127);
 	}
 	if (data->files == NULL)
 		ft_built_in(data, env, count_cmd, garb);
@@ -61,7 +62,7 @@ void ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip, int coun
 	{
 		write(2, ".: filename argument required\n.: usage: . filename [arguments]\n", 63);
 		ft_free_all(*garb);
-		exit(1);
+		exit(2);
 	}
 	if (S_ISDIR((inf_pip.info).st_mode))
 	{
@@ -72,7 +73,7 @@ void ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip, int coun
 			write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
 			write(2, ": is a directory \n", 18);
 			ft_free_all(*garb);
-			exit(1);
+			exit(126);
 		}	
 	}
 	else if(!S_ISREG((inf_pip.info).st_mode) && ft_strlenn(data->cmd[0]) > 0 
@@ -81,14 +82,14 @@ void ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip, int coun
 		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
 		write(2, ": Not a directory\n", 18);
 		ft_free_all(*garb);
-		exit(1);
+		exit(126);
 	}
 	else if (!S_ISREG((inf_pip.info).st_mode) && is_slash(data->cmd[0]) == 0)
 	{
 		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
 		write(2, ": No such file or directory\n", 28);
 		ft_free_all(*garb);
-		exit(1);
+		exit(127);
 	}
 	inf_pip.in_bultin = ft_built_in(data, env, count_cmd, garb);
 	if (inf_pip.in_bultin == -1)
@@ -99,7 +100,7 @@ void ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip, int coun
 			data->cmd[0] = inf_pip.path_cmd;
 			execve(inf_pip.path_cmd, data->cmd, inf_pip.tab_envv);
 			ft_free_all(*garb);
-			exit(1);
+			exit(0);
 		}
 		if (access(data->cmd[0], X_OK ) == -1 )
 		{

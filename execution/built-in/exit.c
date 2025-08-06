@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 13:06:34 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 19:00:33 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void ft_exit (int count_cmd, int len, char **str, t_garbage **garb)
 				if (count_cmd == 1)
 					printf("exit\n");
 				write(2, "exit: too many arguments\n", 25);
+				//exit(1);
 			}	
 			else
 				error_exit(str[1], count_cmd, garb);

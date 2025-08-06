@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/04 22:58:41 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 18:46:37 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,5 @@ void error_export(char **args, int i)
 	write(2, "export: `", 9);
 	write(2, args[i], ft_strlenn(args[i]));
 	write(2, "' not a valid identifier\n", 25);
+	//exit(1);
 }

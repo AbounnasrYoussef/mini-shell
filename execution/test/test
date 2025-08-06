@@ -659,3 +659,8 @@ minishell$ export
 minishell$ export a=kjdkj
 minishell$ export
 
+minishell$ dh/
+dh/: Not a directory
+
+bash-3.2$ Makefile
+bash: Makefile: command not found

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 17:03:08 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 18:23:56 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd,
 		write(2, cmd, ft_strlenn(cmd));
 		write(2, ": command not found\n", 20);
 		ft_free_all(*garb);
-		exit(1);
+		exit(127);
 	}
 	if (!cmd || !cmd[0])
       return NULL;  
@@ -122,7 +122,7 @@ char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd,
 		write(2, cmd, ft_strlenn(cmd));
 		write(2, ": command not found\n", 20);
 		ft_free_all(*garb);
-		exit(1);
+		exit(127);
 	}
 	return path_cmd;
 }

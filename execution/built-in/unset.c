@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 12:59:18 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 14:20:53 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 19:01:36 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void ft_unset(t_list_env **list_env, char **args)
 					write(2, "unset: `", 8);
 					write(2, args[i], strlen(args[i]));
 					write(2, ": not a valid identifier\n", 25);
+					//exit(1);
 					break;
 				}
 			j++;
