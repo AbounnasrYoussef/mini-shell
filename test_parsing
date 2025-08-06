@@ -1,5 +1,20 @@
 ////////parsing :
 
+minishell$ cat << file
+> $HOME
+> file
+/mnt/homes/arahhabE
+
+minishell$ cat << file
+> "$HOME"
+> file
+"/mnt/homes/arahhabME"
+
+minishell$ cat << file
+> ''"'$HOME'"''
+file
+
+
 minishell$ export a=dljddkj | $jgjjgdjyg
 ---- Commande 1 ----
 cmd[0] = 'export'
@@ -91,6 +106,8 @@ minishell$ cat << "m"
 ^C
 ^C
 
+bash-3.2$ ''"'$HOME'"''
+bash: '/mnt/homes/arahhab': No such file or directory
 
 
 #/////////Parsing

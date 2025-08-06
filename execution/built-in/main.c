@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 22:40:06 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 16:53:02 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void ft_print_env_ex(t_list_env *env)
 	{
 		if (ft_strcmpp(env->variable, "_") != 0)
 		{
-			if (env->valeur_vari != NULL)
+			if (env->valeur_vari != NULL && ft_strcmpp(env->valeur_vari, "") != 0)
 				printf("declare -x %s=\"%s\"\n", env->variable, env->valeur_vari);
 			else
 				printf("declare -x %s\n", env->variable);
@@ -31,16 +31,9 @@ void ft_print_env(t_list_env *env)
 {
 	while (env != NULL)
 	{
-		if (ft_strcmpp(env->variable, "OLDPWD") == 0 &&  ft_strcmpp(env->valeur_vari, "") == 0)
+		if (env->valeur_vari != NULL && ft_strcmpp(env->valeur_vari, "") != 0)
 		{
-			
-		}
-		if (env->valeur_vari != NULL)
-		{
-			if (ft_strcmpp(env->variable, "OLDPWD") == 0 &&  ft_strcmpp(env->valeur_vari, "") == 0)
-			;
-			else
-				printf("%s=\"%s\"\n", env->variable, env->valeur_vari);
+			printf("%s=\"%s\"\n", env->variable, env->valeur_vari);
 		}
 		env = env->next;
 	}
@@ -85,6 +78,8 @@ void ft_change_OLDPWD(t_list_env **env)
 int ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
 {
 	int len = 0;
+	if(data->cmd[0] == NULL)
+		return -1;
 	if (data->cmd[1] != NULL)
 		len = ft_strlenn(data->cmd[1]) - 1;
 	if (ft_strcmpp(data->cmd[0], "cd") == 0)
@@ -96,7 +91,7 @@ int ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
 	else if (ft_strcmpp(data->cmd[0], "echo") == 0)
 		return (ft_echo(data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "exit") == 0)
-		return (ft_exit (count_cmd, len, data->cmd), 0);
+		return (ft_exit (count_cmd, len, data->cmd, garb), 0);
 	else if (ft_strcmpp(data->cmd[0], "export") == 0)
 		return (ft_export(*env, data->cmd, garb), 0);
 	else if (ft_strcmpp(data->cmd[0], "env") == 0)

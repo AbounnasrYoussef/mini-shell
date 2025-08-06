@@ -6,13 +6,13 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/04 22:52:13 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 13:06:34 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-void error_exit(char *str, int count_cmd)
+void error_exit(char *str, int count_cmd, t_garbage **garb)
 {
 	if (count_cmd == 1)
 	{
@@ -20,10 +20,11 @@ void error_exit(char *str, int count_cmd)
 	}
 	write(2, str, ft_strlenn(str));
 	write(2, ": numeric argument required\n", 28);
+	ft_free_all(*garb);
 	exit(255);
 }
 
-unsigned long long ft_atoi(int len, char *nbr, int count_cmd)
+unsigned long long ft_atoi(int len, char *nbr, int count_cmd, t_garbage **garb)
 {
 	unsigned long long nombre;
 	int i;
@@ -40,10 +41,10 @@ unsigned long long ft_atoi(int len, char *nbr, int count_cmd)
 		if ((sign == -1) && (nombre > (9223372036854775807)))
 		{
 			if (nbr[19] > '8')
-				error_exit(nbr, count_cmd);
+				error_exit(nbr, count_cmd, garb);
 		}
 		else if (nombre > (9223372036854775807))
-			error_exit(nbr, count_cmd);	
+			error_exit(nbr, count_cmd, garb);	
 		if (len > i)
 			nombre *= 10;
 		i++;
@@ -90,7 +91,7 @@ int ft_modulo_number(unsigned long long number)
 	return (number - g);
 }
 
-void ft_exit (int count_cmd, int len, char **str)
+void ft_exit (int count_cmd, int len, char **str, t_garbage **garb)
 {
 	int argc;
 	argc = ft_strlen_argc(str);
@@ -106,13 +107,13 @@ void ft_exit (int count_cmd, int len, char **str)
 			}
 			else if (ft_strcmpp(str[1], "") == 0)
 			{
-				error_exit(str[1], count_cmd);
+				error_exit(str[1], count_cmd, garb);
 			}
 			else if (check_number(str[1]) == 0 && argc == 2 && len <= 19)
 			{
 				if (count_cmd == 1)
 					printf("exit\n");
-				exit(ft_modulo_number(ft_atoi((len), str[1], count_cmd)));
+				exit(ft_modulo_number(ft_atoi((len), str[1], count_cmd, garb)));
 			}
 			else if (check_number(str[1]) == 0 && argc > 2 && len <= 19)
 			{
@@ -121,7 +122,7 @@ void ft_exit (int count_cmd, int len, char **str)
 				write(2, "exit: too many arguments\n", 25);
 			}	
 			else
-				error_exit(str[1], count_cmd);
+				error_exit(str[1], count_cmd, garb);
 		}
 	}
 }

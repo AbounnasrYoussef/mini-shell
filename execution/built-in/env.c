@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:33:27 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 19:39:20 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 16:07:43 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,17 @@ t_list_env *ft_envvv(char **str, t_garbage **garb)
 	while (str[i] != NULL )
 	{
 		splitt = ft_splitt(str[i], '=', garb);
-		ft_lstadd_backk(&copy_env, ft_lstneww(splitt[0], splitt[1], garb));
-		if(ft_strcmpp(splitt[0], "PWD") == 0)
+		if (splitt[1] != NULL)
 		{
-			ft_lstadd_backk(&copy_env, ft_lstneww("PO", splitt[1], garb));
+			ft_lstadd_backk(&copy_env, ft_lstneww(splitt[0], splitt[1], garb));
+			if(ft_strcmpp(splitt[0], "PWD") == 0)
+			{
+				ft_lstadd_backk(&copy_env, ft_lstneww("PO", splitt[1], garb));
+			}
+		}
+		else
+		{
+			ft_lstadd_backk(&copy_env, ft_lstneww(splitt[0], NULL, garb));
 		}
 		if(i == 0)
 		{

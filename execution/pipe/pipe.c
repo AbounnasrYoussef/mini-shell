@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 22:59:29 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 17:14:37 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void ft_one_cmd(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
 	{
 		original_fd_in = dup(STDIN_FILENO);
 		original_fd_out = dup(STDOUT_FILENO);
-		ft_redirection(data);
+		ft_redirection(data, garb);
 		ft_built_in(data, env, count_cmd, garb);
 		dup2(original_fd_in, STDIN_FILENO);
 		dup2(original_fd_out, STDOUT_FILENO);
@@ -54,12 +54,14 @@ void ft_one_cmd(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
 
 void ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip, int count_cmd, t_garbage **garb)
 {
-	if (data->files != NULL)
-		ft_redirection(data);
+	if ( data->files != NULL)
+		ft_redirection(data, garb);
 	stat(data->cmd[0], &(inf_pip.info));
-	if ((data->cmd[0][0] == '.' && data->cmd[0][1] == '\0'))
+	if (data->cmd[0] && data->cmd[0][0] == '.' && data->cmd[0][1] == '\0')
 	{
 		write(2, ".: filename argument required\n.: usage: . filename [arguments]\n", 63);
+		ft_free_all(*garb);
+		exit(1);
 	}
 	if (S_ISDIR((inf_pip.info).st_mode))
 	{
@@ -68,18 +70,25 @@ void ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip, int coun
 			|| (data->cmd[0][0] == '.' && data->cmd[0][1] == '.') )
 		{
 			write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
-			(write(2, ": is a directory \n", 18), exit(1));
+			write(2, ": is a directory \n", 18);
+			ft_free_all(*garb);
+			exit(1);
 		}	
 	}
-	else if(!S_ISREG((inf_pip.info).st_mode) && data->cmd[0][ft_strlenn(data->cmd[0]) - 1] == '/')
+	else if(!S_ISREG((inf_pip.info).st_mode) && ft_strlenn(data->cmd[0]) > 0 
+			&& (data->cmd[0][ft_strlenn(data->cmd[0]) - 1] == '/'))
 	{
 		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
-		(write(2, ": Not a directory\n", 18), exit(1));
+		write(2, ": Not a directory\n", 18);
+		ft_free_all(*garb);
+		exit(1);
 	}
 	else if (!S_ISREG((inf_pip.info).st_mode) && is_slash(data->cmd[0]) == 0)
 	{
 		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
-		(write(2, ": No such file or directory\n", 28), exit(1));
+		write(2, ": No such file or directory\n", 28);
+		ft_free_all(*garb);
+		exit(1);
 	}
 	inf_pip.in_bultin = ft_built_in(data, env, count_cmd, garb);
 	if (inf_pip.in_bultin == -1)
@@ -89,22 +98,34 @@ void ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip, int coun
 		{
 			data->cmd[0] = inf_pip.path_cmd;
 			execve(inf_pip.path_cmd, data->cmd, inf_pip.tab_envv);
+			ft_free_all(*garb);
 			exit(1);
 		}
 		if (access(data->cmd[0], X_OK ) == -1 )
 		{
+			if (!data->cmd[0])
+				exit(1);
 			perror("access");
+			ft_free_all(*garb);
 			exit(126);
 		}
 	}
 	else
+	{
+		ft_free_all(*garb);
 		exit(1);
+	}
+		
 }
 
 void ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip, int count_cmd, t_garbage **garb)
 {
 	if (inf_pip->pid == -1)
-		(perror("fork"), exit(1));
+	{
+		perror("fork");
+		ft_free_all(*garb);
+		exit(1);
+	}
 	else if (inf_pip->pid == 0)
 	{
 		if (inf_pip->in_fd != STDIN_FILENO)
@@ -137,7 +158,11 @@ void ft_plusieur_cmd(t_exec *data, t_list_env **env, t_info_pipe *inf_pip, int c
 		if (data->next != NULL)
 		{
 			if (pipe(inf_pip->fd) == -1)
-				(perror("pipe"), exit(1));
+			{
+				perror("pipe");
+				ft_free_all(*garb);
+				exit(1);
+			}
 		}
 		inf_pip->pid = fork();
 		ft_child(data, env, inf_pip, count_cmd, garb);

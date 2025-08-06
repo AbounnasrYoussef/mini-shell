@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/04 23:08:32 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 16:45:59 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_read_loop(char **envp, t_exec **data)
 		// 	if (tmp->cmd)
 		// 	{
 		// 		for (int j = 0; tmp->cmd[j]; j++)
-		// 			printf("cmd[%d] = '%s'\n", j, tmp->cmd[j]);
+		// 			printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
 		// 	}
 
 		// 	t_file *file = tmp->files;

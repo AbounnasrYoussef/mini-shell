@@ -6,13 +6,13 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:10:23 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 22:29:49 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 17:04:11 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-void ft_redirection(t_exec *data)
+void ft_redirection(t_exec *data, t_garbage **garb)
 {
 	t_file *file;
 	int fd;
@@ -28,6 +28,7 @@ void ft_redirection(t_exec *data)
 		{
 			write(2, file->file_name, ft_strlenn(file->file_name));
 			write(2, ": ambiguous redirect\n", 21);
+			ft_free_all(*garb);
 			exit(1);
 		}
 		if (file->type == 2)
@@ -42,7 +43,9 @@ void ft_redirection(t_exec *data)
 			if(fd == -1 && S_ISDIR(info.st_mode))
 			{
 				write(2, file->file_name, ft_strlenn(file->file_name));
-				(write(2, ": is a directory \n", 18), exit(1));
+				write(2, ": is a directory \n", 18);
+				ft_free_all(*garb);
+				exit(1);
 			}
 			dup2(fd, STDOUT_FILENO);
 			close(fd);
@@ -62,16 +65,17 @@ void ft_redirection(t_exec *data)
 		{
 			write(2, file->file_name, ft_strlenn(file->file_name));
 			write(2, ": No such file or directory\n", 28);
+			ft_free_all(*garb);
 			exit(1);
 		}
 		else if(fd == -1 && access(file->file_name, X_OK) == -1)
 		{
 			perror("access");
-			//exit(1);
 		}
 		if (file->fd == -1)
 		{
 			perror("dup2");
+			ft_free_all(*garb);
 			exit(1);
 		}
 		file = file->next;

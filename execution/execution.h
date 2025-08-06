@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 18:50:16 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 13:05:22 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int			ft_strlen_argc(char **str);
 int			ft_strlenn(char *str);
 void		ft_cd(char **args, t_list_env *env);
 void		ft_echo(char **str);
-void		ft_exit (int argc, int len, char **str);
+void		ft_exit (int argc, int len, char **str, t_garbage **garb);
 void		ft_lstadd_backk(t_list_env **lst, t_list_env *new);
 t_list_env	*ft_lstneww(void *variable, void *valeur_vari, t_garbage **garb);
 t_list_env	*ex_sort(t_list_env *list_env);
@@ -58,7 +58,7 @@ void		repmlacer_elem(t_list_env **list_env, char *var, char *arg, int d, t_garba
 void		ajout_exp_elem_help(t_list_env **list_env, char *args, int i, int c, int d, char **arg_varia, t_garbage **garb);
 void		ajout_exp_elem(t_list_env **list_env, char *args, int i, int j, t_garbage **garb);
 void		error_export(char **args, int i);
-void		ft_redirection(t_exec *data);
+void		ft_redirection(t_exec *data, t_garbage **garb);
 int			ft_count_env(t_list_env *env);
 char		**tab_env(t_list_env *env, t_garbage **garb);
 int			is_slash(char *str);
@@ -66,5 +66,5 @@ int			count_cmd(t_exec *data);
 int			is_built_in(char *str);
 int			is_espace_tabulion(char *cmd);
 int			ft_count_cmd(t_exec *data);
-unsigned long long	ft_atoi(int len, char *nbr, int count_cmd);
+unsigned long long	ft_atoi(int len, char *nbr, int count_cmd, t_garbage **garb);
 #endif

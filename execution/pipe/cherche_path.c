@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 19:40:08 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 17:03:08 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int is_espace_tabulion(char *cmd)
 	int i;
 
 	i = 0;
+	if(cmd == NULL)
+		return 1;
 	while(cmd[i] != '\0')
 	{
 		if (cmd[i] != ' ' && cmd[i] != '\t')
@@ -73,6 +75,7 @@ char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd,
 	{
 		write(2, cmd, ft_strlenn(cmd));
 		write(2, ": command not found\n", 20);
+		ft_free_all(*garb);
 		exit(1);
 	}
 	if (!cmd || !cmd[0])
@@ -98,6 +101,7 @@ char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd,
 		if (access(cmd, X_OK) != 0)
 		{
 			perror("access");
+			ft_free_all(*garb);
 			exit(1);
 		}
 	}
@@ -117,6 +121,7 @@ char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd,
 	{
 		write(2, cmd, ft_strlenn(cmd));
 		write(2, ": command not found\n", 20);
+		ft_free_all(*garb);
 		exit(1);
 	}
 	return path_cmd;

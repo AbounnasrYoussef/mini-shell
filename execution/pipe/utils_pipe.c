@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:12:25 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 19:40:15 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 16:48:52 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int is_slash(char *str)
 {
 	int i;
 	i = 0;
-	while(str[i] != '\0')
+	while(str && str[i] != '\0')
 	{
 		if (str[i] == '/')
 		{
