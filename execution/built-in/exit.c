@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 19:00:33 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 20:24:00 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int ft_modulo_number(unsigned long long number)
 	return (number - g);
 }
 
-void ft_exit (int count_cmd, int len, char **str, t_garbage **garb)
+void ft_exit (int count_cmd, int len, char **str, t_garbage **garb, int *status)
 {
 	int argc;
 	argc = ft_strlen_argc(str);
@@ -120,6 +120,7 @@ void ft_exit (int count_cmd, int len, char **str, t_garbage **garb)
 				if (count_cmd == 1)
 					printf("exit\n");
 				write(2, "exit: too many arguments\n", 25);
+				*status = 1;
 				//exit(1);
 			}	
 			else

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 18:46:37 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 20:39:14 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,11 @@ void ajout_exp_elem(t_list_env **list_env, char *args, int i, int j, t_garbage *
 	ajout_exp_elem_help(list_env,  args, i, 0, d, arg_varia, garb);
 }
 
-void error_export(char **args, int i)
+void error_export(char **args, int i, int *status)
 {
 	write(2, "export: `", 9);
 	write(2, args[i], ft_strlenn(args[i]));
 	write(2, "' not a valid identifier\n", 25);
+	*status = 1;
 	//exit(1);
 }

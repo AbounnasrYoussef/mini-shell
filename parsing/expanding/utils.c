@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:41:33 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/02 11:30:17 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:46:29 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_exit_status(int status, int flag)
 		exit_status = status;
 	return (exit_status);
 }
+
 
 int	is_valid_var_char(char c)
 {

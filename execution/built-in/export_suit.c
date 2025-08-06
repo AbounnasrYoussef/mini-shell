@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 21:42:24 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/03 18:43:39 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 20:27:41 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,22 @@ int	ft_isalphaa(int c)
 		return (0);
 }
 
-void check_args(t_list_env **list_env, char **args, int i, int j, int c, t_garbage **garb)
+void check_args(t_list_env **list_env, char **args, int i, int j, int c, t_garbage **garb, int *status)
 {
 	while (args[i] != NULL)
 	{
 		if (!(args[i][0] == '_' || ft_isalphaa(args[i][0])))
-			(c = 1, error_export(args, i));
+			(c = 1, error_export(args, i, status));
 		while(args[i][j] != '\0' && args[i][j] != '=' && args[i][j] != '+')
 		{
 			if (!(args[i][j] == '_' || args[i][j] == '=' || ft_isalnumm(args[i][j])))
-					(c = 1, error_export(args, i));
+					(c = 1, error_export(args, i, status));
 			j++;
 		}
 		if (args[i][j] == '+')
 		{
 			if (args[i][j+1] != '=')
-				(c = 1, error_export(args, i));
+				(c = 1, error_export(args, i, status));
 			j++;
 		}
 		if (c == 0)
@@ -97,7 +97,7 @@ t_list_env *ex_sort(t_list_env *list_env)
 	return debut;
 }
 
-void ft_export(t_list_env *list_env, char **args, t_garbage **garb)
+void ft_export(t_list_env *list_env, char **args, t_garbage **garb, int *status)
 {
 	int c;
 	c = ft_strlen_argc(args);
@@ -107,6 +107,6 @@ void ft_export(t_list_env *list_env, char **args, t_garbage **garb)
 	}
 	else
 	{
-		check_args(&list_env, args, 1, 1, 0, garb);
+		check_args(&list_env, args, 1, 1, 0, garb, status);
 	}
 }
