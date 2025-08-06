@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 20:42:07 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 23:53:30 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,8 +186,7 @@ void ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 	inf_pip.j = 0;
 	inf_pip.in_fd = STDIN_FILENO;
 	inf_pip.in_bultin = 0;
-	int status;
-	status = 0;
+	static int status;
 	inf_pip.tab_envv = tab_env(*env, garb);
 	if(count_cmd(data) == 1 && ft_strlen_argc(data->cmd) == 1 
 		&& ft_strcmpp(data->cmd[0], "export") != 0 && is_built_in(data->cmd[0]) == 0)

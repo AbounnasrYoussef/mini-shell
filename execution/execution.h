@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 20:26:19 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 23:26:25 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,20 @@ typedef struct s_list_env  t_list_env;
 typedef struct s_exec  t_exec;
 typedef struct s_garbage	t_garbage;
 
+typedef struct s_cd
+{
+	char	*old_pwd;
+	char	*new_pwd;
+}t_cd;
+
+typedef struct s_exit
+{
+	int c_cmd;
+	int len;
+	int argc;
+}t_exit;
+
+
 void		ft_put_string(char *str);
 int			ft_strcmpp(const char *s1, const char *s2);
 char		**ft_splitt(char const *s, char c, t_garbage **garb);
@@ -36,7 +50,7 @@ int			ft_strlen_argc(char **str);
 int			ft_strlenn(char *str);
 void		ft_cd(char **args, t_list_env *env, int *status);
 void		ft_echo(char **str);
-void		ft_exit (int argc, int len, char **str, t_garbage **garb, int *status);
+void		ft_exit (t_exit inf_exit, char **str, t_garbage **garb, int *status);
 void		ft_lstadd_backk(t_list_env **lst, t_list_env *new);
 t_list_env	*ft_lstneww(void *variable, void *valeur_vari, t_garbage **garb);
 t_list_env	*ex_sort(t_list_env *list_env);

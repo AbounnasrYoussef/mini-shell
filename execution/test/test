@@ -664,3 +664,6 @@ dh/: Not a directory
 
 bash-3.2$ Makefile
 bash: Makefile: command not found
+
+minishell$ exit 32 24 24 | exit
+exit: too many arguments

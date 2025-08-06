@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 21:42:24 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 20:27:41 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 21:15:14 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,9 @@ int	ft_isalnumm(int c)
 	s = (unsigned char)c;
 	if ((s >= '0' && s <= '9') || (s >= 'a' && s <= 'z')
 		|| (s >= 'A' && s <= 'Z'))
-	{
 		return (1);
-	}
 	else
-	{
 		return (0);
-	}
 }
 
 int	ft_isalphaa(int c)
@@ -36,21 +32,21 @@ int	ft_isalphaa(int c)
 		return (0);
 }
 
-void check_args(t_list_env **list_env, char **args, int i, int j, int c, t_garbage **garb, int *status)
+void	check_args(t_list_env **list_env, char **args, int i, int j, int c, t_garbage **garb, int *status)
 {
 	while (args[i] != NULL)
 	{
 		if (!(args[i][0] == '_' || ft_isalphaa(args[i][0])))
 			(c = 1, error_export(args, i, status));
-		while(args[i][j] != '\0' && args[i][j] != '=' && args[i][j] != '+')
+		while (args[i][j] != '\0' && args[i][j] != '=' && args[i][j] != '+')
 		{
 			if (!(args[i][j] == '_' || args[i][j] == '=' || ft_isalnumm(args[i][j])))
-					(c = 1, error_export(args, i, status));
+				(c = 1, error_export(args, i, status));
 			j++;
 		}
 		if (args[i][j] == '+')
 		{
-			if (args[i][j+1] != '=')
+			if (args[i][j + 1] != '=')
 				(c = 1, error_export(args, i, status));
 			j++;
 		}
@@ -65,41 +61,40 @@ void check_args(t_list_env **list_env, char **args, int i, int j, int c, t_garba
 	}
 }
 
-t_list_env *ex_sort(t_list_env *list_env)
+t_list_env	*ex_sort(t_list_env *list_env)
 {
 	t_list_env	*list1;
-	char	*tmp;;
+	char		*tmp;
 	t_list_env	*debut;
-	
+
 	list1 = list_env;
 	debut = list1;
 	while (list_env != NULL)
 	{
 		list1 = debut;
-		while(list1 != NULL)
+		while (list1 != NULL)
 		{
 			if (ft_strcmpp(list1->variable, (list_env->variable)) > 0)
 			{
 				tmp = list1->variable;
 				list1->variable = list_env->variable;
 				list_env->variable = tmp;
-				
 				tmp = list1->valeur_vari;
 				list1->valeur_vari = list_env->valeur_vari;
 				list_env->valeur_vari = tmp;
-				
 				list1 = debut;
 			}
-			list1 = list1->next;	
+			list1 = list1->next;
 		}
 		list_env = list_env->next;
 	}
-	return debut;
+	return (debut);
 }
 
-void ft_export(t_list_env *list_env, char **args, t_garbage **garb, int *status)
+void	ft_export(t_list_env *list_env, char **args, t_garbage **garb, int *status)
 {
-	int c;
+	int	c;
+
 	c = ft_strlen_argc(args);
 	if (c == 1)
 	{

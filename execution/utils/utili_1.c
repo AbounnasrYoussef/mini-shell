@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:37 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/31 17:58:25 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 23:29:28 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int ft_strlenn(char *str)
 	{
 		return 0;
 	}
-	while (str[i] != '\0')
+	while (str && str[i] != '\0')
 	{
 		i++;
 	}
