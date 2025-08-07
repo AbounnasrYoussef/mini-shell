@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 18:39:49 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 18:46:22 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ void		ft_unset(t_list_env **list_env, char **args);
 void		ft_print_env_ex(t_list_env *env);
 void		ft_supp_arg(t_list_env **list_env, char *arg);
 char		*ft_concat(char *str, char *str2, t_garbage **garb);
-char		*cherch_path(t_list_env **env, t_exec *data, int count_cmd, t_garbage **garb);
-int			ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb);
+char		*cherch_path(t_list_env **env, t_exec *data,
+				int count_cmd, t_garbage **garb);
+int			ft_built_in(t_exec *data, t_list_env **env,
+				int count_cmd, t_garbage **garb);
 void		ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb);
 char		*ft_cherch_home(t_list_env *env);
 int			verif_exist(t_list_env **list_env, char *arg);
