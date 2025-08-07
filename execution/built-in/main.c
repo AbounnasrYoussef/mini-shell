@@ -6,39 +6,11 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 11:21:31 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 16:20:34 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
-
-void	ft_print_env_ex(t_list_env *env)
-{
-	while (env != NULL)
-	{
-		if (ft_strcmpp(env->variable, "_") != 0)
-		{
-			if (env->valeur != NULL
-				&& ft_strcmpp(env->valeur, "") != 0)
-				printf("declare -x %s=\"%s\"\n", env->variable, env->valeur);
-			else
-				printf("declare -x %s\n", env->variable);
-		}
-		env = env->next;
-	}
-}
-
-void	ft_print_env(t_list_env *env)
-{
-	while (env != NULL)
-	{
-		if (env->valeur != NULL && ft_strcmpp(env->valeur, "") != 0)
-		{
-			printf("%s=\"%s\"\n", env->variable, env->valeur);
-		}
-		env = env->next;
-	}
-}
 
 void	error_env(char *str)
 {
@@ -79,20 +51,12 @@ void	ft_change_oldpwd(t_list_env **env)
 	}
 }
 
-int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
+int	help_built(t_exec *data, t_list_env **env
+		, t_exit inf_exit, t_garbage **garb)
 {
-	int		len;
-	t_exit	inf_exit;
-
-	len = 0;
-	inf_exit.c_cmd = count_cmd;
-	if (data->cmd[0] == NULL)
-		return (-1);
 	if (data->cmd[1] != NULL)
 		inf_exit.len = ft_strlenn(data->cmd[1]) - 1;
-	if (ft_strcmpp(data->cmd[0], "cd") == 0)
-		return (ft_cd(data->cmd, *env), 0);
-	else if (ft_strcmpp(data->cmd[0], "pwd") == 0)
+	if (ft_strcmpp(data->cmd[0], "pwd") == 0)
 		return (printf("%s\n", ft_pwd(*env)), 0);
 	else if (ft_strcmpp(data->cmd[0], "echo") == 0)
 		return (ft_echo(data->cmd), 0);
@@ -115,4 +79,18 @@ int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
 		return (0);
 	}
 	return (-1);
+}
+
+int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
+{
+	int		len;
+	t_exit	inf_exit;
+
+	len = 0;
+	inf_exit.c_cmd = count_cmd;
+	if (data->cmd[0] == NULL)
+		return (-1);
+	if (ft_strcmpp(data->cmd[0], "cd") == 0)
+		return (ft_cd(data->cmd, *env), 0);
+	return (help_built(data, env, inf_exit, garb));
 }

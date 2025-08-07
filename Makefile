@@ -39,10 +39,13 @@ SRC = minishell.c  signals.c\
 		$(PARS)/here_doc/here.c\
 		$(PARS)/here_doc/utils_here.c\
 		execution/built-in/cd.c\
+		execution/built-in/utils_cd.c\
 		execution/built-in/echo.c\
 		execution/built-in/env.c\
 		execution/built-in/exit.c\
+		execution/built-in/utils_exit.c\
 		execution/built-in/main.c\
+		execution/built-in/utils_main.c\
 		execution/built-in/pwd.c\
 		execution/built-in/unset.c\
 		execution/utils/ft_memcpy.c\

@@ -785,3 +785,7 @@ bash-3.2$ ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | 
 bash: fork: Resource temporarily unavailable
 bash-3.2$ $?
 bash: 1: command not found
+
+minishell$ exit | exit
+minishell$ $?
+1: command not found

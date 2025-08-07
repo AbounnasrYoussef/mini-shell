@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 14:49:06 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 16:14:58 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ void		ft_supp_arg(t_list_env **list_env, char *arg);
 char		*ft_concat(char *str, char *str2, t_garbage **garb);
 char		*cherch_path(char *cmd, t_list_env **env, t_exec *data, int count_cmd, t_garbage **garb);
 int			ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb);
-void		ft_print_env(t_list_env *env);
-void		ft_print_env_ex(t_list_env *env);
 void		ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb);
 char		*ft_cherch_home(t_list_env *env);
 int			verif_exist(t_list_env **list_env, char *arg);
@@ -99,4 +97,8 @@ int			count_cmd(t_exec *data);
 int			is_built_in(char *str);
 int			is_espace_tabulion(char *cmd);
 int			ft_count_cmd(t_exec *data);
+int			check_home(t_list_env *env);
+void		error_exit(char *str, int count_cmd, t_garbage **garb);
+void		error_exit2(int count_cmd);
+int			modulo(unsigned long long number);
 #endif

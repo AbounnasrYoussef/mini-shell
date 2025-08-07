@@ -6,21 +6,11 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 10:08:09 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 16:18:20 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
-
-void	error_exit(char *str, int count_cmd, t_garbage **garb)
-{
-	if (count_cmd == 1)
-		write(2, "exit: ", 6);
-	write(2, str, ft_strlenn(str));
-	write(2, ": numeric argument required\n", 28);
-	ft_free_all(*garb);
-	exit(255);
-}
 
 unsigned long long	ft_atoi(int len, char *nbr, int count_cmd, t_garbage **garb)
 {
@@ -50,7 +40,7 @@ unsigned long long	ft_atoi(int len, char *nbr, int count_cmd, t_garbage **garb)
 	return (nombre);
 }
 
-int	check_number(char *str)
+int	chck_nb(char *str)
 {
 	int	i;
 
@@ -78,24 +68,6 @@ int	check_number(char *str)
 	}
 }
 
-int	modulo(unsigned long long number)
-{
-	int	i;
-	int	g;
-
-	i = number / 256;
-	g = i * 256;
-	return (number - g);
-}
-
-void	error_exit2(int count_cmd)
-{
-	if (count_cmd == 1)
-		printf("exit\n");
-	write(2, "exit: too many arguments\n", 25);
-	ft_exit_status(1, 1);
-}
-
 void	ft_exit(t_exit i_exi, char **str, t_garbage **garb)
 {
 	i_exi.argc = ft_strlen_argc(str);
@@ -111,13 +83,13 @@ void	ft_exit(t_exit i_exi, char **str, t_garbage **garb)
 			}
 			else if (ft_strcmpp(str[1], "") == 0)
 				error_exit(str[1], i_exi.c_cmd, garb);
-			else if (check_number(str[1]) == 0 && i_exi.argc == 2 && i_exi.len <= 19)
+			else if (chck_nb(str[1]) == 0 && i_exi.argc == 2 && i_exi.len <= 19)
 			{
 				if (i_exi.c_cmd == 1)
 					printf("exit\n");
 				exit(modulo(ft_atoi((i_exi.len), str[1], i_exi.c_cmd, garb)));
 			}
-			else if (check_number(str[1]) == 0 && i_exi.argc > 2 && i_exi.len <= 19)
+			else if (chck_nb(str[1]) == 0 && i_exi.argc > 2 && i_exi.len <= 19)
 				error_exit2(i_exi.c_cmd);
 			else
 				error_exit(str[1], i_exi.c_cmd, garb);
