@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 11:14:00 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 12:59:17 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,18 @@ typedef struct s_export
 	
 }t_export;
 
+typedef struct s_info_pipe
+{
+	int i;
+    int pid;
+    int fd[2];
+    int in_fd; 
+	char *path_cmd;
+	int in_bultin;
+	int j;
+	char **tab_envv;
+	struct stat info;
+}t_info_pipe;
 
 void		ft_put_string(char *str);
 int			ft_strcmpp(const char *s1, const char *s2);

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:37 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 11:35:23 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 12:58:12 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,19 @@ int	ft_strlen_argc(char **str)
 	i = 0;
 	while (str[i] != NULL)
 	{
+		i++;
+	}
+	return (i);
+}
+
+int	ft_count_cmd(t_exec *data)
+{
+	int	i;
+
+	i = 0;
+	while (data != NULL)
+	{
+		data = data->next;
 		i++;
 	}
 	return (i);
