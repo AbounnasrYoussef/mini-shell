@@ -6,60 +6,59 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 12:59:17 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 14:49:06 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
-#include "../minishell.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
+# include "../minishell.h"
+# include <unistd.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
 
-typedef struct s_list_env  t_list_env;
-typedef struct s_exec  t_exec;
+typedef struct s_list_env	t_list_env;
+typedef struct s_exec		t_exec;
 typedef struct s_garbage	t_garbage;
 
 typedef struct s_cd
 {
 	char	*old_pwd;
 	char	*new_pwd;
-}t_cd;
+}	t_cd;
 
 typedef struct s_exit
 {
-	int c_cmd;
-	int len;
-	int argc;
-}t_exit;
+	int	c_cmd;
+	int	len;
+	int	argc;
+}	t_exit;
 
 typedef struct s_export
 {
-	int i;
-	int j;
-	int c;
-	
-}t_export;
+	int	i;
+	int	j;
+	int	c;
+}	t_export;
 
 typedef struct s_info_pipe
 {
-	int i;
-    int pid;
-    int fd[2];
-    int in_fd; 
-	char *path_cmd;
-	int in_bultin;
-	int j;
-	char **tab_envv;
-	struct stat info;
-}t_info_pipe;
+	int			i;
+	int			pid;
+	int			fd[2];
+	int			in_fd;
+	char		*path_cmd;
+	int			in_bultin;
+	int			j;
+	char		**tab_envv;
+	struct stat	info;
+}	t_info_pipe;
 
 void		ft_put_string(char *str);
 int			ft_strcmpp(const char *s1, const char *s2);
@@ -70,7 +69,7 @@ int			ft_strlen_argc(char **str);
 int			ft_strlenn(char *str);
 void		ft_cd(char **args, t_list_env *env);
 void		ft_echo(char **str);
-void		ft_exit (t_exit inf_exit, char **str, t_garbage **garb);
+void		ft_exit(t_exit inf_exit, char **str, t_garbage **garb);
 void		ft_lstadd_backk(t_list_env **lst, t_list_env *new);
 t_list_env	*ft_lstneww(void *variable, void *valeur, t_garbage **garb);
 t_list_env	*ex_sort(t_list_env *list_env, char *tmp);
@@ -81,7 +80,7 @@ void		ft_unset(t_list_env **list_env, char **args);
 void		ft_print_env_ex(t_list_env *env);
 void		ft_supp_arg(t_list_env **list_env, char *arg);
 char		*ft_concat(char *str, char *str2, t_garbage **garb);
-char		*cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd, t_garbage **garb);
+char		*cherch_path(char *cmd, t_list_env **env, t_exec *data, int count_cmd, t_garbage **garb);
 int			ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb);
 void		ft_print_env(t_list_env *env);
 void		ft_print_env_ex(t_list_env *env);
@@ -100,5 +99,4 @@ int			count_cmd(t_exec *data);
 int			is_built_in(char *str);
 int			is_espace_tabulion(char *cmd);
 int			ft_count_cmd(t_exec *data);
-unsigned long long	ft_atoi(int len, char *nbr, int count_cmd, t_garbage **garb);
 #endif
