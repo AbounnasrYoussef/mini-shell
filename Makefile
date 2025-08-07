@@ -54,10 +54,11 @@ SRC = minishell.c  signals.c\
 		execution/utils/ft_split.c\
 		execution/utils/utili_1.c\
 		execution/pipe/pipe.c\
+		execution/pipe/utils_pipe.c\
+		execution/pipe/utils_pipe2.c\
 		execution/pipe/cherche_path.c\
 		execution/pipe/ft_redirections.c\
 		execution/pipe/utils_redirection.c\
-		execution/pipe/utils_pipe.c\
 
 
 OBJ = $(SRC:.c=.o)

@@ -6,14 +6,15 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 14:19:53 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 18:15:14 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 #include "../../minishell.h"
 
-void	ft_one_cmd(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
+void	ft_one_cmd(t_exec *data, t_list_env **env, int count_cmd
+		, t_garbage **garb)
 {
 	int	original_fd_in;
 	int	original_fd_out;
@@ -33,78 +34,41 @@ void	ft_one_cmd(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
 	}
 }
 
-void	ft_error_pipe(t_exec *data, t_info_pipe inf_pip, t_garbage **garb)
-{
-	if (data->cmd[0] && data->cmd[0][0] == '.' && data->cmd[0][1] == '\0')
-	{
-		write(2, ".: filename argument required\n", 30);
-		write(2, ".: usage: . filename [arguments]\n", 33);
-		(ft_free_all(*garb), exit(2));
-	}
-	if (S_ISDIR((inf_pip.info).st_mode))
-	{
-		if ((data->cmd[0][0] == '.' && data->cmd[0][1] == '/')
-			|| data->cmd[0][0] == '/'
-			|| (data->cmd[0][0] == '.' && data->cmd[0][1] == '.'))
-		{
-			write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
-			write(2, ": is a directory \n", 18);
-			(ft_free_all(*garb), exit(126));
-		}
-	}
-	else if (!S_ISREG((inf_pip.info).st_mode) && ft_strlenn(data->cmd[0]) > 0
-		&& (data->cmd[0][ft_strlenn(data->cmd[0]) - 1] == '/'))
-	{
-		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
-		write(2, ": Not a directory\n", 18);
-		(ft_free_all(*garb), exit(126));
-	}
-	else if (!S_ISREG((inf_pip.info).st_mode) && is_slash(data->cmd[0]) == 0)
-	{
-		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
-		write(2, ": No such file or directory\n", 28);
-		(ft_free_all(*garb), exit(127));
-	}
-}
-
-void	ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip, int count_cmd, t_garbage **garb)
+void	ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip
+		, t_garbage **garb)
 {
 	if (data->files != NULL)
 		ft_redirection(data, garb);
 	stat(data->cmd[0], &(inf_pip.info));
-	ft_error_pipe(data, inf_pip,  garb);
-	inf_pip.in_bultin = ft_built_in(data, env, count_cmd, garb);
+	ft_error_pipe(data, garb);
+	ft_error_pipe2(data, inf_pip, garb);
+	inf_pip.in_bultin = ft_built_in(data, env, inf_pip.count_cmd, garb);
 	if (inf_pip.in_bultin == -1)
 	{
-		inf_pip.path_cmd = cherch_path(data->cmd[0], env, data, count_cmd, garb);
+		inf_pip.path_cmd = cherch_path(data->cmd[0], env, data, inf_pip.count_cmd, garb);
 		if (inf_pip.path_cmd)
 		{
 			data->cmd[0] = inf_pip.path_cmd;
 			execve(inf_pip.path_cmd, data->cmd, inf_pip.tab_envv);
-			ft_free_all(*garb);
-			exit(0);
+			(ft_free_all(*garb), exit(0));
 		}
 		if (access(data->cmd[0], X_OK) == -1)
 		{
 			if (!data->cmd[0])
 				exit(1);
 			perror("access");
-			ft_free_all(*garb);
-			exit(126);
+			(ft_free_all(*garb), exit(126));
 		}
 	}
 	else
 		(ft_free_all(*garb), exit(1));
 }
 
-void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip, int count_cmd, t_garbage **garb)
+void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
+		, t_garbage **garb)
 {
 	if (inf_pip->pid == -1)
-	{
-		perror("fork");
-		ft_free_all(*garb);
-		exit(1);
-	}
+		ft_error_fork(garb);
 	else if (inf_pip->pid == 0)
 	{
 		if (inf_pip->in_fd != STDIN_FILENO)
@@ -117,7 +81,7 @@ void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip, int count_cm
 			dup2(inf_pip->fd[1], STDOUT_FILENO);
 			1 && (close(inf_pip->fd[0]), close(inf_pip->fd[1]));
 		}
-		ft_exec_child(data, env, *inf_pip, count_cmd, garb);
+		ft_exec_child(data, env, *inf_pip, garb);
 	}
 	else
 	{
@@ -130,7 +94,8 @@ void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip, int count_cm
 	}
 }
 
-void	ft_plusieur_cmd(t_exec *data, t_list_env **env, t_info_pipe *inf_pip, int count_cmd, t_garbage **garb)
+void	ft_plusieur_cmd(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
+		, t_garbage **garb)
 {
 	while (data != NULL)
 	{
@@ -144,7 +109,7 @@ void	ft_plusieur_cmd(t_exec *data, t_list_env **env, t_info_pipe *inf_pip, int c
 			}
 		}
 		inf_pip->pid = fork();
-		ft_child(data, env, inf_pip, count_cmd, garb);
+		ft_child(data, env, inf_pip, garb);
 		data = data->next;
 		(inf_pip->i)++;
 	}
@@ -159,6 +124,7 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 	inf_pip.j = 0;
 	inf_pip.in_fd = STDIN_FILENO;
 	inf_pip.tab_envv = tab_env(*env, garb);
+	inf_pip.count_cmd = count_cmd(data);
 	if (count_cmd(data) == 1 && ft_strlen_argc(data->cmd) == 1
 		&& ft_strcmpp(data->cmd[0], "export") != 0
 		&& is_built_in(data->cmd[0]) == 0)
@@ -167,15 +133,11 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 		&& is_built_in(data->cmd[0]) == 0)
 		ft_one_cmd(data, env, count_cmd(data), garb);
 	else
-		ft_plusieur_cmd(data, env, &inf_pip, count_cmd(data), garb);
+		ft_plusieur_cmd(data, env, &inf_pip, garb);
 	waitpid(inf_pip.pid, &status, 0);
 	if (WIFEXITED(status))
 		ft_exit_status(WEXITSTATUS(status), 1);
 	else if (WIFSIGNALED(status))
 		ft_exit_status(WEXITSTATUS(status) + 130, 1);
-	while (inf_pip.j < inf_pip.i)
-	{
-		wait(NULL);
-		(inf_pip.j)++;
-	}
+	ft_wait_child(&inf_pip);
 }

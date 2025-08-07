@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 16:55:54 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 17:45:58 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	error_cherch_path(char *cmd, t_garbage **garb)
 	exit(127);
 }
 
-char 	*cherch_path2(t_exec *data, char *cmd, t_list_env **env, char *path, int count_cmd, t_garbage **garb)
+char	*cherch_path2(t_exec *data, char *cmd, t_list_env **env, char *path, int count_cmd, t_garbage **garb)
 {
 	char	**paths;
 	char	*path_cmd;
