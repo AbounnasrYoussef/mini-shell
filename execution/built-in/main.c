@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 16:20:34 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 16:55:54 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_change_oldpwd(t_list_env **env)
 	{
 		if (ft_strcmpp(copy_env->variable, "OLDPWD") == 0)
 		{
-			copy_env->valeur = "";
+			copy_env->val = "";
 		}
 		copy_env = copy_env->next;
 	}

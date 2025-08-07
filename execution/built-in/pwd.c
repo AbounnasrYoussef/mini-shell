@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 22:49:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 10:47:46 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 16:55:54 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_pwd(t_list_env *env)
 		if (ft_strcmpp(env->variable, "PWD") == 0
 			|| ft_strcmpp(env->variable, "PO") == 0)
 		{
-			buffer = env->valeur;
+			buffer = env->val;
 		}
 		env = env->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 14:38:32 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 16:55:54 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*cherch_path1(t_exec *data, char *cmd, t_list_env **env, int count_cmd, t_g
 	{
 		if (ft_strcmpp((*env)->variable, "PATH") == 0)
 		{
-			path = (*env)->valeur;
+			path = (*env)->val;
 			break ;
 		}
 		(*env) = (*env)->next;

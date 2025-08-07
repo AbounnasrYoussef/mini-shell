@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:12:25 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 12:54:44 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 16:55:54 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_count_env(t_list_env *env)
 	c = 0;
 	while (env != NULL)
 	{
-		if (env->valeur != NULL)
+		if (env->val != NULL)
 		{
 			c++;
 		}
@@ -43,10 +43,10 @@ char	**tab_env(t_list_env *env, t_garbage **garb)
 	i = 0;
 	while (copy_env != NULL)
 	{
-		if (copy_env->valeur != NULL)
+		if (copy_env->val != NULL)
 		{
 			tab_env[i] = ft_concat(copy_env->variable, "=", garb);
-			tab_env[i] = ft_concat(tab_env[i], copy_env->valeur, garb);
+			tab_env[i] = ft_concat(tab_env[i], copy_env->val, garb);
 			i++;
 		}
 		copy_env = copy_env->next;

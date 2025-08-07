@@ -6,50 +6,14 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 11:14:11 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 17:06:31 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-int	verif_exist(t_list_env **list_env, char *arg)
-{
-	t_list_env	*l_env;
-
-	l_env = *list_env;
-	while (l_env != NULL)
-	{
-		if (ft_strcmpp((l_env)->variable, arg) == 0)
-		{
-			return (1);
-			break ;
-		}
-		(l_env) = (l_env)->next;
-	}
-	return (0);
-}
-
-void	chng_el(t_list_env **env, char *var, char *arg, int d, t_garbage **garb)
-{
-	t_list_env	*l_env;
-
-	l_env = *env;
-	while (l_env != NULL)
-	{
-		if (ft_strcmpp((l_env)->variable, var) == 0)
-		{
-			if (d == 1)
-			{
-				(l_env)->valeur = ft_concat((l_env)->valeur, arg, garb);
-			}
-			else
-				(l_env)->valeur = arg;
-		}
-		(l_env) = (l_env)->next;
-	}
-}
-
-void	exp_el_help(t_list_env **list_env, char *args, t_export indx, char **arg_varia, t_garbage **garb)
+void	exp_el_help(t_list_env **env, char *args
+		, t_export indx, t_garbage **garb)
 {
 	int	k;
 
@@ -60,40 +24,38 @@ void	exp_el_help(t_list_env **list_env, char *args, t_export indx, char **arg_va
 		indx.j++;
 	}
 	indx.i = indx.i - indx.j;
-	arg_varia[1] = ft_malloc(garb, (indx.j + 1));
+	indx.arg_ex[1] = ft_malloc(garb, (indx.j + 1));
 	while (args[indx.i] != '\0')
 	{
-		arg_varia[1][k] = args[indx.i];
+		indx.arg_ex[1][k] = args[indx.i];
 		k++;
 		indx.i++;
 	}
-	arg_varia[1][k] = '\0';
-	if (verif_exist(list_env, arg_varia[0]) == 0)
-		ft_lstadd_backk(list_env, ft_lstneww(arg_varia[0], arg_varia[1], garb));
+	indx.arg_ex[1][k] = '\0';
+	if (verif_exist(env, indx.arg_ex[0]) == 0)
+		ft_lstadd_backk(env, ft_lstneww(indx.arg_ex[0], indx.arg_ex[1], garb));
 	else
 	{
-		if (arg_varia[1] != NULL && arg_varia[1][0] != '\0')
-			chng_el(list_env, arg_varia[0], arg_varia[1], indx.c, garb);
+		if (indx.arg_ex[1] != NULL && indx.arg_ex[1][0] != '\0')
+			chng_el(env, indx, garb);
 	}
 }
 
 void	export_el(t_list_env **env, char *args, t_export indx, t_garbage **garb)
 {
-	char	**arg_varia;
-
 	indx.i = 0;
 	indx.j = 0;
 	indx.c = 0;
-	arg_varia = ft_malloc(garb, 2 * sizeof(char *));
+	indx.arg_ex = ft_malloc(garb, 2 * sizeof(char *));
 	while (args[indx.j] != '\0' && args[indx.j] != '=' && args[indx.j] != '+')
 		indx.j++;
-	arg_varia[0] = ft_malloc(garb, indx.j + 1);
+	indx.arg_ex[0] = ft_malloc(garb, indx.j + 1);
 	while (indx.i < indx.j)
 	{
-		arg_varia[0][indx.i] = args[indx.i];
+		indx.arg_ex[0][indx.i] = args[indx.i];
 		indx.i++;
 	}
-	arg_varia[0][indx.i] = '\0';
+	indx.arg_ex[0][indx.i] = '\0';
 	if (args[indx.i] == '+' && args[indx.i + 1] == '=')
 	{
 		indx.c = 1;
@@ -102,15 +64,84 @@ void	export_el(t_list_env **env, char *args, t_export indx, t_garbage **garb)
 	else if (args[indx.i] == '=')
 		indx.i++;
 	if (args[indx.i] == '\0')
-		arg_varia[1] = NULL;
+		indx.arg_ex[1] = NULL;
 	indx.j = 0;
-	exp_el_help(env, args, indx, arg_varia, garb);
+	exp_el_help(env, args, indx, garb);
 }
 
-void	error_export(char **args, int i)
+void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 {
-	write(2, "export: `", 9);
-	write(2, args[i], ft_strlenn(args[i]));
-	write(2, "' not a valid identifier\n", 25);
-	ft_exit_status(1, 1);
+	while (args[ix.i] != NULL)
+	{
+		if (!(args[ix.i][0] == '_' || ft_isalphaa(args[ix.i][0])))
+			1 && (error_export(args, ix.i), ix.c = 1);
+		while (args[ix.i][ix.j] != '\0' && args[ix.i][ix.j] != '='
+			&& args[ix.i][ix.j] != '+')
+		{
+			if (!(args[ix.i][ix.j] == '_' || args[ix.i][ix.j] == '='
+				|| ft_isalnumm(args[ix.i][ix.j])))
+				1 && (error_export(args, ix.i), ix.c = 1);
+			ix.j++;
+		}
+		if (args[ix.i][ix.j] == '+')
+		{
+			if (args[ix.i][ix.j + 1] != '=')
+				1 && (error_export(args, ix.i), ix.c = 1);
+			ix.j++;
+		}
+		if (ix.c == 0)
+			export_el(env, args[ix.i], ix, garb);
+		else
+			ix.c = 0;
+		ix.j = 1;
+		ix.i++;
+	}
+}
+
+t_list_env	*ex_sort(t_list_env *list_env, char *tmp)
+{
+	t_list_env	*list1;
+	t_list_env	*debut;
+
+	list1 = list_env;
+	debut = list1;
+	while (list_env != NULL)
+	{
+		list1 = debut;
+		while (list1 != NULL)
+		{
+			if (ft_strcmpp(list1->variable, (list_env->variable)) > 0)
+			{
+				tmp = list1->variable;
+				list1->variable = list_env->variable;
+				list_env->variable = tmp;
+				tmp = list1->val;
+				list1->val = list_env->val;
+				list_env->val = tmp;
+				list1 = debut;
+			}
+			list1 = list1->next;
+		}
+		list_env = list_env->next;
+	}
+	return (debut);
+}
+
+void	ft_export(t_list_env *list_env, char **args, t_garbage **garb)
+{
+	int			c;
+	t_export	index;
+
+	c = ft_strlen_argc(args);
+	index.i = 1;
+	index.j = 1;
+	index.c = 0;
+	if (c == 1)
+	{
+		ft_print_env_ex(ex_sort(list_env, NULL));
+	}
+	else
+	{
+		check_args(&list_env, index, args, garb);
+	}
 }

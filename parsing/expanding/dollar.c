@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:23:13 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/07 10:47:46 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 16:55:54 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_env_value(char *name, t_list_env *env, t_garbage **garb)
 	while (env)
 	{
 		if (env->variable && ft_strcmp(env->variable, name) == 0)
-			return (ft_strdup(env->valeur, garb));
+			return (ft_strdup(env->val, garb));
 		env = env->next;
 	}
 	return (ft_strdup("", garb));
