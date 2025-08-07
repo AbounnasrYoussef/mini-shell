@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 18:15:14 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 18:22:12 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip
 	inf_pip.in_bultin = ft_built_in(data, env, inf_pip.count_cmd, garb);
 	if (inf_pip.in_bultin == -1)
 	{
-		inf_pip.path_cmd = cherch_path(data->cmd[0], env, data, inf_pip.count_cmd, garb);
+		inf_pip.path_cmd = cherch_path(env, data, inf_pip.count_cmd, garb);
 		if (inf_pip.path_cmd)
 		{
 			data->cmd[0] = inf_pip.path_cmd;

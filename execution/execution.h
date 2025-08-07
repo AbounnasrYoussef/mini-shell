@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 18:12:00 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 18:39:49 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ typedef struct s_info_pipe
 	struct stat	info;
 }	t_info_pipe;
 
+typedef struct s_inf_cher_path
+{
+	char	*path;
+	int		c_cmd;
+}	t_inf_cher_path;
+
 void		ft_put_string(char *str);
 int			ft_strcmpp(const char *s1, const char *s2);
 char		**ft_splitt(char const *s, char c, t_garbage **garb);
@@ -81,7 +87,7 @@ void		ft_unset(t_list_env **list_env, char **args);
 void		ft_print_env_ex(t_list_env *env);
 void		ft_supp_arg(t_list_env **list_env, char *arg);
 char		*ft_concat(char *str, char *str2, t_garbage **garb);
-char		*cherch_path(char *cmd, t_list_env **env, t_exec *data, int count_cmd, t_garbage **garb);
+char		*cherch_path(t_list_env **env, t_exec *data, int count_cmd, t_garbage **garb);
 int			ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb);
 void		ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb);
 char		*ft_cherch_home(t_list_env *env);
@@ -110,4 +116,5 @@ void		ft_error_pipe(t_exec *data, t_garbage **garb);
 void		ft_error_pipe2(t_exec *data, t_info_pipe inf_pip, t_garbage **garb);
 void		ft_error_fork(t_garbage **garb);
 void		ft_wait_child(t_info_pipe *inf_pip);
+void		error_cherch_path(char *cmd, t_garbage **garb);
 #endif

@@ -57,6 +57,7 @@ SRC = minishell.c  signals.c\
 		execution/pipe/utils_pipe.c\
 		execution/pipe/utils_pipe2.c\
 		execution/pipe/cherche_path.c\
+		execution/pipe/utils_cherch_path.c\
 		execution/pipe/ft_redirections.c\
 		execution/pipe/utils_redirection.c\
 
