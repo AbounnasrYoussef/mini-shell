@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:53:52 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/03 19:40:36 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 11:31:33 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,25 +84,25 @@ char	**ft_splitt(char const *s, char c, t_garbage **garb)
 	size_t	skip;
 	size_t	i;
 	size_t	index;
-	size_t	sizee;
+	size_t	siz;
 	char	**alloce_array;
 
 	(void)garb;
 	skip = 0;
 	i = 0;
 	index = 0;
-	sizee = 0;
+	siz = 0;
 	alloce_array = alloc(s, c, garb);
 	if (!alloce_array)
 		return (NULL);
 	while (index < count_word(s, c))
 	{
-		sizee = count_len_word(s, c, &i, &skip);
-		alloce_array[index] = (char *)ft_malloc(garb, sizeof(char) * (sizee + 1));
+		siz = count_len_word(s, c, &i, &skip);
+		alloce_array[index] = (char *)ft_malloc(garb, sizeof(char) * (siz + 1));
 		if (!alloce_array[index])
 			return (free_split(alloce_array, index));
-		ft_memcpyy(alloce_array[index], s + skip, sizee);
-		alloce_array[index][sizee] = '\0';
+		ft_memcpyy(alloce_array[index], s + skip, siz);
+		alloce_array[index][siz] = '\0';
 		index++;
 	}
 	return (alloce_array[index] = NULL, alloce_array);
