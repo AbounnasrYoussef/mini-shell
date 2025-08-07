@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 22:24:19 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 09:44:51 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 10:47:46 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_cherch_home(t_list_env *env)
 	while (env != NULL)
 	{
 		if (ft_strcmpp(env->variable, "HOME") == 0)
-			return (env->valeur_vari);
+			return (env->valeur);
 		env = env->next;
 	}
 	return (NULL);
@@ -40,11 +40,11 @@ void	ft_r_pwd_oldp(t_list_env *env, char *new_pwd, char *old_pwd)
 	{
 		if (ft_strcmpp(env->variable, "PWD") == 0)
 		{
-			env->valeur_vari = new_pwd;
+			env->valeur = new_pwd;
 		}
 		else if (ft_strcmpp(env->variable, "OLDPWD") == 0)
 		{
-			env->valeur_vari = old_pwd;
+			env->valeur = old_pwd;
 		}
 		env = env->next;
 	}

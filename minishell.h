@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/03 17:43:26 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 10:47:46 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_garbage
 typedef struct s_list_env
 {
 	void	*variable;
-	void 	*valeur_vari;
+	void 	*valeur;
 	struct s_list_env	*next;
 }	t_list_env;
 
@@ -166,7 +166,7 @@ size_t  ft_strlen(const char *s);
 //env
 t_list_env *ft_env(char **str);
 void	ft_lstadd_back(t_list_env **lst, t_list_env *new);
-t_list_env	*ft_lstnew(void *variable, void *valeur_vari);
+t_list_env	*ft_lstnew(void *variable, void *valeur);
 char	**i_split(char const *s, char c);
 
 //signals 

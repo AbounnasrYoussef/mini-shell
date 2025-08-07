@@ -6,13 +6,13 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:33:27 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 20:59:01 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 10:47:46 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-t_list_env	*ft_lstneww(void *variable, void *valeur_vari, t_garbage **garb)
+t_list_env	*ft_lstneww(void *variable, void *valeur, t_garbage **garb)
 {
 	t_list_env	*list1;
 
@@ -23,7 +23,7 @@ t_list_env	*ft_lstneww(void *variable, void *valeur_vari, t_garbage **garb)
 		return (NULL);
 	}
 	list1->variable = variable;
-	list1->valeur_vari = valeur_vari;
+	list1->valeur = valeur;
 	list1->next = NULL;
 	return (list1);
 }

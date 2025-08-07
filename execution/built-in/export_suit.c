@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 21:42:24 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 09:50:36 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 11:17:09 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,39 +32,38 @@ int	ft_isalphaa(int c)
 		return (0);
 }
 
-void	check_args(t_list_env **list_env, char **args, int i, int j, int c, t_garbage **garb)
+void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 {
-	while (args[i] != NULL)
+	while (args[ix.i] != NULL)
 	{
-		if (!(args[i][0] == '_' || ft_isalphaa(args[i][0])))
-			(c = 1, error_export(args, i));
-		while (args[i][j] != '\0' && args[i][j] != '=' && args[i][j] != '+')
+		if (!(args[ix.i][0] == '_' || ft_isalphaa(args[ix.i][0])))
+			1 && (error_export(args, ix.i), ix.c = 1);
+		while (args[ix.i][ix.j] != '\0' && args[ix.i][ix.j] != '='
+			&& args[ix.i][ix.j] != '+')
 		{
-			if (!(args[i][j] == '_' || args[i][j] == '=' || ft_isalnumm(args[i][j])))
-				(c = 1, error_export(args, i));
-			j++;
+			if (!(args[ix.i][ix.j] == '_' || args[ix.i][ix.j] == '='
+				|| ft_isalnumm(args[ix.i][ix.j])))
+				1 && (error_export(args, ix.i), ix.c = 1);
+			ix.j++;
 		}
-		if (args[i][j] == '+')
+		if (args[ix.i][ix.j] == '+')
 		{
-			if (args[i][j + 1] != '=')
-				(c = 1, error_export(args, i));
-			j++;
+			if (args[ix.i][ix.j + 1] != '=')
+				1 && (error_export(args, ix.i), ix.c = 1);
+			ix.j++;
 		}
-		if (c == 0)
-		{
-			ajout_exp_elem(list_env, args[i], 0, 0, garb);
-		}
+		if (ix.c == 0)
+			export_el(env, args[ix.i], ix, garb);
 		else
-			c = 0;
-		j = 1;
-		i++;
+			ix.c = 0;
+		ix.j = 1;
+		ix.i++;
 	}
 }
 
-t_list_env	*ex_sort(t_list_env *list_env)
+t_list_env	*ex_sort(t_list_env *list_env, char *tmp)
 {
 	t_list_env	*list1;
-	char		*tmp;
 	t_list_env	*debut;
 
 	list1 = list_env;
@@ -79,9 +78,9 @@ t_list_env	*ex_sort(t_list_env *list_env)
 				tmp = list1->variable;
 				list1->variable = list_env->variable;
 				list_env->variable = tmp;
-				tmp = list1->valeur_vari;
-				list1->valeur_vari = list_env->valeur_vari;
-				list_env->valeur_vari = tmp;
+				tmp = list1->valeur;
+				list1->valeur = list_env->valeur;
+				list_env->valeur = tmp;
 				list1 = debut;
 			}
 			list1 = list1->next;
@@ -93,15 +92,19 @@ t_list_env	*ex_sort(t_list_env *list_env)
 
 void	ft_export(t_list_env *list_env, char **args, t_garbage **garb)
 {
-	int	c;
+	int			c;
+	t_export	index;
 
 	c = ft_strlen_argc(args);
+	index.i = 1;
+	index.j = 1;
+	index.c = 0;
 	if (c == 1)
 	{
-		ft_print_env_ex(ex_sort(list_env));
+		ft_print_env_ex(ex_sort(list_env, NULL));
 	}
 	else
 	{
-		check_args(&list_env, args, 1, 1, 0, garb);
+		check_args(&list_env, index, args, garb);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 09:51:36 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 10:47:46 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	ft_print_env_ex(t_list_env *env)
 	{
 		if (ft_strcmpp(env->variable, "_") != 0)
 		{
-			if (env->valeur_vari != NULL
-				&& ft_strcmpp(env->valeur_vari, "") != 0)
-				printf("declare -x %s=\"%s\"\n", env->variable, env->valeur_vari);
+			if (env->valeur != NULL
+				&& ft_strcmpp(env->valeur, "") != 0)
+				printf("declare -x %s=\"%s\"\n", env->variable, env->valeur);
 			else
 				printf("declare -x %s\n", env->variable);
 		}
@@ -32,9 +32,9 @@ void	ft_print_env(t_list_env *env)
 {
 	while (env != NULL)
 	{
-		if (env->valeur_vari != NULL && ft_strcmpp(env->valeur_vari, "") != 0)
+		if (env->valeur != NULL && ft_strcmpp(env->valeur, "") != 0)
 		{
-			printf("%s=\"%s\"\n", env->variable, env->valeur_vari);
+			printf("%s=\"%s\"\n", env->variable, env->valeur);
 		}
 		env = env->next;
 	}
@@ -73,7 +73,7 @@ void	ft_change_OLDPWD(t_list_env **env)
 	{
 		if (ft_strcmpp(copy_env->variable, "OLDPWD") == 0)
 		{
-			copy_env->valeur_vari = "";
+			copy_env->valeur = "";
 		}
 		copy_env = copy_env->next;
 	}
