@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 12:59:18 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 09:52:25 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 11:26:36 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ void	ft_supp_arg(t_list_env **list_env, char *arg)
 	}
 }
 
+void	ft_error_unset(char *arg)
+{
+	write(2, "unset: `", 8);
+	write(2, arg, strlen(arg));
+	write(2, ": not a valid identifier\n", 25);
+	ft_exit_status(1, 1);
+}
+
 void	ft_unset(t_list_env **list_env, char **args)
 {
 	int	i;
@@ -51,10 +59,7 @@ void	ft_unset(t_list_env **list_env, char **args)
 				|| (args[i][j] >= '0' && args[i][j] <= '9'))
 				|| (args[i][0] >= '0' && args[i][0] <= '9'))
 			{
-				write(2, "unset: `", 8);
-				write(2, args[i], strlen(args[i]));
-				write(2, ": not a valid identifier\n", 25);
-				ft_exit_status(1, 1);
+				ft_error_unset(args[i]);
 				break ;
 			}
 			j++;

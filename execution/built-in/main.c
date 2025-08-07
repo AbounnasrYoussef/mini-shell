@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 10:47:46 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 11:21:31 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	error_env(char *str)
 	exit(127);
 }
 
-int	check_exist_PWD(t_list_env *env)
+int	check_exist_pwd(t_list_env *env)
 {
 	t_list_env	*copy_env;
 
@@ -64,7 +64,7 @@ int	check_exist_PWD(t_list_env *env)
 	return (1);
 }
 
-void	ft_change_OLDPWD(t_list_env **env)
+void	ft_change_oldpwd(t_list_env **env)
 {
 	t_list_env	*copy_env;
 
@@ -81,11 +81,10 @@ void	ft_change_OLDPWD(t_list_env **env)
 
 int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
 {
-	int	len;
+	int		len;
+	t_exit	inf_exit;
 
 	len = 0;
-	t_exit inf_exit;
-	
 	inf_exit.c_cmd = count_cmd;
 	if (data->cmd[0] == NULL)
 		return (-1);
@@ -111,8 +110,8 @@ int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
 	else if (ft_strcmpp(data->cmd[0], "unset") == 0)
 	{
 		ft_unset(env, data->cmd);
-		if (check_exist_PWD(*env) == 1)
-			ft_change_OLDPWD(env);
+		if (check_exist_pwd(*env) == 1)
+			ft_change_oldpwd(env);
 		return (0);
 	}
 	return (-1);
