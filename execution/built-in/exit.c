@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 23:50:16 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 09:46:58 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,15 @@ int	modulo(unsigned long long number)
 	return (number - g);
 }
 
-void	error_exit2(int count_cmd, int *status)
+void	error_exit2(int count_cmd)
 {
 	if (count_cmd == 1)
 		printf("exit\n");
 	write(2, "exit: too many arguments\n", 25);
-	*status = 1;
+	ft_exit_status(1, 1);
 }
 
-void	ft_exit (t_exit i_exi, char **str, t_garbage **garb, int *status)
+void	ft_exit (t_exit i_exi, char **str, t_garbage **garb)
 {
 	i_exi.argc = ft_strlen_argc(str);
 	if (i_exi.argc >= 1)
@@ -120,7 +120,7 @@ void	ft_exit (t_exit i_exi, char **str, t_garbage **garb, int *status)
 				exit(modulo(ft_atoi((i_exi.len), str[1], i_exi.c_cmd, garb)));
 			}
 			else if (check_number(str[1]) == 0 && i_exi.argc > 2 && i_exi.len <= 19)
-				error_exit2(i_exi.c_cmd, status);
+				error_exit2(i_exi.c_cmd);
 			else
 				error_exit(str[1], i_exi.c_cmd, garb);
 		}

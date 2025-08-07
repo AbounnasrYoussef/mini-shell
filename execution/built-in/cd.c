@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 22:24:19 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 23:46:41 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 09:44:51 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_error_cd(int index, char *arg_cd)
 	}
 }
 
-void	check_exec_fil(t_list_env *env, char *arg_cd, int *status, t_cd inf_pwd)
+void	check_exec_fil(t_list_env *env, char *arg_cd, t_cd inf_pwd)
 {
 	int	a;
 
@@ -76,13 +76,12 @@ void	check_exec_fil(t_list_env *env, char *arg_cd, int *status, t_cd inf_pwd)
 		inf_pwd.old_pwd = getcwd(NULL, 0);
 		a = chdir(arg_cd);
 		if (a != 0)
-			1 && (ft_error_cd(1, arg_cd), *status = 127);
+			1 && (ft_error_cd(1, arg_cd), ft_exit_status(127, 1));
 		inf_pwd.new_pwd = getcwd(NULL, 0);
 		if (inf_pwd.new_pwd == NULL)
 		{
 			ft_error_cd(0, NULL);
 			a = chdir("/");
-			*status = 12;
 			ft_exit_status(0, 1);
 		}
 		ft_r_pwd_oldp(env, inf_pwd.new_pwd, inf_pwd.old_pwd);
@@ -90,12 +89,11 @@ void	check_exec_fil(t_list_env *env, char *arg_cd, int *status, t_cd inf_pwd)
 	else
 	{
 		ft_error_cd(1, arg_cd);
-		*status = 122;
 		ft_exit_status(127, 1);
 	}
 }
 
-void	ft_cd(char **args, t_list_env *env, int *status)
+void	ft_cd(char **args, t_list_env *env)
 {
 	int		len_args;
 	t_cd	inf_pwd;
@@ -108,13 +106,12 @@ void	ft_cd(char **args, t_list_env *env, int *status)
 		if (check_home(env) == 0)
 		{
 			write(2, "cd: HOME not set\n", 17);
-			*status = 2;
 			ft_exit_status(1, 1);
 		}
 		else
-			check_exec_fil(env, ft_cherch_home(env), status, inf_pwd);
+			check_exec_fil(env, ft_cherch_home(env), inf_pwd);
 	}
 	else
-		check_exec_fil(env, args[1], status, inf_pwd);
+		check_exec_fil(env, args[1], inf_pwd);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 20:06:22 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 09:49:05 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int is_espace_tabulion(char *cmd)
 	return 0;	
 }
 
-char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd, t_garbage **garb, int *status)
+char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd, t_garbage **garb)
 {
 	
 	char *path;
@@ -117,7 +117,7 @@ char *cherche_path_cmd(char *cmd, t_list_env **env, t_exec *data, int count_cmd,
 		}
 		i++;
 	}
-	if (path_cmd == NULL && ft_built_in(data, env, count_cmd, garb, status) == -1)
+	if (path_cmd == NULL && ft_built_in(data, env, count_cmd, garb) == -1)
 	{
 		write(2, cmd, ft_strlenn(cmd));
 		write(2, ": command not found\n", 20);

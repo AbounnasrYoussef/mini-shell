@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 22:39:51 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 09:51:36 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_change_OLDPWD(t_list_env **env)
 	}
 }
 
-int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb, int *status)
+int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
 {
 	int	len;
 
@@ -92,15 +92,15 @@ int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb,
 	if (data->cmd[1] != NULL)
 		inf_exit.len = ft_strlenn(data->cmd[1]) - 1;
 	if (ft_strcmpp(data->cmd[0], "cd") == 0)
-		return (ft_cd(data->cmd, *env, status), 0);
+		return (ft_cd(data->cmd, *env), 0);
 	else if (ft_strcmpp(data->cmd[0], "pwd") == 0)
 		return (printf("%s\n", ft_pwd(*env)), 0);
 	else if (ft_strcmpp(data->cmd[0], "echo") == 0)
 		return (ft_echo(data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "exit") == 0)
-		return (ft_exit (inf_exit, data->cmd, garb, status), 0);
+		return (ft_exit (inf_exit, data->cmd, garb), 0);
 	else if (ft_strcmpp(data->cmd[0], "export") == 0)
-		return (ft_export(*env, data->cmd, garb, status), 0);
+		return (ft_export(*env, data->cmd, garb), 0);
 	else if (ft_strcmpp(data->cmd[0], "env") == 0)
 	{
 		if (data->cmd[1] == NULL)
@@ -110,7 +110,7 @@ int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb,
 	}
 	else if (ft_strcmpp(data->cmd[0], "unset") == 0)
 	{
-		ft_unset(env, data->cmd, status);
+		ft_unset(env, data->cmd);
 		if (check_exist_PWD(*env) == 1)
 			ft_change_OLDPWD(env);
 		return (0);

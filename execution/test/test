@@ -641,29 +641,11 @@ bash: 126: command not found
 bash-3.2$ 
 
 ➜  minishell2 git:(master) ✗ env -i ./minishell
-minishell$ export a
-minishell$ export
-declare -x PATH="/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
-declare -x PWD="/mnt/homes/arahhab/Desktop/minishell2"
-declare -x a
-minishell$ unset PWD PATH 
-minishell$ unset PWD PATH a
-minishell$ unset _ 
-minishell$ 
+minishell$ unset PWD PATH _
 minishell$ export
 minishell$ env
 minishell$ export a
 minishell$ export
-minishell$ export a=;;;
-minishell$ export      
-minishell$ export a=kjdkj
-minishell$ export
 
 minishell$ dh/
 dh/: Not a directory
-
-bash-3.2$ Makefile
-bash: Makefile: command not found
-
-minishell$ exit 32 24 24 | exit
-exit: too many arguments
