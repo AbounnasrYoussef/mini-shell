@@ -6,23 +6,23 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:10:23 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 12:15:35 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 12:50:26 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-void ft_input(int *fd, char *file_name)
+void	ft_input(int *fd, char *file_name)
 {
 	*fd = open(file_name, O_RDONLY);
 	dup2(*fd, STDIN_FILENO);
 	close(*fd);
 }
 
-void ft_output(int *fd, char *file_name, struct stat info)
+void	ft_output(int *fd, char *file_name, struct stat info)
 {
-	*fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC,0644);
-	if(*fd == -1 && S_ISDIR(info.st_mode))
+	*fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (*fd == -1 && S_ISDIR(info.st_mode))
 	{
 		write(2, file_name, ft_strlenn(file_name));
 		write(2, ": is a directory \n", 18);
@@ -32,20 +32,20 @@ void ft_output(int *fd, char *file_name, struct stat info)
 	close(*fd);
 }
 
-void ft_output_append(int *fd, char *file_name)
+void	ft_output_append(int *fd, char *file_name)
 {
 	*fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	dup2(*fd, STDOUT_FILENO);
 	close(*fd);
 }
 
-void ft_herdoc(int *fd)
+void	ft_herdoc(int *fd)
 {
 	dup2(*fd, STDIN_FILENO);
 	close(*fd);
 }
 
-void error_redr(int *fd, char *file_name, struct stat info)
+void	error_redr(int *fd, char *file_name, struct stat info)
 {
 	if (*fd == -1 && !S_ISDIR(info.st_mode) && !S_ISREG(info.st_mode))
 	{
@@ -53,34 +53,32 @@ void error_redr(int *fd, char *file_name, struct stat info)
 		write(2, ": No such file or directory\n", 28);
 		exit(1);
 	}
-	else if(*fd == -1 && access(file_name, X_OK) == -1)
+	else if (*fd == -1 && access(file_name, X_OK) == -1)
 	{
 		perror("access");
 		ft_exit_status(1, 1);
 	}
 }
 
-void error_dolar(char *file_name)
+void	error_dolar(char *file_name)
 {
 	write(2, file_name, ft_strlenn(file_name));
 	write(2, ": ambiguous redirect\n", 21);
 	ft_exit_status(1, 1);
 }
 
-void ft_redirection(t_exec *data, t_garbage **garb)
+void	ft_redirection(t_exec *data, t_garbage **garb)
 {
-	t_file *file;
-	int fd;
-	int fd_herdoc;
-	struct stat info;
-	
+	t_file		*file;
+	int			fd;
+	struct stat	info;
+
 	(void)garb;
-	fd_herdoc = -1;
 	file = data->files;
-	while(file != NULL)
+	while (file != NULL)
 	{
 		stat(file->file_name, &info);
-		if(file->file_name[0] == '$')
+		if (file->file_name[0] == '$')
 			error_dolar(file->file_name);
 		if (file->type == 2)
 			ft_input(&fd, file->file_name);
