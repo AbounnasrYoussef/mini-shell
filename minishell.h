@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 17:54:15 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/07 16:55:54 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 extern int g_exit_status;
 // enumeration pour reconnaitre chaque type
+
 
 typedef enum type_token{
     WORD,
@@ -70,9 +71,8 @@ typedef struct s_garbage
 
 typedef struct s_list_env
 {
-	void	*ligne;
 	void	*variable;
-	void 	*valeur_vari;
+	void 	*val;
 	struct s_list_env	*next;
 }	t_list_env;
 
@@ -84,12 +84,13 @@ typedef struct s_expand_ctx
 	t_garbage	**garb;
 }	t_expand_ctx;
 
-typedef struct s_quote_ctx
+
+ typedef struct s_ctx
 {
-	char		**res;
-	int			*quoted_flag;
+	t_list_env	*env;
 	t_garbage	**garb;
-}	t_quote_ctx;
+	char		**tmp;
+}	t_ctx;
 
 
 
@@ -120,7 +121,7 @@ t_token	*new_token(char *value, type_token type,int i, t_garbage **garb);
 //expanding
 void expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, t_garbage **garb);
 char	*expand_token(char *value, int exit_code, t_list_env *env, t_garbage **garb);
-char	*expand_dollar(char *value, int *i, int exit_code, t_list_env *env, t_garbage **garb);
+char	*expand_dollar(char *value, int *i, t_expand_ctx *ctx);
 void	append_double_quote(const char *val, int *i, char **res, t_expand_ctx ctx);
 void	append_single_quote(const char *val, int *i, char **res, t_garbage **garb);
 char	*get_env_value(char *name, t_list_env *env, t_garbage **garb);
@@ -165,7 +166,7 @@ size_t  ft_strlen(const char *s);
 //env
 t_list_env *ft_env(char **str);
 void	ft_lstadd_back(t_list_env **lst, t_list_env *new);
-t_list_env	*ft_lstnew(void *variable, void *valeur_vari, void *ligne);
+t_list_env	*ft_lstnew(void *variable, void *val);
 char	**i_split(char const *s, char c);
 
 //signals 
@@ -176,6 +177,14 @@ void	handle_sigint(int sig);
 
 //heredoc
 void process_heredocs(t_exec *exec, t_list_env *env, t_garbage **garb);
+int	heredoc_expand(char *line, t_list_env *env, t_garbage **garb, char **res);
+int create_heredoc(char *delimiter, int expand, t_list_env *env, t_garbage **garb);
 
+//utils_heredoc
+int	append_normal_char(char **tmp, char c, t_garbage **garb);
+int	append_raw_dollar(char **tmp, char c, t_garbage **garb);
+int	append_variable(char *line, t_list_env *env,t_garbage **garb, char **tmp);
+int	append_exit_status(char **tmp, t_garbage **garb);
+int	is_valid_var_char(char c);
 
 #endif

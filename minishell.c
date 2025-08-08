@@ -6,34 +6,31 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 16:43:25 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/06 20:20:44 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "execution/execution.h"
 
 int	g_exit_status = 0;
 
-int ft_count_cmd(t_exec *data)
-{
-	int i;
-
-	i = 0;
-	while (data != NULL)
-	{
-		data = data->next;
-		i++;
-	}
-	return i;
-}
-
-void	ft_read_loop(t_list_env **env, t_exec **data)
+void	ft_read_loop(char **envp, t_exec **data)
 {
 	char		*line;
 	t_garbage		*garb;
 	t_token		*token;
 	int			last_exit_code = 0;
-
+	t_list_env *env;
+	
+	env = ft_envvv(envp, &garb);
+	if (envp[0] == NULL)
+	{
+		env = NULL;
+		ft_lstadd_backk(&env, ft_lstneww("PATH", "/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", &garb));
+		ft_lstadd_backk(&env, ft_lstneww("PWD", getcwd(NULL, 0),&garb));
+		ft_lstadd_backk(&env, ft_lstneww("_", "/usr/bin/env", &garb));
+	}
 	setup_signals();
 	while (1)
 	{
@@ -43,17 +40,20 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 			break ;
 		if (*line)
 			add_history(line);
-		if (!syntaxe_errors(line))
+		if (syntaxe_errors(line) == 0)
 		{
 			free(line);
+			free_exec_list(*data);
 			continue ;
 		}
 		token = tokens(line, &garb);
 		free(line);
 		if (!token)
+		{
 			continue ;
+		}
 
-		expand_all_tokens(&token, last_exit_code, *env, &garb);
+		expand_all_tokens(&token, last_exit_code, env, &garb);
 		*data = parse_tokens_to_exec_list(token, &garb);
 		if (!*data)
 		{
@@ -62,41 +62,45 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 		}
 
 		// 👇 heredoc traité ici AVANT exécution
-		process_heredocs(*data, *env, &garb);
+		process_heredocs(*data, env, &garb);
+
 
 		// 🔍 Debug - Afficher les commandes et redirections
-
+		// printf("%d\n",ft_count_cmd(*data));
+		
 		if (*data != NULL)
         {
-            ft_pipe(ft_count_cmd(*data), *data, *env);
-            ft_free_all(garb);
+            //printf("%d\n\n", ft_count_cmd(*data));
+			ft_pipe(*data, &env, &garb);
             *data = NULL;
         }
-		//int i = 1;
-		//while (tmp)
-		//{
-		//	printf("---- Commande %d ----\n", i);
-		//	if (tmp->cmd)
-		//	{
-		//		for (int j = 0; tmp->cmd[j]; j++)
-		//			printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
-		//	}
+		// t_exec *tmp = *data;
+		// int i = 1;
+		// while (tmp)
+		// {
+		// 	printf("---- Commande %d ----\n", i);
+		// 	if (tmp->cmd)
+		// 	{
+		// 		for (int j = 0; tmp->cmd[j]; j++)
+		// 			printf("cmd[%d] = %s\n", j, tmp->cmd[j]);
+		// 	}
 
-		//	t_file *file = tmp->files;
-		//	while (file)
-		//	{
-		//		printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
-		//		file = file->next;
-		//	}
-		//	tmp = tmp->next;
-		//	i++;
-		//}
+		// 	t_file *file = tmp->files;
+		// 	while (file)
+		// 	{
+		// 		printf("Redirection type: %d, file: %s\n", file->type, file->file_name);
+		// 		file = file->next;
+		// 	}
+		// 	tmp = tmp->next;
+		// 	i++;
+		// }
 
 
 		// 🧹 Nettoyage mémoire
 		//ft_free_all(garb);
-		// Optionnel : free_exec_list(*data); *data = NULL;
+		//free_exec_list(*data); *data = NULL;
 	}
+	ft_free_all(garb);
 }
 
 
@@ -173,15 +177,22 @@ void	ft_read_loop(t_list_env **env, t_exec **data)
 // 	}
 // }
 
+
+void ff()
+{
+	system("leaks -q ./minishell");
+}
+
 int	main(int ac, char **av, char **envp)
 {
-	t_list_env	*env_list;
+	//atexit(ff);
 	t_exec		*data;
 
 	(void)ac;
 	(void)av;
 	data = NULL;
-	env_list = ft_env(envp);
-	ft_read_loop(&env_list, &data);
+	if (!isatty(0) || !isatty(1))
+		return 1;
+	ft_read_loop(envp, &data);
 	return (0);
 }

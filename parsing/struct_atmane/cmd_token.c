@@ -3,50 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:26:22 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 14:21:09 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/06 13:18:14 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char **extract_cmd_from_tokens(t_token *tokens, t_garbage **garb)
+static int	count_cmd_args(t_token *tokens)
 {
-    int count = 0;
-    t_token *tmp = tokens;
-    t_token *prev = NULL;
+	int		count;
+	t_token	*tmp;
+	t_token	*prev;
 
-    while (tmp)
-    {
-        if (tmp->type == WORD)
-        {
-            if (!prev || !is_redirection(prev->type))
-                count++;
-        }
-        prev = tmp;
-        tmp = tmp->next;
-    }
-
-    char **cmd = ft_malloc(garb, sizeof(char *) * (count + 1));
-    tmp = tokens;
-    prev = NULL;
-    int i = 0;
-
-    while (tmp)
-    {
-        if (tmp->type == WORD)
-        {
-            if (!prev || !is_redirection(prev->type))
-                cmd[i++] = ft_strdup(tmp->value, garb);
-        }
-        prev = tmp;
-        tmp = tmp->next;
-    }
-    cmd[i] = NULL;
-    return cmd;
+	count = 0;
+	tmp = tokens;
+	prev = NULL;
+	while (tmp)
+	{
+		if (tmp->type == WORD && (!prev || !is_redirection(prev->type)))
+			count++;
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	return (count);
 }
 
+char	**extract_cmd_from_tokens(t_token *tokens, t_garbage **garb)
+{
+	char		**cmd;
+	int			i;
+	t_token		*tmp;
+	t_token		*prev;
 
-
+	cmd = ft_malloc(garb, sizeof(char *) * (count_cmd_args(tokens) + 1));
+	if (!cmd)
+		return (NULL);
+	i = 0;
+	tmp = tokens;
+	prev = NULL;
+	while (tmp)
+	{
+		if (tmp->type == WORD && (!prev || !is_redirection(prev->type)))
+			cmd[i++] = ft_strdup(tmp->value, garb);
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	cmd[i] = NULL;
+	return (cmd);
+}

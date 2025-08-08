@@ -6,115 +6,101 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/07/31 16:55:48 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/08 15:28:43 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-void msg_err_atoi(char *nbr)
+int	ft_atoi(int len, char *nbr, int count_cmd, t_garbage **garb)
 {
-	printf("exit\n");
-	write(2, nbr, ft_strlenn(nbr));
-	write(2, ": numeric argument required\n", 28);
-	exit(255);
-}
-
-unsigned long long ft_atoi(int len, char *nbr)
-{
-	unsigned long long nombre;
-	int i;
-	int sign;
+	unsigned long long	nombre;
+	int					i;
+	int					sign;
 
 	i = 0;
 	sign = 1;
 	nombre = 0;
-	if (nbr[i] == '-')
-		(sign = -1, i++);
+	while (nbr && (nbr[i] == ' ' || nbr[i] == '\t'))
+		i++;
+	if (nbr[i] == '-' || nbr[i] == '+')
+	{
+		if (nbr[i] == '-')
+			sign = -1;	
+		i++;
+	}
 	while (nbr[i] != '\0')
 	{
 		nombre = nombre + nbr[i] - '0';
-		if ((sign == -1) && (nombre > (9223372036854775807)))
-		{
-			if (nbr[19] > '8')
-				msg_err_atoi(nbr);
-		}
+		if ((sign == -1) && (nombre > (9223372036854775807)) && nbr[19] > '8')
+			error_exit(nbr, count_cmd, garb);
 		else if (nombre > (9223372036854775807))
-			msg_err_atoi(nbr);	
+			error_exit(nbr, count_cmd, garb);
 		if (len > i)
 			nombre *= 10;
 		i++;
 	}
-	return nombre;
+	return (modulo(nombre) * sign);
 }
 
-int check_number(char *str)
+int	chck_nb(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if (str[i] == '-')
+	while (str && (str[i] == ' ' || str[i] == '\t'))
+		i++;
+	if (str && (str[i] == '-' || str[i] == '+'))
 	{
 		i++;
-		while(str[i] != '\0')
+		while (str[i] != '\0')
 		{
-			if(!(str[i] >= '0' && str[i] <= '9'))
-				return -1;
+			if (!(str[i] >= '0' && str[i] <= '9'))
+				return (-1);
 			i++;
 		}
-		return 0;
+		return (0);
 	}
 	else
 	{
-		while(str[i] != '\0')
+		while (str && str[i] != '\0')
 		{
-			if(!(str[i] >= '0' && str[i] <= '9'))
-				return -1;
+			if (!(str[i] >= '0' && str[i] <= '9'))
+				return (-1);
 			i++;
 		}
-		return 0;
+		return (0);
 	}
 }
 
-int ft_modulo_number(unsigned long long number)
+void	ft_exit(t_exit i_exi, char **str, t_garbage **garb)
 {
-	int i;
-	int g;
-	
-	i = number / 256;
-	g = i * 256;
-	
-	return (number - g);
-}
-
-void error_exit(char **str)
-{
-	printf("exit\n");
-	write(2, str[1], ft_strlenn(str[1]));
-	write(2, ": numeric argument required\n", 28);
-	exit(255);
-}
-
-void ft_exit (int len, char **str)
-{
-	int argc;
-	
-	argc = ft_strlen_argc(str);
-	if (argc >= 1)
+	i_exi.argc = ft_strlen_argc(str);
+	if (i_exi.argc >= 1)
 	{
 		if (ft_strcmpp(str[0], "exit") == 0)
 		{
 			if (str[1] == NULL)
-				(printf("exit\n"), exit(0));
-			else if (check_number(str[1]) == 0 && argc == 2 && len <= 19)
 			{
-				write(2, "exit\n", 5);
-				exit(ft_modulo_number(ft_atoi((len), str[1])));
+				if (i_exi.c_cmd == 1)
+					printf("exit\n");
+				exit(ft_exit_status(0, 0));
 			}
-			else if (check_number(str[1]) == 0 && argc > 2 && len <= 19)
-				write(2, "exit: too many arguments\n", 25);
+			else if (ft_strcmpp(str[1], "") == 0)
+				error_exit(str[1], i_exi.c_cmd, garb);
+			else if (chck_nb(str[1]) == 0 && i_exi.argc == 2 && i_exi.len <= 19)
+			{
+				if (i_exi.c_cmd == 1)
+					printf("exit\n");
+				if (ft_atoi((i_exi.len), str[1], i_exi.c_cmd, garb) < 0)
+					exit(255);
+				else
+					exit(ft_atoi((i_exi.len), str[1], i_exi.c_cmd, garb));
+			}
+			else if (chck_nb(str[1]) == 0 && i_exi.argc > 2 && i_exi.len <= 19)
+				error_exit2(i_exi.c_cmd);
 			else
-				error_exit(str);
+				error_exit(str[1], i_exi.c_cmd, garb);
 		}
 	}
 }

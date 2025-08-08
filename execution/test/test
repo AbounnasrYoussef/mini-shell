@@ -402,46 +402,397 @@
 #ls: No such file or directory
 #ls: command not found
 
+#minishell$ cd /bin 
+#minishell$ ls
+#ls: No such file or directory
 
-/////////////
-============
+#touch ls
+#chmod +x ls
+#minishell$ unset PATH
+#minishell$ ls
+#ls: No such file or directory
+#minishell$ 
 
-bash-3.2$ $?
-bash: 127: command not found
+#minishell$ ./minishell
+#minishell$ ls
+#ls: No such file or directory
 
-minishell$ cd /bin 
-minishell$ ls
-ls: No such file or directory
+#➜  parsing ./minishell /// execve // char **env
+#minishell$ top
+#Error opening terminal: unknown.
+
+#bash-3.2$ unset PATH
+#bash-3.2$ bash
+#bash: bash: No such file or directory
+
+#bash-3.2$ Makefile/..
+#bash: Makefile/..: Not a directory
+#bash-3.2$ $?
+#bash: 126: command not found
+
+#bash-3.2$ Makefile
+#bash: Makefile: Permission denied
+#bash-3.2$ $?
+#bash: 126: No such file or directory
+
+
+#minishell$ exit | exit
+#exit
+#minishell$ 
+
+#bash: .: filename argument required
+#.: usage: . filename [arguments]
+#bash-3.2$ ..
+#bash: ..: command not found
+
+#minishell$ cd ..
+#cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+#minishell$ pwd
+#(null)
+#minishell$ cd .. 
+#cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+#minishell$ pwd
+#(null)
+#minishell$ 
+
+#touch ls
+#chmod +x
+#minishell$ unset PATH
+#minishell$ cd /bin
+#minishell$ ls
+#minishell$ z
+
+#minishell$ export PATH=dfsd
+#minishell$ export PATH=/bin
+#minishell$ ls
+#minishell$ ls
+#minishell$ ls
+#$               d               minishell       parsing         signals.o
+#;               execution       minishell.c     s
+#Makefile        get_next_line.c minishell.h     saaa
+#a               get_next_line.o minishell.o     signals.c
+
+
+#➜  minishell2 git:(master) ✗ ./minishell 
+#minishell$ ./minishell | ls
+#Makefile        execution       minishell       minishell.o     signals.c
+#a               get_next_line.c minishell.c     parsing         signals.o
+#d               get_next_line.o minishell.h     s
+
+#unset USER 
+#export | grep USER
+
+#bash-3.2$ <pipe.c ls < x 
+#bash: pipe.c: No such file or directory
+#//
+
+#bash-3.2$ < pipe.c ls > x 
+#bash: pipe.c: No such file or directory
+#//
+#bash-3.2$ ls > x  <f
+#bash: f: No such file or directory
+#//
+
+#bash-3.2$ ls > tets
+
+#//
+#bash-3.2$ ls > x | grep
+#usage: grep [-abcDEFGHhIiJLlmnOoqRSsUVvwxZ] [-A num] [-B num] [-C[num]]
+#        [-e pattern] [-f file] [--binary-files=value] [--color=when]
+#        [--context[=num]] [--directories=action] [--label] [--line-buffered]
+#        [--null] [pattern] [file ...]
+
+#//
+
+
+#<cd.c < echo.c < env.c cat >x >y >z < pwd.c
+
+#//
+
+#bash-3.2$ < a > 1 > 2 | < 1 > 1 >2
+#bash: a: No such file or directory
+#bash: 1: No such file or directory
+
+#///
+#bash-3.2$ > parsing/ 
+#bash: parsing/: Is a directory
+
+#////
+#bash-3.2$ echo > 1
+#bash: 1: Permission denied
+#bash-3.2$ $?
+#bash: 1: command not found
+#///
+
+#bash-3.2$ > 1
+#bash: 1: Permission denied
+
+#bash-3.2$ ls < ss > d
+#bash: ss: No such file or directory
+
+
+
+#bash-3.2$ << s cat
+#> $PATH
+#> s
+#/mnt/homes/arahhab/Library/Python/3.8/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/mnt/homes/arahhab/Library/Python/3.8/bin/
+
+#touch ls
+#minishell$ "" | << s | << so | ls
+#> s
+#> so
+#: command not found
+
+#touch ls
+#minishell$  << s  ls
+#> s
+
+#minishell$ exit ""
+#exit
+#bash-3.2$ 
+
+#minishell$ unset PWD
+#bash-3.2$ export | grep PWD
+#declare -x OLDPWD=""
+
+#env -i
+
+
+#bash-3.2$ mkdir -p 1/1/1/1/1/1/1/1/1/1/1/
+#bash-3.2$ cd 1/1/1/1/1/1/1/1/1/1/1/
+#bash-3.2$ rm -rf 1
+#bash-3.2$ cd ..
+#bash: cd: ..: No such file or directory
+#bash-3.2$ pwd
+#/mnt/homes/arahhab/Desktop/minishell2/1/1/1/1/1/1/1/1/1/1/1
+#bash-3.2$ cd ..
+#cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+#bash-3.2$ pwd
+#/mnt/homes/arahhab/Desktop/minishell2/1/1/1/1/1/1/1/1/1/1/1/..
+#bash-3.2$ cd ..
+#cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+#bash-3.2$ pwdcd
+#-> /
+
+#minishell$ touch ls
+#minishell$ unset PATH
+#minishell$ ls
+
+#minishell$ unset PWD
+#minishell$ pwd
+#/mnt/homes/arahhab/Desktop/minishell2
+#minishell$ echo $PWD
+#minishell$ cd ..
+#minishell$ env | grep PWD
+#minishell$ echo $PWD
+
+#minishell$ ls > /dev/stdout | ls > /dev/stdout                                             
+#/dev/stdout: No such file or directory
+#Makefile        minishell.c     parsing         t
+#execution       minishell.h     signals.c       test_parsing
+#minishell       minishell.o     signals.o
+#leaks[81114]: [fatal] unable to read input graph: The data couldn’t be read because it isn’t in the correct format.
+#bash-3.2$ $?
+#bash: 127: command not found
+
+#minishell$ ls > /dev/stdout | ls > /dev/stdout
+#/dev/stdout: No such file or directory
+#Makefile        minishell       minishell.h     parsing         signals.o
+#execution       minishell.c     minishell.o     signals.c       test_parsing
+
+#//////////////////////
+#export var=""
+#EXPORT VAR
+#env | grep var
+
+#echo """$HOLA""" | cat -e
+
+
+#bash-3.2$ export a=a
+#bash-3.2$ export a
+#bash-3.2$ export
+#declare -x OLDPWD
+#declare -x PATH="/mnt/homes/arahhab/Library/Python/3.8/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
+#declare -x PWD="/mnt/homes/arahhab/Desktop/minishell2"
+#declare -x SHLVL="1"
+#declare -x a="a"
+
+#minishell$ export a=a | $variable_makaynch //export a=a
+#minishell$ export
+#declare -x COLORTERM="truecolor"
+#....
+#declare -x a="a"
+
+#minishell$ export a
+#minishell$ export
+
+#////////////parsing
+#minishell$ << 1
+#> dw
+#> 
+#> dw
+#> dw
+#> 1
+
+#bash-3.2$ ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls
+#bash: fork: Resource temporarily unavailable
+#bash-3.2$ $?
+#bash: 1: command not found
+
+#minishell$ exit | exit
+#minishell$ $?
+#1: command not found
+
+# ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls
+#fork: Resource temporarily unavailable
+#fork: Resource temporarily unavailable
+#minishell(78919,0x112821dc0) malloc: NO ZONE for ptr 0x7fddb5e02d40
+#minishell(78919,0x112821dc0) malloc: *** error for object 0x7fddb5e02d40: pointer being freed was not allocated
+#minishell(78919,0x112821dc0) malloc: *** set a breakpoint in malloc_error_break to debug
+#[1]    78919 abort      ./minishell
 
 bash-3.2$ Makefile/..
 bash: Makefile/..: Not a directory
 bash-3.2$ $?
 bash: 126: command not found
+bash-3.2$
 
-bash-3.2$ Makefile
-bash: Makefile: Permission denied
-bash-3.2$ $?
-bash: 126: No such file or directory
+➜  minishell2 git:(master) ✗ env -i ./minishell
+minishell$ unset PWD PATH _
+minishell$ export
+minishell$ env
+minishell$ export a
+minishell$ export
 
-touch ls
-chmod +x ls
+minishell$ dh/
+dh/: Not a directory
+
+
+==============
+minishell$ touch ls
+minishell$ ls
+Makefile        execution       ls              minishell       minishell.c     minishell.h     minishell.o     parsing         signals.c       signals.o       test_parsing
+minishell$ ./ls
+access: Permission denied
+minishell$ $?
+126: command not found
+minishell$ chmod +x ls
+minishell$ ls
+minishell$ ./ls
+minishell$ 
+==============
+
+minishell$ pwd
+/mnt/homes/arahhab/Desktop/minishell2/1/2/3
+minishell$ pwd
+/mnt/homes/arahhab/Desktop/minishell2
+minishell$ $?
+130: command not found  ////// ?????/
+
+bash-3.2$ export var2=
+bash-3.2$ export
+declare -x COLORTERM="truecolor"
+declare -x COMMAND_MODE="unix2003"
+declare -x GIT_ASKPASS="/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh"
+declare -x HOME="/mnt/homes/arahhab"
+declare -x LANG="en_US.UTF-8"
+declare -x LESS="-R"
+declare -x LOGNAME="arahhab"
+declare -x LSCOLORS="Gxfxcxdxbxegedabagacad"
+declare -x LS_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+declare -x LaunchInstanceID="DD47C281-3BA6-4EAC-8B6F-6208C9E607B1"
+declare -x MallocNanoZone="0"
+declare -x OLDPWD
+declare -x ORIGINAL_XDG_CURRENT_DESKTOP="undefined"
+declare -x PAGER="less"
+declare -x PATH="/mnt/homes/arahhab/Library/Python/3.8/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/mnt/homes/arahhab/Library/Python/3.8/bin/"
+declare -x PWD="/mnt/homes/arahhab/Desktop/minishell2"
+declare -x SECURITYSESSIONID="186a6"
+declare -x SHELL="/bin/zsh"
+declare -x SHLVL="2"
+declare -x SSH_AUTH_SOCK="/private/tmp/com.apple.launchd.H3iHcv0E2a/Listeners"
+declare -x TERM="xterm-256color"
+declare -x TERM_PROGRAM="vscode"
+declare -x TERM_PROGRAM_VERSION="1.89.1"
+declare -x TMPDIR="/var/folders/zz/zyxvpxvq6csfxvn_n000cplc0035mv/T/"
+declare -x USER="arahhab"
+declare -x USER_ZDOTDIR="/mnt/homes/arahhab"
+declare -x VSCODE_GIT_ASKPASS_EXTRA_ARGS=""
+declare -x VSCODE_GIT_ASKPASS_MAIN="/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js"
+declare -x VSCODE_GIT_ASKPASS_NODE="/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)"
+declare -x VSCODE_GIT_IPC_HANDLE="/var/folders/zz/zyxvpxvq6csfxvn_n000cplc0035mv/T/vscode-git-be3dcb8d17.sock"
+declare -x VSCODE_INJECTION="1"
+declare -x XPC_FLAGS="0x0"
+declare -x XPC_SERVICE_NAME="0"
+declare -x ZDOTDIR="/mnt/homes/arahhab"
+declare -x ZSH="/mnt/homes/arahhab/.oh-my-zsh"
+declare -x __CF_USER_TEXT_ENCODING="0x1969B:0x0:0x0"
+declare -x var2=""
+bash-3.2$ 
+
+
 minishell$ unset PATH
 minishell$ ls
-ls: No such file or directory
+access: No such file or directory
+minishell$ $?
+access: No such file or directory
+minishell$ $?
+access: No such file or directory
 minishell$ 
 
-minishell$ ./minishell
-minishell$ ls
-ls: No such file or directory
-
-➜  parsing ./minishell /// execve // char **env
-minishell$ top
-Error opening terminal: unknown.
-
-unset USER 
-export | grep USER
-
 bash-3.2$ unset PATH
-bash-3.2$ bash
-bash: bash: No such file or directory
+bash-3.2$ ls
+bash: ls: No such file or directory
+bash-3.2$ $?
+bash: 127: No such file or directory
+bash-3.2$ 
 
+
+===============
+
+minishell$ unset PWD OLDPWD
+minishell$ mkdir -p 1/2/3
+minishell$ cd 1/2/3 
+minishell$ pwd
+/mnt/homes/arahhab/Desktop/minishell2/1/2/3
+minishell$ pwd
+/mnt/homes/arahhab/Desktop/minishell2/1/2/3
+minishell$ export | grep PWD
+minishell$ pwd
+(null)
+minishell$
+
+bash-3.2$ execution/
+bash: execution/: is a directory
+bash-3.2$ $?
+bash: 126: command not found
+bash-3.2$ 
+
+=================
+➜  minishell2 git:(master) ✗ ./minishell
+minishell$ wefwef
+wefwef: command not found
+minishell$ ^D%                                                                                                 
+➜  minishell2 git:(master) ✗ $?
+zsh: command not found: 0
+➜  minishell2 git:(master) ✗ 
+
+===========
+
+bash-3.2$ exit "        1"
+exit
+➜  minishell2 git:(master) ✗ $?
+zsh: command not found: 1
+➜  minishell2 git:(master) ✗
+
+==============
+
+bash-3.2$ unset w/ef/we/f /ewf/wef/ /f/wf/we 
+bash: unset: `w/ef/we/f': not a valid identifier
+bash: unset: `/ewf/wef/': not a valid identifier
+bash: unset: `/f/wf/we': not a valid identifier
+bash-3.2$ $?
+bash: 1: command not found
+bash-3.2$ 
+
+=====================

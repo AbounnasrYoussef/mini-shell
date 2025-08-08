@@ -1,34 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   utils_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 22:49:31 by arahhab           #+#    #+#             */
+/*   Created: 2025/08/07 16:13:22 by arahhab           #+#    #+#             */
 /*   Updated: 2025/08/07 16:55:54 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-char	*ft_pwd(t_list_env *env)
+void	ft_print_env_ex(t_list_env *env)
 {
-	char		*buffer;
-	t_list_env	*copy_env;
-
-	copy_env = env;
-	buffer = NULL;
 	while (env != NULL)
 	{
-		if (ft_strcmpp(env->variable, "PWD") == 0
-			|| ft_strcmpp(env->variable, "PO") == 0)
+		if (ft_strcmpp(env->variable, "_") != 0)
 		{
-			buffer = env->val;
+			if (env->val != NULL
+				&& ft_strcmpp(env->val, "") != 0)
+				printf("declare -x %s=\"%s\"\n", env->variable, env->val);
+			else
+				printf("declare -x %s\n", env->variable);
 		}
 		env = env->next;
 	}
-	if (getcwd(NULL, 0) != NULL)
-		buffer = getcwd(NULL, 0);
-	return (buffer);
+}
+
+void	ft_print_env(t_list_env *env)
+{
+	while (env != NULL)
+	{
+		if (env->val != NULL && ft_strcmpp(env->val, "") != 0)
+		{
+			printf("%s=\"%s\"\n", env->variable, env->val);
+		}
+		env = env->next;
+	}
 }

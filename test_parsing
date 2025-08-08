@@ -1,0 +1,171 @@
+////////parsing :
+
+minishell$ cat << file
+> $HOME
+> file
+/mnt/homes/arahhabE
+
+minishell$ cat << file
+> "$HOME"
+> file
+"/mnt/homes/arahhabME"
+
+minishell$ cat << file
+> ''"'$HOME'"''
+file
+
+
+minishell$ export a=dljddkj | $jgjjgdjyg
+---- Commande 1 ----
+cmd[0] = 'export'
+cmd[1] = 'a=dljddkj'
+minishell$ 
+
+minishell$ ls | hjgdjsg
+hjgdjsg: command not found
+minishell$ ls | $hjgdjsg
+Makefile        minishell       minishell.o     signals.o
+execution       minishell.c     parsing         test_parsing
+ls              minishell.h     signals.c
+
+minishell$ echo $"$HOME"
+$$HOME
+
+minishell$ echo $HO'ME'
+$HOME
+
+minishell$ echo "$"$HOME
+$$HOME
+
+minishell$ echo "'$HOME'"
+$HOME
+
+minishell$ echo '"'$HOME'"'
+"$HOME"
+export var="hello             world"
+var="hello             world"
+minishell$ echo $var
+bash-3.2$ export var="hello      world"
+bash-3.2$ echo $var
+hello world
+
+
+bash-3.2$ export var="hello      world"
+bash-3.2$ echo $var
+hello world
+bash-3.2$ echo "$var"
+hello      world
+bash-3.2$ 
+
+
+minishell$ cat << m
+> $HOME
+> "$HOME"
+> '$HOME'
+> m
+/mnt/homes/arahhabE
+"/mnt/homes/arahhabME"
+'/mnt/homes/arahhabME'
+minishell$ cat << m"
+
+minishell$ cat << "m"
+> $HOME
+> "$HOME"
+> '$HOME'
+> m
+/mnt/homes/arahhabE
+"/mnt/homes/arahhabME"
+'/mnt/homes/arahhabME'
+
+minishell$ cat <$ggdfgdfgdfg | <"$SDfdsfdsf"
+$ggdfgdfgdfg: ambiguous redirect
+$SDfdsfdsf: ambiguous redirect
+
+minishell$ cat <$ggdfgdfgdfg | <"$SDfdsfdsf" | ><<<<>>><><<>
+minishell: syntax error
+minishell: syntax error
+
+minishell$ echo "'$HO'M'E'"
+$HOME
+
+minishell$ "'l's"
+Makefile        minishell       minishell.h     parsing         signals.o
+execution       minishell.c     minishell.o     signals.c       test_parsing
+
+minishell$ cat << m
+> $USER
+> m
+arahhabR
+
+minishell$ cat << "m"
+> ^C
+^C
+^C
+^C
+^C
+^C
+^C
+
+bash-3.2$ ''"'$HOME'"''
+bash: '/mnt/homes/arahhab': No such file or directory
+
+
+#/////////Parsing
+
+#bash-3.2$ < $hijk
+#bash: $hijk: ambiguous redirect
+
+/// Parsing
+
+bash-3.2$ << s'' cat 
+> $PATH
+> s
+$PATH
+bash-3.2$ 
+
+inishell$ < $y ls
+---- Commande 1 ----
+Redirection type: 2, file: ls
+
+minishell$ export a="ls -la"
+minishell$ $a
+
+
+minishell$ $"HOME"
+---- Commande 1 ----
+cmd[0] = '/mnt/homes/arahhab'
+
+minishell$ $""
+---- Commande 1 ----
+cmd[0] = '$'
+
+minishell$ $H"OME"
+---- Commande 1 ----
+cmd[0] = '/mnt/homes/arahhab'
+
+/////////////////////////
+
+
+
+bash-3.2$ | hdsh
+bash: syntax error near unexpected token `|'
+bash-3.2$ 
+
+minishell$ |||
+minishell: syntax error
+minishell: syntax error
+minishell: syntax error
+
+bash-3.2$ << 1<<2 << 3<< 4 << 5<< 6 << 7 << 8 << 9 << 10 << 11 << 12 << 13 << 14 << 15 << 16 << 17 
+bash: syntax error near unexpected token `1'
+bash-3.2$ <<  1 << 2 << 3 << 4 << 5<< 6 << 7 << 8 << 9 << 10 << 11 << 12 << 13 << 14 <<
+ 15 << 16 << 17 
+bash: syntax error near unexpected token `5'
+> <<  1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12 << 13 << 14 << 15 << 
+16 << 17 
+
+bash-3.2$ <<  1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12 << 13 << 14 <
+< 15 << 16 << 17 
+bash: maximum here-document count exceeded
+minishell2 git:(master) ✗ $?
+zsh: command not found: 2

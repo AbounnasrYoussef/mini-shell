@@ -3,43 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 14:22:02 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/07 17:17:14 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, t_garbage **garb)
+static t_token	*process_token(t_token *curr, t_token **tokens,
+						t_token **prev, t_expand_ctx *ctx)
 {
-	t_token	*curr = *tokens;
-	t_token	*prev = NULL;
+	char		*expanded;
+	char		*cleaned;
+	t_token		*to_delete;
 
-	while (curr)
+	if (*prev && ((*prev)->type == RDR_IN || (*prev)->type == RDR_OUT || (*prev)->type == APPEND || (*prev)->type == HERE_DOC))
+
 	{
-		char *expanded;
-
-		if (curr->quoted == 1) // simple quote
-			expanded = ft_strdup(curr->value, garb); // pas d'expansion
-		else
-			expanded = expand_token(curr->value, exit_code, env, garb);
-
-		char *cleaned = ft_strtrim_custom(expanded, garb, curr->quoted);
-
-		if (!cleaned || cleaned[0] == '\0')
-		{
-			t_token *to_delete = curr;
-			curr = curr->next;
-			if (!prev)
-				*tokens = to_delete->next;
-			else
-				prev->next = to_delete->next;
-			continue;
-		}
-		curr->value = cleaned;
-		prev = curr;
-		curr = curr->next;
+		*prev = curr;
+		return (curr->next);
+		
 	}
+	if (curr->quoted == 1)
+		expanded = ft_strdup(curr->value, ctx->garb);
+	else
+		expanded = expand_token(curr->value,
+				ctx->exit_code, ctx->env, ctx->garb);
+	cleaned = ft_strtrim_custom(expanded, ctx->garb, curr->quoted);
+	if ((!cleaned || cleaned[0] == '\0') && (curr->quoted == 0))
+	{
+		to_delete = curr;
+		curr = curr->next;
+		if (!*prev)
+			*tokens = to_delete->next;
+		else
+			(*prev)->next = to_delete->next;
+		return (curr);
+	}
+	curr->value = cleaned;
+	*prev = curr;
+	return (curr->next);
+}
+
+void	expand_all_tokens(t_token **tokens, int exit_code
+		, t_list_env *env, t_garbage **garb)
+{
+	t_token			*curr;
+	t_token			*prev;
+	t_expand_ctx	ctx;
+
+	curr = *tokens;
+	prev = NULL;
+	ctx.exit_code = exit_code;
+	ctx.env = env;
+	ctx.garb = garb;
+	while (curr)
+		curr = process_token(curr, tokens, &prev, &ctx);
 }

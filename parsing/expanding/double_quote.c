@@ -6,25 +6,34 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 08:22:31 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/29 17:42:47 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/07/31 18:12:28 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-
-void	append_double_quote(const char *val, int *i, char **res, t_expand_ctx ctx)
+static char	*get_expanded_dollar(const char *val, int *i, t_expand_ctx *ctx)
 {
-	char	*part;
-	char	*tmp;
+	return (expand_dollar((char *)val, i, ctx));
+}
 
+void	append_double_quote(const char *val, int *i
+		, char **res, t_expand_ctx ctx)
+{
+	char			*part;
+	char			*tmp;
+	t_expand_ctx	subctx;
+
+	subctx.exit_code = ctx.exit_code;
+	subctx.env = ctx.env;
+	subctx.garb = ctx.garb;
 	(*i)++;
 	part = ft_strdup("", ctx.garb);
 	while (val[*i] && val[*i] != '"')
 	{
 		if (val[*i] == '$')
 			part = ft_strjoin(part,
-					expand_dollar((char *)val, i, ctx.exit_code, ctx.env, ctx.garb),
+					get_expanded_dollar(val, i, &subctx),
 					ctx.garb);
 		else
 		{

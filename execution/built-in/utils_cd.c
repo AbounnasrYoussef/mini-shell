@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   uilis_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/20 13:03:00 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/06 13:18:46 by arahhab          ###   ########.fr       */
+/*   Created: 2025/08/07 15:53:25 by arahhab           #+#    #+#             */
+/*   Updated: 2025/08/07 16:20:50 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../execution.h"
 
-size_t	ft_strlen(const char *s)
+int	check_home(t_list_env *env)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
+	while (env != NULL)
 	{
-		i++;
+		if (ft_strcmpp(env->variable, "HOME") == 0)
+			return (1);
+		env = env->next;
 	}
-	return (i);
+	return (0);
 }

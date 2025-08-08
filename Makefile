@@ -1,5 +1,6 @@
 NAME = minishell
 CC = cc
+#-g -fsanitize=address
 CFLAGS =  -Wall -Wextra -Werror
 PARS = parsing
 SRC = minishell.c  signals.c\
@@ -25,8 +26,6 @@ SRC = minishell.c  signals.c\
 		$(PARS)/utils/ft_substr.c\
 		$(PARS)/utils/skip_space.c\
 		$(PARS)/ft_malloc/ft_malloc.c\
-		$(PARS)/env/env.c\
-		$(PARS)/env/split.c\
 		$(PARS)/expanding/dollar.c\
 		$(PARS)/expanding/double_quote.c\
 		$(PARS)/expanding/expand_token.c\
@@ -39,36 +38,48 @@ SRC = minishell.c  signals.c\
 		$(PARS)/struct_atmane/redir_token.c\
 		$(PARS)/struct_atmane/struct_at.c\
 		$(PARS)/here_doc/here.c\
+		$(PARS)/here_doc/utils_here.c\
 		execution/built-in/cd.c\
+		execution/built-in/utils_cd.c\
 		execution/built-in/echo.c\
 		execution/built-in/env.c\
 		execution/built-in/exit.c\
+		execution/built-in/utils_exit.c\
 		execution/built-in/main.c\
+		execution/built-in/utils_main.c\
 		execution/built-in/pwd.c\
 		execution/built-in/unset.c\
 		execution/utils/ft_memcpy.c\
 		execution/built-in/export.c\
+		execution/built-in/utils_export.c\
 		execution/utils/ft_split.c\
 		execution/utils/utili_1.c\
 		execution/pipe/pipe.c\
-
-
+		execution/pipe/utils_pipe.c\
+		execution/pipe/utils_pipe2.c\
+		execution/pipe/cherche_path.c\
+		execution/pipe/utils_cherch_path.c\
+		execution/pipe/ft_redirections.c\
+		execution/pipe/utils_redirection.c\
 
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) minishell.h
+$(NAME): $(OBJ) 
 	$(CC) $(OBJ) -o $(NAME) -lreadline -L/mnt/homes/yabounna/.brew/opt/readline/lib
 
-$(OBJ): %.o : %.c 
+$(OBJ): %.o : %.c minishell.h
 	$(CC) $(CFLAGS) -c -I/mnt/homes/yabounna/.brew/opt/readline/include $< -o $@
 
 clean: 
 	rm -f $(OBJ)
 
+
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY : clean
