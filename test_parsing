@@ -151,7 +151,7 @@ bash-3.2$ | hdsh
 bash: syntax error near unexpected token `|'
 bash-3.2$ 
 
-minishell$ |||
+✅ minishell$ |||
 minishell: syntax error
 minishell: syntax error
 minishell: syntax error
