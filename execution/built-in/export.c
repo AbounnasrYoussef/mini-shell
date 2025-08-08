@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 17:06:31 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/08 19:27:49 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,24 @@ void	exp_el_help(t_list_env **env, char *args
 	}
 	indx.i = indx.i - indx.j;
 	indx.arg_ex[1] = ft_malloc(garb, (indx.j + 1));
-	while (args[indx.i] != '\0')
-	{
-		indx.arg_ex[1][k] = args[indx.i];
-		k++;
-		indx.i++;
-	}
-	indx.arg_ex[1][k] = '\0';
-	if (verif_exist(env, indx.arg_ex[0]) == 0)
-		ft_lstadd_backk(env, ft_lstneww(indx.arg_ex[0], indx.arg_ex[1], garb));
+	if (verif_exist(env, indx.arg_ex[0]) == 0 && args[indx.i - 1] != '=')
+		ft_lstadd_backk(env, ft_lstneww(indx.arg_ex[0], NULL, garb));
 	else
 	{
-		if (indx.arg_ex[1] != NULL && indx.arg_ex[1][0] != '\0')
-			chng_el(env, indx, garb);
+		while (args[indx.i] != '\0')
+		{
+			indx.arg_ex[1][k] = args[indx.i];
+			k++;
+			indx.i++;
+		}
+		indx.arg_ex[1][k] = '\0';
+		if (verif_exist(env, indx.arg_ex[0]) == 0)
+			ft_lstadd_backk(env, ft_lstneww(indx.arg_ex[0], indx.arg_ex[1], garb));
+		else
+		{
+			if (indx.arg_ex[1] != NULL)
+				chng_el(env, indx, garb);
+		}
 	}
 }
 

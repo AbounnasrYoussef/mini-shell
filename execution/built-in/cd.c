@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 22:24:19 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/08 14:29:58 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/08 18:30:15 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	check_exec_fil(t_list_env *env, char *arg_cd, t_cd inf_pwd)
 	else
 	{
 		ft_error_cd(1, arg_cd);
-		ft_exit_status(127, 1);
+		ft_exit_status(1, 1);
 	}
 }
 

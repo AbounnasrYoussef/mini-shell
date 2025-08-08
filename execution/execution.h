@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/08 14:14:56 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/08 20:35:37 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,5 @@ void		ft_error_pipe2(t_exec *data, t_info_pipe inf_pip, t_garbage **garb);
 void		ft_error_fork(void);
 void		ft_wait_child(t_info_pipe *inf_pip);
 void		error_cherch_path(char *cmd, t_garbage **garb);
+char		*new_str(char *str);
 #endif

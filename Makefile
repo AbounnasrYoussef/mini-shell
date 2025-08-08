@@ -1,6 +1,5 @@
 NAME = minishell
-CC = cc
-#-g -fsanitize=address
+CC = cc -g -fsanitize=address
 CFLAGS =  -Wall -Wextra -Werror
 PARS = parsing
 SRC = minishell.c  signals.c\

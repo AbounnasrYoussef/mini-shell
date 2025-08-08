@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/06 20:20:44 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/08 20:48:02 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_read_loop(char **envp, t_exec **data)
 		ft_lstadd_backk(&env, ft_lstneww("PATH", "/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", &garb));
 		ft_lstadd_backk(&env, ft_lstneww("PWD", getcwd(NULL, 0),&garb));
 		ft_lstadd_backk(&env, ft_lstneww("_", "/usr/bin/env", &garb));
+		//ft_lstadd_backk(&env, ft_lstneww("", NULL, &garb));
 	}
 	setup_signals();
 	while (1)

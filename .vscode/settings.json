@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"stat.h": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"minishell.h": "c"
 	}
 }

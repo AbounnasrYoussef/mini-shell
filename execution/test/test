@@ -651,11 +651,94 @@
 #minishell(78919,0x112821dc0) malloc: *** set a breakpoint in malloc_error_break to debug
 #[1]    78919 abort      ./minishell
 
-bash-3.2$ Makefile/..
-bash: Makefile/..: Not a directory
-bash-3.2$ $?
-bash: 126: command not found
-bash-3.2$
+#bash-3.2$ exit "        1"
+#exit
+#➜  minishell2 git:(master) ✗ $?
+#zsh: command not found: 1
+#➜  minishell2 git:(master) ✗
+
+#minishell$ unset PATH
+#minishell$ ls
+#access: No such file or directory
+#minishell$ $?
+#access: No such file or directory
+#minishell$ $?
+#access: No such file or directory
+#minishell$ 
+
+#bash-3.2$ unset PATH
+#bash-3.2$ ls
+#bash: ls: No such file or directory
+#bash-3.2$ $?
+#bash: 127: No such file or directory
+#bash-3.2$ 
+
+#=================
+#➜  minishell2 git:(master) ✗ ./minishell
+#minishell$ wefwef
+#wefwef: command not found
+#minishell$ ^D%                                                                                                 
+#➜  minishell2 git:(master) ✗ $?
+#zsh: command not found: 0
+#➜  minishell2 git:(master) ✗ 
+
+#bash-3.2$ execution/
+#bash: execution/: is a directory
+#bash-3.2$ $?
+#bash: 126: command not found
+#bash-3.2$ 
+
+#===============
+
+#minishell$ unset PWD OLDPWD
+#minishell$ mkdir -p 1/2/3
+#minishell$ cd 1/2/3
+#minishell$ pwd
+#/mnt/homes/arahhab/Desktop/minishell2/1/2/3
+#minishell$ pwd
+#/mnt/homes/arahhab/Desktop/minishell2/1/2/3
+#minishell$ export | grep PWD
+#minishell$ pwd
+#(null)
+#minishell$
+
+#minishell$ pwd
+#/mnt/homes/arahhab/Desktop/minishell2/1/2/3
+#minishell$ pwd
+#/mnt/homes/arahhab/Desktop/minishell2
+#minishell$ $?
+#130: command not found  ////// ?????/
+
+#bash-3.2$ unset w/ef/we/f /ewf/wef/ /f/wf/we 
+#bash: unset: `w/ef/we/f': not a valid identifier
+#bash: unset: `/ewf/wef/': not a valid identifier
+#bash: unset: `/f/wf/we': not a valid identifier
+#bash-3.2$ $?
+#bash: 1: command not found
+#bash-3.2$ 
+
+#==============
+#minishell$ touch ls
+#minishell$ ls
+#Makefile        execution       ls              minishell       minishell.c     minishell.h     minishell.o     parsing         signals.c       signals.o       test_parsing
+#minishell$ ./ls
+#access: Permission denied
+#minishell$ $?
+#126: command not found
+#minishell$ chmod +x ls
+#minishell$ ls
+#minishell$ ./ls
+#minishell$ 
+#==============
+
+#bash-3.2$ Makefile/..
+#bash: Makefile/..: Not a directory
+#bash-3.2$ $?
+#bash: 126: command not found
+#bash-3.2$
+
+#bash-3.2$ Makefile
+#bash: Makefile: command not found
 
 ➜  minishell2 git:(master) ✗ env -i ./minishell
 minishell$ unset PWD PATH _
@@ -664,135 +747,8 @@ minishell$ env
 minishell$ export a
 minishell$ export
 
-minishell$ dh/
-dh/: Not a directory
 
-
-==============
-minishell$ touch ls
-minishell$ ls
-Makefile        execution       ls              minishell       minishell.c     minishell.h     minishell.o     parsing         signals.c       signals.o       test_parsing
-minishell$ ./ls
-access: Permission denied
-minishell$ $?
-126: command not found
-minishell$ chmod +x ls
-minishell$ ls
-minishell$ ./ls
-minishell$ 
-==============
-
-minishell$ pwd
-/mnt/homes/arahhab/Desktop/minishell2/1/2/3
-minishell$ pwd
-/mnt/homes/arahhab/Desktop/minishell2
-minishell$ $?
-130: command not found  ////// ?????/
-
-bash-3.2$ export var2=
 bash-3.2$ export
-declare -x COLORTERM="truecolor"
-declare -x COMMAND_MODE="unix2003"
-declare -x GIT_ASKPASS="/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh"
-declare -x HOME="/mnt/homes/arahhab"
-declare -x LANG="en_US.UTF-8"
-declare -x LESS="-R"
-declare -x LOGNAME="arahhab"
-declare -x LSCOLORS="Gxfxcxdxbxegedabagacad"
-declare -x LS_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
-declare -x LaunchInstanceID="DD47C281-3BA6-4EAC-8B6F-6208C9E607B1"
-declare -x MallocNanoZone="0"
 declare -x OLDPWD
-declare -x ORIGINAL_XDG_CURRENT_DESKTOP="undefined"
-declare -x PAGER="less"
-declare -x PATH="/mnt/homes/arahhab/Library/Python/3.8/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/mnt/homes/arahhab/Library/Python/3.8/bin/"
+declare -x PATH="/mnt/homes/arahhab/Library/Python/3.8/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
 declare -x PWD="/mnt/homes/arahhab/Desktop/minishell2"
-declare -x SECURITYSESSIONID="186a6"
-declare -x SHELL="/bin/zsh"
-declare -x SHLVL="2"
-declare -x SSH_AUTH_SOCK="/private/tmp/com.apple.launchd.H3iHcv0E2a/Listeners"
-declare -x TERM="xterm-256color"
-declare -x TERM_PROGRAM="vscode"
-declare -x TERM_PROGRAM_VERSION="1.89.1"
-declare -x TMPDIR="/var/folders/zz/zyxvpxvq6csfxvn_n000cplc0035mv/T/"
-declare -x USER="arahhab"
-declare -x USER_ZDOTDIR="/mnt/homes/arahhab"
-declare -x VSCODE_GIT_ASKPASS_EXTRA_ARGS=""
-declare -x VSCODE_GIT_ASKPASS_MAIN="/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js"
-declare -x VSCODE_GIT_ASKPASS_NODE="/Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper (Plugin).app/Contents/MacOS/Code Helper (Plugin)"
-declare -x VSCODE_GIT_IPC_HANDLE="/var/folders/zz/zyxvpxvq6csfxvn_n000cplc0035mv/T/vscode-git-be3dcb8d17.sock"
-declare -x VSCODE_INJECTION="1"
-declare -x XPC_FLAGS="0x0"
-declare -x XPC_SERVICE_NAME="0"
-declare -x ZDOTDIR="/mnt/homes/arahhab"
-declare -x ZSH="/mnt/homes/arahhab/.oh-my-zsh"
-declare -x __CF_USER_TEXT_ENCODING="0x1969B:0x0:0x0"
-declare -x var2=""
-bash-3.2$ 
-
-
-minishell$ unset PATH
-minishell$ ls
-access: No such file or directory
-minishell$ $?
-access: No such file or directory
-minishell$ $?
-access: No such file or directory
-minishell$ 
-
-bash-3.2$ unset PATH
-bash-3.2$ ls
-bash: ls: No such file or directory
-bash-3.2$ $?
-bash: 127: No such file or directory
-bash-3.2$ 
-
-
-===============
-
-minishell$ unset PWD OLDPWD
-minishell$ mkdir -p 1/2/3
-minishell$ cd 1/2/3 
-minishell$ pwd
-/mnt/homes/arahhab/Desktop/minishell2/1/2/3
-minishell$ pwd
-/mnt/homes/arahhab/Desktop/minishell2/1/2/3
-minishell$ export | grep PWD
-minishell$ pwd
-(null)
-minishell$
-
-bash-3.2$ execution/
-bash: execution/: is a directory
-bash-3.2$ $?
-bash: 126: command not found
-bash-3.2$ 
-
-=================
-➜  minishell2 git:(master) ✗ ./minishell
-minishell$ wefwef
-wefwef: command not found
-minishell$ ^D%                                                                                                 
-➜  minishell2 git:(master) ✗ $?
-zsh: command not found: 0
-➜  minishell2 git:(master) ✗ 
-
-===========
-
-bash-3.2$ exit "        1"
-exit
-➜  minishell2 git:(master) ✗ $?
-zsh: command not found: 1
-➜  minishell2 git:(master) ✗
-
-==============
-
-bash-3.2$ unset w/ef/we/f /ewf/wef/ /f/wf/we 
-bash: unset: `w/ef/we/f': not a valid identifier
-bash: unset: `/ewf/wef/': not a valid identifier
-bash: unset: `/f/wf/we': not a valid identifier
-bash-3.2$ $?
-bash: 1: command not found
-bash-3.2$ 
-
-=====================
