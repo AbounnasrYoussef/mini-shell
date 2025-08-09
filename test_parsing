@@ -92,7 +92,7 @@ minishell$ "'l's"
 Makefile        minishell       minishell.h     parsing         signals.o
 execution       minishell.c     minishell.o     signals.c       test_parsing
 
-minishell$ cat << m
+✅minishell$ cat << m
 > $USER
 > m
 arahhabR

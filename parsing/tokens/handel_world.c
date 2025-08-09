@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:38:19 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/02 10:38:03 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/09 12:21:30 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,25 @@ void	handle_quoted_part(const char *line, int *i,
 	quote = line[*i];
 	(*i)++;
 	start = *i;
-	while (line[*i] && line[*i] != quote)
-	{
-		(*i)++;
-	}
-	if (line[*i] == quote)
-	{
-		substr = ft_substr(line, start, *i - start, garb);
-		*res = ft_strjoin(*res, substr, garb);
-		if (quote == '\'')
-			*quoted_flag = 1;
-		else if (quote == '\"')
-			*quoted_flag = 2;
-		(*i)++;
-	}
-}
 
+	// On lit jusqu’à la quote fermante ou fin de ligne
+	while (line[*i] && line[*i] != quote)
+		(*i)++;
+
+	// On extrait la partie entre quotes
+	substr = ft_substr(line, start, *i - start, garb);
+	*res = ft_strjoin(*res, substr, garb);
+
+	// On définit le flag selon le type de quote
+	if (quote == '\'')
+		*quoted_flag = 2;  // 2 = simple quotes, aucune expansion plus tard
+	else if (quote == '"')
+		*quoted_flag = 1;  // 1 = double quotes, expansion possible
+
+	// Si on est bien sur une quote fermante, on avance
+	if (line[*i] == quote)
+		(*i)++;
+}
 
 void	handle_word(const char *line, int *i,
 			t_token **tokens, t_garbage **garb)
@@ -63,28 +66,32 @@ void	handle_word(const char *line, int *i,
 	int		start;
 	int		quoted_flag;
 
-	quoted_flag = 0;
+	quoted_flag = 0; // 0 = pas de quotes, expansion normale possible
 	res = ft_strdup("", garb);
+
 	while (line[*i] && !skip_space(line[*i]) && !is_operator(line[*i]))
 	{
-		if (line[*i] == '\'' || line[*i] == '\"')
+		if (line[*i] == '\'' || line[*i] == '"')
 		{
+			// Gérer les quotes, concaténer dans res et set flag
 			handle_quoted_part(line, i, &res, &quoted_flag, garb);
 		}
 		else
 		{
+			// Partie normale hors quotes
 			start = *i;
 			while (line[*i] && !skip_space(line[*i])
 				&& !is_operator(line[*i])
-				&& line[*i] != '\'' && line[*i] != '\"')
+				&& line[*i] != '\'' && line[*i] != '"')
 				(*i)++;
+
 			word = ft_substr(line, start, *i - start, garb);
 			res = ft_strjoin(res, word, garb);
 		}
 	}
+
 	if (res)
-	{
 		add_token(tokens, new_token(res, WORD, quoted_flag, garb));
-	}
 }
+
 
