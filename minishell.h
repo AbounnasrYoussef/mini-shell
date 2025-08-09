@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/07 16:55:54 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/09 10:55:31 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,14 @@ void	append_single_quote(const char *val, int *i, char **res, t_garbage **garb);
 char	*get_env_value(char *name, t_list_env *env, t_garbage **garb);
 void	replace_token(t_token **head, t_token *old, t_token *new_list);
 t_token	*get_last_token(t_token *tokens);
-t_token	*split_into_tokens(char *str, t_garbage **garb);
+// t_token	*split_into_tokens(char *str, t_garbage **garb);
 void	add_token_back(t_token **head, t_token *new_token);
 t_token	*new_token_0(char *value, type_token type, t_garbage **garb);
 int ft_exit_status(int status, int flag);
 int	is_valid_var_char(char c);
 char	*ft_strtrim_custom(char *str, t_garbage **garb, int quoted);
+t_token *split_tokens_by_space(char *str, t_garbage **garb);
+
 
 
 //struct_atmane

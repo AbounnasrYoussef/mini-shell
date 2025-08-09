@@ -1,6 +1,6 @@
 ////////parsing :
 
-minishell$ cat << file
+✅minishell$ cat << file
 > $HOME
 > file
 /mnt/homes/arahhabE
@@ -169,3 +169,10 @@ bash-3.2$ <<  1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12 << 13 
 bash: maximum here-document count exceeded
 minishell2 git:(master) ✗ $?
 zsh: command not found: 2
+
+
+
+
+
+
+il reste toujours erreur dans les quotes

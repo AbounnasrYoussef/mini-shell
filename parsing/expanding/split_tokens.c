@@ -6,35 +6,12 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:37:21 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 18:11:28 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/09 10:51:48 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	replace_token(t_token **head, t_token *old, t_token *new_list)
-{
-	t_token	*prev;
-	t_token	*curr;
-	t_token	*last;
-
-	prev = NULL;
-	curr = *head;
-	while (curr && curr != old)
-	{
-		prev = curr;
-		curr = curr->next;
-	}
-	if (!prev)
-		*head = new_list;
-	else
-		prev->next = new_list;
-	last = new_list;
-	while (last && last->next)
-		last = last->next;
-	if (last)
-		last->next = old->next;
-}
 
 t_token	*get_last_token(t_token *tokens)
 {
@@ -43,51 +20,86 @@ t_token	*get_last_token(t_token *tokens)
 	return (tokens);
 }
 
-t_token	*split_by_space(char *str, t_garbage **garb)
+// Fonction pour splitter une chaîne par espace en tokens (sans gestion spéciale des quotes)
+t_token *split_tokens_by_space(char *str, t_garbage **garb)
 {
-	t_token	*head;
-	t_token	*new;
-	char	**words;
-	int		i;
+    t_token *head = NULL;
+    t_token *new_token;
+    char **words;
+    int i = 0;
 
-	head = NULL;
-	words = ft_split(str, ' ', garb);
-	i = 0;
-	while (words && words[i])
-	{
-		new = new_token_0(words[i], WORD, garb);
-		new->quoted = 0;
-		add_token_back(&head, new);
-		i++;
-	}
-	return (head);
+    if (!str)
+        return NULL;
+
+    words = ft_split(str, ' ', garb);
+    if (!words)
+        return NULL;
+
+    while (words[i])
+    {
+        if (words[i][0] != '\0') // ignore tokens vides
+        {
+            new_token = new_token_0(words[i], WORD, garb);
+            new_token->quoted = 0;
+            add_token_back(&head, new_token);
+        }
+        i++;
+    }
+    return head;
 }
 
-t_token	*handle_quoted_string(char *str, t_garbage **garb)
+// Fonction qui remplace un token 'old' dans la liste *head par une liste 'new_list'
+void replace_token(t_token **head, t_token *old, t_token *new_list)
 {
-	t_token	*head;
-	t_token	*new;
-	char	*trimmed;
+    t_token *prev = NULL;
+    t_token *curr = *head;
+    t_token *last;
 
-	head = NULL;
-	trimmed = ft_substr(str, 1, ft_strlen(str) - 2, garb);
-	if (!trimmed)
-		return (NULL);
-	new = new_token_0(trimmed, WORD, garb);
-	new->quoted = 1;
-	add_token_back(&head, new);
-	return (head);
+    while (curr && curr != old)
+    {
+        prev = curr;
+        curr = curr->next;
+    }
+    if (!curr)
+        return;
+
+    if (!prev)
+        *head = new_list;
+    else
+        prev->next = new_list;
+
+    if (new_list)
+    {
+        last = new_list;
+        while (last->next)
+            last = last->next;
+        last->next = old->next;
+    }
+    else
+    {
+        // Si new_list est NULL, on supprime juste old
+        if (prev)
+            prev->next = old->next;
+        else
+            *head = old->next;
+    }
 }
 
-t_token	*split_into_tokens(char *str, t_garbage **garb)
+// Fonction principale pour gérer l'expansion et split dans les tokens
+void expand_token_1(t_token **tokens_head, t_token *token_to_expand,
+    t_list_env *env, t_garbage **garb)
 {
-	size_t	len;
+    char *var_name = token_to_expand->value; // exemple : "a"
+    char *expanded_value = get_env_value(var_name, env, garb);
 
-	if (!str)
-		return (NULL);
-	len = ft_strlen(str);
-	if (len >= 2 && str[0] == '"' && str[len - 1] == '"')
-		return (handle_quoted_string(str, garb));
-	else
-		return (split_by_space(str, garb));
+    if (!expanded_value)
+        expanded_value = ft_strdup("", garb);
+
+    // Split l'expansion en tokens
+    t_token *new_tokens = split_tokens_by_space(expanded_value, garb);
+
+    // Remplace le token initial par la liste des tokens splittés
+    replace_token(tokens_head, token_to_expand, new_tokens);
 }
+
+// Cette fonction supprime les quotes et split correctement
