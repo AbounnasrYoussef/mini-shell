@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/08 16:42:49 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/09 17:08:48 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	error_env(char *str)
 	write(2, "env: ", 5);
 	write(2, str, ft_strlenn(str));
 	write(2, ": No such file or directory\n", 28);
-	exit(127);
+	ft_exit_status(127, 1);
 }
 
 int	check_exist_pwd(t_list_env *env)

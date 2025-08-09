@@ -753,8 +753,22 @@
 #declare -x PATH="/mnt/homes/arahhab/Library/Python/3.8/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
 #declare -x PWD="/mnt/homes/arahhab/Desktop/minishell2"
 
-export a=dkjdjd
-export a
+#export a=dkjdjd
+#export a
+
+#bash-3.2$ env "hshshs"
+#env: hshshs: No such file or directory
+
+#bash-3.2$ env ""
+#env: hshshs: No such file or directory
+
+#➜  minishell2 git:(execution) ✗ ./minishell
+#minishell$ unset ""
 
 bash-3.2$ export "       "
 bash: export: `       ': not a valid identifier
+
+
+
+
+
