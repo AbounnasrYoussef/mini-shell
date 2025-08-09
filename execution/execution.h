@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/08 20:35:37 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 00:24:35 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 typedef struct s_list_env	t_list_env;
 typedef struct s_exec		t_exec;

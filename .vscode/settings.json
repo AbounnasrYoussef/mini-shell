@@ -2,6 +2,7 @@
 	"files.associations": {
 		"stat.h": "c",
 		"sstream": "c",
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"errno.h": "c"
 	}
 }

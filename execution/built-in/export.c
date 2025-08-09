@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/09 22:20:56 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 00:08:58 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,28 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 	while (args[ix.i] != NULL)
 	{
 		if (ft_strcmpp(args[ix.i], "") == 0)
+		{
 			error_export(args, ix.i);
+			if (args[ix.i + 1] != NULL)
+			{
+				ix.i++;
+				continue;
+			}
+			else
+				break;
+		}
 		else
 		{
 			if (!(args[ix.i][0] == '_' || ft_isalphaa(args[ix.i][0])))
 			{
 				1 && (error_export(args, ix.i), ix.c = 1);
-				ix.i++;
-				continue;
+				if (args[ix.i + 1] != NULL)
+				{
+					ix.i++;
+					continue;
+				}
+				else
+					break;
 			}
 			while (args[ix.i][ix.j] != '\0' && args[ix.i][ix.j] != '='
 				&& args[ix.i][ix.j] != '+')
@@ -97,8 +111,13 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 					|| ft_isalnumm(args[ix.i][ix.j])))
 				{
 					1 && (error_export(args, ix.i), ix.c = 1);
-					ix.i++;
-					continue;
+					if (args[ix.i + 1] != NULL)
+					{
+						ix.i++;
+						continue;
+					}
+					else
+						break;
 				}
 				ix.j++;
 			}
@@ -107,8 +126,13 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 				if (args[ix.i][ix.j + 1] != '=')
 				{
 					1 && (error_export(args, ix.i), ix.c = 1);
-					ix.i++;
-					continue;
+					if (args[ix.i + 1] != NULL)
+					{
+						ix.i++;
+						continue;
+					}
+					else
+						break;
 				}
 				ix.j++;
 			}

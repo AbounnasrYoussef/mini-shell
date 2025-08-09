@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/09 17:07:49 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 00:25:12 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,18 @@ void	ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip
 		{
 			if (!data->cmd[0])
 				exit(1);
-			perror("access");
-			(ft_free_all(*garb), exit(126));
+			if (errno == 13)
+			{
+				write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
+				write(2, ": Permission denied\n", 20);
+				(ft_free_all(*garb), exit(126));
+			}
+			else
+			{
+				write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
+				write(2, ": No such file or directory\n", 28);
+				(ft_free_all(*garb), exit(127));
+			}
 		}
 
 	}
@@ -135,6 +145,7 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 		&& is_built_in(data->cmd[0]) == 0)
 	{
 		ft_one_cmd(data, env, count_cmd(data), garb);
+		//ft_exit_status(0, 1);
 		return;
 	}
 		
@@ -142,6 +153,7 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 		&& is_built_in(data->cmd[0]) == 0)
 	{
 		ft_one_cmd(data, env, count_cmd(data), garb);
+		//ft_exit_status(0, 1);
 		return;
 	}
 	else
