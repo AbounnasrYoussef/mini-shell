@@ -767,3 +767,121 @@
 
 #bash-3.2$ export "       "
 #bash: export: `       ': not a valid identifier
+
+
+ls > a > b < l> c | ls
+
+bash-3.2$ ls < /dev/stdout | ls 
+bash: /dev/stdout: Permission denied
+Makefile        b               execution       minishell.c     minishell.o     signals.c       test_parsing
+a               c               minishell       minishell.h     parsing         signals.o
+
+bash-3.2$ ls > c < /dev/stdout 
+bash: /dev/stdout: Permission denied
+
+bash-3.2$ ls > c < /dev/stdin  
+
+=============================
+
+ while true;do lsof -c minishell && sleep 3 && clear ;done
+
+
+ top
+ \
+ $?
+
+=====================
+
+minishell$ unset PATH
+minishell$ $?
+access: No such file or directory
+
+➜  minishell2 git:(execution) ✗ env -i ./minishell
+minishell$ unset PATH
+minishell$ env | grep PATH
+access: No such file or directory
+minishell$ $?
+access: No such file or directory
+
+minishell$ unset PATH
+minishell$ ls
+access: No such file or directory
+minishell$ echo $?
+126
+
+==================
+
+
+bash-3.2$ exit "    -53  "
+exit
+➜  minishell2 git:(execution) ✗ echo $?
+203
+
+
+bash-3.2$ ps aux | grep minishell
+arahhab          76805   0.0  0.0  4268328    720 s007  S+   10:35PM   0:00.00 grep minishell
+arahhab          76553   0.0  0.1 21479157300   4992 s004  S+   10:34PM   0:00.23 ./minishell
+
+minishell$ skldfjkldsjfkls
+skldfjkldsjfkls: command not found
+minishell$ ^D%                                                                                                     
+➜  minishell2 git:(execution) ✗ echo $?
+0
+
+unset _
+env
+
+minishell$ export a&p=sldfjl
+export: `a&p=sldfjl' not a valid identifier
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==354==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000001 (pc 0x00010a0b18c9 bp 0x7ffee5b692b0 sp 0x7ffee5b68e40 T0)
+==354==The signal is caused by a READ memory access.
+==354==Hint: address points to the zero page.
+    #0 0x10a0b18c9 in check_args+0x8d9 (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x10001b8c9)
+    #1 0x10a0b3210 in ft_export+0x300 (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x10001d210)
+    #2 0x10a0acee6 in help_built+0x9e6 (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x100016ee6)
+    #3 0x10a0ad77c in ft_built_in+0x4bc (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x10001777c)
+    #4 0x10a0b4ebe in ft_one_cmd+0x6e (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x10001eebe)
+    #5 0x10a0b6940 in ft_pipe+0x6a0 (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x100020940)
+    #6 0x10a098863 in ft_read_loop+0x723 (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x100002863)
+    #7 0x10a098af0 in main+0x150 (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x100002af0)
+    #8 0x7fff71ea4cc8 in start+0x0 (/usr/lib/system/libdyld.dylib:x86_64+0x1acc8)
+
+==354==Register values:
+rax = 0x0000000000000000  rbx = 0x00007ffee5b68ea0  rcx = 0x0000000000000001  rdx = 0x0000000000000001  
+rdi = 0x0000100000000000  rsi = 0x0000100000000000  rbp = 0x00007ffee5b692b0  rsp = 0x00007ffee5b68e40  
+ r8 = 0x0000603000002c00   r9 = 0x00007ffee5b69be0  r10 = 0x00000c0400000601  r11 = 0x0000000000000246  
+r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000000  r15 = 0x0000000000000000  
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x10001b8c9) in check_args+0x8d9
+==354==ABORTING
+[1]    354 abort      env -i ./minishell
+
+
+minishell$ export a%b=dsklj
+export: `a%b=dsklj' not a valid identifier
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==6473==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000001 (pc 0x00010a7718c9 bp 0x7ffee54a92b0 sp 0x7ffee54a8e40 T0)
+==6473==The signal is caused by a READ memory access.
+==6473==Hint: address points to the zero page.
+    #0 0x10a7718c9 in check_args+0x8d9 (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x10001b8c9)
+    #1 0x10a773210 in ft_export+0x300 (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x10001d210)
+    #2 0x10a76cee6 in help_built+0x9e6 (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x100016ee6)
+    #3 0x10a76d77c in ft_built_in+0x4bc (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x10001777c)
+    #4 0x10a774ebe in ft_one_cmd+0x6e (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x10001eebe)
+    #5 0x10a776940 in ft_pipe+0x6a0 (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x100020940)
+    #6 0x10a758863 in ft_read_loop+0x723 (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x100002863)
+    #7 0x10a758af0 in main+0x150 (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x100002af0)
+    #8 0x7fff71ea4cc8 in start+0x0 (/usr/lib/system/libdyld.dylib:x86_64+0x1acc8)
+
+==6473==Register values:
+rax = 0x0000000000000000  rbx = 0x00007ffee54a8ea0  rcx = 0x0000000000000001  rdx = 0x0000000000000001  
+rdi = 0x0000100000000000  rsi = 0x0000100000000000  rbp = 0x00007ffee54a92b0  rsp = 0x00007ffee54a8e40  
+ r8 = 0x0000603000002b00   r9 = 0x00007ffee54a9be0  r10 = 0x00000c0400000401  r11 = 0x0000000000000246  
+r12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000000  r15 = 0x0000000000000000  
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/mnt/homes/arahhab/Desktop/minishell2/./minishell:x86_64+0x10001b8c9) in check_args+0x8d9
+==6473==ABORTING
+[1]    6473 abort      env -i ./minishell

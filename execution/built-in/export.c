@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/09 17:26:58 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/09 22:20:56 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	exp_el_help(t_list_env **env, char *args
 	}
 	indx.i = indx.i - indx.j;
 	indx.arg_ex[1] = ft_malloc(garb, (indx.j + 1));
-	printf("%c\n\n", args[indx.i - 1]);
 	if (verif_exist(env, indx.arg_ex[0]) == 0 && args[indx.i - 1] != '=')
 		ft_lstadd_backk(env, ft_lstneww(indx.arg_ex[0], NULL, garb));
 	else if (verif_exist(env, indx.arg_ex[0]) == 1 && args[indx.i - 1] != '=')

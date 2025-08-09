@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/08 15:28:43 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/09 23:31:06 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,18 @@ int	chck_nb(char *str)
 		i++;
 		while (str[i] != '\0')
 		{
-			if (!(str[i] >= '0' && str[i] <= '9'))
+			if ((str[i] >= '0' && str[i] <= '9'))
+			{
+				while ((str[i] != '\0' && str[i] >= '0' && str[i] <= '9'))
+					i++;
+				while(str[i] == ' ' || str[i] == '\t')
+					i++;
+				if (ft_strcmpp(&str[i], "") == 0)
+					return (0);
+				else
+					return (-1);
+			}
+			else
 				return (-1);
 			i++;
 		}
@@ -65,7 +76,18 @@ int	chck_nb(char *str)
 	{
 		while (str && str[i] != '\0')
 		{
-			if (!(str[i] >= '0' && str[i] <= '9'))
+			if ((str[i] >= '0' && str[i] <= '9'))
+			{
+				while ((str[i] != '\0' && str[i] >= '0' && str[i] <= '9'))
+					i++;
+				while(str[i] == ' ' || str[i] == '\t')
+					i++;
+				if (ft_strcmpp(&str[i], "") == 0)
+					return (0);
+				else
+					return (-1);
+			}
+			else
 				return (-1);
 			i++;
 		}
@@ -92,10 +114,7 @@ void	ft_exit(t_exit i_exi, char **str, t_garbage **garb)
 			{
 				if (i_exi.c_cmd == 1)
 					printf("exit\n");
-				if (ft_atoi((i_exi.len), str[1], i_exi.c_cmd, garb) < 0)
-					exit(255);
-				else
-					exit(ft_atoi((i_exi.len), str[1], i_exi.c_cmd, garb));
+				exit(ft_atoi((i_exi.len), str[1], i_exi.c_cmd, garb));
 			}
 			else if (chck_nb(str[1]) == 0 && i_exi.argc > 2 && i_exi.len <= 19)
 				error_exit2(i_exi.c_cmd);
