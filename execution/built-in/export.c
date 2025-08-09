@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/08 19:27:49 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/09 16:51:18 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,27 +78,32 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 {
 	while (args[ix.i] != NULL)
 	{
-		if (!(args[ix.i][0] == '_' || ft_isalphaa(args[ix.i][0])))
-			1 && (error_export(args, ix.i), ix.c = 1);
-		while (args[ix.i][ix.j] != '\0' && args[ix.i][ix.j] != '='
-			&& args[ix.i][ix.j] != '+')
-		{
-			if (!(args[ix.i][ix.j] == '_' || args[ix.i][ix.j] == '='
-				|| ft_isalnumm(args[ix.i][ix.j])))
-				1 && (error_export(args, ix.i), ix.c = 1);
-			ix.j++;
-		}
-		if (args[ix.i][ix.j] == '+')
-		{
-			if (args[ix.i][ix.j + 1] != '=')
-				1 && (error_export(args, ix.i), ix.c = 1);
-			ix.j++;
-		}
-		if (ix.c == 0)
-			export_el(env, args[ix.i], ix, garb);
+		if (ft_strcmpp(args[ix.i], "") == 0)
+			error_export(args, ix.i);
 		else
-			ix.c = 0;
-		ix.j = 1;
+		{
+			if (!(args[ix.i][0] == '_' || ft_isalphaa(args[ix.i][0])))
+				1 && (error_export(args, ix.i), ix.c = 1);
+			while (args[ix.i][ix.j] != '\0' && args[ix.i][ix.j] != '='
+				&& args[ix.i][ix.j] != '+')
+			{
+				if (!(args[ix.i][ix.j] == '_' || args[ix.i][ix.j] == '='
+					|| ft_isalnumm(args[ix.i][ix.j])))
+					1 && (error_export(args, ix.i), ix.c = 1);
+				ix.j++;
+			}
+			if (args[ix.i][ix.j] == '+')
+			{
+				if (args[ix.i][ix.j + 1] != '=')
+					1 && (error_export(args, ix.i), ix.c = 1);
+				ix.j++;
+			}
+			if (ix.c == 0)
+				export_el(env, args[ix.i], ix, garb);
+			else
+				ix.c = 0;
+			ix.j = 1;
+		}
 		ix.i++;
 	}
 }

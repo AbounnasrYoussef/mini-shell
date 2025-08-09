@@ -740,15 +740,21 @@
 #bash-3.2$ Makefile
 #bash: Makefile: command not found
 
-➜  minishell2 git:(master) ✗ env -i ./minishell
-minishell$ unset PWD PATH _
-minishell$ export
-minishell$ env
-minishell$ export a
-minishell$ export
+#➜  minishell2 git:(master) ✗ env -i ./minishell
+#minishell$ unset PWD PATH _
+#minishell$ export
+#minishell$ env
+#minishell$ export a
+#minishell$ export
 
 
-bash-3.2$ export
-declare -x OLDPWD
-declare -x PATH="/mnt/homes/arahhab/Library/Python/3.8/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
-declare -x PWD="/mnt/homes/arahhab/Desktop/minishell2"
+#bash-3.2$ export
+#declare -x OLDPWD
+#declare -x PATH="/mnt/homes/arahhab/Library/Python/3.8/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
+#declare -x PWD="/mnt/homes/arahhab/Desktop/minishell2"
+
+export a=dkjdjd
+export a
+
+bash-3.2$ export "       "
+bash: export: `       ': not a valid identifier
