@@ -6,13 +6,13 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/09 23:31:06 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/09 23:42:41 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-int	ft_atoi(int len, char *nbr, int count_cmd, t_garbage **garb)
+int	ft_atoi(char *nbr, int count_cmd, t_garbage **garb)
 {
 	unsigned long long	nombre;
 	int					i;
@@ -29,14 +29,14 @@ int	ft_atoi(int len, char *nbr, int count_cmd, t_garbage **garb)
 			sign = -1;	
 		i++;
 	}
-	while (nbr[i] != '\0')
+	while (nbr[i] != '\0' && nbr[i] >= '0' && nbr[i] <= '9')
 	{
 		nombre = nombre + nbr[i] - '0';
 		if ((sign == -1) && (nombre > (9223372036854775807)) && nbr[19] > '8')
 			error_exit(nbr, count_cmd, garb);
 		else if (nombre > (9223372036854775807))
 			error_exit(nbr, count_cmd, garb);
-		if (len > i)
+		if (nbr[i + 1] >= '0' && nbr[i + 1] <= '9')
 			nombre *= 10;
 		i++;
 	}
@@ -114,7 +114,7 @@ void	ft_exit(t_exit i_exi, char **str, t_garbage **garb)
 			{
 				if (i_exi.c_cmd == 1)
 					printf("exit\n");
-				exit(ft_atoi((i_exi.len), str[1], i_exi.c_cmd, garb));
+				exit(ft_atoi(str[1], i_exi.c_cmd, garb));
 			}
 			else if (chck_nb(str[1]) == 0 && i_exi.argc > 2 && i_exi.len <= 19)
 				error_exit2(i_exi.c_cmd);
