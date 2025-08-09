@@ -765,10 +765,5 @@
 #➜  minishell2 git:(execution) ✗ ./minishell
 #minishell$ unset ""
 
-bash-3.2$ export "       "
-bash: export: `       ': not a valid identifier
-
-
-
-
-
+#bash-3.2$ export "       "
+#bash: export: `       ': not a valid identifier
