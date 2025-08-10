@@ -814,15 +814,52 @@
 
  while true;do lsof -c minishell && sleep 3 && clear ;done
 
-====== signals
- top
- \
- $?
-
 ====== pour check fd leaks
 bash-3.2$ ps aux | grep minishell
 arahhab          76805   0.0  0.0  4268328    720 s007  S+   10:35PM   0:00.00 grep minishell
 arahhab          76553   0.0  0.1 21479157300   4992 s004  S+   10:34PM   0:00.23 ./minishell
 
 ===== kill zombie process
+
+====== signals
+ top
+ \
+ $?
+
+ bash-3.2$ echo '$HOME'
+$HOME
+bash-3.2$ echo ''$HOME''
+/mnt/homes/arahhab
+bash-3.2$ echo '''$HOME'''
+$HOME
+bash-3.2$ echo ''''$HOME''''
+/mnt/homes/arahhab
+
+bash-3.2$ echo "$HOME"
+/mnt/homes/arahhab
+bash-3.2$ echo ""$HOME""
+/mnt/homes/arahhab
+bash-3.2$ echo """$HOME"""
+/mnt/homes/arahhab
+bash-3.2$ echo """"$HOME""""
+/mnt/homes/arahhab
+bash-3.2$ echo """""$HOME"""""
+/mnt/homes/arahhab
+
+
+bash-3.2$ echo "'$HOME'"
+'/mnt/homes/arahhab'
+bash-3.2$ echo ""'$HOME'""
+$HOME
+bash-3.2$ echo """'$HOME'"""
+'/mnt/homes/arahhab'
+bash-3.2$ echo """"'$HOME'""""
+$HOME
+
+bash-3.2$ echo '"$HOME"'
+"$HOME"
+bash-3.2$ echo ''"$HOME"''
+/mnt/homes/arahhab
+bash-3.2$ echo '''"$HOME"'''
+"$HOME"
 
