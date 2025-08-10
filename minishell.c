@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/10 19:13:23 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 22:51:00 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	ft_read_loop(char **envp, t_exec **data)
 	while (1)
 	{
 		garb = NULL;
+		g_exit_status = 2;
 		line = readline("minishell$ ");
+		g_exit_status = 0;
 		if (!line)
 			break ;
 		if (*line)
