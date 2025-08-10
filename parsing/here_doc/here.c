@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:21:08 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/06 15:39:55 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 18:56:03 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	create_heredoc(char *delimiter, int expand,
 	close(fd[1]);
 	return (fd[0]);
 }
+
+
 
 void	process_heredocs(t_exec *exec, t_list_env *env, t_garbage **garb)
 {

@@ -169,3 +169,7 @@ bash-3.2$ <<  1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12 << 13 
 bash: maximum here-document count exceeded
 minishell2 git:(master) ✗ $?
 zsh: command not found: 2
+
+
+bash-3.2$  | ls 
+bash: syntax error near unexpected token `|'

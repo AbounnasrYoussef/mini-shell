@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/09 23:49:17 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 19:13:23 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,12 @@ void	ft_read_loop(char **envp, t_exec **data)
 		// 🧹 Nettoyage mémoire
 		//ft_free_all(garb);
 		//free_exec_list(*data); *data = NULL;
+		int bb = 3;
+		while (bb < 1024)
+		{
+			close(bb);
+			bb++;
+		}
 	}
 	ft_free_all(garb);
 }

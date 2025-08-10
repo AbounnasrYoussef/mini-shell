@@ -810,9 +810,48 @@
 #env
 #$?
 
+# bash-3.2$ echo '$HOME'
+#$HOME
+#bash-3.2$ echo ''$HOME''
+#/mnt/homes/arahhab
+#bash-3.2$ echo '''$HOME'''
+#$HOME
+#bash-3.2$ echo ''''$HOME''''
+#/mnt/homes/arahhab
+
+#bash-3.2$ echo "$HOME"
+#/mnt/homes/arahhab
+#bash-3.2$ echo ""$HOME""
+#/mnt/homes/arahhab
+#bash-3.2$ echo """$HOME"""
+#/mnt/homes/arahhab
+#bash-3.2$ echo """"$HOME""""
+#/mnt/homes/arahhab
+#bash-3.2$ echo """""$HOME"""""
+#/mnt/homes/arahhab
+
+
+#bash-3.2$ echo "'$HOME'"
+#'/mnt/homes/arahhab'
+#bash-3.2$ echo ""'$HOME'""
+#$HOME
+#bash-3.2$ echo """'$HOME'"""
+#'/mnt/homes/arahhab'
+#bash-3.2$ echo """"'$HOME'""""
+#$HOME
+
+#bash-3.2$ echo '"$HOME"'
+#"$HOME"
+#bash-3.2$ echo ''"$HOME"''
+#/mnt/homes/arahhab
+#bash-3.2$ echo '''"$HOME"'''
+#"$HOME"
+
 ============================= check leaks
 
  while true;do lsof -c minishell && sleep 3 && clear ;done
+
+ps aux | grep a.out
 
 ====== pour check fd leaks
 bash-3.2$ ps aux | grep minishell
@@ -826,40 +865,8 @@ arahhab          76553   0.0  0.1 21479157300   4992 s004  S+   10:34PM   0:00.2
  \
  $?
 
- bash-3.2$ echo '$HOME'
-$HOME
-bash-3.2$ echo ''$HOME''
-/mnt/homes/arahhab
-bash-3.2$ echo '''$HOME'''
-$HOME
-bash-3.2$ echo ''''$HOME''''
-/mnt/homes/arahhab
-
-bash-3.2$ echo "$HOME"
-/mnt/homes/arahhab
-bash-3.2$ echo ""$HOME""
-/mnt/homes/arahhab
-bash-3.2$ echo """$HOME"""
-/mnt/homes/arahhab
-bash-3.2$ echo """"$HOME""""
-/mnt/homes/arahhab
-bash-3.2$ echo """""$HOME"""""
-/mnt/homes/arahhab
-
-
-bash-3.2$ echo "'$HOME'"
-'/mnt/homes/arahhab'
-bash-3.2$ echo ""'$HOME'""
-$HOME
-bash-3.2$ echo """'$HOME'"""
-'/mnt/homes/arahhab'
-bash-3.2$ echo """"'$HOME'""""
-$HOME
-
-bash-3.2$ echo '"$HOME"'
-"$HOME"
-bash-3.2$ echo ''"$HOME"''
-/mnt/homes/arahhab
-bash-3.2$ echo '''"$HOME"'''
-"$HOME"
-
+ minishell$ l
+l: command not found
+minishell$ ^D%                                                                  
+➜  minishell2 git:(execution) ✗ echo $? 
+0
