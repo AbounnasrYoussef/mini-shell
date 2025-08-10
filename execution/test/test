@@ -793,17 +793,22 @@
 #minishell$ echo $?
 #126
 
-ls > a > b < l> c | ls
+#bash-3.2$ ls > c < /dev/stdout 
+#bash: /dev/stdout: Permission denied
 
-bash-3.2$ ls < /dev/stdout | ls 
-bash: /dev/stdout: Permission denied
-Makefile        b               execution       minishell.c     minishell.o     signals.c       test_parsing
-a               c               minishell       minishell.h     parsing         signals.o
+#bash-3.2$ ls > c < /dev/stdin  
 
-bash-3.2$ ls > c < /dev/stdout 
-bash: /dev/stdout: Permission denied
+#ls > a > b < l> c | ls
 
-bash-3.2$ ls > c < /dev/stdin  
+#bash-3.2$ ls < /dev/stdout | ls 
+#bash: /dev/stdout: Permission denied
+#Makefile        b               execution       minishell.c     minishell.o     signals.c       test_parsing
+#a               c               minishell       minishell.h     parsing         signals.o
+
+#exit | exit 232
+#$?
+#env
+#$?
 
 ============================= check leaks
 
@@ -821,8 +826,5 @@ arahhab          76553   0.0  0.1 21479157300   4992 s004  S+   10:34PM   0:00.2
 
 ===== kill zombie process
 
-============
-exit | exit 232
-$?
-env
-$?
+============ exit status
+export

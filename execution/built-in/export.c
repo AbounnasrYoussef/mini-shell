@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 00:08:58 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 01:03:01 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,9 +187,11 @@ void	ft_export(t_list_env *list_env, char **args, t_garbage **garb)
 	if (c == 1)
 	{
 		ft_print_env_ex(ex_sort(list_env, NULL));
+		ft_exit_status(0, 1);
 	}
 	else
 	{
 		check_args(&list_env, index, args, garb);
+		ft_exit_status(0, 1);
 	}
 }

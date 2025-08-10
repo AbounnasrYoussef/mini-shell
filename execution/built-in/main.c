@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 00:06:33 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 01:02:25 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ int	help_built(t_exec *data, t_list_env **env
 	else if (ft_strcmpp(data->cmd[0], "env") == 0)
 	{
 		if (data->cmd[1] == NULL)
+		{
+			ft_exit_status(0, 1);
 			return (ft_print_env(*env), 0);
+		}	
 		else
 			return (error_env(data->cmd[1]), 0);
 	}

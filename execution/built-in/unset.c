@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 12:59:18 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/09 23:46:04 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 01:20:34 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ void	ft_supp_arg(t_list_env **list_env, char *arg)
 	}
 }
 
-void	ft_error_unset(char *arg)
+void	ft_error_unset(char *arg, int *error)
 {
+	*error = 1;
 	write(2, "unset: `", 8);
 	write(2, arg, strlen(arg));
 	write(2, ": not a valid identifier\n", 25);
@@ -47,14 +48,16 @@ void	ft_unset(t_list_env **list_env, char **args)
 {
 	int	i;
 	int	j;
+	int error;
 
 	i = 1;
 	j = 0;
+	error = 0;
 	while (args[i] != NULL)
 	{
 		if (ft_strcmpp(args[i], "") == 0 || is_espace_tabulion(args[i]) == 0)
 		{
-			ft_error_unset(args[i]);
+			ft_error_unset(args[i], &error);
 			break;
 		}
 		if (ft_strcmpp(args[i], "_") == 0)
@@ -66,7 +69,7 @@ void	ft_unset(t_list_env **list_env, char **args)
 				|| (args[i][j] >= '0' && args[i][j] <= '9'))
 				|| (args[i][0] >= '0' && args[i][0] <= '9'))
 			{
-				ft_error_unset(args[i]);
+				ft_error_unset(args[i], &error);
 				break ;
 			}
 			j++;
@@ -74,6 +77,7 @@ void	ft_unset(t_list_env **list_env, char **args)
 		ft_supp_arg(list_env, args[i]);
 		j = 0;
 		i++;
-		
 	}
+	if (error == 0)
+		ft_exit_status(0, 1);
 }

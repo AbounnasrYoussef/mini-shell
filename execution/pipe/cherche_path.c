@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/08 20:23:14 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 00:57:04 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*cherch_path2(t_exec *data, t_list_env **env, t_inf_cher_path inf_path
 	}
 	if (path_cmd == NULL && ft_built_in(data, env, inf_path.c_cmd, garb) == -1)
 		error_cherch_path(data->cmd[0], garb);
+	ft_exit_status(0, 1);
 	return (path_cmd);
 }
 

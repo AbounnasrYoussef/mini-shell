@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:10:23 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 16:36:44 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 00:45:17 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	error_redr(int *fd, char *file_name, struct stat info)
 {
-	if (*fd == -1 && !S_ISDIR(info.st_mode) && !S_ISREG(info.st_mode))
+	if (*fd == -1 && access(file_name, X_OK) == -1)
+	{
+		perror("access");
+		exit(1);
+	}
+	else if (*fd == -1 && !S_ISDIR(info.st_mode) && !S_ISREG(info.st_mode))
 	{
 		write(2, file_name, ft_strlenn(file_name));
 		write(2, ": No such file or directory\n", 28);
 		exit(1);
-	}
-	else if (*fd == -1 && access(file_name, X_OK) == -1)
-	{
-		perror("access");
-		ft_exit_status(1, 1);
 	}
 }
 
