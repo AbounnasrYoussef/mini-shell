@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 00:57:04 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 01:46:40 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,23 @@ char	*cherch_path1(t_exec *data, t_list_env **env, int count_cmd
 	return (cherch_path2(data, env, inf_path, garb));
 }
 
-int chech_path(t_list_env **env)
+int	chech_path(t_list_env **env)
 {
-	t_list_env *copy_env;
+	t_list_env	*copy_env;
+
 	copy_env = *env;
 	while (copy_env)
 	{
-		if (ft_strcmpp(copy_env->variable, "PATH") == 0 
+		if (ft_strcmpp(copy_env->variable, "PATH") == 0
 			&& copy_env->val != NULL)
 		{
 			if (ft_strcmpp(copy_env->val, "") == 0)
 				return (1);
-			return 0;
+			return (0);
 		}
 		copy_env = copy_env->next;
 	}
-	return 1;
+	return (1);
 }
 
 char	*cherch_path(t_list_env **env, t_exec *data, int count_cmd

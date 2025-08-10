@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 01:36:04 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 01:42:24 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	exp_el_help(t_list_env **env, char *args
 	if (verif_exist(env, indx.arg_ex[0]) == 0 && args[indx.i - 1] != '=')
 		ft_lstadd_backk(env, ft_lstneww(indx.arg_ex[0], NULL, garb));
 	else if (verif_exist(env, indx.arg_ex[0]) == 1 && args[indx.i - 1] != '=')
-	;
+		;
 	else
 	{
 		while (args[indx.i] != '\0')
@@ -87,10 +87,10 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 			if (args[ix.i + 1] != NULL)
 			{
 				ix.i++;
-				continue;
+				continue ;
 			}
 			else
-				break;
+				break ;
 		}
 		else
 		{
@@ -100,10 +100,10 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 				if (args[ix.i + 1] != NULL)
 				{
 					ix.i++;
-					continue;
+					continue ;
 				}
 				else
-					break;
+					break ;
 			}
 			while (args[ix.i][ix.j] != '\0' && args[ix.i][ix.j] != '='
 				&& args[ix.i][ix.j] != '+')
@@ -115,10 +115,10 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 					if (args[ix.i + 1] != NULL)
 					{
 						ix.i++;
-						continue;
+						continue ;
 					}
 					else
-						break;
+						break ;
 				}
 				ix.j++;
 			}
@@ -130,10 +130,10 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 					if (args[ix.i + 1] != NULL)
 					{
 						ix.i++;
-						continue;
+						continue ;
 					}
 					else
-						break;
+						break ;
 				}
 				ix.j++;
 			}

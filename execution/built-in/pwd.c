@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 22:49:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 01:11:11 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 01:43:22 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_pwd(t_list_env *env)
 				|| ft_strcmpp(env->variable, "OLD_PWD") == 0)
 			{
 				buffer = env->val;
-				break;
+				break ;
 			}
 			env = env->next;
 		}

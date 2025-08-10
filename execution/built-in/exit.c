@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 01:09:55 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 01:39:24 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_atoi(char *nbr, int count_cmd, t_garbage **garb)
 	if (nbr[i] == '-' || nbr[i] == '+')
 	{
 		if (nbr[i] == '-')
-			sign = -1;	
+			sign = -1;
 		i++;
 	}
 	while (nbr[i] != '\0' && nbr[i] >= '0' && nbr[i] <= '9')
@@ -59,7 +59,7 @@ int	chck_nb(char *str)
 			{
 				while ((str[i] != '\0' && str[i] >= '0' && str[i] <= '9'))
 					i++;
-				while(str[i] == ' ' || str[i] == '\t')
+				while (str[i] == ' ' || str[i] == '\t')
 					i++;
 				if (ft_strcmpp(&str[i], "") == 0)
 					return (0);
@@ -80,7 +80,7 @@ int	chck_nb(char *str)
 			{
 				while ((str[i] != '\0' && str[i] >= '0' && str[i] <= '9'))
 					i++;
-				while(str[i] == ' ' || str[i] == '\t')
+				while (str[i] == ' ' || str[i] == '\t')
 					i++;
 				if (ft_strcmpp(&str[i], "") == 0)
 					return (0);

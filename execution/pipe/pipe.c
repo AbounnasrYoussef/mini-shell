@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 01:01:19 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 01:49:41 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip
 				(ft_free_all(*garb), exit(127));
 			}
 		}
-
 	}
 	else
 		(ft_free_all(*garb), exit(0));
@@ -121,7 +120,7 @@ void	ft_plusieur_cmd(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 		if (inf_pip->pid == -1)
 		{
 			ft_exit_status(1, 1);
-			return(ft_error_fork());
+			return (ft_error_fork());
 		}
 		else
 			ft_child(data, env, inf_pip, garb);
@@ -145,14 +144,13 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 		&& is_built_in(data->cmd[0]) == 0)
 	{
 		ft_one_cmd(data, env, count_cmd(data), garb);
-		return;
+		return ;
 	}
-		
 	else if (count_cmd(data) == 1 && ft_strlen_argc(data->cmd) != 1
 		&& is_built_in(data->cmd[0]) == 0)
 	{
 		ft_one_cmd(data, env, count_cmd(data), garb);
-		return;
+		return ;
 	}
 	else
 		ft_plusieur_cmd(data, env, &inf_pip, garb);
