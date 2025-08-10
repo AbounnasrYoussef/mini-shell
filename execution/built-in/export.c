@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 01:03:01 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 01:36:04 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,12 @@ void	export_el(t_list_env **env, char *args, t_export indx, t_garbage **garb)
 
 void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 {
+	ix.error = 0;
 	while (args[ix.i] != NULL)
 	{
 		if (ft_strcmpp(args[ix.i], "") == 0)
 		{
-			error_export(args, ix.i);
+			error_export(args, ix.i, &(ix.error));
 			if (args[ix.i + 1] != NULL)
 			{
 				ix.i++;
@@ -95,7 +96,7 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 		{
 			if (!(args[ix.i][0] == '_' || ft_isalphaa(args[ix.i][0])))
 			{
-				1 && (error_export(args, ix.i), ix.c = 1);
+				1 && (error_export(args, ix.i, &(ix.error)), ix.c = 1);
 				if (args[ix.i + 1] != NULL)
 				{
 					ix.i++;
@@ -110,7 +111,7 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 				if (!(args[ix.i][ix.j] == '_' || args[ix.i][ix.j] == '='
 					|| ft_isalnumm(args[ix.i][ix.j])))
 				{
-					1 && (error_export(args, ix.i), ix.c = 1);
+					1 && (error_export(args, ix.i, &(ix.error)), ix.c = 1);
 					if (args[ix.i + 1] != NULL)
 					{
 						ix.i++;
@@ -125,7 +126,7 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 			{
 				if (args[ix.i][ix.j + 1] != '=')
 				{
-					1 && (error_export(args, ix.i), ix.c = 1);
+					1 && (error_export(args, ix.i, &(ix.error)), ix.c = 1);
 					if (args[ix.i + 1] != NULL)
 					{
 						ix.i++;
@@ -144,6 +145,8 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 		}
 		ix.i++;
 	}
+	if (ix.error == 0)
+		ft_exit_status(0, 1);
 }
 
 t_list_env	*ex_sort(t_list_env *list_env, char *tmp)
@@ -192,6 +195,5 @@ void	ft_export(t_list_env *list_env, char **args, t_garbage **garb)
 	else
 	{
 		check_args(&list_env, index, args, garb);
-		ft_exit_status(0, 1);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:01:21 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 17:09:18 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 01:34:13 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ void	chng_el(t_list_env **env, t_export indx, t_garbage **garb)
 	}
 }
 
-void	error_export(char **args, int i)
+void	error_export(char **args, int i, int *error)
 {
+	*error = 1;
 	write(2, "export: `", 9);
 	write(2, args[i], ft_strlenn(args[i]));
 	write(2, "' not a valid identifier\n", 25);

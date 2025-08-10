@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 00:24:35 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 01:34:46 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_export
 	int		j;
 	int		c;
 	char	**arg_ex;
+	int		error;
 }	t_export;
 
 typedef struct s_info_pipe
@@ -96,7 +97,7 @@ void		ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb);
 char		*ft_cherch_home(t_list_env *env);
 int			verif_exist(t_list_env **list_env, char *arg);
 void		chng_el(t_list_env **list_env, t_export indx, t_garbage **garb);
-void		error_export(char **args, int i);
+void		error_export(char **args, int i, int *error);
 void		ft_redirection(t_exec *data, t_garbage **garb);
 int			ft_count_env(t_list_env *env);
 char		**tab_env(t_list_env *env, t_garbage **garb);
