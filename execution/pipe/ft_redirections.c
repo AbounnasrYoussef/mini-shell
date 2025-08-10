@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:10:23 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 19:12:19 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 21:40:30 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_redr(int *fd, char *file_name, struct stat info)
 {
-	if (*fd == -1 && access(file_name, X_OK) == -1)
+	if (*fd == -1 && access(file_name, X_OK) == -1 && errno == 13) 
 	{
 		perror("access");
 		exit(1);

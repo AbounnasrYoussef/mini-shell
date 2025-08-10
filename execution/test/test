@@ -1,4 +1,17 @@
 
+#============================= check leaks
+
+# while true;do lsof -c minishell && sleep 3 && clear ;done
+
+#ps aux | grep a.out
+
+#====== pour check fd leaks
+#bash-3.2$ ps aux | grep minishell
+#arahhab          76805   0.0  0.0  4268328    720 s007  S+   10:35PM   0:00.00 grep minishell
+#arahhab          76553   0.0  0.1 21479157300   4992 s004  S+   10:34PM   0:00.23 ./minishell
+
+#==================================
+
 #/// exit 
 
 #bash-3.2$ exit cfgas1342
@@ -847,26 +860,53 @@
 #bash-3.2$ echo '''"$HOME"'''
 #"$HOME"
 
-============================= check leaks
+#bash-3.2$ ..
+#bash: ..: command not found
+#bash-3.2$ $?
+#bash: 127: command not found
+#bash-3.2$ 
 
- while true;do lsof -c minishell && sleep 3 && clear ;done
 
-ps aux | grep a.out
+#minishell$ parsing/expanding/dollar.c
+#parsing/expanding/dollar.c: command not found
 
-====== pour check fd leaks
-bash-3.2$ ps aux | grep minishell
-arahhab          76805   0.0  0.0  4268328    720 s007  S+   10:35PM   0:00.00 grep minishell
-arahhab          76553   0.0  0.1 21479157300   4992 s004  S+   10:34PM   0:00.23 ./minishell
+#minishell$ exit | exit 234 234 23 423 5 345  45 6
+#exit: too many arguments
+#minishell$ $?
+#0: command not found
 
-===== kill zombie process
+
+#========================================
+#bash-3.2$ < file1 > file2 < file3 > file4 < file5
+#bash: file1: No such file or directory ===> (print file)
+#bash-3.2$
+
+
+#bash-3.2$ env
+#PATH=/mnt/homes/arahhab/Library/Python/3.8/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.
+#PWD=/mnt/homes/arahhab/Desktop/minishell2
+#SHLVL=1
+#_=/usr/bin/env
+#bash-3.2$ unset PATH
+#bash-3.2$ ls
+#bash: ls: No such file or directory
+#bash-3.2$ env
+#bash: env: No such file or directory
+#bash-3.2$ %?
+#bash: fg: %?: no such job
+#bash-3.2$ env
+#bash: env: No such file or directory
+#bash-3.2$ $?
+#bash: 127: No such file or directory
+#bash-3.2$ 
+
+# minishell$ l
+#l: command not found
+#minishell$ ^D%                                                                  
+#➜  minishell2 git:(execution) ✗ echo $? 
+#0
 
 ====== signals
  top
  \
  $?
-
- minishell$ l
-l: command not found
-minishell$ ^D%                                                                  
-➜  minishell2 git:(execution) ✗ echo $? 
-0

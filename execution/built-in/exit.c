@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 18:05:10 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 20:56:59 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ft_exit(t_exit i_exi, char **str, t_garbage **garb)
 			{
 				if (i_exi.c_cmd == 1)
 					printf("exit\n");
-				exit(ft_exit_status(0, 1));
+				exit(ft_exit_status(0, 0));
 			}
 			else if (ft_strcmpp(str[1], "") == 0)
 				error_exit(str[1], i_exi.c_cmd, garb);

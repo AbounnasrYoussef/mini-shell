@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 18:09:22 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 01:49:52 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 21:24:14 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,14 @@ void	ft_error_pipe2(t_exec *data, t_info_pipe inf_pip, t_garbage **garb)
 {
 	if (S_ISDIR((inf_pip.info).st_mode))
 	{
-		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
-		write(2, ": is a directory \n", 18);
-		(ft_free_all(*garb), exit(126));
+		if (ft_strcmpp(data->cmd[0], "..") != 0)
+		{
+			write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
+			write(2, ": is a directory \n", 18);
+			(ft_free_all(*garb), exit(126));
+		}
+		else if (ft_strcmpp(data->cmd[0], "..") == 0)
+			error_cherch_path(data->cmd[0], garb);
 	}
 	else if (errno == 20)
 	{

@@ -173,3 +173,10 @@ zsh: command not found: 2
 
 bash-3.2$  | ls 
 bash: syntax error near unexpected token `|'
+
+(check expanding heredoc)
+➜  minishell2 git:(execution) ✗ ./minishell 
+minishell$ $?$?$?$USER
+000arahhab: command not found
+minishell$ cat <<f
+> $?$?$?$USER

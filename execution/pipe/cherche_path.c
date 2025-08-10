@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 01:46:40 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 21:30:00 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	*cherch_path2(t_exec *data, t_list_env **env, t_inf_cher_path inf_path
 	int		i;
 
 	i = 0;
+	(void)env;
 	path_cmd = NULL;
 	paths = ft_splitt(inf_path.path, ':', garb);
 	while (paths && paths[i] && (paths[i] != NULL))
@@ -33,9 +34,17 @@ char	*cherch_path2(t_exec *data, t_list_env **env, t_inf_cher_path inf_path
 		}
 		i++;
 	}
-	if (path_cmd == NULL && ft_built_in(data, env, inf_path.c_cmd, garb) == -1)
-		error_cherch_path(data->cmd[0], garb);
-	ft_exit_status(0, 1);
+	if (path_cmd == NULL && is_built_in(data->cmd[0]) == -1)
+	{
+		if (access(paths[i], X_OK) != 0 && errno == 13)
+		{
+			write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
+			write(2, ": Permission denied\n", 20);
+			(ft_free_all(*garb), exit(126));
+		}
+		else
+			error_cherch_path(data->cmd[0], garb);
+	}
 	return (path_cmd);
 }
 
