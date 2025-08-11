@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/11 15:31:24 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/11 19:12:40 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*expand_token_double_quotes(char *value,
 		{
 			while (value[i] == '$')
 				i++;
+			if (value[i] == '\0')
+				return (value);
 			if (value[i] == '?')
 			{
 				char *exit_str = ft_itoa(exit_code, garb);
@@ -200,9 +202,9 @@ static int	should_expand(t_token *curr, t_parsing_context ctx)
 static char	*expand_value(t_token *curr, t_expand_ctx *ctx1,
 		t_parsing_context ctx)
 {
+	
 	if (ctx.quoted_flag == 1)
 	{
-		// printf("youssef");
 		return (expand_token_double_quotes(
 			curr->value, ctx1->exit_code, ctx1->env, ctx1->garb));
 		
@@ -218,18 +220,34 @@ void	expand_all_tokens(t_token **tokens, int exit_code,
 	t_token			*curr;
 	t_expand_ctx	ctx1;
 
+	t_token			*prev;
+	t_token			*new_tokens;
+
 	curr = *tokens;
 	ctx1.exit_code = exit_code;
 	ctx1.env = env;
 	ctx1.garb = ctx.garb;
 	while (curr)
 	{
+		// printf("%s\n", curr->value);
 		if (!should_expand(curr, ctx))
 		{
 			curr = curr->next;
 			continue ;
 		}
 		curr->value = expand_value(curr, &ctx1, ctx);
+		if (ctx.quoted_flag == 0) // pas dans quotes → on split
+		{
+			new_tokens = split_tokens_by_space(curr->value, ctx1.garb);
+			replace_token(tokens, curr, new_tokens);
+			if (new_tokens)
+			{
+				prev = get_last_token(new_tokens);
+				curr = prev->next;
+				continue ;
+			}
+		}
+		prev = curr;
 		curr = curr->next;
 	}
 }

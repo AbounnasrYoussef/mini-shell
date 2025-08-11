@@ -42,7 +42,7 @@ minishell$ $"HOME"
 ---- Commande 1 ----
 cmd[0] = '/mnt/homes/arahhab'
 
-minishell$ $""
+✅minishell$ $""
 ---- Commande 1 ----
 cmd[0] = '$'
 
@@ -105,7 +105,7 @@ minishell$ echo "$a" $a $a$a
 dada dada dadadada
 minishell$ echo "$a     '$a'" $a $a$a
 
-""$
+✅""$
 =================================================================
 ==28408==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000126b2 at pc 0x00010465a04f bp 0x7ffeeb5b2db0 sp 0x7ffeeb5b2da8
 READ of size 1 at 0x6020000126b2 thread T0
