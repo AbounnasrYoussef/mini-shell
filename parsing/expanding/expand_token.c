@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:38:12 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/11 18:58:27 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/11 21:13:49 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static char	*expand_loop(char *value, t_expand_ctx *ctx, t_garbage **garb)
 	res = ft_strdup("", garb);
 	while (value[i])
 	{
+		
 		if (value[i] == '\'')
 			append_single_quote(value, &i, &res, garb);
 		else if (value[i] == '"')

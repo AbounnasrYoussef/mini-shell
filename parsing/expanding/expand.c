@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/11 19:12:40 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/11 21:48:36 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,7 @@ void	expand_all_tokens(t_token **tokens, int exit_code,
 	ctx1.exit_code = exit_code;
 	ctx1.env = env;
 	ctx1.garb = ctx.garb;
+	printf("%d\n\n\n", ctx.quoted_flag);
 	while (curr)
 	{
 		// printf("%s\n", curr->value);
@@ -247,7 +248,6 @@ void	expand_all_tokens(t_token **tokens, int exit_code,
 				continue ;
 			}
 		}
-		prev = curr;
 		curr = curr->next;
 	}
 }

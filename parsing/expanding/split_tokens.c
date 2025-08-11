@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:37:21 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/09 10:51:48 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/11 21:40:21 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_token *split_tokens_by_space(char *str, t_garbage **garb)
 
     if (!str)
         return NULL;
-
     words = ft_split(str, ' ', garb);
     if (!words)
         return NULL;
