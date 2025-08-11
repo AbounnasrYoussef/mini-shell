@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/10 16:32:31 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/11 15:31:24 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char	*expand_token_double_quotes(char *value,
 	{
 		if (value[i] == '$')
 		{
-			i++;
+			while (value[i] == '$')
+				i++;
 			if (value[i] == '?')
 			{
 				char *exit_str = ft_itoa(exit_code, garb);
@@ -146,26 +147,89 @@ char	*expand_token_double_quotes(char *value,
 // }
 
 
-void	expand_all_tokens(t_token **tokens, int exit_code
-		, t_list_env *env, t_parsing_context ctx)
+// void	expand_all_tokens(t_token **tokens, int exit_code
+// 		, t_list_env *env, t_parsing_context ctx)
+// {
+// 	t_token			*curr;
+// 	t_token			*prev;
+// 	t_expand_ctx	ctx1;
+
+// 	curr = *tokens;
+// 	prev = NULL;
+// 	ctx1.exit_code = exit_code;
+// 	ctx1.env = env;
+// 	ctx1.garb = ctx.garb;
+	
+// 	while (curr)
+// 	{
+// 		// curr = process_token(curr, tokens, &prev, &ctx1, ctx);
+// 		if (ctx.quoted_flag == 1){
+// 			curr->value = expand_token_double_quotes(curr->value, ctx1.exit_code, ctx1.env, ctx1.garb);
+// 		}
+// 		else
+// 		{
+			
+// 		}
+// 		curr =  curr->next;
+// 	}
+// }
+
+static int	should_expand(t_token *curr, t_parsing_context ctx)
+{
+	if (ctx.quoted_flag == 2) 
+	{
+		// printf("yyyy\n");
+		return (0);
+	}// simple quotes
+	if (ctx.quoted_flag == 1) // double quotes
+	{
+		// printf("nnn\n");
+		return (1);
+		
+	}
+	if (curr->value[0] == '$' && curr->value[1] == '"')
+	{
+		// printf("gggg\n");
+		return (0);
+		
+	}
+	return (1);
+}
+
+
+static char	*expand_value(t_token *curr, t_expand_ctx *ctx1,
+		t_parsing_context ctx)
+{
+	if (ctx.quoted_flag == 1)
+	{
+		// printf("youssef");
+		return (expand_token_double_quotes(
+			curr->value, ctx1->exit_code, ctx1->env, ctx1->garb));
+		
+	}
+	return (expand_token(
+		curr->value, ctx1->exit_code, ctx1->env, ctx1->garb));
+}
+
+
+void	expand_all_tokens(t_token **tokens, int exit_code,
+		t_list_env *env, t_parsing_context ctx)
 {
 	t_token			*curr;
-	t_token			*prev;
 	t_expand_ctx	ctx1;
 
 	curr = *tokens;
-	prev = NULL;
 	ctx1.exit_code = exit_code;
 	ctx1.env = env;
 	ctx1.garb = ctx.garb;
-	
 	while (curr)
 	{
-		// curr = process_token(curr, tokens, &prev, &ctx1, ctx);
-		if (ctx.quoted_flag == 1){
-			curr->value = expand_token_double_quotes(curr->value, ctx1.exit_code, ctx1.env, ctx1.garb);
+		if (!should_expand(curr, ctx))
+		{
+			curr = curr->next;
+			continue ;
 		}
-		curr =  curr->next;
+		curr->value = expand_value(curr, &ctx1, ctx);
+		curr = curr->next;
 	}
-	// print_tokens(curr);
 }

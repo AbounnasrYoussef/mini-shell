@@ -15,7 +15,7 @@ minishell$ cat << file
 file
 
 
-minishell$ echo $"$HOME"
+✅minishell$ echo $"$HOME"
 $$HOME
 
 minishell$ echo $HO'ME'
@@ -93,3 +93,20 @@ bash-3.2$ | hdsh
 bash: syntax error near unexpected token `|'
 bash-3.2$ 
 
+minishell$ << $""
+=================================================================
+==28275==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000075d2 at pc 0x0001082a804f bp 0x7ffee7964db0 sp 0x7ffee7964da8
+READ of size 1 at 0x6020000075d2 thread T0
+    #0 0x1082a804e in expand_token_double_quotes expand.c:22
+    #1 0x1082a9513 in expand_value expand.c:206
+
+    export a=dada
+minishell$ echo "$a" $a $a$a
+dada dada dadadada
+minishell$ echo "$a     '$a'" $a $a$a
+
+""$
+=================================================================
+==28408==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6020000126b2 at pc 0x00010465a04f bp 0x7ffeeb5b2db0 sp 0x7ffeeb5b2da8
+READ of size 1 at 0x6020000126b2 thread T0
+    #0 0x10465a04e in expand_token_double_quotes expand.c:22

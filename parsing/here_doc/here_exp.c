@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 13:26:51 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/10 13:27:21 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/11 14:50:54 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	handle_dollar(char *line, int *i, char **tmp, t_expand_ctx *ctx)
 {
 	if (line[*i] == '?')
 	{
-		char *exit_str = ft_itoa(g_exit_status, ctx->garb);
+		char *exit_str = ft_itoa(ft_exit_status(0 , 0), ctx->garb);
 		*tmp = ft_strjoin(*tmp, exit_str, ctx->garb);
 		(*i)++;
 		return (0);
