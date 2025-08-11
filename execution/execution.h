@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/11 01:10:52 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/11 02:04:14 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,4 +130,5 @@ void		norm_exp_el_h(char *args, t_export *indx, t_garbage **garb);
 int			check_exist_pwd(t_list_env *env);
 void		ft_change_oldpwd(t_list_env **env);
 void		norm_ft_exec_child(char *cmd, t_garbage **garb);
+int			norm_check_args2(char **args, t_export *ix);
 #endif

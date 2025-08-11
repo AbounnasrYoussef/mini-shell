@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 00:44:30 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/11 01:30:08 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/11 02:04:59 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,21 @@ void	norm_exp_el_h(char *args, t_export *indx, t_garbage **garb)
 	}
 	(*indx).i = (*indx).i - (*indx).j;
 	(*indx).arg_ex[1] = ft_malloc(garb, ((*indx).j + 1));
+}
+
+int	norm_check_args2(char **args, t_export *ix)
+{
+	if (norm_check_arg(args, ix, 0) == 0)
+		return (0);
+	else if (norm_check_arg(args, ix, 0) == 1)
+		return (1);
+	if (norm_check_arg(args, ix, 1) == 0)
+		return (0);
+	else if (norm_check_arg(args, ix, 1) == 1)
+		return (1);
+	if (norm_check_arg2(args, ix) == 0)
+		return (0);
+	else if (norm_check_arg2(args, ix) == 1)
+		return (1);
+	return (252525);
 }
