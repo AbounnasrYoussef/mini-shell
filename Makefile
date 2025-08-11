@@ -50,7 +50,8 @@ SRC = minishell.c  signals.c\
 		execution/built-in/unset.c\
 		execution/utils/ft_memcpy.c\
 		execution/built-in/export.c\
-		execution/built-in/utils_export.c\
+		execution/built-in/utils_export1.c\
+		execution/built-in/utils_export2.c\
 		execution/utils/ft_split.c\
 		execution/utils/utili_1.c\
 		execution/pipe/pipe.c\

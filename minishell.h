@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/07 16:55:54 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/11 00:38:22 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,14 +160,6 @@ int     is_operator(char c);
 int     redirection(char c);
 void    space_skip(const char *line , int *i);
 size_t  ft_strlen(const char *s);
-
-
-
-//env
-t_list_env *ft_env(char **str);
-void	ft_lstadd_back(t_list_env **lst, t_list_env *new);
-t_list_env	*ft_lstnew(void *variable, void *val);
-char	**i_split(char const *s, char c);
 
 //signals 
 void	setup_signals(void);

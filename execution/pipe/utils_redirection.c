@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 16:36:12 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 19:08:37 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 23:13:58 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,3 @@ void	ft_herdoc(int *fd)
 	dup2(*fd, STDIN_FILENO);
 	close(*fd);
 }
-

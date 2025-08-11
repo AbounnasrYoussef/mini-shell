@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 18:09:22 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 21:24:14 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/11 00:43:13 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,23 @@ void	ft_wait_child(t_info_pipe *inf_pip)
 	{
 		wait(NULL);
 		(inf_pip->j)++;
+	}
+}
+
+void	norm_ft_exec_child(char *cmd, t_garbage **garb)
+{
+	if (!cmd)
+		exit(1);
+	if (errno == 13)
+	{
+		write(2, cmd, ft_strlenn(cmd));
+		write(2, ": Permission denied\n", 20);
+		(ft_free_all(*garb), exit(126));
+	}
+	else
+	{
+		write(2, cmd, ft_strlenn(cmd));
+		write(2, ": No such file or directory\n", 28);
+		(ft_free_all(*garb), exit(127));
 	}
 }

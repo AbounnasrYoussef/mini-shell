@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 12:59:18 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 01:43:46 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/11 00:37:00 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,23 @@ void	ft_error_unset(char *arg, int *error)
 	ft_exit_status(1, 1);
 }
 
+void	norm_ft_unset(char **args, int *i, int *j, int *error)
+{
+	while (args[*i][*j] != '\0')
+	{
+		if (!(args[*i][*j] == '_'
+			|| (args[*i][*j] >= 'a' && args[*i][*j] <= 'z')
+			|| (args[*i][*j] >= 'A' && args[*i][*j] <= 'Z')
+			|| (args[*i][*j] >= '0' && args[*i][*j] <= '9'))
+			|| (args[*i][0] >= '0' && args[*i][0] <= '9'))
+		{
+			ft_error_unset(args[*i], error);
+			break ;
+		}
+		j++;
+	}
+}
+
 void	ft_unset(t_list_env **list_env, char **args)
 {
 	int	i;
@@ -62,18 +79,7 @@ void	ft_unset(t_list_env **list_env, char **args)
 		}
 		if (ft_strcmpp(args[i], "_") == 0)
 			break ;
-		while (args[i][j] != '\0')
-		{
-			if (!(args[i][j] == '_' || (args[i][j] >= 'a' && args[i][j] <= 'z')
-				|| (args[i][j] >= 'A' && args[i][j] <= 'Z')
-				|| (args[i][j] >= '0' && args[i][j] <= '9'))
-				|| (args[i][0] >= '0' && args[i][0] <= '9'))
-			{
-				ft_error_unset(args[i], &error);
-				break ;
-			}
-			j++;
-		}
+		norm_ft_unset(args, &i, &j, &error);
 		ft_supp_arg(list_env, args[i]);
 		j = 0;
 		i++;

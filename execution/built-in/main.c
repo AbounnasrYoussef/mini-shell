@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 01:43:02 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/11 00:41:51 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,12 @@ int	help_built(t_exec *data, t_list_env **env
 			return (error_env(data->cmd[1]), 0);
 	}
 	else if (ft_strcmpp(data->cmd[0], "unset") == 0)
-	{
-		ft_unset(env, data->cmd);
-		if (check_exist_pwd(*env) == 1)
-			ft_change_oldpwd(env);
-		return (0);
-	}
+		return (norm_help_built(env, data->cmd));
 	return (-1);
 }
 
-int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
+int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd
+		, t_garbage **garb)
 {
 	int		len;
 	t_exit	inf_exit;

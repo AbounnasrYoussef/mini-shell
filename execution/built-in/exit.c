@@ -6,11 +6,23 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 20:56:59 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 23:06:17 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
+
+void	norm_atoi(char *nbr, int *i, int *sign)
+{
+	while (nbr && (nbr[*i] == ' ' || nbr[*i] == '\t'))
+		(*i)++;
+	if (nbr[*i] == '-' || nbr[*i] == '+')
+	{
+		if (nbr[*i] == '-')
+			*sign = -1;
+		(*i)++;
+	}
+}
 
 int	ft_atoi(char *nbr, int count_cmd, t_garbage **garb)
 {
@@ -21,14 +33,7 @@ int	ft_atoi(char *nbr, int count_cmd, t_garbage **garb)
 	i = 0;
 	sign = 1;
 	nombre = 0;
-	while (nbr && (nbr[i] == ' ' || nbr[i] == '\t'))
-		i++;
-	if (nbr[i] == '-' || nbr[i] == '+')
-	{
-		if (nbr[i] == '-')
-			sign = -1;
-		i++;
-	}
+	norm_atoi(nbr, &i, &sign);
 	while (nbr[i] != '\0' && nbr[i] >= '0' && nbr[i] <= '9')
 	{
 		nombre = nombre + nbr[i] - '0';
@@ -51,48 +56,25 @@ int	chck_nb(char *str)
 	while (str && (str[i] == ' ' || str[i] == '\t'))
 		i++;
 	if (str && (str[i] == '-' || str[i] == '+'))
-	{
 		i++;
-		while (str[i] != '\0')
-		{
-			if ((str[i] >= '0' && str[i] <= '9'))
-			{
-				while ((str[i] != '\0' && str[i] >= '0' && str[i] <= '9'))
-					i++;
-				while (str[i] == ' ' || str[i] == '\t')
-					i++;
-				if (ft_strcmpp(&str[i], "") == 0)
-					return (0);
-				else
-					return (-1);
-			}
-			else
-				return (-1);
-			i++;
-		}
-		return (0);
-	}
-	else
+	while (str && str[i] != '\0')
 	{
-		while (str && str[i] != '\0')
+		if ((str[i] >= '0' && str[i] <= '9'))
 		{
-			if ((str[i] >= '0' && str[i] <= '9'))
-			{
-				while ((str[i] != '\0' && str[i] >= '0' && str[i] <= '9'))
-					i++;
-				while (str[i] == ' ' || str[i] == '\t')
-					i++;
-				if (ft_strcmpp(&str[i], "") == 0)
-					return (0);
-				else
-					return (-1);
-			}
+			while ((str[i] != '\0' && str[i] >= '0' && str[i] <= '9'))
+				i++;
+			while (str[i] == ' ' || str[i] == '\t')
+				i++;
+			if (ft_strcmpp(&str[i], "") == 0)
+				return (0);
 			else
 				return (-1);
-			i++;
 		}
-		return (0);
+		else
+			return (-1);
+		i++;
 	}
+	return (0);
 }
 
 void	ft_exit(t_exit i_exi, char **str, t_garbage **garb)

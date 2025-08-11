@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/10 22:51:00 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/11 00:39:39 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	ft_read_loop(char **envp, t_exec **data)
 	if (envp[0] == NULL)
 	{
 		env = NULL;
-		ft_lstadd_backk(&env, ft_lstneww("OLDPWD", NULL, &garb));
-		ft_lstadd_backk(&env, ft_lstneww("PATH", "/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", &garb));
-		ft_lstadd_backk(&env, ft_lstneww("PWD", getcwd(NULL, 0),&garb));
-		ft_lstadd_backk(&env, ft_lstneww("_", "/usr/bin/env", &garb));
+		lst_add_back(&env, ft_lstnew("OLDPWD", NULL, &garb));
+		lst_add_back(&env, ft_lstnew("PATH", "/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.", &garb));
+		lst_add_back(&env, ft_lstnew("PWD", getcwd(NULL, 0),&garb));
+		lst_add_back(&env, ft_lstnew("_", "/usr/bin/env", &garb));
 	}
 	setup_signals();
 	while (1)

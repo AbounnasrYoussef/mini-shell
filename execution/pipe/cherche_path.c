@@ -6,11 +6,23 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 21:30:00 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 23:22:53 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
+
+void	norm_cherch_path2(char **paths, char *cmd, t_garbage **garb, int i)
+{
+	if (access(paths[i], X_OK) != 0 && errno == 13)
+	{
+		write(2, cmd, ft_strlenn(cmd));
+		write(2, ": Permission denied\n", 20);
+		(ft_free_all(*garb), exit(126));
+	}
+	else
+		error_cherch_path(cmd, garb);
+}
 
 char	*cherch_path2(t_exec *data, t_list_env **env, t_inf_cher_path inf_path
 	, t_garbage **garb)
@@ -35,16 +47,7 @@ char	*cherch_path2(t_exec *data, t_list_env **env, t_inf_cher_path inf_path
 		i++;
 	}
 	if (path_cmd == NULL && is_built_in(data->cmd[0]) == -1)
-	{
-		if (access(paths[i], X_OK) != 0 && errno == 13)
-		{
-			write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
-			write(2, ": Permission denied\n", 20);
-			(ft_free_all(*garb), exit(126));
-		}
-		else
-			error_cherch_path(data->cmd[0], garb);
-	}
+		norm_cherch_path2(paths, data->cmd[0], garb, i);
 	return (path_cmd);
 }
 
