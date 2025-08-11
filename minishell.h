@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/09 10:55:31 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:43:14 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ typedef struct s_garbage
     struct s_garbage *next;  // hada next l prochaine element dial dik la list
 }   t_garbage;
 
+typedef struct s_parsing_context {
+	const char *line;
+	int *index;
+	int quoted_flag;
+	t_garbage **garb;
+	
+} t_parsing_context;
 
 typedef struct s_list_env
 {
@@ -105,12 +112,11 @@ int	error_redir(char *str, int *i);
 
 
 //tokens
-t_token *tokens(const char *line, t_garbage **garb);
+t_token *tokens(const char *line, t_garbage **garb, t_parsing_context	*ctx);
 void handel_quote(const char *line , int  *i , t_token **token ,t_garbage **garb);
 void handel_double_operator(const char *line ,int *i , t_token **tokens, t_garbage **garb);
 void handle_single_operator(const char *line, int *i, t_token **tokens , t_garbage **garb);
-void handle_word(const char *line, int *i, t_token **tokens, t_garbage **garb);
-//tokens//utils
+void	handle_word(t_parsing_context *ctx, t_token **tokens);//tokens//utils
 void add_token(t_token **list, t_token *new_tok);
 t_token	*new_token_0(char *value, type_token type, t_garbage **garb);
 type_token get_token_type(char *str);
@@ -119,7 +125,7 @@ t_token	*new_token(char *value, type_token type,int i, t_garbage **garb);
 
 
 //expanding
-void expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, t_garbage **garb);
+void expand_all_tokens(t_token **tokens, int exit_code, t_list_env *env, t_parsing_context ctx);
 char	*expand_token(char *value, int exit_code, t_list_env *env, t_garbage **garb);
 char	*expand_dollar(char *value, int *i, t_expand_ctx *ctx);
 void	append_double_quote(const char *val, int *i, char **res, t_expand_ctx ctx);
@@ -188,5 +194,7 @@ int	append_raw_dollar(char **tmp, char c, t_garbage **garb);
 int	append_variable(char *line, t_list_env *env,t_garbage **garb, char **tmp);
 int	append_exit_status(char **tmp, t_garbage **garb);
 int	is_valid_var_char(char c);
+
+void print_tokens(t_token *tokens);
 
 #endif

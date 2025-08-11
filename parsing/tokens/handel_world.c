@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:38:19 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/09 12:21:30 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:57:49 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,70 +28,60 @@ t_token	*new_token(char *value, type_token type, int i, t_garbage **garb)
 	return (tok);
 }
 
-void	handle_quoted_part(const char *line, int *i,
-			char **res, int *quoted_flag, t_garbage **garb)
+static void	handle_quoted_part(t_parsing_context *ctx
+		, char **res, int *quoted_flag)
 {
 	char	quote;
 	int		start;
 	char	*substr;
 
-	quote = line[*i];
-	(*i)++;
-	start = *i;
-
-	// On lit jusqu’à la quote fermante ou fin de ligne
-	while (line[*i] && line[*i] != quote)
-		(*i)++;
-
-	// On extrait la partie entre quotes
-	substr = ft_substr(line, start, *i - start, garb);
-	*res = ft_strjoin(*res, substr, garb);
-
-	// On définit le flag selon le type de quote
+	
+	quote = ctx->line[*ctx->index];
+	(*ctx->index)++;
+	start = *ctx->index;
+	while (ctx->line[*ctx->index] && ctx->line[*ctx->index] != quote)
+		(*ctx->index)++;
+	substr = ft_substr(ctx->line, start, *ctx->index - start, ctx->garb);
+	*res = ft_strjoin(*res, substr, ctx->garb);
 	if (quote == '\'')
-		*quoted_flag = 2;  // 2 = simple quotes, aucune expansion plus tard
+		*quoted_flag = 2;
 	else if (quote == '"')
-		*quoted_flag = 1;  // 1 = double quotes, expansion possible
-
-	// Si on est bien sur une quote fermante, on avance
-	if (line[*i] == quote)
-		(*i)++;
+		*quoted_flag = 1;
+	if (ctx->line[*ctx->index] == quote)
+		(*ctx->index)++;
 }
+static void	handle_non_quoted_part(t_parsing_context *ctx, char **res)
+{
+	int		start;
+	char	*word;
 
-void	handle_word(const char *line, int *i,
-			t_token **tokens, t_garbage **garb)
+	start = *ctx->index;
+	while (ctx->line[*ctx->index] && !skip_space(ctx->line[*ctx->index])
+		&& !is_operator(ctx->line[*ctx->index])
+		&& ctx->line[*ctx->index] != '\''
+		&& ctx->line[*ctx->index] != '"')
+		(*ctx->index)++;
+	word = ft_substr(ctx->line, start, *ctx->index - start, ctx->garb);
+	*res = ft_strjoin(*res, word, ctx->garb);
+}
+void	handle_word(t_parsing_context *ctx, t_token **tokens)
 {
 	char	*res;
-	char	*word;
-	int		start;
-	int		quoted_flag;
-
-	quoted_flag = 0; // 0 = pas de quotes, expansion normale possible
-	res = ft_strdup("", garb);
-
-	while (line[*i] && !skip_space(line[*i]) && !is_operator(line[*i]))
+	
+	ctx->quoted_flag = 0;
+	res = ft_strdup("", ctx->garb);
+	while (ctx->line[*ctx->index] && !skip_space(ctx->line[*ctx->index])
+		&& !is_operator(ctx->line[*ctx->index]))
 	{
-		if (line[*i] == '\'' || line[*i] == '"')
-		{
-			// Gérer les quotes, concaténer dans res et set flag
-			handle_quoted_part(line, i, &res, &quoted_flag, garb);
-		}
+		if (ctx->line[*ctx->index] == '\'' || ctx->line[*ctx->index] == '"')
+			handle_quoted_part(ctx, &res, &ctx->quoted_flag);
 		else
-		{
-			// Partie normale hors quotes
-			start = *i;
-			while (line[*i] && !skip_space(line[*i])
-				&& !is_operator(line[*i])
-				&& line[*i] != '\'' && line[*i] != '"')
-				(*i)++;
-
-			word = ft_substr(line, start, *i - start, garb);
-			res = ft_strjoin(res, word, garb);
-		}
+			handle_non_quoted_part(ctx, &res);
 	}
-
 	if (res)
-		add_token(tokens, new_token(res, WORD, quoted_flag, garb));
+	{
+		add_token(tokens, new_token(res, WORD, ctx->quoted_flag, ctx->garb));
+	}
+	// print_tokens(*tokens);
 }
-
 

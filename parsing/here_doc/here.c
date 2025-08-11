@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:21:08 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/09 10:18:42 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/10 13:29:47 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ void process_heredocs(t_exec *exec, t_list_env *env, t_garbage **garb)
 		{
 			if (file->type == HERE_DOC)
 			{
-				// Si le délimiteur est entre quotes simples ou doubles => pas d'expansion
 				if (file->file_name[0] == '\'' || file->file_name[0] == '"')
 					expand = 0;
 				else

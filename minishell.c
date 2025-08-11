@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/06 20:20:44 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 15:59:31 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_read_loop(char **envp, t_exec **data)
 	t_token		*token;
 	int			last_exit_code = 0;
 	t_list_env *env;
+	t_parsing_context ctx;
 	
 	env = ft_envvv(envp, &garb);
 	if (envp[0] == NULL)
@@ -46,14 +47,13 @@ void	ft_read_loop(char **envp, t_exec **data)
 			free_exec_list(*data);
 			continue ;
 		}
-		token = tokens(line, &garb);
+		token = tokens(line, &garb, &ctx);
 		free(line);
 		if (!token)
 		{
 			continue ;
 		}
-
-		expand_all_tokens(&token, last_exit_code, env, &garb);
+		expand_all_tokens(&token, last_exit_code, env, ctx);
 		*data = parse_tokens_to_exec_list(token, &garb);
 		if (!*data)
 		{
