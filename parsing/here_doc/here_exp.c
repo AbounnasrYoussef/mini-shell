@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 13:26:51 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/12 16:44:33 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/12 16:53:56 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ static int	expand_dollar_in_heredoc(char *line, int *i,
 	(*i)++;
 	if (line[*i] == '?')
 	{
-		*(ctx->tmp) = ft_strjoin(*(ctx->tmp),
-				ft_itoa(ft_exit_status(0, 0), ctx->garb),
-				ctx->garb);
+		*(ctx->tmp) = ft_strjoin(*(ctx->tmp), ft_itoa(ft_exit_status(0, 0),
+					ctx->garb), ctx->garb);
 		(*i)++;
 	}
 	else if (is_valid_var_char(line[*i]))

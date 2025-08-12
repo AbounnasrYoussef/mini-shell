@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/12 16:45:24 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/12 16:49:48 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,15 @@ typedef struct s_expand_ctx_heredoc
 	t_garbage	**garb;
 	char		**tmp;
 }	t_expand_ctx_heredoc;
+
+typedef struct s_heredoc_ctx
+{
+	int			expand;
+	t_list_env	*env;
+	t_garbage	**garb;
+	int			fd;
+}	t_heredoc_ctx;
+
 
 // syntaxe_error
 int syntaxe_errors(char *args);
