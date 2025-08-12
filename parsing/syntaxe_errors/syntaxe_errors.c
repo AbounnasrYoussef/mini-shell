@@ -39,4 +39,3 @@ int	syntaxe_errors(char *args)
 	}
 	return (1);
 }
-

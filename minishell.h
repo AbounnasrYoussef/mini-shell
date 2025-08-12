@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/10 15:43:14 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/12 16:45:24 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,12 @@ typedef struct s_expand_ctx
 	char		**tmp;
 }	t_ctx;
 
-
+typedef struct s_expand_ctx_heredoc
+{
+	t_list_env	*env;
+	t_garbage	**garb;
+	char		**tmp;
+}	t_expand_ctx_heredoc;
 
 // syntaxe_error
 int syntaxe_errors(char *args);
@@ -184,7 +189,7 @@ void	handle_sigint(int sig);
 
 
 //heredoc
-void process_heredocs(t_exec *exec, t_list_env *env, t_garbage **garb);
+void process_heredocs(char *line ,t_exec *exec, t_list_env *env, t_garbage **garb);
 int	heredoc_expand(char *line, t_list_env *env, t_garbage **garb, char **res);
 int create_heredoc(char *delimiter, int expand, t_list_env *env, t_garbage **garb);
 
@@ -194,7 +199,8 @@ int	append_raw_dollar(char **tmp, char c, t_garbage **garb);
 int	append_variable(char *line, t_list_env *env,t_garbage **garb, char **tmp);
 int	append_exit_status(char **tmp, t_garbage **garb);
 int	is_valid_var_char(char c);
+int heredoc_expansion(char *line, t_list_env *env, t_garbage **garb, char **res);
+void	append_char(char **tmp, char c, t_garbage **garb);
 
-void print_tokens(t_token *tokens);
 
 #endif

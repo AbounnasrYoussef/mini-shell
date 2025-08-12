@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:44:25 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/10 15:54:18 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/12 16:33:34 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,6 @@ type_token	get_token_type(char *str)
 	return (WORD);
 }
 
-void print_tokens(t_token *tokens)
-{
-	while (tokens != NULL)
-	{
-		printf("%s----\n\n", tokens->value);
-		tokens = tokens->next;
-	}
-}
 t_token	*tokens(const char *line, t_garbage **garb, t_parsing_context	*ctx)
 {
 	t_token				*tokens;

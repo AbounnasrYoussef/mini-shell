@@ -43,23 +43,22 @@
 // 	return (1);
 // }
 
-
-static int print_err(void)
+static int	print_err(void)
 {
 	write(2, "minishell: syntax error\n", 25);
 	ft_exit_status(258, 1);
 	return (-1);
 }
 
-int error_pipe(char *line, int *i)
+int	error_pipe(char *line, int *i)
 {
-	int tmp;
+	int	tmp;
 
 	(*i)++;
 	while (line[*i] && (line[*i] == ' ' || line[*i] == '\t'))
 		(*i)++;
 	if (!line[*i] || line[*i] == '|')
-		return print_err();
+		return (print_err());
 	if (line[*i] == '<' || line[*i] == '>')
 	{
 		tmp = *i;
@@ -68,8 +67,9 @@ int error_pipe(char *line, int *i)
 		tmp++;
 		while (line[tmp] && (line[tmp] == ' ' || line[tmp] == '\t'))
 			tmp++;
-		if (!line[tmp] || line[tmp] == '|' || line[tmp] == '<' || line[tmp] == '>')
-			return print_err();
+		if (!line[tmp] || line[tmp] == '|' || line[tmp] == '<'
+			|| line[tmp] == '>')
+			return (print_err());
 	}
 	return (1);
 }

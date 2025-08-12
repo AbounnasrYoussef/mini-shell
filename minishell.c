@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/10 15:59:31 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/12 11:35:04 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	ft_read_loop(char **envp, t_exec **data)
 			continue ;
 		}
 		token = tokens(line, &garb, &ctx);
-		free(line);
 		if (!token)
 		{
+			free(line);
 			continue ;
 		}
 		expand_all_tokens(&token, last_exit_code, env, ctx);
@@ -62,7 +62,7 @@ void	ft_read_loop(char **envp, t_exec **data)
 		}
 
 		// 👇 heredoc traité ici AVANT exécution
-		process_heredocs(*data, env, &garb);
+		process_heredocs(line, *data, env, &garb);
 
 
 		// 🔍 Debug - Afficher les commandes et redirections
