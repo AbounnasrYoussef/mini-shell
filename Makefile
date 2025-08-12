@@ -68,10 +68,10 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) 
-	$(CC) $(OBJ) -o $(NAME) -lreadline -L/mnt/homes/yabounna/.brew/opt/readline/lib
+	$(CC) $(OBJ) -o $(NAME) -lreadline -L/mnt/homes/arahhab/.brew/Cellar/readline/8.3.1/lib
 
 $(OBJ): %.o : %.c minishell.h
-	$(CC) $(CFLAGS) -c -I/mnt/homes/yabounna/.brew/opt/readline/include $< -o $@
+	$(CC) $(CFLAGS) -c -I/mnt/homes/arahhab/.brew/Cellar/readline/8.3.1/include $< -o $@
 
 clean: 
 	rm -f $(OBJ)
