@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/12 18:32:14 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/12 20:37:30 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,15 +230,15 @@ static t_token	*handle_expanded_tokens(t_token **tokens, t_token *curr,
 {
 	(void) ctx;
 	t_token	*new_tokens;
-	t_token	*prev;
+	//t_token	*prev;
 
-	new_tokens = split_tokens_by_space(curr->value, ctx1->garb);
+	new_tokens = split_tokens_by_space(curr->value, ctx1->garb, curr->type);
 	replace_token(tokens, curr, new_tokens);
-	if (new_tokens)
-	{
-		prev = get_last_token(new_tokens);
-		return (prev->next);
-	}
+	// if (new_tokens)
+	// {
+	// 	prev = get_last_token(new_tokens);
+	// 	return (curr->next);
+	// }
 	return (curr->next);
 }
 

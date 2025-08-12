@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:37:21 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/12 10:15:25 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/12 20:27:20 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token	*get_last_token(t_token *tokens)
 	return (tokens);
 }
 
-t_token *split_tokens_by_space(char *str, t_garbage **garb)
+t_token *split_tokens_by_space(char *str, t_garbage **garb, type_token type)
 {
     t_token *head;
     t_token *new_token;
@@ -36,7 +36,7 @@ t_token *split_tokens_by_space(char *str, t_garbage **garb)
     {
         if (words[i][0] != '\0')
         {
-            new_token = new_token_0(words[i], WORD, garb);
+            new_token = new_token_0(words[i], type, garb);
             new_token->quoted = 0;
             add_token_back(&head, new_token);
         }
