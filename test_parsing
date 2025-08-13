@@ -53,7 +53,7 @@ bash-3.2$ export var="hello      world"
 bash-3.2$ echo $var
 hello world
 
-bash-3.2$ export var="hello      world"
+✅bash-3.2$ export var="hello      world"
 bash-3.2$ echo $var
 hello world
 bash-3.2$ echo "$var"
@@ -61,7 +61,7 @@ hello      world
 bash-3.2$ 
 
 
-minishell$ cat << "m"
+✅minishell$ cat << "m"
 > $HOME
 > "$HOME"
 > '$HOME'
@@ -73,12 +73,12 @@ minishell$ cat << "m"
 
 #/////////Parsing
 
-#bash-3.2$ < $hijk
+✅#bash-3.2$ < $hijk
 #bash: $hijk: ambiguous redirect
 
 /// Parsing
 
-bash-3.2$ << s'' cat 
+✅bash-3.2$ << s'' cat 
 > $PATH
 > s
 $PATH

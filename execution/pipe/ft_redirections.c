@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirections.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:10:23 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/13 02:05:45 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/13 16:02:10 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_redirection(t_exec *data, t_garbage **garb)
 			ft_output_append(&fd, file->file_name);
 		else if (file->type == 5)
 			ft_herdoc(&(file->fd));
-		error_redr(&fd, file->file_name, info);
+		error_redr(&fd, file->file_name, info);	
 		file = file->next;
 	}
 }

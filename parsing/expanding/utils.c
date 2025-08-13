@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:41:33 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/07 09:56:22 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/13 11:26:27 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	should_expand(t_token *curr, t_parsing_context ctx)
+{
+	if (ctx.quoted_flag == 2)
+		return (0);
+	if (ctx.quoted_flag == 1)
+		return (1);
+	if (curr->value[0] == '$' && curr->value[1] == '"')
+		return (0);
+	return (1);
+}
 
 void	add_token_back(t_token **head, t_token *new_token)
 {
@@ -37,7 +48,6 @@ int	ft_exit_status(int status, int flag)
 		exit_status = status;
 	return (exit_status);
 }
-
 
 int	is_valid_var_char(char c)
 {
