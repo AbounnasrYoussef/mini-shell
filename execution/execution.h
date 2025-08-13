@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 18:46:22 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/12 21:18:42 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 typedef struct s_list_env	t_list_env;
 typedef struct s_exec		t_exec;
@@ -46,6 +47,7 @@ typedef struct s_export
 	int		j;
 	int		c;
 	char	**arg_ex;
+	int		error;
 }	t_export;
 
 typedef struct s_info_pipe
@@ -78,8 +80,8 @@ int			ft_strlenn(char *str);
 void		ft_cd(char **args, t_list_env *env);
 void		ft_echo(char **str);
 void		ft_exit(t_exit inf_exit, char **str, t_garbage **garb);
-void		ft_lstadd_backk(t_list_env **lst, t_list_env *new);
-t_list_env	*ft_lstneww(void *variable, void *val, t_garbage **garb);
+void		lst_add_back(t_list_env **lst, t_list_env *new);
+t_list_env	*ft_lstnew(void *variable, void *val, t_garbage **garb);
 void		ft_print_env(t_list_env *env);
 void		ft_export(t_list_env *list_env, char **args, t_garbage **garb);
 char		*ft_pwd(t_list_env *env);
@@ -95,7 +97,7 @@ void		ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb);
 char		*ft_cherch_home(t_list_env *env);
 int			verif_exist(t_list_env **list_env, char *arg);
 void		chng_el(t_list_env **list_env, t_export indx, t_garbage **garb);
-void		error_export(char **args, int i);
+void		error_export(char **args, int i, int *error);
 void		ft_redirection(t_exec *data, t_garbage **garb);
 int			ft_count_env(t_list_env *env);
 char		**tab_env(t_list_env *env, t_garbage **garb);
@@ -116,7 +118,15 @@ int			ft_isalnumm(int c);
 int			ft_isalphaa(int c);
 void		ft_error_pipe(t_exec *data, t_garbage **garb);
 void		ft_error_pipe2(t_exec *data, t_info_pipe inf_pip, t_garbage **garb);
-void		ft_error_fork(t_garbage **garb);
+void		ft_error_fork(void);
 void		ft_wait_child(t_info_pipe *inf_pip);
 void		error_cherch_path(char *cmd, t_garbage **garb);
+char		*new_str(char *str);
+int			norm_help_built(t_list_env **env, char **cmd);
+int			norm_check_arg(char **args, t_export *ix);
+int			norm_check_arg2(char **args, t_export *ix);
+void		norm_exp_el_h(char *args, t_export *indx, t_garbage **garb);
+int			check_exist_pwd(t_list_env *env);
+void		ft_change_oldpwd(t_list_env **env);
+void		norm_ft_exec_child(char *cmd, t_garbage **garb);
 #endif

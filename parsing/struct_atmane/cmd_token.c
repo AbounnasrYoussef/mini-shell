@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:26:22 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/06 13:18:14 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/13 02:50:59 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	**extract_cmd_from_tokens(t_token *tokens, t_garbage **garb)
 	i = 0;
 	tmp = tokens;
 	prev = NULL;
+	
 	while (tmp)
 	{
 		if (tmp->type == WORD && (!prev || !is_redirection(prev->type)))

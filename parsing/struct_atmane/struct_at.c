@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_at.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:19:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/12 19:52:17 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/13 02:52:34 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_token	*copy_until_pipe(t_token *start,
 	{
 		new = ft_malloc(garb, sizeof(t_token));
 		new->type = curr->type;
-		new->value = ft_strdup(curr->value, garb);
+		new->value = curr->value;
 		new->next = NULL;
 		*last = new;
 		last = &new->next;
@@ -48,15 +48,27 @@ t_exec	*parse_tokens_to_exec_list(t_token *tokens, t_garbage **garb)
 
 	head = NULL;
 	current = &head;
-	while (tokens)
+	segment = tokens;
+	while (tokens != NULL)
 	{
-		segment = copy_until_pipe(tokens, &tokens, garb);
-		cmd = ft_malloc(garb, sizeof(t_exec));
-		cmd->cmd = extract_cmd_from_tokens(segment, garb);
-		cmd->files = extract_redirs_from_tokens(segment, garb);
-		cmd->next = NULL;
-		*current = cmd;
-		current = &cmd->next;
+		if (tokens->value != NULL)
+		{
+			segment = copy_until_pipe(tokens, &tokens, garb);
+			cmd = ft_malloc(garb, sizeof(t_exec));
+			cmd->cmd = extract_cmd_from_tokens(segment, garb);
+			cmd->files = extract_redirs_from_tokens(segment, garb);
+			cmd->next = NULL;
+			*current = cmd;
+			
+			current = &cmd->next;
+		}
+		else
+		{
+			cmd = ft_malloc(garb, sizeof(t_exec));
+			cmd->cmd = &(tokens)->value;
+			cmd->next = NULL;
+			tokens = tokens->next;
+		}
 	}
 	return (head);
 }

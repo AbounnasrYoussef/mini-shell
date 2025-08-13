@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:17:33 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/06 22:12:17 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/10 01:07:53 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,5 @@ void	ft_echo(char **str)
 	}
 	else if (argc == 1 && trait_cmd1(str[0]) == 0)
 		write(1, "\n", 1);
+	ft_exit_status(0, 1);
 }

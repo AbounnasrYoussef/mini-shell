@@ -6,13 +6,13 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:33:27 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 16:55:54 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/11 00:39:39 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-t_list_env	*ft_lstneww(void *variable, void *val, t_garbage **garb)
+t_list_env	*ft_lstnew(void *variable, void *val, t_garbage **garb)
 {
 	t_list_env	*list1;
 
@@ -28,7 +28,7 @@ t_list_env	*ft_lstneww(void *variable, void *val, t_garbage **garb)
 	return (list1);
 }
 
-void	ft_lstadd_backk(t_list_env **lst, t_list_env *new)
+void	lst_add_back(t_list_env **lst, t_list_env *new)
 {
 	t_list_env	*temp;
 
@@ -65,12 +65,12 @@ t_list_env	*ft_envvv(char **str, t_garbage **garb)
 		splitt = ft_splitt(str[i], '=', garb);
 		if (splitt[1] != NULL)
 		{
-			ft_lstadd_backk(&copy_env, ft_lstneww(splitt[0], splitt[1], garb));
+			lst_add_back(&copy_env, ft_lstnew(splitt[0], splitt[1], garb));
 			if (ft_strcmpp(splitt[0], "PWD") == 0)
-				ft_lstadd_backk(&copy_env, ft_lstneww("PO", splitt[1], garb));
+				lst_add_back(&copy_env, ft_lstnew("PO", splitt[1], garb));
 		}
 		else
-			ft_lstadd_backk(&copy_env, ft_lstneww(splitt[0], NULL, garb));
+			lst_add_back(&copy_env, ft_lstnew(splitt[0], NULL, garb));
 		if (i == 0)
 			debut_env = copy_env;
 		i++;

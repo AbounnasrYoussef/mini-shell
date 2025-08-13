@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:38:12 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/12 20:12:43 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/12 23:20:17 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static char	*expand_loop(char *value, t_expand_ctx *ctx, t_garbage **garb)
 	char	*tmp;
 
 	i = 0;
+	
 	res = ft_strdup("", garb);
 	while (value[i])
 	{

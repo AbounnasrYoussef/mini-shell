@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 17:06:31 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/12 23:06:25 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,27 @@ void	exp_el_help(t_list_env **env, char *args
 	int	k;
 
 	k = 0;
-	while (args[indx.i] != '\0')
-	{
-		indx.i++;
-		indx.j++;
-	}
-	indx.i = indx.i - indx.j;
-	indx.arg_ex[1] = ft_malloc(garb, (indx.j + 1));
-	while (args[indx.i] != '\0')
-	{
-		indx.arg_ex[1][k] = args[indx.i];
-		k++;
-		indx.i++;
-	}
-	indx.arg_ex[1][k] = '\0';
-	if (verif_exist(env, indx.arg_ex[0]) == 0)
-		ft_lstadd_backk(env, ft_lstneww(indx.arg_ex[0], indx.arg_ex[1], garb));
+	norm_exp_el_h(args, &indx, garb);
+	if (verif_exist(env, indx.arg_ex[0]) == 0 && args[indx.i - 1] != '=')
+		lst_add_back(env, ft_lstnew(indx.arg_ex[0], NULL, garb));
+	else if (verif_exist(env, indx.arg_ex[0]) == 1 && args[indx.i - 1] != '=')
+		;
 	else
 	{
-		if (indx.arg_ex[1] != NULL && indx.arg_ex[1][0] != '\0')
-			chng_el(env, indx, garb);
+		while (args[indx.i] != '\0')
+		{
+			indx.arg_ex[1][k] = args[indx.i];
+			k++;
+			indx.i++;
+		}
+		indx.arg_ex[1][k] = '\0';
+		if (verif_exist(env, indx.arg_ex[0]) == 0)
+			lst_add_back(env, ft_lstnew(indx.arg_ex[0], indx.arg_ex[1], garb));
+		else
+		{
+			if (indx.arg_ex[1] != NULL)
+				chng_el(env, indx, garb);
+		}
 	}
 }
 
@@ -71,31 +72,31 @@ void	export_el(t_list_env **env, char *args, t_export indx, t_garbage **garb)
 
 void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 {
+	ix.error = 0;
 	while (args[ix.i] != NULL)
 	{
-		if (!(args[ix.i][0] == '_' || ft_isalphaa(args[ix.i][0])))
-			1 && (error_export(args, ix.i), ix.c = 1);
-		while (args[ix.i][ix.j] != '\0' && args[ix.i][ix.j] != '='
-			&& args[ix.i][ix.j] != '+')
+		if (ft_strcmpp(args[ix.i], "") == 0)
 		{
-			if (!(args[ix.i][ix.j] == '_' || args[ix.i][ix.j] == '='
-				|| ft_isalnumm(args[ix.i][ix.j])))
-				1 && (error_export(args, ix.i), ix.c = 1);
-			ix.j++;
+			error_export(args, ix.i, &(ix.error));
+			if (args[ix.i + 1] != NULL)
+			{
+				ix.i++;
+				continue ;
+			}
 		}
-		if (args[ix.i][ix.j] == '+')
-		{
-			if (args[ix.i][ix.j + 1] != '=')
-				1 && (error_export(args, ix.i), ix.c = 1);
-			ix.j++;
-		}
-		if (ix.c == 0)
-			export_el(env, args[ix.i], ix, garb);
 		else
-			ix.c = 0;
-		ix.j = 1;
+		{
+			if (norm_check_arg(args, &ix) == 1)
+				continue ;
+			if (norm_check_arg2(args, &ix) == 1)
+				continue ;
+			export_el(env, args[ix.i], ix, garb);
+			ix.j = 1;
+		}
 		ix.i++;
 	}
+	if (ix.error == 0)
+		ft_exit_status(0, 1);
 }
 
 t_list_env	*ex_sort(t_list_env *list_env, char *tmp)
@@ -139,6 +140,7 @@ void	ft_export(t_list_env *list_env, char **args, t_garbage **garb)
 	if (c == 1)
 	{
 		ft_print_env_ex(ex_sort(list_env, NULL));
+		ft_exit_status(0, 1);
 	}
 	else
 	{

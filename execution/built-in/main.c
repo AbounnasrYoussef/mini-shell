@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 16:55:54 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/11 00:41:51 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	error_env(char *str)
 	write(2, "env: ", 5);
 	write(2, str, ft_strlenn(str));
 	write(2, ": No such file or directory\n", 28);
-	exit(127);
+	ft_exit_status(127, 1);
 }
 
 int	check_exist_pwd(t_list_env *env)
@@ -67,21 +67,20 @@ int	help_built(t_exec *data, t_list_env **env
 	else if (ft_strcmpp(data->cmd[0], "env") == 0)
 	{
 		if (data->cmd[1] == NULL)
+		{
+			ft_exit_status(0, 1);
 			return (ft_print_env(*env), 0);
+		}
 		else
 			return (error_env(data->cmd[1]), 0);
 	}
 	else if (ft_strcmpp(data->cmd[0], "unset") == 0)
-	{
-		ft_unset(env, data->cmd);
-		if (check_exist_pwd(*env) == 1)
-			ft_change_oldpwd(env);
-		return (0);
-	}
+		return (norm_help_built(env, data->cmd));
 	return (-1);
 }
 
-int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd, t_garbage **garb)
+int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd
+		, t_garbage **garb)
 {
 	int		len;
 	t_exit	inf_exit;

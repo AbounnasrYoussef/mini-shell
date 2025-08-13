@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/12 20:37:30 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/13 00:27:57 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,9 +231,13 @@ static t_token	*handle_expanded_tokens(t_token **tokens, t_token *curr,
 	(void) ctx;
 	t_token	*new_tokens;
 	//t_token	*prev;
-
-	new_tokens = split_tokens_by_space(curr->value, ctx1->garb, curr->type);
-	replace_token(tokens, curr, new_tokens);
+	if (ft_strcmpp(curr->value, "") != 0)
+	{
+		new_tokens = split_tokens_by_space(curr->value, ctx1->garb, curr->type);
+		replace_token(tokens, curr, new_tokens);
+	}
+	else
+		curr->value = NULL;
 	// if (new_tokens)
 	// {
 	// 	prev = get_last_token(new_tokens);
@@ -242,6 +246,14 @@ static t_token	*handle_expanded_tokens(t_token **tokens, t_token *curr,
 	return (curr->next);
 }
 
+void hh(t_token *tmp)
+{
+	while (tmp != NULL)
+	{
+		printf("'%s'\n\n\n", tmp->value);
+		tmp = tmp->next;
+	}
+}
 
 void	expand_all_tokens(t_token **tokens, int exit_code,
 		t_list_env *env, t_parsing_context ctx)
@@ -261,9 +273,14 @@ void	expand_all_tokens(t_token **tokens, int exit_code,
 			continue ;
 		}
 		curr->value = expand_value(curr, &ctx1, ctx);
+		
 		if (ctx.quoted_flag == 0)
+		{
 			curr = handle_expanded_tokens(tokens, curr, &ctx1, ctx);
+		}
 		else
 			curr = curr->next;
 	}
+	//hh(*tokens);
+	
 }

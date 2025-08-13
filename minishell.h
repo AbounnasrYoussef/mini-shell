@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/12 20:27:43 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/13 00:17:06 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,12 +185,6 @@ size_t  ft_strlen(const char *s);
 
 
 
-//env
-t_list_env *ft_env(char **str);
-void	ft_lstadd_back(t_list_env **lst, t_list_env *new);
-t_list_env	*ft_lstnew(void *variable, void *val);
-char	**i_split(char const *s, char c);
-
 //signals 
 void	setup_signals(void);
 void	handle_sigquit(int sig);
@@ -211,5 +205,5 @@ int	is_valid_var_char(char c);
 int heredoc_expansion(char *line, t_list_env *env, t_garbage **garb, char **res);
 void	append_char(char **tmp, char c, t_garbage **garb);
 
-
+void hh(t_token *tmp);
 #endif

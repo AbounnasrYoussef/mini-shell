@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirections.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:10:23 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/12 20:31:11 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/13 02:05:45 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	error_redr(int *fd, char *file_name, struct stat info)
 {
-	if (*fd == -1 && !S_ISDIR(info.st_mode) && !S_ISREG(info.st_mode))
+	if (*fd == -1 && access(file_name, X_OK) == -1 && errno == 13)
+	{
+		perror("access");
+		exit(1);
+	}
+	else if (*fd == -1 && !S_ISDIR(info.st_mode) && !S_ISREG(info.st_mode))
 	{
 		write(2, file_name, ft_strlenn(file_name));
 		write(2, ": No such file or directory\n", 28);
 		exit(1);
-	}
-	else if (*fd == -1 && access(file_name, X_OK) == -1)
-	{
-		perror("access");
-		ft_exit_status(1, 1);
 	}
 }
 
@@ -31,6 +31,7 @@ void	error_dolar(char *file_name)
 {
 	write(2, file_name, ft_strlenn(file_name));
 	write(2, ": ambiguous redirect\n", 21);
+	exit(1);
 	ft_exit_status(1, 1);
 }
 
@@ -45,7 +46,9 @@ void	ft_redirection(t_exec *data, t_garbage **garb)
 	while (file != NULL)
 	{
 		stat(file->file_name, &info);
-		if (file->file_name[0] == '$' && file->type != 5)
+		//printf("%s-------\n\n", data->cmd[0] );
+		//printf("%s+++++\n\n", file->file_name);
+		if (file->file_name[0] == '$' || data->cmd[0] == NULL)
 			error_dolar(file->file_name);
 		if (file->type == 2)
 			ft_input(&fd, file->file_name);

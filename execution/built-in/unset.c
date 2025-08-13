@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 12:59:18 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/07 11:26:36 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/11 00:37:00 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,37 +35,55 @@ void	ft_supp_arg(t_list_env **list_env, char *arg)
 	}
 }
 
-void	ft_error_unset(char *arg)
+void	ft_error_unset(char *arg, int *error)
 {
+	*error = 1;
 	write(2, "unset: `", 8);
 	write(2, arg, strlen(arg));
 	write(2, ": not a valid identifier\n", 25);
 	ft_exit_status(1, 1);
 }
 
+void	norm_ft_unset(char **args, int *i, int *j, int *error)
+{
+	while (args[*i][*j] != '\0')
+	{
+		if (!(args[*i][*j] == '_'
+			|| (args[*i][*j] >= 'a' && args[*i][*j] <= 'z')
+			|| (args[*i][*j] >= 'A' && args[*i][*j] <= 'Z')
+			|| (args[*i][*j] >= '0' && args[*i][*j] <= '9'))
+			|| (args[*i][0] >= '0' && args[*i][0] <= '9'))
+		{
+			ft_error_unset(args[*i], error);
+			break ;
+		}
+		j++;
+	}
+}
+
 void	ft_unset(t_list_env **list_env, char **args)
 {
 	int	i;
 	int	j;
+	int	error;
 
 	i = 1;
 	j = 0;
+	error = 0;
 	while (args[i] != NULL)
 	{
-		while (args[i][j] != '\0')
+		if (ft_strcmpp(args[i], "") == 0 || is_espace_tabulion(args[i]) == 0)
 		{
-			if (!(args[i][j] == '_' || (args[i][j] >= 'a' && args[i][j] <= 'z')
-				|| (args[i][j] >= 'A' && args[i][j] <= 'Z')
-				|| (args[i][j] >= '0' && args[i][j] <= '9'))
-				|| (args[i][0] >= '0' && args[i][0] <= '9'))
-			{
-				ft_error_unset(args[i]);
-				break ;
-			}
-			j++;
+			ft_error_unset(args[i], &error);
+			break ;
 		}
+		if (ft_strcmpp(args[i], "_") == 0)
+			break ;
+		norm_ft_unset(args, &i, &j, &error);
 		ft_supp_arg(list_env, args[i]);
 		j = 0;
 		i++;
 	}
+	if (error == 0)
+		ft_exit_status(0, 1);
 }
