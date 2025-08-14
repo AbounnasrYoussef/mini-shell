@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 07:57:03 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 08:03:22 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 {
 	if (inf_pip->pid == 0)
 	{
-		signal(SIGQUIT, handle_sigquit);
+		signal(SIGQUIT, SIG_DFL);
 		signal(SIGINT, SIG_DFL);
 		if (inf_pip->in_fd != STDIN_FILENO)
 		{
@@ -136,9 +136,12 @@ void	ft_plusieur_cmd(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 		}
 		else
 			ft_child(data, env, inf_pip, garb);
+		
 		data = data->next;
 		(inf_pip->i)++;
 	}
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 }
 
 void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)

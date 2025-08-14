@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/14 07:48:08 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 08:05:12 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	ft_read_loop(char **envp, t_exec **data)
 		lst_add_back(&env, ft_lstnew("PWD", getcwd(NULL, 0),&garb));
 		lst_add_back(&env, ft_lstnew("_", "/usr/bin/env", &garb));
 	}
-	setup_signals();
 	while (1)
 	{
+		setup_signals();
 		garb = NULL;
 		line = readline("minishell$ ");
 		
