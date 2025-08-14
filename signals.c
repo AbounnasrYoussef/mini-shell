@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 16:53:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/14 06:42:39 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 07:46:28 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	handle_sigint(int sig)
 void	setup_signals(void)
 {
 	signal(SIGINT, handle_sigint);
-	//signal(SIGQUIT, handle_sigquit);
 	signal(SIGQUIT, SIG_IGN);
 
 }

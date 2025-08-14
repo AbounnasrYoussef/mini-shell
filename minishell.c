@@ -6,14 +6,15 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/14 07:00:44 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 07:48:08 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "execution/execution.h"
 
-int g_handl_signals;
+int g_handl_signals = 0;
+
 
 void	ft_read_loop(char **envp, t_exec **data)
 {
@@ -32,12 +33,12 @@ void	ft_read_loop(char **envp, t_exec **data)
 		lst_add_back(&env, ft_lstnew("PWD", getcwd(NULL, 0),&garb));
 		lst_add_back(&env, ft_lstnew("_", "/usr/bin/env", &garb));
 	}
-	//setup_signals();
+	setup_signals();
 	while (1)
 	{
 		garb = NULL;
 		line = readline("minishell$ ");
-		g_handl_signals = 1;
+		
 		if (!line)
 			break ;
 		if (*line)

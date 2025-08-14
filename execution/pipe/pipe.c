@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 07:02:57 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 07:57:03 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,26 @@ void	ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip
 }
 
 
-//void	handle_sigquit(int sig)
-//{
-//	(void)sig;
-//	printf("Quit: 3");
-//	write(1, "\n", 1);
-//	rl_replace_line("", 0);
-//	rl_on_new_line();
-//	rl_redisplay();
-//	exit(131);
-//}
-
-void	handle_sigintj(int sig)
+void	handle_sigquit(int sig)
 {
 	(void)sig;
+	printf("Quit: 3");
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
-	exit(0);
+	exit(131);
 }
+
+//void	handle_sigintj(int sig)
+//{
+//	(void)sig;
+//	write(1, "\n", 1);
+//	rl_replace_line("", 0);
+//	rl_on_new_line();
+//	rl_redisplay();
+//	exit(0);
+//}
 
 
 void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
@@ -87,8 +87,8 @@ void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 {
 	if (inf_pip->pid == 0)
 	{
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGINT, handle_sigintj);
+		signal(SIGQUIT, handle_sigquit);
+		signal(SIGINT, SIG_DFL);
 		if (inf_pip->in_fd != STDIN_FILENO)
 		{
 			dup2(inf_pip->in_fd, STDIN_FILENO);
@@ -103,6 +103,8 @@ void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 	}
 	else
 	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, SIG_IGN);
 		if (data->next != NULL)
 			close(inf_pip->fd[1]);
 		if (inf_pip->in_fd != STDIN_FILENO)
