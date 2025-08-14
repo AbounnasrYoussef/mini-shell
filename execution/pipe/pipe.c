@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 11:23:05 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 11:31:06 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,7 @@ void	ft_plusieur_cmd(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 			if (pipe(inf_pip->fd) == -1)
 			{
 				perror("pipe");
-				ft_free_all(*garb);
-				exit(1);
+				(ft_free_all(*garb), exit(1));
 			}
 		}
 		inf_pip->pid = fork();
@@ -143,13 +142,7 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 	if (WIFEXITED(status))
 		ft_exit_status(WEXITSTATUS(status), 1);
 	else if (WIFSIGNALED(status))
-	{
-		if (WTERMSIG(status) == SIGQUIT)
-			write(STDOUT_FILENO, "Quit: 3\n", 8);
-		else if (WTERMSIG(status) == SIGINT)
-			write(STDOUT_FILENO, "\n", 1);
-		ft_exit_status(WTERMSIG(status) + 128, 1);
-	}
+		ft_check_signals(&status);
 	ft_wait_child(&inf_pip);
 	restore_terminal_settings();
 	setup_signals();

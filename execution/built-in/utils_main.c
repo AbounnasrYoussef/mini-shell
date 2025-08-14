@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 16:13:22 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/11 00:43:22 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 11:31:53 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,23 @@ int	norm_help_built(t_list_env **env, char **cmd)
 	if (check_exist_pwd(*env) == 1)
 		ft_change_oldpwd(env);
 	return (0);
+}
+
+int	is_built_in(char *str)
+{
+	if (ft_strcmpp(str, "export") == 0)
+		return (0);
+	else if (ft_strcmpp(str, "cd") == 0)
+		return (0);
+	else if (ft_strcmpp(str, "echo") == 0)
+		return (0);
+	else if (ft_strcmpp(str, "env") == 0)
+		return (0);
+	else if (ft_strcmpp(str, "exit") == 0)
+		return (0);
+	else if (ft_strcmpp(str, "pwd") == 0)
+		return (0);
+	else if (ft_strcmpp(str, "unset") == 0)
+		return (0);
+	return (-1);
 }

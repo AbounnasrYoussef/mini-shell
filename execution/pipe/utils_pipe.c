@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:12:25 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/08 20:35:45 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 11:31:35 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,21 +84,11 @@ int	count_cmd(t_exec *data)
 	return (i);
 }
 
-int	is_built_in(char *str)
+void	ft_check_signals(int *status)
 {
-	if (ft_strcmpp(str, "export") == 0)
-		return (0);
-	else if (ft_strcmpp(str, "cd") == 0)
-		return (0);
-	else if (ft_strcmpp(str, "echo") == 0)
-		return (0);
-	else if (ft_strcmpp(str, "env") == 0)
-		return (0);
-	else if (ft_strcmpp(str, "exit") == 0)
-		return (0);
-	else if (ft_strcmpp(str, "pwd") == 0)
-		return (0);
-	else if (ft_strcmpp(str, "unset") == 0)
-		return (0);
-	return (-1);
+	if (WTERMSIG(*status) == SIGQUIT)
+		write(STDOUT_FILENO, "Quit: 3\n", 8);
+	else if (WTERMSIG(*status) == SIGINT)
+		write(STDOUT_FILENO, "\n", 1);
+	ft_exit_status(WTERMSIG(*status) + 128, 1);
 }
