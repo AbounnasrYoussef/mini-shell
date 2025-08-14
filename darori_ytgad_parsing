@@ -1,0 +1,12 @@
+bash-3.2$ | hdsh
+bash: syntax error near unexpected token `|'
+bash-3.2$ 
+
+
+minishell$ $H"OME"
+
+
+minishell$ $"HOME"
+
+minishell$ <"$duygads"
+sift empty string fblast NULL 

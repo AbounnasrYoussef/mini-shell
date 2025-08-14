@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirections.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:10:23 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/13 16:02:10 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/14 04:10:09 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ void	ft_redirection(t_exec *data, t_garbage **garb)
 	while (file != NULL)
 	{
 		stat(file->file_name, &info);
-		//printf("%s-------\n\n", data->cmd[0] );
-		//printf("%s+++++\n\n", file->file_name);
-		if (file->file_name[0] == '$' || data->cmd[0] == NULL)
+		//printf("'%s'", file->file_name);
+		if (ft_strcmpp(file->file_name, "") == 0)
 			error_dolar(file->file_name);
 		if (file->type == 2)
 			ft_input(&fd, file->file_name);

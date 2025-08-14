@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/12 23:46:58 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 07:02:57 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,36 @@ void	ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip
 		(ft_free_all(*garb), exit(ft_exit_status(0, 0)));
 }
 
+
+//void	handle_sigquit(int sig)
+//{
+//	(void)sig;
+//	printf("Quit: 3");
+//	write(1, "\n", 1);
+//	rl_replace_line("", 0);
+//	rl_on_new_line();
+//	rl_redisplay();
+//	exit(131);
+//}
+
+void	handle_sigintj(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+	exit(0);
+}
+
+
 void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 		, t_garbage **garb)
 {
 	if (inf_pip->pid == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, handle_sigintj);
 		if (inf_pip->in_fd != STDIN_FILENO)
 		{
 			dup2(inf_pip->in_fd, STDIN_FILENO);
@@ -124,6 +149,7 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 	inf_pip.in_fd = STDIN_FILENO;
 	inf_pip.tab_envv = tab_env(*env, garb);
 	inf_pip.count_cmd = count_cmd(data);
+	//printf("%d\n\n", ft_exit_status(0, 0));
 	if (count_cmd(data) == 1 && ft_strlen_argc(data->cmd) == 1
 		&& ft_strcmpp(data->cmd[0], "export") != 0
 		&& is_built_in(data->cmd[0]) == 0)

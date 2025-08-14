@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/13 11:28:37 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/14 07:00:14 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include <stdio.h>
 #include "execution/execution.h"
 
-extern int g_exit_status;
+extern int	g_handl_signals;
 // enumeration pour reconnaitre chaque type
 
 
@@ -192,9 +192,9 @@ void	handle_sigint(int sig);
 
 
 //heredoc
-void process_heredocs(char *line ,t_exec *exec, t_list_env *env, t_garbage **garb);
+void process_heredocs(char *line ,t_exec *exec);
 int	heredoc_expand(char *line, t_list_env *env, t_garbage **garb, char **res);
-int create_heredoc(char *delimiter, int expand, t_list_env *env, t_garbage **garb);
+int create_heredoc(char *delimiter);
 
 //utils_heredoc
 int	append_normal_char(char **tmp, char c, t_garbage **garb);
