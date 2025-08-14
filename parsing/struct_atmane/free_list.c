@@ -6,11 +6,22 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 10:44:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 18:15:18 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/14 22:49:26 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+t_exec	*init_new_cmd(t_garbage **garb)
+{
+	t_exec	*new_cmd;
+
+	new_cmd = ft_malloc(garb, sizeof(t_exec));
+	new_cmd->cmd = ft_malloc(garb, 2000 * sizeof(char *));
+	new_cmd->files = NULL;
+	new_cmd->next = NULL;
+	return (new_cmd);
+}
 
 void	free_exec_list(t_exec *exec_list)
 {

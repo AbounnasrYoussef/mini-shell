@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/14 11:19:05 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 23:02:38 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ void free_exec_list(t_exec *exec_list);
 int	is_redirection(type_token type);
 t_file	*extract_redirs_from_tokens(t_token *tokens, t_garbage **garb);
 t_exec	*parse_tokens_to_exec_list(t_token *tokens, t_garbage **garb);
+t_exec	*init_new_cmd(t_garbage **garb);
 
 //utils
 int     ft_isalnum(int c);
