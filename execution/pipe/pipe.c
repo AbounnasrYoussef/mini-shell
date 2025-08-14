@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 11:18:41 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 11:23:05 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,9 @@ void	ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip
 		(ft_free_all(*garb), exit(ft_exit_status(0, 0)));
 }
 
-
-
-
 void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 		, t_garbage **garb)
 {
-	
 	if (inf_pip->pid == 0)
 	{
 		signal(SIGQUIT, SIG_DFL);
@@ -97,7 +93,7 @@ void	ft_plusieur_cmd(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 		, t_garbage **garb)
 {
 	signal(SIGINT, SIG_IGN);
-    signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	while (data != NULL)
 	{
 		if (data->next != NULL)
@@ -147,13 +143,13 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 	if (WIFEXITED(status))
 		ft_exit_status(WEXITSTATUS(status), 1);
 	else if (WIFSIGNALED(status))
-    {
-        if (WTERMSIG(status) == SIGQUIT)
-            write(STDOUT_FILENO, "Quit: 3\n", 8);
-        else if (WTERMSIG(status) == SIGINT)
-            write(STDOUT_FILENO, "\n", 1);
-        ft_exit_status(WTERMSIG(status) + 128, 1);
-    }
+	{
+		if (WTERMSIG(status) == SIGQUIT)
+			write(STDOUT_FILENO, "Quit: 3\n", 8);
+		else if (WTERMSIG(status) == SIGINT)
+			write(STDOUT_FILENO, "\n", 1);
+		ft_exit_status(WTERMSIG(status) + 128, 1);
+	}
 	ft_wait_child(&inf_pip);
 	restore_terminal_settings();
 	setup_signals();
