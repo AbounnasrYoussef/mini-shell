@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/14 10:16:46 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 11:19:05 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "execution/execution.h"
+#include <termios.h>
 
 //extern int	g_handl_signals;
 // enumeration pour reconnaitre chaque type

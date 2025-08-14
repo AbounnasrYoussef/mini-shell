@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 00:44:30 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/12 21:17:48 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 11:19:49 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	norm_check_arg2(char **args, t_export *ix)
 	}
 	return (0);
 }
-
 
 void	norm_exp_el_h(char *args, t_export *indx, t_garbage **garb)
 {

@@ -6,11 +6,28 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 16:53:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/14 10:15:34 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 11:18:53 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+struct termios	*ft_get_termios(void)
+{
+	static struct termios	saved_termios;
+
+	return (&saved_termios);
+}
+
+void	save_terminal_settings(void)
+{
+	tcgetattr(STDIN_FILENO, ft_get_termios());
+}
+
+void	restore_terminal_settings(void)
+{
+	tcsetattr(STDIN_FILENO, TCSANOW, ft_get_termios());
+}
 
 void	handle_sigint(int sig)
 {

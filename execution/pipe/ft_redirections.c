@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:10:23 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 04:10:09 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 11:20:07 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	ft_redirection(t_exec *data, t_garbage **garb)
 	while (file != NULL)
 	{
 		stat(file->file_name, &info);
-		//printf("'%s'", file->file_name);
 		if (ft_strcmpp(file->file_name, "") == 0)
 			error_dolar(file->file_name);
 		if (file->type == 2)
@@ -57,7 +56,7 @@ void	ft_redirection(t_exec *data, t_garbage **garb)
 			ft_output_append(&fd, file->file_name);
 		else if (file->type == 5)
 			ft_herdoc(&(file->fd));
-		error_redr(&fd, file->file_name, info);	
+		error_redr(&fd, file->file_name, info);
 		file = file->next;
 	}
 }
