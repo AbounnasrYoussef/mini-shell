@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 10:35:35 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 10:50:53 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 	else if (WIFSIGNALED(status))
     {
         if (WTERMSIG(status) == SIGQUIT)
-            write(STDOUT_FILENO, "Quit: 3\n", 9);
+            write(STDOUT_FILENO, "Quit: 3\n", 8);
         else if (WTERMSIG(status) == SIGINT)
             write(STDOUT_FILENO, "\n", 1);
         ft_exit_status(WTERMSIG(status) + 128, 1);
