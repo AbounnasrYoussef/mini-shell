@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 11:31:06 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 12:08:03 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,11 +139,11 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 	else
 		ft_plusieur_cmd(data, env, &inf_pip, garb);
 	waitpid(inf_pip.pid, &status, 0);
-	if (WIFEXITED(status))
+	if (WIFEXITED(status) && data && data->files
+		&& data->files->type != HERE_DOC)
 		ft_exit_status(WEXITSTATUS(status), 1);
 	else if (WIFSIGNALED(status))
 		ft_check_signals(&status);
 	ft_wait_child(&inf_pip);
-	restore_terminal_settings();
-	setup_signals();
+	(restore_terminal_settings(), setup_signals());
 }
