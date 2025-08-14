@@ -3,24 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   struct_at.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:19:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/14 02:48:56 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 21:08:29 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//void hhh(t_file *test)
-//{
-//	while (test != NULL)
-//	{
-//		printf("%s\n\n", test->file_name);
-//		test = test->next;
-//	}
-//}
-	
 int is_redirection(type_token type)
 {
     return (type == RDR_IN || type == RDR_OUT
@@ -29,24 +20,23 @@ int is_redirection(type_token type)
 
 t_exec *parse_tokens_to_exec_list(t_token *tokens, t_garbage **garb)
 {
-    t_exec *head = NULL;
-    t_exec *cmd = NULL;
+    t_exec *head;
+    t_exec *cmd;
     t_file  **current;
     t_file  *f;
+    t_exec *new_cmd;
     int i;
 
+    cmd = NULL;
+    head = NULL;
     while (tokens != NULL)
     {
-        t_exec *new_cmd = ft_malloc(garb, sizeof(t_exec));
-
+        new_cmd = ft_malloc(garb, sizeof(t_exec));
         new_cmd->cmd = ft_malloc(garb, 2000 * sizeof(char *));
-
         i = 0;
         new_cmd->files = NULL;
         new_cmd->next = NULL;
-
         current = &(new_cmd->files);
-
         if (!head)
         {
             head = new_cmd;

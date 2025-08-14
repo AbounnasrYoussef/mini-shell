@@ -34,7 +34,6 @@ SRC = minishell.c  signals.c\
 		$(PARS)/expanding/utils.c\
 		$(PARS)/struct_atmane/cmd_token.c\
 		$(PARS)/struct_atmane/free_list.c\
-		$(PARS)/struct_atmane/redir_token.c\
 		$(PARS)/struct_atmane/struct_at.c\
 		$(PARS)/here_doc/here.c\
 		$(PARS)/here_doc/here_exp.c\

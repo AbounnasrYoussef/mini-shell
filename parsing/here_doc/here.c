@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:21:08 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/14 06:15:29 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 21:16:35 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	append_char(char **tmp, char c, t_garbage **garb)
 	*tmp = ft_strjoin(*tmp, str, garb);
 }
 
-int count_nbr_herdoc(t_file *file)
+int	count_nbr_herdoc(t_file *file)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (file != NULL)
@@ -34,6 +34,7 @@ int count_nbr_herdoc(t_file *file)
 	}
 	return (i);
 }
+
 void	process_heredocs(char *line, t_exec *exec)
 {
 	t_file	*file;
@@ -55,7 +56,6 @@ void	process_heredocs(char *line, t_exec *exec)
 					exit(2);
 				}
 				file->fd = create_heredoc(file->file_name);
-				
 			}
 			file = file->next;
 		}
