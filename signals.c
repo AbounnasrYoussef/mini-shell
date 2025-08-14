@@ -6,12 +6,11 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 16:53:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/14 07:46:28 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 10:15:34 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	handle_sigint(int sig)
 {

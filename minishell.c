@@ -6,15 +6,12 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/14 08:05:12 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 10:32:50 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "execution/execution.h"
-
-int g_handl_signals = 0;
-
 
 void	ft_read_loop(char **envp, t_exec **data)
 {
@@ -35,10 +32,10 @@ void	ft_read_loop(char **envp, t_exec **data)
 	}
 	while (1)
 	{
+		save_terminal_settings();
 		setup_signals();
 		garb = NULL;
 		line = readline("minishell$ ");
-		
 		if (!line)
 			break ;
 		if (*line)
@@ -65,8 +62,7 @@ void	ft_read_loop(char **envp, t_exec **data)
 		if ((*data)->files != NULL)
 		{
 			process_heredocs(line, *data);
-		}
-			
+		}	
 		if (*data != NULL)
         {
 			ft_pipe(*data, &env, &garb);

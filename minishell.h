@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/14 07:00:14 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 10:16:46 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include <readline/history.h>
 #include "execution/execution.h"
 
-extern int	g_handl_signals;
+//extern int	g_handl_signals;
 // enumeration pour reconnaitre chaque type
 
 
@@ -187,7 +187,7 @@ size_t  ft_strlen(const char *s);
 
 //signals 
 void	setup_signals(void);
-void	handle_sigquit(int sig);
+//void	handle_sigquit(int sig);
 void	handle_sigint(int sig);
 
 
@@ -205,5 +205,6 @@ int	is_valid_var_char(char c);
 int heredoc_expansion(char *line, t_list_env *env, t_garbage **garb, char **res);
 void	append_char(char **tmp, char c, t_garbage **garb);
 
-void hh(t_token *tmp);
+void	save_terminal_settings(void);
+void	restore_terminal_settings(void);
 #endif

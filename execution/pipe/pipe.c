@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 08:03:22 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/14 10:35:35 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,32 +59,30 @@ void	ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip
 		(ft_free_all(*garb), exit(ft_exit_status(0, 0)));
 }
 
+# include <termios.h>
 
-void	handle_sigquit(int sig)
+struct termios	*ft_get_termios(void)
 {
-	(void)sig;
-	printf("Quit: 3");
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-	exit(131);
+	static struct termios	saved_termios;
+
+	return (&saved_termios);
 }
 
-//void	handle_sigintj(int sig)
-//{
-//	(void)sig;
-//	write(1, "\n", 1);
-//	rl_replace_line("", 0);
-//	rl_on_new_line();
-//	rl_redisplay();
-//	exit(0);
-//}
+void	save_terminal_settings(void)
+{
+	tcgetattr(STDIN_FILENO, ft_get_termios());
+}
+
+void	restore_terminal_settings(void)
+{
+	tcsetattr(STDIN_FILENO, TCSANOW, ft_get_termios());
+}
 
 
 void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 		, t_garbage **garb)
 {
+	
 	if (inf_pip->pid == 0)
 	{
 		signal(SIGQUIT, SIG_DFL);
@@ -103,8 +101,6 @@ void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 	}
 	else
 	{
-		signal(SIGQUIT, SIG_IGN);
-		signal(SIGINT, SIG_IGN);
 		if (data->next != NULL)
 			close(inf_pip->fd[1]);
 		if (inf_pip->in_fd != STDIN_FILENO)
@@ -117,6 +113,8 @@ void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 void	ft_plusieur_cmd(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 		, t_garbage **garb)
 {
+	signal(SIGINT, SIG_IGN);
+    signal(SIGQUIT, SIG_IGN);
 	while (data != NULL)
 	{
 		if (data->next != NULL)
@@ -135,13 +133,12 @@ void	ft_plusieur_cmd(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 			return (ft_error_fork());
 		}
 		else
+		{
 			ft_child(data, env, inf_pip, garb);
-		
+		}
 		data = data->next;
 		(inf_pip->i)++;
 	}
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, SIG_IGN);
 }
 
 void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
@@ -154,7 +151,6 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 	inf_pip.in_fd = STDIN_FILENO;
 	inf_pip.tab_envv = tab_env(*env, garb);
 	inf_pip.count_cmd = count_cmd(data);
-	//printf("%d\n\n", ft_exit_status(0, 0));
 	if (count_cmd(data) == 1 && ft_strlen_argc(data->cmd) == 1
 		&& ft_strcmpp(data->cmd[0], "export") != 0
 		&& is_built_in(data->cmd[0]) == 0)
@@ -168,6 +164,14 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 	if (WIFEXITED(status))
 		ft_exit_status(WEXITSTATUS(status), 1);
 	else if (WIFSIGNALED(status))
-		ft_exit_status(WTERMSIG(status) + 128, 1);
+    {
+        if (WTERMSIG(status) == SIGQUIT)
+            write(STDOUT_FILENO, "Quit: 3\n", 9);
+        else if (WTERMSIG(status) == SIGINT)
+            write(STDOUT_FILENO, "\n", 1);
+        ft_exit_status(WTERMSIG(status) + 128, 1);
+    }
 	ft_wait_child(&inf_pip);
+	restore_terminal_settings();
+	setup_signals();
 }
