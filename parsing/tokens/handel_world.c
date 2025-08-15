@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handel_world.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:38:19 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/12 15:20:17 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/15 06:56:39 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_token	*new_token(char *value, type_token type, int i, t_garbage **garb)
+t_token	*new_token(char *value, t_type_token type, int i, t_garbage **garb)
 {
 	t_token	*tok;
 

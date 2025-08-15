@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 16:53:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/14 23:02:09 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/15 04:28:47 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,21 @@ void	restore_terminal_settings(void)
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-	ft_exit_status(130, 1);
+	if (g_handl_signals == 0)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+		ft_exit_status(130, 1);
+	}
+	else if (g_handl_signals == 2)
+	{
+		g_handl_signals = 3;
+		write(1, "\n", 1);
+		ft_exit_status(1, 1);
+		close(0);
+	}
 }
 
 void	setup_signals(void)

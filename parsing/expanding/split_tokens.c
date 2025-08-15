@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:37:21 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/13 10:30:41 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/15 06:56:39 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_token	*get_last_token(t_token *tokens)
 	return (tokens);
 }
 
-t_token	*split_tokens_by_space(char *str, t_garbage **garb, type_token type)
+t_token	*split_tokens_by_space(char *str, t_garbage **garb, t_type_token type)
 {
 	t_token	*head;
 	t_token	*new_token;

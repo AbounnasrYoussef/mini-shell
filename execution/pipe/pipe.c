@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 22:57:07 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/15 06:32:33 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 
 	inf_pip.i = 0;
 	inf_pip.j = 0;
+	status = 0;
 	inf_pip.in_fd = STDIN_FILENO;
 	inf_pip.tab_envv = tab_env(*env, garb);
 	inf_pip.count_cmd = count_cmd(data);
@@ -140,7 +141,12 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 		ft_plusieur_cmd(data, env, &inf_pip, garb);
 	waitpid(inf_pip.pid, &status, 0);
 	if (WIFEXITED(status))
-		ft_exit_status(WEXITSTATUS(status), 1);
+	{
+		if (g_handl_signals == 2 && !data->cmd[0])
+			;
+		else
+			ft_exit_status(WEXITSTATUS(status), 1);
+	}
 	else if (WIFSIGNALED(status))
 		ft_check_signals(&status);
 	ft_wait_child(&inf_pip);

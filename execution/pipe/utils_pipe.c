@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:12:25 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 11:31:35 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/15 05:52:12 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	count_cmd(t_exec *data)
 void	ft_check_signals(int *status)
 {
 	if (WTERMSIG(*status) == SIGQUIT)
-		write(STDOUT_FILENO, "Quit: 3\n", 8);
+		write(STDOUT_FILENO, "Quit: 3\n\r", 9);
 	else if (WTERMSIG(*status) == SIGINT)
 		write(STDOUT_FILENO, "\n", 1);
 	ft_exit_status(WTERMSIG(*status) + 128, 1);
