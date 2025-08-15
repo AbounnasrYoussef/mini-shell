@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creat_here.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 13:29:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/15 06:30:09 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/15 11:00:58 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,8 @@ int	create_heredoc(char *delimiter, int expand, t_list_env *env,
 
 	if (pipe(fd) == -1)
 		return (perror("pipe"), -1);
-	ctx.expand = expand;
-	ctx.env = env;
-	ctx.garb = garb;
-	ctx.fd = fd[1];
-	saved_stdin = dup(0);
+	1 && (ctx.expand = expand, ctx.env = env, ctx.garb = garb);
+	1 && (ctx.fd = fd[1], saved_stdin = dup(0));
 	g_handl_signals = 2;
 	while (1)
 	{

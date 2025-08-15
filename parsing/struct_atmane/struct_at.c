@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_at.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:19:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/15 06:56:39 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/15 10:56:34 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,34 +29,39 @@ static t_file	*create_file_node(t_token *token, t_garbage **garb)
 	return (f);
 }
 
-static void	fill_cmd_or_file(t_exec *new_cmd, t_file ***current,
-		t_token **tokens, int *i, t_garbage **garb)
+static void	fill_cmd_or_file(t_fill_ctx *ctx)
 {
-	if (is_redirection((*tokens)->type) && (*tokens)->next)
+	if (is_redirection((*(ctx->tokens))->type) && (*(ctx->tokens))->next)
 	{
-		**current = create_file_node(*tokens, garb);
-		*current = &(**current)->next;
-		*tokens = (*tokens)->next;
+		**(ctx->current) = create_file_node(*(ctx->tokens), ctx->garb);
+		*(ctx->current) = &(**(ctx->current))->next;
+		*(ctx->tokens) = (*(ctx->tokens))->next;
 	}
 	else
 	{
-		new_cmd->cmd[*i] = (*tokens)->value;
-		(*i)++;
+		ctx->new_cmd->cmd[*(ctx->i)] = (*(ctx->tokens))->value;
+		(*(ctx->i))++;
 	}
 }
 
 static void	parse_single_command(t_token **tokens, t_exec *new_cmd,
 		t_garbage **garb)
 {
-	t_file	**current;
-	int		i;
+	t_file		**current;
+	int			i;
+	t_fill_ctx	ctx;
 
 	current = &(new_cmd->files);
 	i = 0;
+	ctx.new_cmd = new_cmd;
+	ctx.current = &current;
+	ctx.tokens = tokens;
+	ctx.i = &i;
+	ctx.garb = garb;
 	while (*tokens && (*tokens)->type != PIPE)
 	{
 		if ((*tokens)->value)
-			fill_cmd_or_file(new_cmd, &current, tokens, &i, garb);
+			fill_cmd_or_file(&ctx);
 		*tokens = (*tokens)->next;
 	}
 	new_cmd->cmd[i] = NULL;

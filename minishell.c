@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/15 06:44:13 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/15 11:15:09 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "execution/execution.h"
 
 int	g_handl_signals = 0;
+
 
 void	ft_read_loop(char **envp, t_exec **data)
 {
@@ -31,6 +32,7 @@ void	ft_read_loop(char **envp, t_exec **data)
 		env = NULL;
 		lst_add_back(&env, ft_lstnew("PATH", PATHD, &garb));
 		lst_add_back(&env, ft_lstnew("PWD", getcwd(NULL, 0), &garb));
+		lst_add_back(&env, ft_lstnew("SHLVL", "1", &garb));
 		lst_add_back(&env, ft_lstnew("_", "/usr/bin/env", &garb));
 	}
 	while (1)

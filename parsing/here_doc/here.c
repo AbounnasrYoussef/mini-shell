@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:21:08 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/15 06:30:30 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/15 11:03:55 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ int	count_nbr_herdoc(t_file *file)
 	return (i);
 }
 
+static void	print_e(t_file *file)
+{
+	if (count_nbr_herdoc(file) > 15)
+	{
+		printf("maximum here-document count exceeded\n");
+		exit(2);
+	}
+}
+
 void	process_heredocs(char *line, t_exec *exec,
 		t_list_env *env, t_garbage **garb)
 {
@@ -51,11 +60,7 @@ void	process_heredocs(char *line, t_exec *exec,
 				expand = 0;
 			if (file->type == HERE_DOC)
 			{
-				if (count_nbr_herdoc(file) > 15)
-				{
-					printf("maximum here-document count exceeded\n");
-					exit(2);
-				}
+				print_e(file);
 				file->fd = create_heredoc(file->file_name, expand, env, garb);
 			}
 			if (g_handl_signals == 3)

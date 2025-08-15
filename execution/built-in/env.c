@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:33:27 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/11 00:39:39 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/15 11:18:19 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_list_env	*ft_envvv(char **str, t_garbage **garb)
 		{
 			lst_add_back(&copy_env, ft_lstnew(splitt[0], splitt[1], garb));
 			if (ft_strcmpp(splitt[0], "PWD") == 0)
-				lst_add_back(&copy_env, ft_lstnew("PO", splitt[1], garb));
+				lst_add_back(&copy_env, ft_lstnew("PO", splitt[1], garb));  // 5assek dir pwd f blaaste po
 		}
 		else
 			lst_add_back(&copy_env, ft_lstnew(splitt[0], NULL, garb));
