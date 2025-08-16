@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 16:13:22 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/16 03:28:53 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/16 16:02:56 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void	ft_print_env_ex(t_list_env *env)
 {
 	while (env != NULL)
 	{
-		if (ft_strcmpp(env->variable, "_") != 0)
+		if (ft_strcmp(env->variable, "") != 0)
 		{
-			if (env->val != NULL)
-				printf("declare -x %s=\"%s\"\n", env->variable, env->val);
-			else
-				printf("declare -x %s\n", env->variable);
+			if (ft_strcmpp(env->variable, "_") != 0)
+			{
+				if (env->val != NULL)
+					printf("declare -x %s=\"%s\"\n", env->variable, env->val);
+				else
+					printf("declare -x %s\n", env->variable);
+			}
 		}
 		env = env->next;
 	}
@@ -31,9 +34,12 @@ void	ft_print_env(t_list_env *env)
 {
 	while (env != NULL)
 	{
-		if (env->val != NULL && ft_strcmpp(env->val, "") != 0)
+		if (ft_strcmp(env->variable, "") != 0)
 		{
-			printf("%s=%s\n", env->variable, env->val);
+			if (env->val != NULL && ft_strcmpp(env->val, "") != 0)
+			{
+				printf("%s=%s\n", env->variable, env->val);
+			}
 		}
 		env = env->next;
 	}

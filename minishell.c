@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/16 03:52:46 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/16 16:05:26 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@ int	g_handl_signals = 0;
 
 void	env_i_and_readline(char **envp, t_read_loop *inf_read, int flag)
 {
+	char **str;
+	
+	str = ft_malloc(&(*inf_read).garb, 6 * sizeof(char *));
 	if (flag == 0)
 	{
-		(*inf_read).env = ft_envvv(envp, &((*inf_read).garb));
+		str[0] = PATHD;
+		str[1] = ft_concat("PWD=", getcwd(NULL, 0), &(*inf_read).garb);
+		str[2] = "SHLVL = 1";
+		str[3] = "_=/usr/bin/env";
+		str[4] = "OLDPWD";
+		str[5] = NULL;
 		if (envp[0] == NULL)
-		{
-			(*inf_read).env = NULL;
-			lst_add_back(&(*inf_read).env, ft_lstnew("PATH",
-					PATHD, &(*inf_read).garb));
-			lst_add_back(&(*inf_read).env, ft_lstnew("PWD",
-					getcwd(NULL, 0), &(*inf_read).garb));
-			lst_add_back(&(*inf_read).env, ft_lstnew("SHLVL", "1",
-					&(*inf_read).garb));
-			lst_add_back(&(*inf_read).env, ft_lstnew("_", "/usr/bin/env",
-					&(*inf_read).garb));
-		}
+			(*inf_read).env = ft_envvv(str, &(*inf_read).garb);
+		else
+			(*inf_read).env = ft_envvv(envp, &((*inf_read).garb));
 	}
 	else if (flag == 1)
 	{

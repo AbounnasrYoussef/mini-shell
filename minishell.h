@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/16 03:45:38 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/16 15:50:54 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "execution/execution.h"
 # include <termios.h>
 
-# define PATHD "/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
+# define PATHD "PATH=/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
 
 extern int	g_handl_signals;
 
