@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/16 18:54:12 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/16 19:31:02 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,10 @@ int	main(int ac, char **av, char **envp)
 	data = NULL;
 	if (!isatty(0) || !isatty(1))
 	{
-		printf("jhdggajhdgj\n\n");
 		return (1);
 	}
 		
 	ft_read_loop(envp, &data);
+	write(1, "exit\n", 5);
 	return (ft_exit_status(0, 0));
 }
