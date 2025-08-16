@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 00:44:30 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 11:19:49 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/16 19:16:25 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	norm_check_arg(char **args, t_export *ix)
 		1 && (error_export(args, (*ix).i, &((*ix).error)), (*ix).c = 1);
 		if (args[(*ix).i + 1] != NULL)
 			return ((*ix).i++, 1);
+		else
+			return (0);
 	}
 	while (args[(*ix).i][(*ix).j] != '\0' && args[(*ix).i][(*ix).j] != '='
 		&& args[(*ix).i][(*ix).j] != '+')
@@ -29,15 +31,21 @@ int	norm_check_arg(char **args, t_export *ix)
 			1 && (error_export(args, (*ix).i, &((*ix).error)), (*ix).c = 1);
 			if (args[(*ix).i + 1] != NULL)
 				return ((*ix).i++, 1);
+			else
+				return (0);
 		}
 		(*ix).j++;
 	}
-	return (0);
+	return (5);
 }
 
 int	norm_check_arg2(char **args, t_export *ix)
 {
-	if (args[(*ix).i][(*ix).j] == '+')
+	if (norm_check_arg(args, ix) == 0)
+		return (0);
+	else if (norm_check_arg(args, ix) == 1)
+		return (1) ;
+	else if (args[(*ix).i][(*ix).j] == '+')
 	{
 		if (args[(*ix).i][((*ix).j) + 1] != '=')
 		{
@@ -47,10 +55,12 @@ int	norm_check_arg2(char **args, t_export *ix)
 				(*ix).i++;
 				return (1);
 			}
+			else
+				return (0);
 		}
 		(*ix).j++;
 	}
-	return (0);
+	return (5);
 }
 
 void	norm_exp_el_h(char *args, t_export *indx, t_garbage **garb)

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/12 23:06:25 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/16 19:15:45 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	export_el(t_list_env **env, char *args, t_export indx, t_garbage **garb)
 
 void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 {
-	ix.error = 0;
 	while (args[ix.i] != NULL)
 	{
 		if (ft_strcmpp(args[ix.i], "") == 0)
@@ -86,9 +85,9 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 		}
 		else
 		{
-			if (norm_check_arg(args, &ix) == 1)
-				continue ;
-			if (norm_check_arg2(args, &ix) == 1)
+			if (norm_check_arg2(args, &ix) == 0)
+				break ;
+			else if (norm_check_arg2(args, &ix) == 1)
 				continue ;
 			export_el(env, args[ix.i], ix, garb);
 			ix.j = 1;
