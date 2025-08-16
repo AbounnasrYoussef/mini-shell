@@ -918,20 +918,22 @@
 #bash-3.2$ << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12 << 13 << 14 << 15 << 16 << 17 << 18 << 19
 #bash: maximum here-document count exceeded
 
-minishell$ cat << "m"
-> ^C
-^C
-^C
-^C
-^C
-^C
-^C
+#minishell$ cat << "m"
+#> ^C
+#^C
+#^C
+#^C
+#^C
+#^C
+#^C
 
 
-====== signals
- top
- \
- $?
+#====== signals
+# top
+# \
+# $?
+
+execution
 
  minishell$ "" |
 : command not found
@@ -953,19 +955,12 @@ minishell$
 <<: command not found
 
 
-
 minishell$ export $ffff=./ls
 export: `=./ls' not a valid identifier
 export: `=./ls' not a valid identifier
 export: `=./ls' not a valid identifier
 
-export +
-export ++
 
-bash-3.2$ bash ryfghgaerg
-bash: ryfghgaerg: No such file or directory
-
-execution
 
 > ""
 
