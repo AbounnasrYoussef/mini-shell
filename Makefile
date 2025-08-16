@@ -57,6 +57,7 @@ SRC = minishell.c  signals.c\
 		execution/pipe/pipe.c\
 		execution/pipe/utils_pipe.c\
 		execution/pipe/utils_pipe2.c\
+		execution/pipe/utils_pipe3.c\
 		execution/pipe/cherche_path.c\
 		execution/pipe/utils_cherch_path.c\
 		execution/pipe/ft_redirections.c\
@@ -68,10 +69,10 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) 
-	$(CC) $(OBJ) -o $(NAME) -lreadline -L/mnt/homes/yabounna/.brew/opt/readline/lib -fsanitize=address -g3
+	$(CC) $(OBJ) -o $(NAME) -lreadline -L/mnt/homes/arahhab/.brew/opt/readline/lib -fsanitize=address -g3
 
 $(OBJ): %.o : %.c minishell.h
-	$(CC) $(CFLAGS) -c -I/mnt/homes/yabounna/.brew/opt/readline/include $< -o $@
+	$(CC) $(CFLAGS) -c -I/mnt/homes/arahhab/.brew/opt/readline/include $< -o $@
 
 clean: 
 	rm -f $(OBJ)

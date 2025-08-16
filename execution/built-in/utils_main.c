@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 16:13:22 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 11:31:53 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/16 03:28:53 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_print_env(t_list_env *env)
 	{
 		if (env->val != NULL && ft_strcmpp(env->val, "") != 0)
 		{
-			printf("%s=\"%s\"\n", env->variable, env->val);
+			printf("%s=%s\n", env->variable, env->val);
 		}
 		env = env->next;
 	}

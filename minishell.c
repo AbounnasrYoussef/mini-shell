@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/15 11:15:09 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/16 03:52:46 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,69 +15,104 @@
 
 int	g_handl_signals = 0;
 
-
-void	ft_read_loop(char **envp, t_exec **data)
+void	env_i_and_readline(char **envp, t_read_loop *inf_read, int flag)
 {
-	char				*line;
-	t_garbage			*garb;
-	t_token				*token;
-	int					last_exit_code;
-	t_list_env			*env;
-	t_parsing_context	ctx;
-
-	last_exit_code = 0;
-	env = ft_envvv(envp, &garb);
-	if (envp[0] == NULL)
+	if (flag == 0)
 	{
-		env = NULL;
-		lst_add_back(&env, ft_lstnew("PATH", PATHD, &garb));
-		lst_add_back(&env, ft_lstnew("PWD", getcwd(NULL, 0), &garb));
-		lst_add_back(&env, ft_lstnew("SHLVL", "1", &garb));
-		lst_add_back(&env, ft_lstnew("_", "/usr/bin/env", &garb));
+		(*inf_read).env = ft_envvv(envp, &((*inf_read).garb));
+		if (envp[0] == NULL)
+		{
+			(*inf_read).env = NULL;
+			lst_add_back(&(*inf_read).env, ft_lstnew("PATH",
+					PATHD, &(*inf_read).garb));
+			lst_add_back(&(*inf_read).env, ft_lstnew("PWD",
+					getcwd(NULL, 0), &(*inf_read).garb));
+			lst_add_back(&(*inf_read).env, ft_lstnew("SHLVL", "1",
+					&(*inf_read).garb));
+			lst_add_back(&(*inf_read).env, ft_lstnew("_", "/usr/bin/env",
+					&(*inf_read).garb));
+		}
 	}
-	while (1)
+	else if (flag == 1)
 	{
 		g_handl_signals = 0;
 		save_terminal_settings();
 		setup_signals();
-		garb = NULL;
-		line = readline("minishell$ ");
-		if (!line)
-			break ;
-		if (*line)
-			add_history(line);
-		if (syntaxe_errors(line) == 0)
+		(*inf_read).garb = NULL;
+		(*inf_read).line = readline("minishell$ ");
+	}
+}
+
+void	ft_herdoc_piepe(t_exec **data, t_read_loop *inf_read)
+{
+	if ((*data)->files != NULL)
+	{
+		process_heredocs((*inf_read).line, *data,
+			(*inf_read).env, &(*inf_read).garb);
+		if (g_handl_signals != 3)
+			ft_exit_status(0, 1);
+	}
+	if (*data != NULL && g_handl_signals != 3)
+	{
+		ft_pipe(*data, &(*inf_read).env, &(*inf_read).garb);
+		*data = NULL;
+	}
+}
+
+int	ft_parsing(t_exec **data, t_read_loop inf_read, int flag)
+{
+	if (flag == 0)
+	{
+		if (syntaxe_errors((inf_read).line) == 0)
 		{
-			free(line);
-			free_exec_list(*data);
-			continue ;
-		}
-		token = tokens(line, &garb, &ctx);
-		if (!token)
-		{
-			free(line);
-			continue ;
-		}
-		expand_all_tokens(&token, last_exit_code, env, ctx);
-		*data = parse_tokens_to_exec_list(token, &garb);
-		if (!*data)
-		{
-			ft_free_all(garb);
-			continue ;
-		}
-		if ((*data)->files != NULL)
-		{
-			process_heredocs(line, *data, env, &garb);
-			if (g_handl_signals != 3)
-				ft_exit_status(0, 1);
-		}
-		if (*data != NULL && g_handl_signals != 3)
-		{
-			ft_pipe(*data, &env, &garb);
-			*data = NULL;
+			(free((inf_read).line), free_exec_list(*data));
+			return (0);
 		}
 	}
-	ft_free_all(garb);
+	else if (flag == 1)
+	{
+		if (!inf_read.token)
+		{
+			free(inf_read.line);
+			return (0);
+		}
+	}
+	else if (flag == 2)
+	{
+		if (!*data)
+		{
+			ft_free_all(inf_read.garb);
+			return (0);
+		}
+	}
+	return (1);
+}
+
+void	ft_read_loop(char **envp, t_exec **data)
+{
+	t_read_loop	inf_read;
+
+	env_i_and_readline(envp, &inf_read, 0);
+	while (1)
+	{
+		env_i_and_readline(envp, &inf_read, 1);
+		if (!inf_read.line)
+			break ;
+		if (*inf_read.line)
+			add_history(inf_read.line);
+		if (ft_parsing(data, inf_read, 0) == 0)
+			continue ;
+		inf_read.token = tokens(inf_read.line, &inf_read.garb, &inf_read.ctx);
+		if (ft_parsing(data, inf_read, 1) == 0)
+			continue ;
+		expand_all_tokens(&inf_read.token, inf_read.last_exit_code,
+			inf_read.env, inf_read.ctx);
+		*data = parse_tokens_to_exec_list(inf_read.token, &inf_read.garb);
+		if (ft_parsing(data, inf_read, 2) == 0)
+			continue ;
+		ft_herdoc_piepe(data, &inf_read);
+	}
+	ft_free_all(inf_read.garb);
 }
 
 int	main(int ac, char **av, char **envp)

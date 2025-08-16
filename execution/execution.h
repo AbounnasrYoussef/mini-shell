@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 11:31:22 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/16 03:54:52 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_info_pipe
 	int			j;
 	char		**tab_envv;
 	int			count_cmd;
+	int			status;
 	struct stat	info;
 }	t_info_pipe;
 
@@ -130,4 +131,5 @@ int			check_exist_pwd(t_list_env *env);
 void		ft_change_oldpwd(t_list_env **env);
 void		norm_ft_exec_child(char *cmd, t_garbage **garb);
 void		ft_check_signals(int *status);
+void		ft_status(t_exec *data, int *status);
 #endif

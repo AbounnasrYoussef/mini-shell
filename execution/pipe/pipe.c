@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/15 11:08:16 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/16 03:53:44 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,15 +140,7 @@ void	ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb)
 	else
 		ft_plusieur_cmd(data, env, &inf_pip, garb);
 	waitpid(inf_pip.pid, &status, 0);
-	if (WIFEXITED(status))
-	{
-		if (g_handl_signals == 2 && !data->cmd[0])
-			;
-		else
-			ft_exit_status(WEXITSTATUS(status), 1);
-	}
-	else if (WIFSIGNALED(status))
-		ft_check_signals(&status);
+	ft_status(data, &status);
 	ft_wait_child(&inf_pip);
 	(restore_terminal_settings(), setup_signals());
 }

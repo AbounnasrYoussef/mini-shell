@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/15 10:55:48 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/16 03:45:38 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,16 @@ typedef struct s_fill_ctx
 	int			*i;
 	t_garbage	**garb;
 }	t_fill_ctx;
+
+typedef struct s_read_loop
+{
+	char				*line;
+	t_garbage			*garb;
+	t_token				*token;
+	int					last_exit_code;
+	t_list_env			*env;
+	t_parsing_context	ctx;
+}	t_read_loop;
 
 t_type_token	get_token_type(char *str);
 
