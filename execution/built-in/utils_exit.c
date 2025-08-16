@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 16:02:38 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 01:10:12 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/16 16:32:40 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	error_exit(char *str, int count_cmd, t_garbage **garb)
 {
 	if (count_cmd == 1)
-		write(2, "exit: ", 6);
+		write(2, "exit \n", 7);
+	write(2, "exit: ", 7);
 	write(2, str, ft_strlenn(str));
 	write(2, ": numeric argument required\n", 28);
 	ft_free_all(*garb);
