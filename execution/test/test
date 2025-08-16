@@ -932,3 +932,47 @@ minishell$ cat << "m"
  top
  \
  $?
+
+ minishell$ "" |
+: command not found
+minishell$ " " |
+ : command not found
+minishell$ " s" |
+ s: command not found
+minishell$ s |
+minishell: syntax error
+minishell$ "s" |
+s: command not found
+minishell$ 
+
+
+"" | ls
+"    " |ls
+
+"exit" | <<<<<<
+<<: command not found
+
+
+
+minishell$ export $ffff=./ls
+export: `=./ls' not a valid identifier
+export: `=./ls' not a valid identifier
+export: `=./ls' not a valid identifier
+
+export +
+export ++
+
+bash-3.2$ bash ryfghgaerg
+bash: ryfghgaerg: No such file or directory
+
+execution
+
+> ""
+
+> "   "
+
+
+minishell$ export "" "" ll
+minishell$ export "" ll
+minishell$ export ""
+export: `' not a valid identifier
