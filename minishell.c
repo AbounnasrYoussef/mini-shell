@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/16 20:47:26 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:36:41 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	ft_read_loop(char **envp, t_exec **data)
 {
 	t_read_loop	inf_read;
 
+	inf_read.i = 3;
 	env_i_and_readline(envp, &inf_read, 0);
 	while (1)
 	{
@@ -105,12 +106,12 @@ void	ft_read_loop(char **envp, t_exec **data)
 		inf_read.token = tokens(inf_read.line, &inf_read.garb, &inf_read.ctx);
 		if (ft_parsing(data, inf_read, 1) == 0)
 			continue ;
-		expand_all_tokens(&inf_read.token, inf_read.last_exit_code,
-			inf_read.env, inf_read.ctx);
-		*data = parse_tokens_to_exec_list(inf_read.token, &inf_read.garb);
+		norm_read_loop(data, inf_read);
 		if (ft_parsing(data, inf_read, 2) == 0)
 			continue ;
 		ft_herdoc_piepe(data, &inf_read);
+		while (inf_read.i++ < 1024)
+			close(inf_read.i);
 	}
 	ft_free_all(inf_read.garb);
 }

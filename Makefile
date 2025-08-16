@@ -62,6 +62,7 @@ SRC = minishell.c  signals.c\
 		execution/pipe/utils_cherch_path.c\
 		execution/pipe/ft_redirections.c\
 		execution/pipe/utils_redirection.c\
+		utils_minishell.c\
 
 
 OBJ = $(SRC:.c=.o)

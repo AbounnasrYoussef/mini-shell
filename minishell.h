@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/16 19:58:53 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:38:23 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct s_read_loop
 	int					last_exit_code;
 	t_list_env			*env;
 	t_parsing_context	ctx;
+	int					i;
 }	t_read_loop;
 
 t_type_token	get_token_type(char *str);
@@ -228,5 +229,7 @@ void			append_char(char **tmp, char c, t_garbage **garb);
 void			save_terminal_settings(void);
 void			restore_terminal_settings(void);
 int				ft_exit_status(int status, int flag);
+
+void			norm_read_loop(t_exec **data, t_read_loop	inf_read);
 
 #endif

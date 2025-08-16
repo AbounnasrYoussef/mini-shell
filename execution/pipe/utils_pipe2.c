@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 18:09:22 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/16 19:25:04 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/16 21:35:13 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,12 @@ void	ft_error_pipe2(t_exec *data, t_info_pipe inf_pip, t_garbage **garb)
 
 void	ft_error_fork(void)
 {
+	int	i;
+
+	i = 3;
 	perror("fork");
+	while (i++ < 1024)
+		close(i);
 	ft_exit_status(1, 1);
 }
 
