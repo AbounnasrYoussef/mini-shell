@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 18:09:22 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/15 04:51:09 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/16 19:25:04 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_error_pipe(t_exec *data, t_garbage **garb)
 
 void	ft_error_pipe2(t_exec *data, t_info_pipe inf_pip, t_garbage **garb)
 {
-	if (S_ISDIR((inf_pip.info).st_mode))
+	if (S_ISDIR((inf_pip.info).st_mode) && is_slash(data->cmd[0]) == 0)
 	{
 		if (ft_strcmpp(data->cmd[0], "..") != 0)
 		{
