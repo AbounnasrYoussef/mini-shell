@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 00:44:30 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/16 19:16:25 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/16 20:46:54 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	norm_check_arg2(char **args, t_export *ix)
 	if (norm_check_arg(args, ix) == 0)
 		return (0);
 	else if (norm_check_arg(args, ix) == 1)
-		return (1) ;
+		return (1);
 	else if (args[(*ix).i][(*ix).j] == '+')
 	{
 		if (args[(*ix).i][((*ix).j) + 1] != '=')

@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:19:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/15 10:56:34 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/16 20:46:35 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ static t_file	*create_file_node(t_token *token, t_garbage **garb)
 
 	f = ft_malloc(garb, sizeof(t_file));
 	f->type = token->type;
-	f->file_name = ft_strdup(token->next->value, garb);
+	if (token->next->value == NULL)
+		f->file_name = NULL;
+	else
+		f->file_name = ft_strdup(token->next->value, garb);
 	f->next = NULL;
 	return (f);
 }
