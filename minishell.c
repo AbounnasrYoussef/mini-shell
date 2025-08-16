@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/16 16:05:26 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/16 16:07:25 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	g_handl_signals = 0;
 
 void	env_i_and_readline(char **envp, t_read_loop *inf_read, int flag)
 {
-	char **str;
-	
+	char	**str;
+
 	str = ft_malloc(&(*inf_read).garb, 6 * sizeof(char *));
 	if (flag == 0)
 	{
