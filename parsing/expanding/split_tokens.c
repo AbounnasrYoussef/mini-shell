@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   split_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:37:21 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/15 06:56:39 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/18 14:31:27 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	if_only_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	if (!str[i])
+		return (1);
+	return (0);
+}
 
 t_token	*handle_expanded_tokens(t_token **tokens, t_token *curr,
 		t_expand_ctx *ctx1, t_parsing_context ctx)
@@ -20,8 +32,12 @@ t_token	*handle_expanded_tokens(t_token **tokens, t_token *curr,
 	(void) ctx;
 	if (ft_strcmpp(curr->value, "") != 0)
 	{
-		new_tokens = split_tokens_by_space(curr->value, ctx1->garb, curr->type);
-		replace_token(tokens, curr, new_tokens);
+		if (!if_only_space(curr->value))
+		{
+			new_tokens = split_tokens_by_space(curr->value,
+				ctx1->garb, curr->type);
+			replace_token(tokens, curr, new_tokens);
+		}
 	}
 	else
 		curr->value = NULL;

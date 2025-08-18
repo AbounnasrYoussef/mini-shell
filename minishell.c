@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/16 21:36:41 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/18 14:19:50 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,28 @@ int	ft_parsing(t_exec **data, t_read_loop inf_read, int flag)
 		}
 	}
 	return (1);
+}
+
+void print_token(const t_token *token) {
+    if (!token) {
+        printf("Token: (null)\n");
+        return;
+    }
+    printf("  value: [%s]\n", token->value ? token->value : "(null)");
+    printf("  type: %d\n", token->type);
+    printf("  quoted: %d\n", token->quoted);
+    printf("  double_quote: %d\n", token->double_quote);
+    printf("  join: %d\n", token->join);
+    printf("  next: %p\n", (void*)token->next);
+}
+
+void print_token_list(const t_token *head) {
+    int i = 0;
+    while (head) {
+        printf("Token #%d:\n", i++);
+        print_token(head);
+        head = head->next;
+    }
 }
 
 void	ft_read_loop(char **envp, t_exec **data)

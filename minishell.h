@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/16 21:38:23 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/18 14:20:29 by ihamani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,5 +231,6 @@ void			restore_terminal_settings(void);
 int				ft_exit_status(int status, int flag);
 
 void			norm_read_loop(t_exec **data, t_read_loop	inf_read);
+void print_token_list(const t_token *head);
 
 #endif
