@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/18 14:19:50 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/08/18 19:03:59 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void	ft_read_loop(char **envp, t_exec **data)
 		if (ft_parsing(data, inf_read, 0) == 0)
 			continue ;
 		inf_read.token = tokens(inf_read.line, &inf_read.garb, &inf_read.ctx);
+		print_token_list(inf_read.token);
 		if (ft_parsing(data, inf_read, 1) == 0)
 			continue ;
 		norm_read_loop(data, inf_read);

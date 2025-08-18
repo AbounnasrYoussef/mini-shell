@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:59:42 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/14 19:26:42 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/18 18:59:45 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	print_err(void)
 {
+
 	write(2, "minishell: syntax error\n", 25);
 	ft_exit_status(258, 1);
 	return (-1);
