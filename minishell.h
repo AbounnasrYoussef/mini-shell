@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/19 18:02:01 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/20 00:33:03 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,8 @@ int				is_valid_var_char(char c);
 char			*ft_strtrim_custom(char *str, t_garbage **garb, int quoted);
 t_token			*split_tokens_by_space(char *str, t_garbage **garb,
 					t_type_token type);
-int				should_expand(t_token *curr, t_parsing_context ctx, t_token *prev);
+int				should_expand(t_token *curr, t_parsing_context ctx,
+					t_token *prev);
 t_token			*handle_expanded_tokens(t_token **tokens, t_token *curr,
 					t_expand_ctx *ctx1, t_parsing_context ctx);
 
@@ -231,6 +232,4 @@ void			restore_terminal_settings(void);
 int				ft_exit_status(int status, int flag);
 
 void			norm_read_loop(t_exec **data, t_read_loop	inf_read);
-void print_token_list(const t_token *head);
-
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_at.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:19:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/19 18:07:22 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/20 00:37:14 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ static void	parse_single_command(t_token **tokens, t_exec *new_cmd,
 		*tokens = (*tokens)->next;
 }
 
-static int count_argument(t_token *tokens)
+static int	count_argument(t_token *tokens)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tokens && tokens->type != PIPE)
@@ -96,7 +96,7 @@ t_exec	*parse_tokens_to_exec_list(t_token *tokens, t_garbage **garb)
 	while (tokens)
 	{
 		count = count_argument(tokens);
-		new_cmd = init_new_cmd(garb , count);
+		new_cmd = init_new_cmd(garb, count);
 		if (!head)
 			head = new_cmd;
 		else

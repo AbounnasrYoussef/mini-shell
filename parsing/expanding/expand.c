@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/19 09:46:51 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/20 00:44:21 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,10 @@ void	expand_all_tokens(t_token **tokens, int exit_code,
 			curr = curr->next;
 			continue ;
 		}
-		// print_token_list(curr);
 		curr->value = expand_value(curr, &ctx1, ctx);
 		if (ctx.quoted_flag == 0)
 		{
-			prev = curr;	
+			prev = curr;
 			curr = handle_expanded_tokens(tokens, curr, &ctx1, ctx);
 		}
 		else
@@ -126,4 +125,3 @@ void	expand_all_tokens(t_token **tokens, int exit_code,
 		}
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/19 22:57:26 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 00:58:19 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,36 +85,13 @@ int	ft_parsing(t_exec **data, t_read_loop inf_read, int flag)
 	return (1);
 }
 
-void print_token(const t_token *token) {
-    if (!token) {
-        printf("Token: (null)\n");
-        return;
-    }
-    printf("  value: [%s]\n", token->value ? token->value : "(null)");
-    printf("  type: %d\n", token->type);
-    printf("  quoted: %d\n", token->quoted);
-    printf("  double_quote: %d\n", token->double_quote);
-    printf("  join: %d\n", token->join);
-    printf("  next: %p\n", (void*)token->next);
-}
-
-void print_token_list(const t_token *head) {
-    int i = 0;
-    while (head) {
-        printf("Token #%d:\n", i++);
-        print_token(head);
-        head = head->next;
-    }
-}
-
 void	ft_read_loop(char **envp, t_exec **data)
 {
 	t_read_loop	inf_read;
 
-	inf_read.i = 3;
 	env_i_and_readline(envp, &inf_read, 0);
 	while (1)
-	{	
+	{
 		env_i_and_readline(envp, &inf_read, 1);
 		if (!inf_read.line)
 			break ;
@@ -129,14 +106,11 @@ void	ft_read_loop(char **envp, t_exec **data)
 		if (ft_parsing(data, inf_read, 2) == 0)
 			continue ;
 		ft_herdoc_piepe(data, &inf_read);
+		inf_read.i = 3;
 		while (inf_read.i < 1024)
-		{
-			close(inf_read.i);
-			inf_read.i++;
-		}
+			close(inf_read.i++);
 	}
-
-	ft_free_all(inf_read.garb);	
+	ft_free_all(inf_read.garb);
 }
 
 int	main(int ac, char **av, char **envp)

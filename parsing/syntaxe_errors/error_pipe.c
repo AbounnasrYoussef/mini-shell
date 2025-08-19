@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:59:42 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/18 18:59:45 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/20 00:37:34 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	print_err(void)
 {
-
 	write(2, "minishell: syntax error\n", 25);
 	ft_exit_status(258, 1);
 	return (-1);

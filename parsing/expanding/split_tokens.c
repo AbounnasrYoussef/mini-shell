@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:37:21 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/18 14:31:27 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/08/20 00:52:38 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_token	*handle_expanded_tokens(t_token **tokens, t_token *curr,
 		if (!if_only_space(curr->value))
 		{
 			new_tokens = split_tokens_by_space(curr->value,
-				ctx1->garb, curr->type);
+					ctx1->garb, curr->type);
 			replace_token(tokens, curr, new_tokens);
 		}
 	}

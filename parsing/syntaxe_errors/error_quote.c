@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 13:00:14 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/18 18:52:00 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/20 00:43:43 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	error_quote(char *caracter, int *i)
 	{
 		quote = caracter[(*i)++];
 		while (caracter[*i] && caracter[*i] != quote)
-			(*i)++;	
-		if (caracter[*i]  == quote)
+			(*i)++;
+		if (caracter[*i] == quote)
 		{
 			quote = 0;
 			(*i)++;
