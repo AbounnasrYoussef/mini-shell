@@ -6,18 +6,18 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 10:44:05 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/18 16:21:03 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/19 18:06:35 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_exec	*init_new_cmd(t_garbage **garb)
+t_exec	*init_new_cmd(t_garbage **garb, int count)
 {
 	t_exec	*new_cmd;
 
 	new_cmd = ft_malloc(garb, sizeof(t_exec));
-	new_cmd->cmd = ft_malloc(garb, 2000 * sizeof(char *));
+	new_cmd->cmd = ft_malloc(garb, (count + 1) * sizeof(char *));
 	new_cmd->files = NULL;
 	new_cmd->next = NULL;
 	return (new_cmd);

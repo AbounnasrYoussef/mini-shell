@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_at.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:19:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/18 14:17:49 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/08/19 18:07:22 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static void	fill_cmd_or_file(t_fill_ctx *ctx)
 	}
 	else
 	{
-		ctx->new_cmd->cmd[*(ctx->i)] = (*(ctx->tokens))->value;
-		(*(ctx->i))++;
+		ctx->new_cmd->cmd[ctx->i] = (*(ctx->tokens))->value;
+		(ctx->i)++;
 	}
 }
 
@@ -51,15 +51,13 @@ static void	parse_single_command(t_token **tokens, t_exec *new_cmd,
 		t_garbage **garb)
 {
 	t_file		**current;
-	int			i;
 	t_fill_ctx	ctx;
 
 	current = &(new_cmd->files);
-	i = 0;
 	ctx.new_cmd = new_cmd;
 	ctx.current = &current;
 	ctx.tokens = tokens;
-	ctx.i = &i;
+	ctx.i = 0;
 	ctx.garb = garb;
 	while (*tokens && (*tokens)->type != PIPE)
 	{
@@ -67,9 +65,22 @@ static void	parse_single_command(t_token **tokens, t_exec *new_cmd,
 			fill_cmd_or_file(&ctx);
 		*tokens = (*tokens)->next;
 	}
-	new_cmd->cmd[i] = NULL;
+	new_cmd->cmd[ctx.i] = NULL;
 	if (*tokens && (*tokens)->type == PIPE)
 		*tokens = (*tokens)->next;
+}
+
+static int count_argument(t_token *tokens)
+{
+	int i;
+
+	i = 0;
+	while (tokens && tokens->type != PIPE)
+	{
+		tokens = tokens->next;
+		i++;
+	}
+	return (i);
 }
 
 t_exec	*parse_tokens_to_exec_list(t_token *tokens, t_garbage **garb)
@@ -77,12 +88,15 @@ t_exec	*parse_tokens_to_exec_list(t_token *tokens, t_garbage **garb)
 	t_exec	*head;
 	t_exec	*cmd;
 	t_exec	*new_cmd;
+	int		count;
 
 	head = NULL;
 	cmd = NULL;
+	count = 0;
 	while (tokens)
 	{
-		new_cmd = init_new_cmd(garb);
+		count = count_argument(tokens);
+		new_cmd = init_new_cmd(garb , count);
 		if (!head)
 			head = new_cmd;
 		else

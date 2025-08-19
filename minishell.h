@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/19 09:40:28 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/19 18:02:01 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct s_fill_ctx
 	t_exec		*new_cmd;
 	t_file		***current;
 	t_token		**tokens;
-	int			*i;
+	int			i;
 	t_garbage	**garb;
 }	t_fill_ctx;
 
@@ -184,7 +184,7 @@ void			free_exec_list(t_exec *exec_list);
 int				is_redirection(t_type_token type);
 t_file			*extract_redirs_from_tokens(t_token *tokens, t_garbage **garb);
 t_exec			*parse_tokens_to_exec_list(t_token *tokens, t_garbage **garb);
-t_exec			*init_new_cmd(t_garbage **garb);
+t_exec			*init_new_cmd(t_garbage **garb, int count);
 
 /* Libft-like utils */
 int				ft_isalnum(int c);

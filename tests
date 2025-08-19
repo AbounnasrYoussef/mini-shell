@@ -1,0 +1,12 @@
+minishell$ unset PATH
+minishell$ ls
+ls: No such file or directory
+minishell$ ls
+ls: No such file or directory
+minishell$ cat
+cat: No such file or directory
+minishell$ ./minishell
+minishell$ ls
+ls: No such file or directory
+minishell$ 
+////////////////////////////////////////////////////////////////////
