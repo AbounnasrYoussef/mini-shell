@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/19 14:59:22 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/19 22:57:26 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,10 @@ void	env_i_and_readline(char **envp, t_read_loop *inf_read, int flag)
 
 void	ft_herdoc_piepe(t_exec **data, t_read_loop *inf_read)
 {
-	if ((*data)->files != NULL)
-	{
-		process_heredocs((*inf_read).line, *data,
-			(*inf_read).env, &(*inf_read).garb);
-		if (g_handl_signals != 3)
-			ft_exit_status(0, 1);
-	}
+	process_heredocs((*inf_read).line, *data,
+		(*inf_read).env, &(*inf_read).garb);
+	if (g_handl_signals != 3)
+		ft_exit_status(0, 1);
 	if (*data != NULL && g_handl_signals != 3)
 	{
 		ft_pipe(*data, &(*inf_read).env, &(*inf_read).garb);
@@ -132,14 +129,13 @@ void	ft_read_loop(char **envp, t_exec **data)
 		if (ft_parsing(data, inf_read, 2) == 0)
 			continue ;
 		ft_herdoc_piepe(data, &inf_read);
+		while (inf_read.i < 1024)
+		{
+			close(inf_read.i);
+			inf_read.i++;
+		}
+	}
 
-	}
-	while (inf_read.i < 1024)
-	{
-		//printf("%d\n\n", inf_read.i);
-		close(inf_read.i);
-		inf_read.i++;
-	}
 	ft_free_all(inf_read.garb);	
 }
 
@@ -151,9 +147,7 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	data = NULL;
 	if (!isatty(0) || !isatty(1))
-	{
 		return (1);
-	}
 	ft_read_loop(envp, &data);
 	write(1, "exit\n", 5);
 	return (ft_exit_status(0, 0));

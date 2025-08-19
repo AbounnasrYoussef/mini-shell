@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:21:08 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/19 15:49:08 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/19 22:54:58 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	process_heredocs(char *line, t_exec *exec,
 {
 	t_file	*file;
 	int		expand;
-
+	
 	expand = 1;
 	while (exec)
 	{
