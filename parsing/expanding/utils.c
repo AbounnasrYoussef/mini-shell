@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:41:33 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/19 09:49:51 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/19 15:02:25 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	should_expand(t_token *curr, t_parsing_context ctx, t_token *prev)
 {
+	if (!curr->value[0])
+		return (0);
 	if (prev && prev->type == HERE_DOC)
 		return (0);
 	if (ctx.quoted_flag == 2)
