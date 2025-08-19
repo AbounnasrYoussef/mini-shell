@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/18 19:03:59 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/19 06:42:00 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	ft_read_loop(char **envp, t_exec **data)
 	inf_read.i = 3;
 	env_i_and_readline(envp, &inf_read, 0);
 	while (1)
-	{
+	{	
 		env_i_and_readline(envp, &inf_read, 1);
 		if (!inf_read.line)
 			break ;
@@ -133,10 +133,15 @@ void	ft_read_loop(char **envp, t_exec **data)
 		if (ft_parsing(data, inf_read, 2) == 0)
 			continue ;
 		ft_herdoc_piepe(data, &inf_read);
-		while (inf_read.i++ < 1024)
-			close(inf_read.i);
+
 	}
-	ft_free_all(inf_read.garb);
+	while (inf_read.i < 1024)
+	{
+		//printf("%d\n\n", inf_read.i);
+		close(inf_read.i);
+		inf_read.i++;
+	}
+	ft_free_all(inf_read.garb);	
 }
 
 int	main(int ac, char **av, char **envp)

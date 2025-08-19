@@ -1,0 +1,13 @@
+Makefile
+execution
+l
+minishell
+minishell.c
+minishell.h
+minishell.o
+parsing
+signals.c
+signals.o
+test_parsing
+utils_minishell.c
+utils_minishell.o
