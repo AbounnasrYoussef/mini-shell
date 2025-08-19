@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 13:29:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/15 11:00:58 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/19 09:47:32 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	create_heredoc(char *delimiter, int expand, t_list_env *env,
 	int				saved_stdin;
 	t_heredoc_ctx	ctx;
 
+	printf("(%s)\n", delimiter);
 	if (pipe(fd) == -1)
 		return (perror("pipe"), -1);
 	1 && (ctx.expand = expand, ctx.env = env, ctx.garb = garb);

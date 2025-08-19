@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handel_world.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:38:19 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/15 06:56:39 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/19 09:55:16 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,8 @@ void	handle_word(t_parsing_context *ctx, t_token **tokens)
 		if (ctx->line[*ctx->index] == '\'' || ctx->line[*ctx->index] == '\"')
 			handle_quoted_part(ctx, &res, &ctx->quoted_flag);
 		else
-		{
 			res = handle_non_quoted_part(ctx);
-		}
 	}
 	if (res)
-	{
 		add_token(tokens, new_token(res, WORD, ctx->quoted_flag, ctx->garb));
-	}
 }

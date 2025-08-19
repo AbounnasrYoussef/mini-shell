@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:41:33 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/18 14:25:56 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/08/19 09:49:51 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	should_expand(t_token *curr, t_parsing_context ctx)
+int	should_expand(t_token *curr, t_parsing_context ctx, t_token *prev)
 {
+	if (prev && prev->type == HERE_DOC)
+		return (0);
 	if (ctx.quoted_flag == 2)
 		return (0);
 	if (ctx.quoted_flag == 1)

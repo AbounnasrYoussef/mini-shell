@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:21:08 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/18 14:03:48 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/08/19 09:58:18 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ static void	print_e(t_file *file)
 		exit(2);
 	}
 }
+
+// char *delimeter_exp(char *file)
+// {
+	
+// }
 
 void	process_heredocs(char *line, t_exec *exec,
 		t_list_env *env, t_garbage **garb)

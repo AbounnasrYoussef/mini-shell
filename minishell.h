@@ -6,7 +6,7 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/18 16:57:47 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/19 09:40:28 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ int				is_valid_var_char(char c);
 char			*ft_strtrim_custom(char *str, t_garbage **garb, int quoted);
 t_token			*split_tokens_by_space(char *str, t_garbage **garb,
 					t_type_token type);
-int				should_expand(t_token *curr, t_parsing_context ctx);
+int				should_expand(t_token *curr, t_parsing_context ctx, t_token *prev);
 t_token			*handle_expanded_tokens(t_token **tokens, t_token *curr,
 					t_expand_ctx *ctx1, t_parsing_context ctx);
 

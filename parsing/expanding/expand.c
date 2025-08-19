@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ihamani <ihamani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:08:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/18 14:27:13 by ihamani          ###   ########.fr       */
+/*   Updated: 2025/08/19 09:46:51 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,22 +97,33 @@ void	expand_all_tokens(t_token **tokens, int exit_code,
 {
 	t_token			*curr;
 	t_expand_ctx	ctx1;
+	t_token			*prev;
 
 	curr = *tokens;
 	ctx1.env = env;
 	ctx1.exit_code = exit_code;
 	ctx1.garb = ctx.garb;
+	prev = NULL;
 	while (curr)
 	{
-		if (!should_expand(curr, ctx))
+		if (!should_expand(curr, ctx, prev))
 		{
+			prev = curr;
 			curr = curr->next;
 			continue ;
 		}
+		// print_token_list(curr);
 		curr->value = expand_value(curr, &ctx1, ctx);
 		if (ctx.quoted_flag == 0)
+		{
+			prev = curr;	
 			curr = handle_expanded_tokens(tokens, curr, &ctx1, ctx);
+		}
 		else
+		{
+			prev = curr;
 			curr = curr->next;
+		}
 	}
 }
+
