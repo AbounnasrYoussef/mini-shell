@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAGS =  -Wall -Wextra -Werror -fsanitize=address
+CFLAGS =  -Wall -Wextra -Werror -fsanitize=address -g
 PARS = parsing
 SRC = minishell.c  signals.c\
 		$(PARS)/syntaxe_errors/syntaxe_errors.c\
@@ -73,7 +73,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) 
-	$(CC) $(OBJ) -o $(NAME) -lreadline -L/mnt/homes/$$USER/.brew/opt/readline/lib -fsanitize=address
+	$(CC) $(OBJ) -o $(NAME) -lreadline -L/mnt/homes/$$USER/.brew/opt/readline/lib -fsanitize=address -g
 
 $(OBJ): %.o : %.c minishell.h
 	$(CC) $(CFLAGS) -c -I/mnt/homes/$$USER/.brew/opt/readline/include $< -o $@

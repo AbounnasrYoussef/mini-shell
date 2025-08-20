@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:23:13 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 14:29:52 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 15:52:19 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*get_env_value(char *name, t_list_env *env, t_garbage **garb)
 
 static char	*expand_special_vars(char *value, int *i, t_expand_ctx *ctx)
 {
+	
 	if (!value[*i + 1])
 	{
 		(*i)++;

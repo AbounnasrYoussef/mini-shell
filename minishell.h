@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 14:53:57 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:31:34 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,13 +143,11 @@ typedef struct s_inf_expand_red
 
 t_type_token	get_token_type(char *str);
 
-/* Parsing errors */
 int				syntaxe_errors(char *args);
 int				error_quote(char *caracter, int *i);
 int				error_pipe(char *caracter, int *i);
 int				error_redir(char *str, int *i);
 
-/* Tokenization */
 t_token			*tokens(const char *line, t_garbage **garb,
 					t_parsing_context *ctx);
 void			handel_quote(const char *line, int *i,
@@ -165,7 +163,6 @@ t_token			*new_token_0(char *value, t_type_token type,
 t_token			*new_token(char *value, t_type_token type, int i,
 					t_garbage **garb);
 
-/* Expansion */
 void			expand_all_tokens(t_token **tokens, int exit_code,
 					t_list_env *env, t_parsing_context ctx);
 char			*expand_token(char *value, int exit_code,
@@ -190,7 +187,6 @@ t_token			*handle_expanded_tokens(t_token **tokens, t_token *curr,
 t_token			*update_curr_after_expand(t_token **tokens,
 					t_token *curr, t_expand_ctx *ctx1, t_parsing_context ctx);
 
-/* Execution parsing */
 char			**extract_cmd_from_tokens(t_token *tokens, t_garbage **garb);
 void			free_exec_list(t_exec *exec_list);
 int				is_redirection(t_type_token type);
@@ -198,7 +194,6 @@ t_file			*extract_redirs_from_tokens(t_token *tokens, t_garbage **garb);
 t_exec			*parse_tokens_to_exec_list(t_token *tokens, t_garbage **garb);
 t_exec			*init_new_cmd(t_garbage **garb, int count);
 
-/* Libft-like utils */
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);
 char			*ft_itoa(int n, t_garbage **garb);
@@ -219,11 +214,9 @@ void			space_skip(const char *line, int *i);
 size_t			ft_strlen(const char *s);
 int				if_only_space(char *str);
 
-/* Signals */
 void			setup_signals(void);
 void			handle_sigint(int sig);
 
-/* Heredoc */
 void			process_heredocs(char *line, t_exec *exec,
 					t_list_env *env, t_garbage **garb);
 int				heredoc_expand(char *line, t_list_env *env,

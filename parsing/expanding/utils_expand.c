@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 14:36:56 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 14:54:06 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:31:46 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,42 @@
 
 char	*expand_red(char *value, t_expand_ctx *ctx, t_garbage **garb)
 {
-	t_inf_expand_red	inf_red;
+	int		i;
+	char	*res;
+	char	*tmp;
 
-	inf_red.content = expand_dollar(value, &inf_red.i, ctx);
-	if (check_name(inf_red.content, garb))
-		return (NULL);
-	inf_red.res = ft_strdup("", garb);
-	while (value[inf_red.i])
+	i = 0;
+	res = ft_strdup("", garb);
+	while (value[i])
 	{
-		if (value[inf_red.i] == '\'')
-			append_single_quote(value, &inf_red.i, &inf_red.res, garb);
-		else if (value[inf_red.i] == '"')
-			append_double_quote(value, &inf_red.i, &inf_red.res, *ctx);
-		else if (value[inf_red.i] == '$')
-			inf_red.res = ft_strjoin(inf_red.res, inf_red.content, garb);
+		if (value[i] == '\'')
+			append_single_quote(value, &i, &res, garb);
+		else if (value[i] == '"')
+			append_double_quote(value, &i, &res, *ctx);
+		else if (value[i] == '$')
+		{
+			res = ft_strjoin(res, expand_dollar(value, &i, ctx), garb);
+			if (check_name(res, garb))
+				return (NULL);
+		}	
 		else
 		{
-			inf_red.tmp = ft_substr(value, inf_red.i, 1, garb);
-			inf_red.res = ft_strjoin(inf_red.res, inf_red.tmp, garb);
-			inf_red.i++;
+			tmp = ft_substr(value, i, 1, garb);
+			res = ft_strjoin(res, tmp, garb);
+			i++;
 		}
 	}
-	if (ft_strcmpp(inf_red.res, "") == 0 && value[0] == '$'
+	if (ft_strcmpp(res, "") == 0 && value[0] == '$'
 		&& get_env_value(&value[1], ctx->env, garb) == NULL)
 		return (NULL);
-	return (inf_red.res);
+	return (res);
 }
 
 t_token	*check_if_red(t_token *curr, t_garbage **garb,
 		t_expand_ctx ctx1)
 {
 	curr = curr->next;
-	if (curr)
+	if (curr && ft_strchr(curr->value, '$'))
 	{
 		curr->value = expand_red(curr->value, &ctx1, garb);
 		return (curr->next);
