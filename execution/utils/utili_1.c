@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:37 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/14 11:20:19 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 14:00:14 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	ft_strlen_argc(char **str)
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i] != NULL)
+	while (str && str[i] && str[i] != NULL)
 	{
 		i++;
 	}

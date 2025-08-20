@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 18:37:51 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/12 22:55:54 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 12:38:05 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,6 @@ int	is_espace_tabulion(char *cmd)
 
 void	error_cherch_path(char *cmd, t_garbage **garb)
 {
-	if (ft_strcmpp(cmd, "$laydir_lkhir") == 0)
-	{
-		exit(0);
-	}
 	write(2, cmd, ft_strlenn(cmd));
 	write(2, ": command not found\n", 20);
 	ft_free_all(*garb);

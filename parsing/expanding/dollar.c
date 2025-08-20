@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 10:23:13 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/12 23:13:52 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 14:29:52 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_env_value(char *name, t_list_env *env, t_garbage **garb)
 			return (ft_strdup(env->val, garb));
 		env = env->next;
 	}
-	return (ft_strdup("", garb));
+	return (NULL);
 }
 
 static char	*expand_special_vars(char *value, int *i, t_expand_ctx *ctx)

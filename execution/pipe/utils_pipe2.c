@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 18:09:22 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/16 21:35:13 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 12:40:07 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ft_error_pipe(t_exec *data, t_garbage **garb)
 
 void	ft_error_pipe2(t_exec *data, t_info_pipe inf_pip, t_garbage **garb)
 {
+	if (ft_strcmpp(data->cmd[0], "..") == 0)
+		error_cherch_path(data->cmd[0], garb);
 	if (S_ISDIR((inf_pip.info).st_mode) && is_slash(data->cmd[0]) == 0)
 	{
 		if (ft_strcmpp(data->cmd[0], "..") != 0)
@@ -33,8 +35,6 @@ void	ft_error_pipe2(t_exec *data, t_info_pipe inf_pip, t_garbage **garb)
 			write(2, ": is a directory \n", 18);
 			(ft_free_all(*garb), exit(126));
 		}
-		else if (ft_strcmpp(data->cmd[0], "..") == 0)
-			error_cherch_path(data->cmd[0], garb);
 	}
 	else if (errno == 20)
 	{

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   single_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 10:57:55 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 12:03:50 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/20 12:41:33 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static t_token	*update_curr_after_expand(t_token **tokens,
+t_token	*update_curr_after_expand(t_token **tokens,
 		t_token *curr, t_expand_ctx *ctx1, t_parsing_context ctx)
 {
 	if (ctx.quoted_flag == 0)

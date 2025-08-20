@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 12:04:35 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/20 14:53:57 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,14 @@ typedef struct s_read_loop
 	int					flag_path;
 }	t_read_loop;
 
+typedef struct s_inf_expand_red
+{
+	int		i;
+	char	*res;
+	char	*tmp;
+	char	*content;
+}	t_inf_expand_red;
+
 t_type_token	get_token_type(char *str);
 
 /* Parsing errors */
@@ -238,4 +246,7 @@ int				ft_exit_status(int status, int flag);
 void			norm_read_loop(t_exec **data, t_read_loop	inf_read);
 int				check_exist_path(t_list_env *env);
 void			add_path(t_read_loop *inf_read);
+char			*expand_red(char *value, t_expand_ctx *ctx, t_garbage **garb);
+t_token			*check_if_red(t_token *curr, t_garbage **garb,
+					t_expand_ctx ctx1);
 #endif

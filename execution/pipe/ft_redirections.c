@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:10:23 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/19 06:49:34 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 14:35:35 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,22 @@ void	error_dolar(char *file_name)
 	write(2, ": ambiguous redirect\n", 21);
 	exit(1);
 	ft_exit_status(1, 1);
+}
+
+int	check_name(char *str, t_garbage **garb)
+{
+	char	**split;
+	char	**split2;
+	int		count_word;
+	int		count_word2;
+
+	split = ft_splitt(str, ' ', garb);
+	count_word = ft_strlen_argc(split);
+	split2 = ft_splitt(str, '\t', garb);
+	count_word2 = ft_strlen_argc(split);
+	if (count_word > 1 || count_word2 > 1 || is_espace_tabulion(str) == 0)
+		return (1);
+	return (0);
 }
 
 void	ft_redirection(t_exec *data, t_garbage **garb)

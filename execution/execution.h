@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 11:22:26 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 13:08:08 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,4 +134,5 @@ void		norm_ft_exec_child(char *cmd, t_garbage **garb);
 void		ft_check_signals(int *status);
 void		ft_status(t_exec *data, int *status);
 void		change_flag_path(t_read_loop *inf_read, t_export indx);
+int			check_name(char *str, t_garbage **garb);
 #endif
