@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 12:59:18 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 20:19:55 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 20:37:36 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_unset(t_list_env **list_env, char **args)
 			if (args[i + 1] != NULL)
 			{
 				i++;
-				continue;
+				continue ;
 			}
 		}
 		if (ft_strcmpp(args[i], "_") == 0)
@@ -86,7 +86,7 @@ void	ft_unset(t_list_env **list_env, char **args)
 			if (args[i + 1] != NULL)
 			{
 				i++;
-				continue;
+				continue ;
 			}
 		}
 		norm_ft_unset(args, &i, &j, &error);
