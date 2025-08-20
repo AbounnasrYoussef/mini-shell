@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 00:58:19 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 09:37:47 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	ft_read_loop(char **envp, t_exec **data)
 {
 	t_read_loop	inf_read;
 
+	inf_read.garb = NULL;
 	env_i_and_readline(envp, &inf_read, 0);
 	while (1)
 	{

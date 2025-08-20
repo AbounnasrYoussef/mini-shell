@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   struct_at.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 09:19:44 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 00:37:14 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 09:07:12 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-int	is_redirection(t_type_token type)
-{
-	return (type == RDR_IN || type == RDR_OUT
-		|| type == APPEND || type == HERE_DOC);
-}
 
 static t_file	*create_file_node(t_token *token, t_garbage **garb)
 {

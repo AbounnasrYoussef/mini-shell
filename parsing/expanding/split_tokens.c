@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   split_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 18:37:21 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 00:52:38 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 09:05:25 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-int	if_only_space(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] == ' ')
-		i++;
-	if (!str[i])
-		return (1);
-	return (0);
-}
 
 t_token	*handle_expanded_tokens(t_token **tokens, t_token *curr,
 		t_expand_ctx *ctx1, t_parsing_context ctx)

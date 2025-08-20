@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 00:33:03 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 09:05:11 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,7 @@ int				is_operator(char c);
 int				redirection(char c);
 void			space_skip(const char *line, int *i);
 size_t			ft_strlen(const char *s);
+int				if_only_space(char *str);
 
 /* Signals */
 void			setup_signals(void);
