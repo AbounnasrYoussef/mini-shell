@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 00:44:30 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/16 20:46:54 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/20 11:22:08 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,10 @@ void	norm_exp_el_h(char *args, t_export *indx, t_garbage **garb)
 	}
 	(*indx).i = (*indx).i - (*indx).j;
 	(*indx).arg_ex[1] = ft_malloc(garb, ((*indx).j + 1));
+}
+
+void	change_flag_path(t_read_loop *inf_read, t_export indx)
+{
+	if (ft_strcmpp(indx.arg_ex[0], "PATH") == 0)
+		(*inf_read).flag_path = 0;
 }

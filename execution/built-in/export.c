@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 11:08:05 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 11:21:46 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ void	export_el(t_list_env **env, char *args, t_export indx,
 		indx.i++;
 	}
 	indx.arg_ex[0][indx.i] = '\0';
-	if (ft_strcmpp(indx.arg_ex[0], "PATH") == 0)
-		(*inf_read).flag_path = 0;
+	change_flag_path(&(*inf_read), indx);
 	if (args[indx.i] == '+' && args[indx.i + 1] == '=')
 	{
 		indx.c = 1;

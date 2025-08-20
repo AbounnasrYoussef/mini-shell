@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 10:38:47 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 11:14:59 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,4 +234,6 @@ void			restore_terminal_settings(void);
 int				ft_exit_status(int status, int flag);
 
 void			norm_read_loop(t_exec **data, t_read_loop	inf_read);
+int				check_exist_path(t_list_env *env);
+void			add_path(t_read_loop *inf_read);
 #endif

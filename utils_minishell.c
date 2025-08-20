@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_minishell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 21:36:44 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/19 15:00:40 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/20 11:15:20 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,30 @@ void	norm_read_loop(t_exec **data, t_read_loop	inf_read)
 	expand_all_tokens(&inf_read.token, inf_read.last_exit_code,
 		inf_read.env, inf_read.ctx);
 	*data = parse_tokens_to_exec_list(inf_read.token, &inf_read.garb);
+}
+
+int	check_exist_path(t_list_env *env)
+{
+	t_list_env	*copy_env;
+
+	copy_env = env;
+	while (copy_env)
+	{
+		if (ft_strcmpp(copy_env->variable, "PATH") == 0)
+		{
+			return (0);
+		}
+		copy_env = copy_env->next;
+	}
+	return (1);
+}
+
+void	add_path(t_read_loop *inf_read)
+{
+	if (check_exist_path((*inf_read).env) == 1)
+	{
+		lst_add_back(&(*inf_read).env, ft_lstnew("PATH", PATHD,
+				&(*inf_read).garb));
+		(*inf_read).flag_path = 1;
+	}
 }

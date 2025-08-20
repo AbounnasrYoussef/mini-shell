@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 11:10:45 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 11:14:12 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,6 @@
 #include "execution/execution.h"
 
 int	g_handl_signals = 0;
-
-int	check_exist_path(t_list_env *env)
-{
-	t_list_env	*copy_env;
-
-	copy_env = env;
-	while (copy_env)
-	{
-		if (ft_strcmpp(copy_env->variable, "PATH") == 0)
-		{
-			return (0);
-		}
-		copy_env = copy_env->next;
-	}
-	return (1);
-}
 
 void	env_i_and_readline(char **envp, t_read_loop *inf_read, int flag)
 {
@@ -48,11 +32,7 @@ void	env_i_and_readline(char **envp, t_read_loop *inf_read, int flag)
 			(*inf_read).env = ft_envvv(str, &(*inf_read).garb);
 		else
 			(*inf_read).env = ft_envvv(envp, &((*inf_read).garb));
-		if (check_exist_path((*inf_read).env) == 1)
-		{
-			lst_add_back(&(*inf_read).env, ft_lstnew("PATH", PATHD, &(*inf_read).garb));
-			(*inf_read).flag_path = 1;
-		}
+		add_path(&(*inf_read));
 	}
 	else if (flag == 1)
 	{
