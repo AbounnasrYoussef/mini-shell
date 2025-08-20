@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 14:36:56 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 16:31:46 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:36:12 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*expand_red(char *value, t_expand_ctx *ctx, t_garbage **garb)
 			res = ft_strjoin(res, expand_dollar(value, &i, ctx), garb);
 			if (check_name(res, garb))
 				return (NULL);
-		}	
+		}
 		else
 		{
 			tmp = ft_substr(value, i, 1, garb);
