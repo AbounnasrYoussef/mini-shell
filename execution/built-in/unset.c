@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 12:59:18 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/16 02:05:39 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 20:19:55 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,20 @@ void	ft_unset(t_list_env **list_env, char **args)
 		if (ft_strcmpp(args[i], "") == 0 || is_espace_tabulion(args[i]) == 0)
 		{
 			ft_error_unset(args[i], &error);
-			break ;
+			if (args[i + 1] != NULL)
+			{
+				i++;
+				continue;
+			}
 		}
 		if (ft_strcmpp(args[i], "_") == 0)
-			break ;
+		{
+			if (args[i + 1] != NULL)
+			{
+				i++;
+				continue;
+			}
+		}
 		norm_ft_unset(args, &i, &j, &error);
 		ft_supp_arg(list_env, args[i]);
 		j = 0;
