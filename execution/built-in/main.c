@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/11 00:41:51 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 10:47:20 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_change_oldpwd(t_list_env **env)
 }
 
 int	help_built(t_exec *data, t_list_env **env
-		, t_exit inf_exit, t_garbage **garb)
+		, t_exit inf_exit, t_read_loop *inf_read)
 {
 	if (data->cmd[1] != NULL)
 		inf_exit.len = ft_strlenn(data->cmd[1]) - 1;
@@ -61,15 +61,15 @@ int	help_built(t_exec *data, t_list_env **env
 	else if (ft_strcmpp(data->cmd[0], "echo") == 0)
 		return (ft_echo(data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "exit") == 0)
-		return (ft_exit (inf_exit, data->cmd, garb), 0);
+		return (ft_exit (inf_exit, data->cmd, &(*inf_read).garb), 0);
 	else if (ft_strcmpp(data->cmd[0], "export") == 0)
-		return (ft_export(*env, data->cmd, garb), 0);
+		return (ft_export(*env, data->cmd, &(*inf_read)), 0);
 	else if (ft_strcmpp(data->cmd[0], "env") == 0)
 	{
 		if (data->cmd[1] == NULL)
 		{
 			ft_exit_status(0, 1);
-			return (ft_print_env(*env), 0);
+			return (ft_print_env(*env, &(*inf_read)), 0);
 		}
 		else
 			return (error_env(data->cmd[1]), 0);
@@ -80,7 +80,7 @@ int	help_built(t_exec *data, t_list_env **env
 }
 
 int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd
-		, t_garbage **garb)
+		, t_read_loop *inf_read)
 {
 	int		len;
 	t_exit	inf_exit;
@@ -91,5 +91,5 @@ int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd
 		return (-1);
 	if (ft_strcmpp(data->cmd[0], "cd") == 0)
 		return (ft_cd(data->cmd, *env), 0);
-	return (help_built(data, env, inf_exit, garb));
+	return (help_built(data, env, inf_exit, &(*inf_read)));
 }

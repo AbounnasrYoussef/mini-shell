@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 00:10:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/16 19:15:45 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 11:08:05 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,24 @@ void	exp_el_help(t_list_env **env, char *args
 	}
 }
 
-void	export_el(t_list_env **env, char *args, t_export indx, t_garbage **garb)
+void	export_el(t_list_env **env, char *args, t_export indx,
+		t_read_loop *inf_read)
 {
 	indx.i = 0;
 	indx.j = 0;
 	indx.c = 0;
-	indx.arg_ex = ft_malloc(garb, 2 * sizeof(char *));
+	indx.arg_ex = ft_malloc(&(*inf_read).garb, 2 * sizeof(char *));
 	while (args[indx.j] != '\0' && args[indx.j] != '=' && args[indx.j] != '+')
 		indx.j++;
-	indx.arg_ex[0] = ft_malloc(garb, indx.j + 1);
+	indx.arg_ex[0] = ft_malloc(&(*inf_read).garb, indx.j + 1);
 	while (indx.i < indx.j)
 	{
 		indx.arg_ex[0][indx.i] = args[indx.i];
 		indx.i++;
 	}
 	indx.arg_ex[0][indx.i] = '\0';
+	if (ft_strcmpp(indx.arg_ex[0], "PATH") == 0)
+		(*inf_read).flag_path = 0;
 	if (args[indx.i] == '+' && args[indx.i + 1] == '=')
 	{
 		indx.c = 1;
@@ -67,10 +70,11 @@ void	export_el(t_list_env **env, char *args, t_export indx, t_garbage **garb)
 	if (args[indx.i] == '\0')
 		indx.arg_ex[1] = NULL;
 	indx.j = 0;
-	exp_el_help(env, args, indx, garb);
+	exp_el_help(env, args, indx, &(*inf_read).garb);
 }
 
-void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
+void	check_args(t_list_env **env, t_export ix, char **args,
+		t_read_loop *inf_read)
 {
 	while (args[ix.i] != NULL)
 	{
@@ -89,7 +93,7 @@ void	check_args(t_list_env **env, t_export ix, char **args, t_garbage **garb)
 				break ;
 			else if (norm_check_arg2(args, &ix) == 1)
 				continue ;
-			export_el(env, args[ix.i], ix, garb);
+			export_el(env, args[ix.i], ix, &(*inf_read));
 			ix.j = 1;
 		}
 		ix.i++;
@@ -127,7 +131,7 @@ t_list_env	*ex_sort(t_list_env *list_env, char *tmp)
 	return (debut);
 }
 
-void	ft_export(t_list_env *list_env, char **args, t_garbage **garb)
+void	ft_export(t_list_env *list_env, char **args, t_read_loop *inf_read)
 {
 	int			c;
 	t_export	index;
@@ -138,11 +142,11 @@ void	ft_export(t_list_env *list_env, char **args, t_garbage **garb)
 	index.c = 0;
 	if (c == 1)
 	{
-		ft_print_env_ex(ex_sort(list_env, NULL));
+		ft_print_env_ex(ex_sort(list_env, NULL), &(*inf_read));
 		ft_exit_status(0, 1);
 	}
 	else
 	{
-		check_args(&list_env, index, args, garb);
+		check_args(&list_env, index, args, &(*inf_read));
 	}
 }

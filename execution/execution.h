@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/19 22:45:32 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 11:08:19 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 typedef struct s_list_env	t_list_env;
 typedef struct s_exec		t_exec;
 typedef struct s_garbage	t_garbage;
+typedef struct s_read_loop	t_read_loop;
 
 typedef struct s_cd
 {
@@ -83,18 +84,18 @@ void		ft_echo(char **str);
 void		ft_exit(t_exit inf_exit, char **str, t_garbage **garb);
 void		lst_add_back(t_list_env **lst, t_list_env *new);
 t_list_env	*ft_lstnew(void *variable, void *val, t_garbage **garb);
-void		ft_print_env(t_list_env *env);
-void		ft_export(t_list_env *list_env, char **args, t_garbage **garb);
+void		ft_print_env(t_list_env *env, t_read_loop *inf_read);
+void		ft_export(t_list_env *list_env, char **args, t_read_loop *inf_read);
 char		*ft_pwd(t_list_env *env);
 void		ft_unset(t_list_env **list_env, char **args);
-void		ft_print_env_ex(t_list_env *env);
+void		ft_print_env_ex(t_list_env *env, t_read_loop *inf_read);
 void		ft_supp_arg(t_list_env **list_env, char *arg);
 char		*ft_concat(char *str, char *str2, t_garbage **garb);
 char		*cherch_path(t_list_env **env, t_exec *data,
 				int count_cmd, t_garbage **garb);
-int			ft_built_in(t_exec *data, t_list_env **env,
-				int count_cmd, t_garbage **garb);
-void		ft_pipe(t_exec *data, t_list_env **env, t_garbage **garb);
+int			ft_built_in(t_exec *data, t_list_env **env, int count_cmd,
+				t_read_loop *inf_read);
+void		ft_pipe(t_exec *data, t_list_env **env, t_read_loop *inf_read);
 char		*ft_cherch_home(t_list_env *env);
 int			verif_exist(t_list_env **list_env, char *arg);
 void		chng_el(t_list_env **list_env, t_export indx, t_garbage **garb);

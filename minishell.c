@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 09:37:47 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/20 11:10:45 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,22 @@
 
 int	g_handl_signals = 0;
 
+int	check_exist_path(t_list_env *env)
+{
+	t_list_env	*copy_env;
+
+	copy_env = env;
+	while (copy_env)
+	{
+		if (ft_strcmpp(copy_env->variable, "PATH") == 0)
+		{
+			return (0);
+		}
+		copy_env = copy_env->next;
+	}
+	return (1);
+}
+
 void	env_i_and_readline(char **envp, t_read_loop *inf_read, int flag)
 {
 	char	**str;
@@ -22,7 +38,7 @@ void	env_i_and_readline(char **envp, t_read_loop *inf_read, int flag)
 	str = ft_malloc(&(*inf_read).garb, 6 * sizeof(char *));
 	if (flag == 0)
 	{
-		str[0] = PATHD;
+		str[0] = ft_concat("PATH=", PATHD, &(*inf_read).garb);
 		str[1] = ft_concat("PWD=", getcwd(NULL, 0), &(*inf_read).garb);
 		str[2] = "SHLVL = 1";
 		str[3] = "_=/usr/bin/env";
@@ -32,6 +48,11 @@ void	env_i_and_readline(char **envp, t_read_loop *inf_read, int flag)
 			(*inf_read).env = ft_envvv(str, &(*inf_read).garb);
 		else
 			(*inf_read).env = ft_envvv(envp, &((*inf_read).garb));
+		if (check_exist_path((*inf_read).env) == 1)
+		{
+			lst_add_back(&(*inf_read).env, ft_lstnew("PATH", PATHD, &(*inf_read).garb));
+			(*inf_read).flag_path = 1;
+		}
 	}
 	else if (flag == 1)
 	{
@@ -51,7 +72,7 @@ void	ft_herdoc_piepe(t_exec **data, t_read_loop *inf_read)
 		ft_exit_status(0, 1);
 	if (*data != NULL && g_handl_signals != 3)
 	{
-		ft_pipe(*data, &(*inf_read).env, &(*inf_read).garb);
+		ft_pipe(*data, &(*inf_read).env, &(*inf_read));
 		*data = NULL;
 	}
 }

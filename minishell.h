@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 09:05:11 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/20 10:38:47 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "execution/execution.h"
 # include <termios.h>
 
-# define PATHD "PATH=/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
+# define PATHD "/bin/:/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
 
 extern int	g_handl_signals;
 
@@ -130,6 +130,7 @@ typedef struct s_read_loop
 	t_list_env			*env;
 	t_parsing_context	ctx;
 	int					i;
+	int					flag_path;
 }	t_read_loop;
 
 t_type_token	get_token_type(char *str);
