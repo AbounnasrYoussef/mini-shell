@@ -6,11 +6,21 @@
 /*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 10:57:55 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 18:18:49 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/20 12:03:50 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+static t_token	*update_curr_after_expand(t_token **tokens,
+		t_token *curr, t_expand_ctx *ctx1, t_parsing_context ctx)
+{
+	if (ctx.quoted_flag == 0)
+	{
+		return (handle_expanded_tokens(tokens, curr, ctx1, ctx));
+	}
+	return (curr->next);
+}
 
 void	append_single_quote(const char *val, int *i
 		, char **res, t_garbage **garb)

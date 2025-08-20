@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 11:14:59 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/20 12:04:35 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,8 @@ int				should_expand(t_token *curr, t_parsing_context ctx,
 					t_token *prev);
 t_token			*handle_expanded_tokens(t_token **tokens, t_token *curr,
 					t_expand_ctx *ctx1, t_parsing_context ctx);
+t_token			*update_curr_after_expand(t_token **tokens,
+					t_token *curr, t_expand_ctx *ctx1, t_parsing_context ctx);
 
 /* Execution parsing */
 char			**extract_cmd_from_tokens(t_token *tokens, t_garbage **garb);
