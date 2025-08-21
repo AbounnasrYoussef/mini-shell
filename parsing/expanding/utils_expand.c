@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   utils_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 14:36:56 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 16:36:12 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/21 08:18:01 by yabounna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*expand_red(char *value, t_expand_ctx *ctx, t_garbage **garb)
+static char	*expand_red_loop(char *value, t_expand_ctx *ctx,
+		t_garbage **garb)
 {
 	int		i;
 	char	*res;
 	char	*tmp;
 
-	i = 0;
-	res = ft_strdup("", garb);
+	1 && (i = 0, res = ft_strdup("", garb));
 	while (value[i])
 	{
 		if (value[i] == '\'')
@@ -39,6 +39,16 @@ char	*expand_red(char *value, t_expand_ctx *ctx, t_garbage **garb)
 			i++;
 		}
 	}
+	return (res);
+}
+
+char	*expand_red(char *value, t_expand_ctx *ctx, t_garbage **garb)
+{
+	char	*res;
+
+	res = expand_red_loop(value, ctx, garb);
+	if (!res)
+		return (NULL);
 	if (ft_strcmpp(res, "") == 0 && value[0] == '$'
 		&& get_env_value(&value[1], ctx->env, garb) == NULL)
 		return (NULL);
