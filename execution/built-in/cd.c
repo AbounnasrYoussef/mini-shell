@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 22:24:19 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 01:27:46 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/21 15:28:17 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,21 @@ void	ft_error_cd(int index, char *arg_cd, int *error)
 
 void	check_exec_fil(t_list_env *env, char *arg_cd, t_cd inf_pwd, int *error)
 {
-	int	a;
+	int		a;
+	char	*tmp;
 
 	a = 0;
 	if (access(arg_cd, F_OK) == 0)
 	{
-		inf_pwd.old_pwd = getcwd(NULL, 0);
+		tmp = getcwd(NULL, 0);
+		inf_pwd.old_pwd = ft_strdup(tmp, inf_pwd.garb);
+		free(tmp);
 		a = chdir(arg_cd);
 		if (a != 0)
 			1 && (ft_error_cd(1, arg_cd, error), ft_exit_status(127, 1));
-		inf_pwd.new_pwd = getcwd(NULL, 0);
+		tmp = getcwd(NULL, 0);
+		inf_pwd.new_pwd = ft_strdup(tmp, inf_pwd.garb);
+		free(tmp);
 		if (inf_pwd.new_pwd == NULL)
 		{
 			ft_error_cd(0, NULL, error);
@@ -85,7 +90,7 @@ void	check_exec_fil(t_list_env *env, char *arg_cd, t_cd inf_pwd, int *error)
 	}
 }
 
-void	ft_cd(char **args, t_list_env *env)
+void	ft_cd(char **args, t_list_env *env, t_garbage **garb)
 {
 	int		len_args;
 	t_cd	inf_pwd;
@@ -93,6 +98,7 @@ void	ft_cd(char **args, t_list_env *env)
 
 	inf_pwd.old_pwd = NULL;
 	inf_pwd.new_pwd = NULL;
+	inf_pwd.garb = garb;
 	error = 0;
 	len_args = ft_strlen_argc(args);
 	if (len_args == 1)

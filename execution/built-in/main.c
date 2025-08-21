@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:03:04 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 10:47:20 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/21 15:22:49 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	help_built(t_exec *data, t_list_env **env
 	if (data->cmd[1] != NULL)
 		inf_exit.len = ft_strlenn(data->cmd[1]) - 1;
 	if (ft_strcmpp(data->cmd[0], "pwd") == 0)
-		return (printf("%s\n", ft_pwd(*env)), 0);
+		return (printf("%s\n", ft_pwd(*env, &(*inf_read).garb)), 0);
 	else if (ft_strcmpp(data->cmd[0], "echo") == 0)
 		return (ft_echo(data->cmd), 0);
 	else if (ft_strcmpp(data->cmd[0], "exit") == 0)
@@ -90,6 +90,6 @@ int	ft_built_in(t_exec *data, t_list_env **env, int count_cmd
 	if (data->cmd[0] == NULL)
 		return (-1);
 	if (ft_strcmpp(data->cmd[0], "cd") == 0)
-		return (ft_cd(data->cmd, *env), 0);
+		return (ft_cd(data->cmd, *env, &inf_read->garb), 0);
 	return (help_built(data, env, inf_exit, &(*inf_read)));
 }

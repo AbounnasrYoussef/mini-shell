@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 23:19:57 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 13:08:08 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/21 15:27:26 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ typedef struct s_read_loop	t_read_loop;
 
 typedef struct s_cd
 {
-	char	*old_pwd;
-	char	*new_pwd;
+	char		*old_pwd;
+	char		*new_pwd;
+	t_garbage	**garb;
 }	t_cd;
 
 typedef struct s_exit
@@ -79,14 +80,14 @@ void		*ft_memcpyy(void *dst, const void *src, size_t n);
 t_list_env	*ft_envvv(char **str, t_garbage **garb);
 int			ft_strlen_argc(char **str);
 int			ft_strlenn(char *str);
-void		ft_cd(char **args, t_list_env *env);
+void		ft_cd(char **args, t_list_env *env, t_garbage **garb);
 void		ft_echo(char **str);
 void		ft_exit(t_exit inf_exit, char **str, t_garbage **garb);
 void		lst_add_back(t_list_env **lst, t_list_env *new);
 t_list_env	*ft_lstnew(void *variable, void *val, t_garbage **garb);
 void		ft_print_env(t_list_env *env, t_read_loop *inf_read);
 void		ft_export(t_list_env *list_env, char **args, t_read_loop *inf_read);
-char		*ft_pwd(t_list_env *env);
+char		*ft_pwd(t_list_env *env, t_garbage **garb);
 void		ft_unset(t_list_env **list_env, char **args);
 void		ft_print_env_ex(t_list_env *env, t_read_loop *inf_read);
 void		ft_supp_arg(t_list_env **list_env, char *arg);

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/21 14:42:10 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/21 15:26:50 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ int	g_handl_signals = 0;
 void	env_i_and_readline(char **envp, t_read_loop *inf_read, int flag)
 {
 	char	**str;
+	char	*tmp;
 
 	str = ft_malloc(&(*inf_read).garb, 6 * sizeof(char *));
+	tmp = getcwd(NULL, 0);
 	if (flag == 0)
 	{
 		str[0] = ft_concat("PATH=", PATHD, &(*inf_read).garb);
-		str[1] = ft_concat("PWD=", getcwd(NULL, 0), &(*inf_read).garb);
+		str[1] = ft_concat("PWD=", tmp, &(*inf_read).garb);
 		str[2] = "SHLVL = 1";
 		str[3] = "_=/usr/bin/env";
 		str[4] = "OLDPWD";
@@ -41,6 +43,7 @@ void	env_i_and_readline(char **envp, t_read_loop *inf_read, int flag)
 		setup_signals();
 		(*inf_read).line = readline("minishell$ ");
 	}
+	free(tmp);
 }
 
 void	ft_herdoc_piepe(t_exec **data, t_read_loop *inf_read)
@@ -110,11 +113,13 @@ void	ft_read_loop(char **envp, t_exec **data)
 		inf_read.i = 3;
 		while (inf_read.i < 1024)
 			close(inf_read.i++);
+		free(inf_read.line);
 	}
+	free(inf_read.line);
 	ft_free_all(inf_read.garb);
 }
 
-void ff()
+void	ff(void)
 {
 	system("leaks minishell");
 }
