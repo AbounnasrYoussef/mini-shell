@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:45:34 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/10 23:06:17 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/21 10:12:43 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_exit(t_exit i_exi, char **str, t_garbage **garb)
 			if (str[1] == NULL)
 			{
 				if (i_exi.c_cmd == 1)
-					printf("exit\n");
+					write(2, "exit\n", 5);
 				exit(ft_exit_status(0, 0));
 			}
 			else if (ft_strcmpp(str[1], "") == 0)
@@ -95,7 +95,7 @@ void	ft_exit(t_exit i_exi, char **str, t_garbage **garb)
 			else if (chck_nb(str[1]) == 0 && i_exi.argc == 2 && i_exi.len <= 19)
 			{
 				if (i_exi.c_cmd == 1)
-					printf("exit\n");
+					write(2, "exit\n", 5);
 				exit(ft_atoi(str[1], i_exi.c_cmd, garb));
 			}
 			else if (chck_nb(str[1]) == 0 && i_exi.argc > 2 && i_exi.len <= 19)
