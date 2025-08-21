@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 12:59:18 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 20:37:36 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/21 10:04:30 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,33 @@ void	norm_ft_unset(char **args, int *i, int *j, int *error)
 	}
 }
 
+int	check_error(char **args, int *i, int *error, int flag)
+{
+	if ((ft_strcmpp(args[*i], "") == 0 || is_espace_tabulion(args[*i]) == 0)
+		&& flag == 0)
+	{
+		ft_error_unset(args[*i], &(*error));
+		if (args[*i + 1] != NULL)
+		{
+			(*i)++;
+			return (1);
+		}
+		else
+			return (0);
+	}
+	if (ft_strcmpp(args[*i], "_") == 0 && flag == 1)
+	{
+		if (args[*i + 1] != NULL)
+		{
+			(*i)++;
+			return (1);
+		}
+		else
+			return (0);
+	}
+	return (5);
+}
+
 void	ft_unset(t_list_env **list_env, char **args)
 {
 	int	i;
@@ -72,23 +99,14 @@ void	ft_unset(t_list_env **list_env, char **args)
 	error = 0;
 	while (args[i] != NULL)
 	{
-		if (ft_strcmpp(args[i], "") == 0 || is_espace_tabulion(args[i]) == 0)
-		{
-			ft_error_unset(args[i], &error);
-			if (args[i + 1] != NULL)
-			{
-				i++;
-				continue ;
-			}
-		}
-		if (ft_strcmpp(args[i], "_") == 0)
-		{
-			if (args[i + 1] != NULL)
-			{
-				i++;
-				continue ;
-			}
-		}
+		if (check_error(args, &i, &error, 0) == 1)
+			continue ;
+		else if (check_error(args, &i, &error, 0) == 0)
+			break ;
+		if (check_error(args, &i, &error, 1) == 1)
+			continue ;
+		else if (check_error(args, &i, &error, 1) == 0)
+			break ;
 		norm_ft_unset(args, &i, &j, &error);
 		ft_supp_arg(list_env, args[i]);
 		j = 0;
