@@ -74,7 +74,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) 
 	$(CC) $(OBJ) -o $(NAME) -lreadline -L/mnt/homes/$$USER/.brew/opt/readline/lib
-$(OBJ): %.o : %.c minishell.h
+$(OBJ): %.o : %.c minishell.h execution/execution.h parsing/ft_malloc/ft_malloc.h
 	$(CC) $(CFLAGS) -c -I/mnt/homes/$$USER/.brew/opt/readline/include $< -o $@
 
 clean: 

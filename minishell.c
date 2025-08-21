@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 20:21:00 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/21 14:42:10 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	env_i_and_readline(char **envp, t_read_loop *inf_read, int flag)
 		g_handl_signals = 0;
 		save_terminal_settings();
 		setup_signals();
-		(*inf_read).garb = NULL;
 		(*inf_read).line = readline("minishell$ ");
 	}
 }
@@ -115,12 +114,18 @@ void	ft_read_loop(char **envp, t_exec **data)
 	ft_free_all(inf_read.garb);
 }
 
+void ff()
+{
+	system("leaks minishell");
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_exec		*data;
 
 	(void)ac;
 	(void)av;
+	atexit(ff);
 	data = NULL;
 	if (!isatty(0) || !isatty(1))
 		return (1);
