@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:53:52 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/07 11:31:33 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/23 21:23:19 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,6 @@ static char	**alloc(char const *s, char c, t_garbage **garb)
 	return (sp);
 }
 
-static void	*free_split(char **array, int i)
-{
-	while (--i >= 0)
-		free(array[i]);
-	free(array);
-	return (NULL);
-}
-
 char	**ft_splitt(char const *s, char c, t_garbage **garb)
 {
 	size_t	skip;
@@ -99,8 +91,6 @@ char	**ft_splitt(char const *s, char c, t_garbage **garb)
 	{
 		siz = count_len_word(s, c, &i, &skip);
 		alloce_array[index] = (char *)ft_malloc(garb, sizeof(char) * (siz + 1));
-		if (!alloce_array[index])
-			return (free_split(alloce_array, index));
 		ft_memcpyy(alloce_array[index], s + skip, siz);
 		alloce_array[index][siz] = '\0';
 		index++;

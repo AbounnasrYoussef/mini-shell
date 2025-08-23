@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/21 15:26:50 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/23 21:37:18 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,7 @@ void	ft_read_loop(char **envp, t_exec **data)
 			close(inf_read.i++);
 		free(inf_read.line);
 	}
-	free(inf_read.line);
-	ft_free_all(inf_read.garb);
+	//ft_free_all(inf_read.garb);
 }
 
 void	ff(void)
@@ -130,7 +129,7 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	atexit(ff);
+	//atexit(ff);
 	data = NULL;
 	if (!isatty(0) || !isatty(1))
 		return (1);

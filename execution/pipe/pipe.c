@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 11:04:47 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/23 21:27:16 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_exec_child(t_exec *data, t_list_env **env, t_info_pipe inf_pip
 			norm_ft_exec_child(data->cmd[0], &(*inf_read).garb);
 	}
 	else
-		(ft_free_all((*inf_read).garb), exit(ft_exit_status(0, 0)));
+		exit(ft_exit_status(0, 0));
 }
 
 void	ft_child(t_exec *data, t_list_env **env, t_info_pipe *inf_pip

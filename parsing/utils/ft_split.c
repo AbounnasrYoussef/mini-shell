@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yabounna <yabounna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 10:09:11 by yabounna          #+#    #+#             */
-/*   Updated: 2025/07/31 14:24:04 by yabounna         ###   ########.fr       */
+/*   Updated: 2025/08/23 21:23:44 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,6 @@ static int	count_len_word(const char *s, char c, size_t *j, size_t *skip)
 	return (length);
 }
 
-static void	*free_split(char **array, int i)
-{
-	while (--i >= 0)
-		free(array[i]);
-	free(array);
-	return (NULL);
-}
-
 char	**ft_split(const char *s, char c, t_garbage **garb)
 {
 	size_t	skip;
@@ -74,8 +66,6 @@ char	**ft_split(const char *s, char c, t_garbage **garb)
 	{
 		word_len = count_len_word(s, c, &i, &skip);
 		result[index] = ft_malloc(garb, sizeof(char) * (word_len + 1));
-		if (!result[index])
-			return (free_split(result, index));
 		ft_memcpy(result[index], s + skip, word_len);
 		result[index][word_len] = '\0';
 		index++;
