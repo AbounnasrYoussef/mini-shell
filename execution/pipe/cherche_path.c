@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:06:32 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 20:37:24 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/24 14:45:24 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	norm_cherch_path2(char **paths, char *cmd, t_garbage **garb, int i)
 	{
 		write(2, cmd, ft_strlenn(cmd));
 		write(2, ": Permission denied\n", 20);
-		(ft_free_all(*garb), exit(126));
+		(ft_free_all(garb), exit(126));
 	}
 	else
 		error_cherch_path(cmd, garb);
@@ -73,7 +73,7 @@ char	*cherch_path1(t_exec *data, t_list_env **env, int count_cmd
 		{
 			write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
 			write(2, ": No such file or directory\n", 28);
-			(ft_free_all(*garb), exit(127));
+			(ft_free_all(garb), exit(127));
 		}
 	}
 	return (cherch_path2(data, env, inf_path, garb));

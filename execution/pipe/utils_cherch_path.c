@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 18:37:51 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 12:38:05 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/24 14:45:53 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ void	error_cherch_path(char *cmd, t_garbage **garb)
 {
 	write(2, cmd, ft_strlenn(cmd));
 	write(2, ": command not found\n", 20);
-	ft_free_all(*garb);
+	ft_free_all(garb);
 	exit(127);
 }

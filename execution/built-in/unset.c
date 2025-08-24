@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 12:59:18 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/21 10:04:30 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/24 15:02:43 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_supp_arg(t_list_env **list_env, char *arg)
 				tmp_node->next = current->next;
 			else
 				*list_env = current->next;
-			free(current);
 			break ;
 		}
 		tmp_node = current;

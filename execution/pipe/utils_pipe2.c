@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 18:09:22 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 12:40:07 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/24 14:46:15 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_error_pipe(t_exec *data, t_garbage **garb)
 	{
 		write(2, ".: filename argument required\n", 30);
 		write(2, ".: usage: . filename [arguments]\n", 33);
-		(ft_free_all(*garb), exit(2));
+		(ft_free_all(garb), exit(2));
 	}
 }
 
@@ -33,20 +33,20 @@ void	ft_error_pipe2(t_exec *data, t_info_pipe inf_pip, t_garbage **garb)
 		{
 			write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
 			write(2, ": is a directory \n", 18);
-			(ft_free_all(*garb), exit(126));
+			(ft_free_all(garb), exit(126));
 		}
 	}
 	else if (errno == 20)
 	{
 		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
 		write(2, ": Not a directory\n", 18);
-		(ft_free_all(*garb), exit(126));
+		(ft_free_all(garb), exit(126));
 	}
 	else if (!S_ISREG((inf_pip.info).st_mode) && is_slash(data->cmd[0]) == 0)
 	{
 		write(2, data->cmd[0], ft_strlenn(data->cmd[0]));
 		write(2, ": No such file or directory\n", 28);
-		(ft_free_all(*garb), exit(127));
+		(ft_free_all(garb), exit(127));
 	}
 }
 
@@ -78,12 +78,12 @@ void	norm_ft_exec_child(char *cmd, t_garbage **garb)
 	{
 		write(2, cmd, ft_strlenn(cmd));
 		write(2, ": Permission denied\n", 20);
-		(ft_free_all(*garb), exit(126));
+		(ft_free_all(garb), exit(126));
 	}
 	else
 	{
 		write(2, cmd, ft_strlenn(cmd));
 		write(2, ": No such file or directory\n", 28);
-		(ft_free_all(*garb), exit(127));
+		(ft_free_all(garb), exit(127));
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 09:58:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/23 21:21:34 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/24 14:47:48 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	*ft_malloc(t_garbage **garb, size_t size)
 
 	ptr = malloc(size);
 	if (!ptr)
-		return (ft_free_all(*garb), exit(EXIT_FAILURE), NULL);
+		return (ft_free_all(garb), exit(EXIT_FAILURE), NULL);
 	new = malloc(sizeof(t_garbage));
 	if (!new)
 	{
-		ft_free_all(*garb);
+		ft_free_all(garb);
 		free(ptr);
 		exit(EXIT_FAILURE);
 		return (NULL);
@@ -47,12 +47,12 @@ void	*ft_malloc(t_garbage **garb, size_t size)
 	return (ptr);
 }
 
-void	ft_free_all(t_garbage *garb)
+void	ft_free_all(t_garbage **garb)
 {
 	t_garbage	*current;
 	t_garbage	*tmp;
 
-	current = garb;
+	current = *garb;
 	while (current)
 	{
 		free(current->ptr);
@@ -60,5 +60,5 @@ void	ft_free_all(t_garbage *garb)
 		current = current->next;
 		free(tmp);
 	}
-	garb = NULL;
+	*garb = NULL;
 }
