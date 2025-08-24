@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 10:58:58 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/24 16:13:31 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/24 16:42:21 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,36 +77,6 @@ int	ft_parsing(t_exec **data, t_read_loop inf_read, int flag)
 		}
 	}
 	return (1);
-}
-void	env_i_and_readline(char **envp, t_read_loop *inf_read, int flag)
-{
-	char	**str;
-	char	*tmp;
-
-	str = ft_malloc(&(*inf_read).garb, 6 * sizeof(char *));
-	tmp = getcwd(NULL, 0);
-	if (flag == 0)
-	{
-		str[0] = ft_concat("PATH=", PATHD, &(*inf_read).garb);
-		str[1] = ft_concat("PWD=", tmp, &(*inf_read).garb);
-		str[2] = "SHLVL=1";
-		str[3] = "_=/usr/bin/env";
-		str[4] = "OLDPWD";
-		str[5] = NULL;
-		if (envp[0] == NULL)
-			(*inf_read).env = ft_envvv(str, &(*inf_read).garb);
-		else
-			(*inf_read).env = ft_envvv(envp, &((*inf_read).garb));
-		add_path(&(*inf_read));
-	}
-	else if (flag == 1)
-	{
-		g_handl_signals = 0;
-		save_terminal_settings();
-		setup_signals();
-		(*inf_read).line = readline("minishell$ ");
-	}
-	free(tmp);
 }
 
 void	ft_read_loop(char **envp, t_exec **data)
