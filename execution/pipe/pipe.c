@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 22:36:08 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/24 16:42:36 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/24 17:29:31 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,7 @@ void	ft_plusieur_cmd(t_exec *data, t_list_env **env, t_info_pipe *inf_pip
 			return (ft_error_fork());
 		}
 		else
-		{
 			ft_child(data, env, inf_pip, &(*inf_read));
-		}
 		data = data->next;
 		(inf_pip->i)++;
 	}
