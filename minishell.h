@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 13:29:59 by yabounna          #+#    #+#             */
-/*   Updated: 2025/08/20 20:36:03 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/24 16:05:08 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,4 +242,5 @@ void			add_path(t_read_loop *inf_read);
 char			*expand_red(char *value, t_expand_ctx *ctx, t_garbage **garb);
 t_token			*check_if_red(t_token *curr, t_garbage **garb,
 					t_expand_ctx ctx1);
+void			ft_readline(t_read_loop *inf_read);
 #endif

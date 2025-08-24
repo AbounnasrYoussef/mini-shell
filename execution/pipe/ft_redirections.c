@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:10:23 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 14:35:35 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/24 15:37:54 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	error_dolar(char *file_name)
 	write(2, file_name, ft_strlenn(file_name));
 	write(2, ": ambiguous redirect\n", 21);
 	exit(1);
-	ft_exit_status(1, 1);
 }
 
 int	check_name(char *str, t_garbage **garb)

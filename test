@@ -4,11 +4,5 @@ $a
 export a=ca
 $a"t"
 
-minishell$ mkdir 1
-minishell$ cd 1/
-minishell$ unset PWD OLDPWD
-minishell$ rm -rf ../1
-minishell$ ls
-minishell$ cd ..
-minishell$ 
-exit
+bash-3.2$ << LL < ss
+$?

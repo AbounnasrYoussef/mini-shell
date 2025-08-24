@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 22:24:19 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/21 15:28:17 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/24 15:39:56 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,7 @@ void	check_exec_fil(t_list_env *env, char *arg_cd, t_cd inf_pwd, int *error)
 		ft_r_pwd_oldp(env, inf_pwd.new_pwd, inf_pwd.old_pwd);
 	}
 	else
-	{
-		ft_error_cd(1, arg_cd, error);
-		ft_exit_status(1, 1);
-	}
+		(ft_error_cd(1, arg_cd, error), ft_exit_status(1, 1));
 }
 
 void	ft_cd(char **args, t_list_env *env, t_garbage **garb)

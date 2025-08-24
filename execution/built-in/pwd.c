@@ -6,19 +6,17 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 22:49:31 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/21 15:29:30 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/24 15:55:18 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-char	*ft_pwd(t_list_env *env, t_garbage **garb)
+char	*help_pwd(t_list_env *env, t_garbage **garb)
 {
-	char		*buffer;
-	t_list_env	*copy_env;
-	char		*tmp;
+	char	*buffer;
+	char	*tmp;
 
-	copy_env = env;
 	buffer = NULL;
 	tmp = getcwd(NULL, 0);
 	if (tmp != NULL)
@@ -40,6 +38,14 @@ char	*ft_pwd(t_list_env *env, t_garbage **garb)
 			env = env->next;
 		}
 	}
+	return (buffer);
+}
+
+char	*ft_pwd(t_list_env *env, t_garbage **garb)
+{
+	char	*buffer;
+
+	buffer = help_pwd(env, garb);
 	if (buffer == NULL)
 		buffer = "ahaha";
 	ft_exit_status(0, 1);

@@ -6,7 +6,7 @@
 /*   By: arahhab <arahhab@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 21:36:44 by arahhab           #+#    #+#             */
-/*   Updated: 2025/08/20 11:15:20 by arahhab          ###   ########.fr       */
+/*   Updated: 2025/08/24 16:04:38 by arahhab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,12 @@ void	add_path(t_read_loop *inf_read)
 				&(*inf_read).garb));
 		(*inf_read).flag_path = 1;
 	}
+}
+
+void	ft_readline(t_read_loop *inf_read)
+{
+	g_handl_signals = 0;
+	save_terminal_settings();
+	setup_signals();
+	(*inf_read).line = readline("minishell$ ");
 }
